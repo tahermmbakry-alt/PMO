@@ -435,7 +435,87 @@
             .stats-row { grid-template-columns: 1fr; }
             .budget-summary { grid-template-columns: 1fr; }
         }
+
+        /* ===== Phase 1 Strategic Enhancements ===== */
+        .phase1-banner{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-radius:20px;padding:22px;box-shadow:0 12px 36px rgba(15,23,42,.22);margin-bottom:20px}
+        .phase1-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:18px}
+        .phase1-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+        .phase1-card .num{font-size:1.6rem;font-weight:800;color:var(--primary)}
+        .phase1-card .lbl{font-size:.78rem;color:#64748b;margin-top:3px}
+        .roadmap{display:grid;grid-template-columns:repeat(5,minmax(230px,1fr));gap:12px;overflow-x:auto;padding-bottom:6px}
+        .year-card{background:#fff;border:1px solid #dbeafe;border-top:5px solid var(--accent);border-radius:18px;padding:14px;min-width:230px;box-shadow:var(--shadow);max-height:360px;overflow-y:auto}
+        .year-card h3{color:#1e3a8a;margin-bottom:8px}.year-card ul{list-style:none;font-size:.78rem;color:#334155;line-height:1.7}.year-card li:before{content:'• ';color:#3b82f6;font-weight:900}
+        .year-card.status-green{border-top-color:#10b981}.year-card.status-amber{border-top-color:#f59e0b}.year-card.status-red{border-top-color:#ef4444}
+        .roadmap-metric{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin-top:7px;font-size:.74rem}
+        .roadmap-metric .metric-title{color:#64748b;font-weight:800}.roadmap-metric .metric-value{color:#0f172a;font-weight:900;text-align:left;direction:ltr}
+        .roadmap-status-line{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #dbeafe}
+        body.dark-mode .year-card{background:#111827;border-color:#263244}.dark-mode .roadmap-metric{background:#0f172a;border-color:#334155}.dark-mode .roadmap-metric .metric-value{color:#e5e7eb}
+        .bsc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.bsc-card{border-radius:18px;padding:16px;background:#fff;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+        .bsc-card h3{font-size:1rem;color:#0f172a;margin-bottom:8px}.bsc-item{background:#f8fafc;border-radius:12px;padding:10px;margin-top:8px;border-right:4px solid #3b82f6}.bsc-item .meta{font-size:.72rem;color:#64748b;margin-top:4px}
+        .rag{font-size:.7rem;font-weight:800;border-radius:999px;padding:4px 9px;display:inline-block}.rag-green{background:#dcfce7;color:#166534}.rag-amber{background:#fef3c7;color:#92400e}.rag-red{background:#fee2e2;color:#991b1b}
+        .tree-link{font-size:.72rem;background:#f1f5f9;border-radius:999px;padding:4px 8px;color:#334155;display:inline-block;margin-top:5px}
+        .trend-mini{height:42px;display:flex;align-items:end;gap:3px;direction:ltr}.trend-mini span{width:8px;border-radius:5px 5px 0 0;background:#93c5fd;display:inline-block;min-height:4px}
+
+
+        /* ===== Phase 2 PMO Enhancements ===== */
+        .phase2-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px}
+        .phase2-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}.phase2-kpi{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow);border-right:5px solid #3b82f6}.phase2-kpi strong{display:block;font-size:1.35rem;color:#0f172a}.phase2-kpi span{font-size:.75rem;color:#64748b}
+        .stage-board{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}.stage-col{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:12px;min-height:180px}.stage-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;color:#0f172a;font-size:.86rem;margin-bottom:10px}.stage-pill{font-size:.65rem;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:3px 8px}.stage-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:0 6px 16px rgba(15,23,42,.05);font-size:.78rem}.stage-card .progress{height:6px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:8px}.stage-card .progress div{height:100%;background:#3b82f6;border-radius:999px}
+        .milestone-chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:700;margin:3px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}.milestone-done{background:#dcfce7;color:#166534;border-color:#bbf7d0}.milestone-late{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+        .priority-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-width:620px}.priority-cell{min-height:120px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:8px}.priority-cell h4{font-size:.72rem;color:#475569;margin-bottom:6px;text-align:center}.priority-item{background:#fff;border-radius:10px;border-right:4px solid #3b82f6;padding:7px;margin-bottom:6px;font-size:.72rem;box-shadow:0 4px 12px rgba(15,23,42,.05)}.priority-critical{border-right-color:#ef4444}.priority-high{border-right-color:#f59e0b}.priority-medium{border-right-color:#3b82f6}.priority-low{border-right-color:#10b981}
+        .risk-heatmap{display:grid;grid-template-columns:80px repeat(5,minmax(92px,1fr));gap:6px;min-width:650px;direction:ltr}.heat-label,.heat-head{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:10px;text-align:center;font-size:.72rem;font-weight:800;color:#334155}.heat-cell{min-height:82px;border-radius:12px;padding:6px;border:1px solid rgba(15,23,42,.08);font-size:.7rem;direction:rtl;overflow:auto}.heat-low{background:#dcfce7}.heat-med{background:#fef9c3}.heat-high{background:#fed7aa}.heat-extreme{background:#fecaca}.heat-risk{background:rgba(255,255,255,.82);border-radius:8px;padding:5px;margin-bottom:4px;font-weight:700;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+        .phase2-summary{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 12px 36px rgba(15,23,42,.18)}.phase2-summary p{font-size:.83rem;line-height:1.8;color:#dbeafe;margin-top:6px}
+
+        /* ===== Phase 3 Executive UX Enhancements ===== */
+        body.dark-mode{background:#0b1120;color:#e5e7eb}
+        body.dark-mode .card, body.dark-mode .chart-box, body.dark-mode .report-stat-card, body.dark-mode .phase3-card, body.dark-mode .phase3-search-panel{background:#111827;color:#e5e7eb;border-color:#263244}
+        body.dark-mode th{background:#172033;color:#e5e7eb} body.dark-mode td{border-color:#263244} body.dark-mode tr:hover td{background:#172033}
+        body.dark-mode input, body.dark-mode select, body.dark-mode textarea{background:#0f172a;color:#e5e7eb;border-color:#334155}
+        body.dark-mode .tab-btn:not(.active), body.dark-mode .tabs-nav{background:#111827;color:#cbd5e1}
+        body.dark-mode .header, body.dark-mode .overall-card, body.dark-mode .phase1-banner, body.dark-mode .phase2-summary{box-shadow:none}
+        .phase3-top-tools{display:grid;grid-template-columns:1.2fr auto auto;gap:10px;margin-bottom:16px;align-items:center}
+        .phase3-search-wrap{position:relative;display:flex;gap:8px;align-items:center}.phase3-search-wrap i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#64748b}.phase3-search{width:100%;padding:12px 40px 12px 12px;border-radius:14px;border:1.5px solid #dbe4ef;background:#fff;font-weight:700}.phase3-search-btn{white-space:nowrap;border:none;background:#2563eb;color:white;border-radius:14px;padding:0 18px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:7px;min-height:45px}.phase3-search-btn:hover{background:#1d4ed8}
+        .phase3-tool-btn{border:none;border-radius:14px;padding:12px 15px;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center;background:#fff;color:#0f172a;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+        .phase3-tool-btn.primary{background:#0f172a;color:#fff}.phase3-tool-btn.warn{background:#fff7ed;color:#9a3412}.phase3-tool-btn.dark{background:#1e293b;color:#fff}
+        .phase3-search-panel{display:none;position:absolute;z-index:80;left:16px;right:16px;top:150px;background:#fff;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 22px 55px rgba(15,23,42,.2);padding:14px;max-height:420px;overflow:auto}.phase3-search-panel.show{display:block}
+        .phase3-result{padding:10px;border-radius:12px;border:1px solid #eef2f7;margin-bottom:8px;cursor:pointer}.phase3-result:hover{background:#f8fafc}.phase3-result strong{display:block;color:#0f172a}.phase3-result span{font-size:.75rem;color:#64748b}
+        .phase3-drawer{position:fixed;top:0;bottom:0;left:-420px;width:390px;max-width:94vw;background:#fff;z-index:100;border-right:1px solid #e2e8f0;box-shadow:0 20px 60px rgba(15,23,42,.28);transition:.25s;padding:18px;overflow:auto}.phase3-drawer.show{left:0}body.dark-mode .phase3-drawer{background:#111827;color:#e5e7eb;border-color:#263244}
+        .phase3-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid #e2e8f0;padding-bottom:12px}.phase3-close{border:none;background:#fee2e2;color:#991b1b;border-radius:10px;padding:7px 10px;cursor:pointer}
+        .phase3-alert{padding:12px;border-radius:14px;margin-bottom:10px;border-right:5px solid #3b82f6;background:#f8fafc}.phase3-alert.red{border-color:#ef4444;background:#fef2f2}.phase3-alert.amber{border-color:#f59e0b;background:#fffbeb}.phase3-alert.green{border-color:#10b981;background:#ecfdf5}.phase3-alert-title{font-weight:900;color:#0f172a}.phase3-alert-body{font-size:.8rem;color:#475569;margin-top:4px;line-height:1.6}
+        .phase3-exec-summary{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:22px;padding:20px;box-shadow:0 14px 42px rgba(15,23,42,.24);margin-bottom:18px}.phase3-exec-summary h3{margin-bottom:8px}.phase3-exec-summary p{color:#dbeafe;line-height:1.9;font-size:.9rem}.phase3-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.phase3-actions button{border:none;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
+        .phase3-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}.phase3-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow);border-right:5px solid #3b82f6}.phase3-card .n{font-size:1.45rem;font-weight:900;color:#0f172a}.phase3-card .l{font-size:.76rem;color:#64748b}.phase3-card.red{border-right-color:#ef4444}.phase3-card.amber{border-right-color:#f59e0b}.phase3-card.green{border-right-color:#10b981}.phase3-card.purple{border-right-color:#8b5cf6}
+        .phase3-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.phase3-list{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow)}.phase3-list h4{margin-bottom:10px;color:#0f172a}.phase3-list-item{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #eef2f7;font-size:.82rem}.phase3-list-item:last-child{border-bottom:none}
+
+        .finance-gauge{width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;background:conic-gradient(#10b981 0deg,#10b981 var(--deg),#e5e7eb var(--deg),#e5e7eb 360deg);position:relative}
+        .finance-gauge:after{content:"";position:absolute;width:58px;height:58px;border-radius:50%;background:#fff}
+        .finance-gauge strong{position:relative;z-index:1;font-size:1rem;color:#0f172a}
+        body.dark-mode .finance-gauge:after{background:#111827}
+        .finance-detail{font-size:.72rem;color:#64748b;line-height:1.7;margin-top:6px;text-align:center}
+        .objective-mini-row{margin-bottom:8px}.objective-mini-head{display:flex;justify-content:space-between;gap:10px;font-size:.75rem;font-weight:800;color:#334155;margin-bottom:4px}.objective-mini-track{height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden}.objective-mini-fill{height:100%;border-radius:999px}.objective-mini-meta{font-size:.68rem;color:#64748b;margin-top:3px}
+        body.dark-mode .objective-mini-head{color:#e5e7eb}
+
+        /* ===== UX Pro Enhancements: KPI layout, scrolling, alert navigation ===== */
+        .ux-kpi-reset-btn{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;border-radius:10px;padding:4px 12px;font-size:.75rem;font-weight:900;cursor:pointer}
+        .ux-kpi-reset-btn:hover{background:#e2e8f0}
+        .kpi-card{min-height:112px;overflow:hidden}
+        .kpi-card .kpi-content{max-height:88px;overflow-y:auto;padding-left:4px}
+        .chart-box,.phase1-card,.phase2-kpi,.report-stat-card,.stat-card,.budget-item{max-height:440px;overflow-y:auto;scrollbar-width:thin}
+        .chart-container{overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}
+        .table-wrapper{max-height:460px;overflow-y:auto}
+        .phase3-alert{cursor:pointer;transition:transform .15s,box-shadow .15s}
+        .phase3-alert:hover{transform:translateX(3px);box-shadow:0 10px 22px rgba(15,23,42,.10)}
+        .ux-highlight{animation:uxPulse 1.8s ease-in-out 1;outline:3px solid #2563eb!important;outline-offset:4px;border-radius:16px}
+        @keyframes uxPulse{0%{box-shadow:0 0 0 0 rgba(37,99,235,.45)}70%{box-shadow:0 0 0 14px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
+        body.dark-mode .ux-kpi-reset-btn{background:#172033;color:#e5e7eb;border-color:#334155}
+
+        .phase3-print-note{display:none}@media print{.phase3-top-tools,.tabs-nav,.btn-group,.phase3-actions,.phase3-tool-btn,.phase3-search-panel,.phase3-drawer{display:none!important}.tab-content{display:block!important}.phase3-print-note{display:block}.card,.chart-box{box-shadow:none!important}}
+        @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{top:210px}}
+
     </style>
+
+
+<!-- تم تعطيل نمط أدوات تحكم KPI لمنع التكرار -->
+
 </head>
 <body>
     <div class="main-container">
@@ -449,7 +529,8 @@
 
         <div class="tabs-nav" id="mainTabs">
             <button class="tab-btn active" data-tab="tab-dashboard"><i class="fas fa-chart-pie"></i> لوحة المؤشرات</button>
-            <button class="tab-btn" data-tab="tab-strategy"><i class="fas fa-bullseye"></i> الأهداف الاستراتيجية</button>
+            <button class="tab-btn" data-tab="tab-fiveyear"><i class="fas fa-calendar-alt"></i> الخطة الخمسية</button>
+            <button class="tab-btn" data-tab="tab-strategy"><i class="fas fa-bullseye"></i> الأهداف الاستراتيجية BSC</button>
             <button class="tab-btn" data-tab="tab-projects"><i class="fas fa-folder"></i> المشاريع</button>
             <button class="tab-btn" data-tab="tab-resources"><i class="fas fa-users"></i> الموارد</button>
             <button class="tab-btn" data-tab="tab-gantt"><i class="fas fa-project-diagram"></i> خطة المشروع</button>
@@ -458,6 +539,21 @@
             <button class="tab-btn" data-tab="tab-services"><i class="fas fa-concierge-bell"></i> الخدمات والمبادرات</button>
             <button class="tab-btn" data-tab="tab-reports"><i class="fas fa-chart-bar"></i> التقارير</button>
             <button class="tab-btn" data-tab="tab-export"><i class="fas fa-download"></i> تصدير</button>
+        </div>
+
+        <div class="phase3-top-tools no-print">
+            <div class="phase3-search-wrap">
+                <i class="fas fa-search"></i>
+                <input id="globalSearchInput" class="phase3-search" type="text" placeholder="بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة..." oninput="phase3GlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){phase3SearchButton(event)}">
+                <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)"><i class="fas fa-magnifying-glass"></i> بحث</button>
+            </div>
+            <button class="phase3-tool-btn warn" onclick="toggleNotifications()"><i class="fas fa-bell"></i> مركز التنبيهات <span id="phase3AlertCount" class="badge badge-danger">0</span></button>
+            <button class="phase3-tool-btn dark" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> سمة داكنة</button>
+        </div>
+        <div id="phase3SearchPanel" class="phase3-search-panel no-print"></div>
+        <div id="phase3NotificationsDrawer" class="phase3-drawer no-print">
+            <div class="phase3-drawer-head"><strong><i class="fas fa-bell"></i> مركز التنبيهات التنفيذية</strong><button class="phase3-close" onclick="toggleNotifications(false)"><i class="fas fa-times"></i></button></div>
+            <div id="phase3NotificationsList"></div>
         </div>
 
         <!-- ====== لوحة المؤشرات (المعدلة) ====== -->
@@ -472,6 +568,8 @@
                         <button class="btn btn-sm btn-primary size-btn active-size" data-size="medium" data-target="kpi">متوسط</button>
                         <button class="btn btn-sm btn-outline size-btn" data-size="large" data-target="kpi">كبير</button>
                         <button class="btn btn-sm btn-outline size-btn" data-size="xlarge" data-target="kpi">ضخم</button>
+                        <button type="button" class="ux-kpi-reset-btn" onclick="resetKpiSize()"><i class="fas fa-compress-arrows-alt"></i> الحجم الافتراضي</button>
+                        <button type="button" class="ux-kpi-reset-btn" onclick="resetKpiLayout()"><i class="fas fa-rotate-left"></i> الترتيب الافتراضي</button>
                     </div>
                 </div>
                 <div class="kpi-row size-medium" id="kpiCards"></div>
@@ -480,18 +578,23 @@
             <!-- الأداء العام للمحفظة -->
             <div class="overall-card" id="overallCard"></div>
 
+            <div class="card" id="phase1DashboardCard">
+                <div class="card-header"><span><i class="fas fa-layer-group"></i> ملخص المرحلة الأولى: الخطة الخمسية + BSC + مؤشرات RAG</span></div>
+                <div id="phase1Dashboard"></div>
+            </div>
+
             <!-- ====== قسم الموازنة والتكلفة ====== -->
             <div class="card">
                 <div class="card-header">
                     <span><i class="fas fa-coins"></i> الموازنة والتكلفة</span>
                     <span style="font-size:0.8rem;color:#64748b;">
-                        إجمالي موازنة الخطة الخمسية: <span id="totalBudgetDisplay">0</span>
+                        موازنة الخطة الخمسية المعتمدة: <span id="totalBudgetDisplay">0</span>
                     </span>
                 </div>
                 <div class="budget-summary" id="budgetSummaryCards"></div>
                 <div class="dashboard-grid two-col">
                     <div class="chart-box">
-                        <h3><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> المخطط مقابل المنفق (بالمليون)</h3>
+                        <h3><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> الميزانية المخططة والتكلفة المخصصة والمنفق (بالمليون)</h3>
                         <div class="chart-container"><canvas id="budgetVsSpentChart"></canvas></div>
                     </div>
                     <div class="chart-box">
@@ -567,6 +670,7 @@
                     <div class="chart-box">
                         <h3><i class="fas fa-bullseye" style="color:#ef4444;"></i> الأهداف الاستراتيجية</h3>
                         <div class="chart-container tall"><canvas id="strategicObjectivesChart"></canvas></div>
+                        <div id="strategicObjectivesIndicator" style="margin-top:12px"></div>
                     </div>
                 </div>
             </div>
@@ -574,17 +678,42 @@
             <!-- جدول حالة المشاريع -->
             <div class="card">
                 <div class="card-header"><i class="fas fa-table"></i> حالة المشاريع الحالية</div>
-                <div class="table-wrapper"><table id="dashProjectsTable"><thead><tr><th>المشروع</th><th>النوع</th><th>الحالة</th><th>الإنجاز</th><th>الميزانية</th><th>المخاطر</th></tr></thead><tbody></tbody></table></div>
+                <div class="table-wrapper"><table id="dashProjectsTable"><thead><tr><th>المشروع</th><th>النوع</th><th>الحالة</th><th>الإنجاز</th><th>الميزانية المخططة</th><th>التكلفة المخصصة</th><th>المنفق حتى الآن</th><th>نسبة الصرف</th><th>المخاطر</th></tr></thead><tbody></tbody></table></div>
             </div>
         </div>
 
         <!-- ====== باقي التبويبات (محفوظة كما هي) ====== -->
+
+        <div class="tab-content" id="tab-fiveyear">
+            <div class="phase1-banner">
+                <h2><i class="fas fa-calendar-alt"></i> الخطة الخمسية 2026–2030</h2>
+                <div style="font-size:.86rem;color:#cbd5e1;margin-top:6px">تقسيم سنوي للأهداف والمبادرات والموازنات وربط الخطة بالأهداف الاستراتيجية والمشاريع.</div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span><i class="fas fa-plus-circle"></i> إضافة / تعديل سنة في الخطة</span></div>
+                <div class="form-grid">
+                    <div class="form-group"><label>السنة *</label><select id="fyYear"><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div>
+                    <div class="form-group"><label>التركيز الاستراتيجي</label><input type="text" id="fyFocus" placeholder="مثال: تأسيس الممكنات الرقمية"></div>
+                    <div class="form-group"><label>الأهداف الرئيسية</label><textarea id="fyGoals" placeholder="افصل بين الأهداف بفاصلة عربية ،"></textarea></div>
+                    <div class="form-group"><label>المستهدف السنوي (%)</label><input type="number" id="fyTarget" value="80"></div>
+                    <div class="form-group"><label>الإنجاز الحالي (%)</label><input type="number" id="fyActual" value="0"></div>
+                    <div class="form-group"><label>الموازنة السنوية</label><input type="number" id="fyBudget" value="0"></div>
+                </div>
+                <input type="hidden" id="editingFyId">
+                <div class="btn-group"><button class="btn btn-primary" id="saveFyBtn"><i class="fas fa-save"></i> حفظ السنة</button><button class="btn btn-outline" id="clearFyBtn"><i class="fas fa-plus"></i> جديد</button></div>
+            </div>
+            <div class="card"><div class="card-header"><span><i class="fas fa-road"></i> Roadmap الخطة الخمسية</span></div><div id="fiveYearRoadmap" class="roadmap"></div></div>
+            <div class="card"><div class="card-header"><span><i class="fas fa-table"></i> جدول الخطة السنوية</span></div><div class="table-wrapper"><table><thead><tr><th>السنة</th><th>التركيز</th><th>الأهداف</th><th>المستهدف</th><th>الإنجاز</th><th>RAG</th><th>الموازنة</th><th>إجراءات</th></tr></thead><tbody id="fiveYearBody"></tbody></table></div></div>
+        </div>
+
         <div class="tab-content" id="tab-strategy">
             <div class="card">
                 <div class="card-header"><span><i class="fas fa-bullseye"></i> إضافة / تعديل هدف استراتيجي</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>الهدف *</label><input type="text" id="objTitle"></div>
                     <div class="form-group"><label>الوصف</label><textarea id="objDesc" rows="2"></textarea></div>
+                    <div class="form-group"><label>منظور بطاقة الأداء المتوازن BSC</label><select id="objPerspective"><option>المستفيدون</option><option>العمليات الداخلية</option><option>التعلم والنمو</option><option>المالي</option></select></div>
+                    <div class="form-group"><label>الهدف الأعلى / الربط الهرمي</label><select id="objParent"><option value="">— هدف رئيسي —</option></select></div>
                     <div class="form-group"><label>الوزن (%)</label><input type="number" id="objWeight" value="25"></div>
                     <div class="form-group"><label>المستهدف (%)</label><input type="number" id="objTarget" value="100"></div>
                 </div>
@@ -599,8 +728,12 @@
                 <div class="form-grid">
                     <div class="form-group"><label>الهدف *</label><select id="kpiObjective"></select></div>
                     <div class="form-group"><label>المؤشر *</label><input type="text" id="kpiName"></div>
-                    <div class="form-group"><label>القيمة المستهدفة</label><input type="number" id="kpiTarget" step="0.01"></div>
-                    <div class="form-group"><label>القيمة الفعلية</label><input type="number" id="kpiActual" step="0.01"></div>
+                    <div class="form-group"><label>Baseline / قيمة الأساس</label><input type="number" id="kpiBaseline" step="0.01"></div>
+                    <div class="form-group"><label>Q1</label><input type="number" id="kpiQ1" step="0.01"></div>
+                    <div class="form-group"><label>Q2</label><input type="number" id="kpiQ2" step="0.01"></div>
+                    <div class="form-group"><label>Q3</label><input type="number" id="kpiQ3" step="0.01"></div>
+                    <div class="form-group"><label>Q4 / المستهدف السنوي</label><input type="number" id="kpiTarget" step="0.01"></div>
+                    <div class="form-group"><label>القيمة الفعلية الحالية</label><input type="number" id="kpiActual" step="0.01"></div>
                     <div class="form-group"><label>وحدة القياس</label><input type="text" id="kpiUnit"></div>
                 </div>
                 <input type="hidden" id="editingKpiId">
@@ -609,10 +742,12 @@
                     <button class="btn btn-outline" id="clearKpiBtn"><i class="fas fa-plus"></i> جديد</button>
                 </div>
             </div>
+            <div class="card"><div class="card-header"><span><i class="fas fa-wave-square"></i> سجل مؤشرات الأداء المتقدم RAG والاتجاهات الزمنية</span></div><div id="advancedKpiBox"></div></div>
             <div class="card">
                 <div class="card-header"><i class="fas fa-list"></i> الأهداف الاستراتيجية</div>
-                <div class="table-wrapper"><table id="objectivesTable"><thead><tr><th>الهدف</th><th>الوزن</th><th>الإنجاز</th><th>المشاريع المرتبطة</th><th>KPIs</th><th>إجراءات</th></tr></thead><tbody id="objectivesBody"></tbody></table></div>
+                <div class="table-wrapper"><table id="objectivesTable"><thead><tr><th>الهدف</th><th>المنظور</th><th>الربط الهرمي</th><th>الوزن</th><th>الإنجاز</th><th>المشاريع المرتبطة</th><th>KPIs</th><th>إجراءات</th></tr></thead><tbody id="objectivesBody"></tbody></table></div>
             </div>
+            <div class="card"><div class="card-header"><span><i class="fas fa-sitemap"></i> خريطة BSC والربط الهرمي</span></div><div id="bscMap" class="bsc-grid"></div></div>
         </div>
 
         <div class="tab-content" id="tab-projects">
@@ -632,7 +767,10 @@
                     <div class="form-group"><label>الحالة</label><select id="projStatus"><option value="قيد التخطيط">قيد التخطيط</option><option value="نشط">نشط</option><option value="مكتمل">مكتمل</option><option value="معلق">معلق</option></select></div>
                     <div class="form-group"><label>تاريخ البدء</label><input type="date" id="projStart"></div>
                     <div class="form-group"><label>تاريخ الانتهاء</label><input type="date" id="projEnd"></div>
-                    <div class="form-group"><label>الميزانية</label><input type="number" id="projBudget" step="0.01"></div>
+                    <div class="form-group"><label>الميزانية المخططة للمشروع</label><input type="number" id="projPlannedBudget" step="0.01" placeholder="القيمة المعتمدة في الخطة"></div>
+                    <div class="form-group"><label>التكلفة المخصصة / المعتمدة</label><input type="number" id="projAllocatedBudget" step="0.01" placeholder="القيمة المخصصة للتنفيذ"></div>
+                    <div class="form-group"><label>المنفق من التكلفة حتى الآن</label><input type="number" id="projActualCost" step="0.01" placeholder="Actual Cost"></div>
+                    <input type="hidden" id="projBudget">
                     <div class="form-group"><label>الإنجاز (%)</label><input type="range" id="projProgress" min="0" max="100" value="0" oninput="document.getElementById('progVal').innerText=this.value+'%'"><span id="progVal">0%</span></div>
                     <div class="form-group"><label>الوصف</label><textarea id="projDesc" rows="2"></textarea></div>
                 </div>
@@ -657,7 +795,7 @@
             </div>
             <div class="card">
                 <div class="card-header"><i class="fas fa-list"></i> قائمة المشاريع</div>
-                <div class="table-wrapper"><table id="projectsTable"><thead><tr><th>الاسم</th><th>النوع</th><th>القطاع</th><th>المديرية</th><th>الهدف</th><th>الحالة</th><th>الإنجاز</th><th>إجراءات</th></tr></thead><tbody id="projectsBody"></tbody></table></div>
+                <div class="table-wrapper"><table id="projectsTable"><thead><tr><th>الاسم</th><th>النوع</th><th>القطاع</th><th>المديرية</th><th>الهدف</th><th>الحالة</th><th>الإنجاز</th><th>المخطط</th><th>المخصص</th><th>المنفق</th><th>إجراءات</th></tr></thead><tbody id="projectsBody"></tbody></table></div>
             </div>
         </div>
 
@@ -700,6 +838,14 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header"><span><i class="fas fa-route"></i> مراحل المشروع والمعالم Stage Gates / Milestones</span></div>
+                <div id="phase2ProjectStages"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span><i class="fas fa-layer-group"></i> مصفوفة أولوية المشاريع Impact × Urgency</span></div>
+                <div style="overflow-x:auto"><div id="phase2PriorityMatrix"></div></div>
+            </div>
+            <div class="card">
                 <div class="card-header">
                     <span><i class="fas fa-chart-gantt"></i> مخطط جانت</span>
                     <div class="gantt-controls">
@@ -715,11 +861,25 @@
 
         <div class="tab-content" id="tab-risks">
             <div class="card">
+                <div class="card-header"><span><i class="fas fa-fire"></i> خريطة المخاطر الحرارية Risk Heat Map</span></div>
+                <div class="phase2-toolbar">
+                    <div style="font-size:.82rem;color:#475569;font-weight:700">توزيع المخاطر حسب الاحتمالية والتأثير مع إبراز المخاطر الحرجة المفتوحة.</div>
+                    <button class="btn btn-sm btn-primary" onclick="renderRiskHeatMap && renderRiskHeatMap()"><i class="fas fa-sync"></i> تحديث الخريطة</button>
+                </div>
+                <div style="overflow-x:auto"><div id="phase2RiskHeatMap"></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span><i class="fas fa-chart-line"></i> ملخص المخاطر التنفيذي</span></div>
+                <div id="phase2RiskSummary"></div>
+            </div>
+            <div class="card">
                 <div class="card-header"><span><i class="fas fa-bug"></i> إضافة / تعديل خطر</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>المشروع *</label><select id="riskProject"></select></div>
                     <div class="form-group"><label>النوع</label><select id="riskType"><option value="خطر">خطر</option><option value="مشكلة">مشكلة</option></select></div>
                     <div class="form-group"><label>المستوى</label><select id="riskLevel"><option value="منخفض">منخفض</option><option value="متوسط">متوسط</option><option value="مرتفع">مرتفع</option><option value="حرج">حرج</option></select></div>
+                    <div class="form-group"><label>الاحتمالية (1-5)</label><input type="number" id="riskProbability" min="1" max="5" value="3"></div>
+                    <div class="form-group"><label>الأثر (1-5)</label><input type="number" id="riskImpact" min="1" max="5" value="3"></div>
                     <div class="form-group"><label>الوصف</label><textarea id="riskDesc"></textarea></div>
                     <div class="form-group"><label>الإجراء</label><textarea id="riskAction"></textarea></div>
                     <div class="form-group"><label>المسؤول</label><input type="text" id="riskOwner"></div>
@@ -787,22 +947,28 @@
         </div>
 
         <div class="tab-content" id="tab-reports">
+            <div class="phase3-print-note">تقرير تنفيذي صادر من نظام إدارة المشاريع المتكامل.</div>
             <div class="card">
                 <div class="card-header">
-                    <span><i class="fas fa-chart-bar"></i> ملخص التقارير</span>
-                    <div class="form-group" style="flex-direction:row;gap:10px;align-items:center;">
+                    <span><i class="fas fa-chart-bar"></i> التقارير التنفيذية الشاملة</span>
+                    <div class="form-group" style="flex-direction:row;gap:10px;align-items:center;flex-wrap:wrap;">
                         <label style="font-weight:600;color:#334155;font-size:0.85rem;">المشروع:</label>
-                        <select id="reportProjectFilter" style="width:200px;padding:6px 12px;">
-                            <option value="all">جميع المشاريع</option>
-                        </select>
+                        <select id="reportProjectFilter" style="width:220px;padding:6px 12px;"><option value="all">جميع المشاريع</option></select>
                         <button class="btn btn-sm btn-primary" id="applyReportFilter"><i class="fas fa-sync"></i> تحديث</button>
+                        <button class="btn btn-sm btn-success" onclick="window.print()"><i class="fas fa-file-pdf"></i> طباعة / PDF</button>
                     </div>
                 </div>
+                <div id="phase3ExecutiveSummary" class="phase3-exec-summary"></div>
+            </div>
+            <div class="phase3-cards" id="phase3ExecutiveCards"></div>
+            <div class="phase3-report-grid">
+                <div class="phase3-list"><h4><i class="fas fa-star"></i> أهم الإنجازات</h4><div id="phase3Achievements"></div></div>
+                <div class="phase3-list"><h4><i class="fas fa-triangle-exclamation"></i> أولويات الإدارة العليا</h4><div id="phase3Priorities"></div></div>
             </div>
             <div class="card">
+                <div class="card-header"><span><i class="fas fa-chart-line"></i> مؤشرات الأداء والاتجاهات</span></div>
                 <div class="report-stats-row" id="reportStatsRow"></div>
-            </div>
-            <div class="charts-row" id="reportsChartsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:18px;">
+                <div class="charts-row" id="reportsChartsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:18px;"></div>
             </div>
         </div>
 
@@ -826,7 +992,7 @@
             const KPI_SIZE_KEY = 'kpi_card_size';
 
             let appData = { projects: [], resources: [], tasks: [], risks: [], budgets: [], objectives: [],
-                kpis: [], services: [], teamMembers: [], sectors: [], directorates: [] };
+                kpis: [], services: [], teamMembers: [], sectors: [], directorates: [], fiveYearPlans: [] };
             let ganttZoomLevel = 0;
             const ZOOM_LEVELS = ['أيام', 'أسابيع', 'أشهر', 'سنوات'];
             const ZOOM_OFFSETS = [-2, -1, 0, 1];
@@ -844,11 +1010,16 @@
                 if (s) {
                     try { appData = JSON.parse(s); } catch(e) { initDefaultData(); }
                 } else { initDefaultData(); }
-                ['projects','resources','tasks','risks','budgets','objectives','kpis','services','teamMembers','sectors','directorates'].forEach(k => {
+                // حماية من ظهور اللوحات فارغة عند وجود تخزين محلي قديم أو ملف سابق حفظ مصفوفات فارغة
+                if (!appData.projects || appData.projects.length === 0 || !appData.objectives || appData.objectives.length === 0) {
+                    initDefaultData();
+                }
+                ['projects','resources','tasks','risks','budgets','objectives','kpis','services','teamMembers','sectors','directorates','fiveYearPlans'].forEach(k => {
                     if (!appData[k]) appData[k] = [];
                 });
                 if (appData.sectors.length === 0) appData.sectors = [...DEFAULT_SECTORS];
                 if (appData.directorates.length === 0) appData.directorates = [...DEFAULT_DIRECTORATES];
+                normalizePhaseOneData();
                 const savedZoom = localStorage.getItem('gantt_zoom_level');
                 if (savedZoom !== null) ganttZoomLevel = parseInt(savedZoom);
                 saveData();
@@ -1006,23 +1177,31 @@
             function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
+            function projectAllocatedBudget(p) { return Number(p?.allocatedBudget ?? p?.budget ?? 0); }
+            function projectPlannedBudget(p) { const allocated = projectAllocatedBudget(p); return Number(p?.plannedBudget ?? (allocated ? Math.round(allocated * 1.15) : 0)); }
+            function projectActualCost(p) { const direct = Number(p?.actualCost ?? 0); if (direct > 0) return direct; return appData.budgets.filter(b => b.projectId === p.id).reduce((s,b) => s + Number(b.spent||0), 0); }
+            function projectRemainingAllocated(p) { return projectAllocatedBudget(p) - projectActualCost(p); }
+            function projectSpendRate(p) { const allocated = projectAllocatedBudget(p); return allocated ? Math.round((projectActualCost(p)/allocated)*100) : 0; }
+
 
             function getProjectStats() {
                 const projects = appData.projects;
                 const total = projects.length;
                 const active = projects.filter(p => p.status === 'نشط').length;
                 const completed = projects.filter(p => p.status === 'مكتمل').length;
-                const totalBudget = projects.reduce((s,p) => s + (p.budget||0), 0);
+                const totalProjectCost = projects.reduce((s,p) => s + projectAllocatedBudget(p), 0);
+                const totalPlanBudget = appData.fiveYearPlans?.reduce((s,y) => s + Number(y.budget||0), 0) || 0;
+                const totalBudget = totalProjectCost; // توافق خلفي: يمثل إجمالي تكلفة المشاريع وليس موازنة الخطة
                 const avgProgress = total > 0 ? Math.round(projects.reduce((s,p) => s + (p.progress||0), 0) / total) : 0;
                 const risksOpen = appData.risks.filter(r => r.status !== 'مغلق').length;
                 const risksHigh = appData.risks.filter(r => (r.level === 'مرتفع' || r.level === 'حرج') && r.status !== 'مغلق').length;
                 const risksCritical = appData.risks.filter(r => r.level === 'حرج' && r.status !== 'مغلق').length;
-                const totalSpent = appData.budgets.reduce((s,b) => s + (b.spent||0), 0);
+                const totalSpent = appData.projects.reduce((s,p) => s + projectActualCost(p), 0);
                 const objAchieved = appData.objectives.filter(o => o.progress >= 80).length;
                 const objTotal = appData.objectives.length;
                 const totalTeamMembers = appData.teamMembers.length;
                 const totalResources = appData.resources.length;
-                return { total, active, completed, totalBudget, totalSpent, avgProgress, risksOpen, risksHigh, risksCritical, objAchieved, objTotal, totalTeamMembers, totalResources };
+                return { total, active, completed, totalBudget, totalProjectCost, totalPlanBudget, totalSpent, avgProgress, risksOpen, risksHigh, risksCritical, objAchieved, objTotal, totalTeamMembers, totalResources };
             }
 
             // ---- KPI Drag & Drop ----
@@ -1093,6 +1272,18 @@
                 const saved = localStorage.getItem(key);
                 if(saved && ['small','medium','large','xlarge'].includes(saved)) return saved;
                 return 'medium';
+            }
+
+            window.resetKpiSize=function(){
+                localStorage.setItem(KPI_SIZE_KEY,'medium');
+                setSize('kpi','medium');
+                phase3Toast('تمت إعادة حجم المؤشرات للوضع الافتراضي');
+            }
+            window.resetKpiLayout=function(){
+                localStorage.removeItem(KPI_ORDER_KEY);
+                localStorage.setItem(KPI_SIZE_KEY,'medium');
+                if (typeof renderDashboard === 'function') renderDashboard();
+                phase3Toast('تمت إعادة ترتيب وحجم المؤشرات للوضع الافتراضي');
             }
 
             // ---- Populate dropdowns (اختصار) ----
@@ -1212,8 +1403,10 @@
             }
             function exportAllExcel() {
                 const wb=XLSX.utils.book_new();
-                if(appData.projects.length) { const data=appData.projects.map(p=>({id:p.id,name:p.name,type:p.type,sector:p.sector,directorate:p.directorate||'',objectiveId:p.objectiveId,status:p.status,start:p.start,end:p.end,budget:p.budget,progress:p.progress,description:p.description||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المشاريع'); }
-                if(appData.objectives.length) { const data=appData.objectives.map(o=>({id:o.id,title:o.title,desc:o.desc||'',weight:o.weight,target:o.target,progress:o.progress||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الأهداف'); }
+                if(appData.projects.length) { const data=appData.projects.map(p=>({id:p.id,name:p.name,type:p.type,sector:p.sector,directorate:p.directorate||'',objectiveId:p.objectiveId,status:p.status,start:p.start,end:p.end,plannedBudget:projectPlannedBudget(p),allocatedBudget:projectAllocatedBudget(p),actualCost:projectActualCost(p),budget:projectAllocatedBudget(p),progress:p.progress,description:p.description||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المشاريع'); }
+                if(appData.fiveYearPlans?.length) { const data=appData.fiveYearPlans.map(y=>({id:y.id,year:y.year,focus:y.focus||'',goals:y.goals||'',target:y.target||0,actual:y.actual||0,budget:y.budget||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الخطة الخمسية'); }
+                if(appData.objectives.length) { const data=appData.objectives.map(o=>({id:o.id,title:o.title,desc:o.desc||'',perspective:o.perspective||'',parentId:o.parentId||'',weight:o.weight,target:o.target,progress:o.progress||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الأهداف'); }
+                if(appData.kpis.length) { const data=appData.kpis.map(k=>({id:k.id,objectiveId:k.objectiveId,name:k.name,baseline:k.baseline||0,q1:k.q1||0,q2:k.q2||0,q3:k.q3||0,q4:k.q4||k.target||0,target:k.target||0,actual:k.actual||0,unit:k.unit||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'مؤشرات BSC'); }
                 if(appData.tasks.length) { const data=appData.tasks.map(t=>({id:t.id,projectId:t.projectId,name:t.name,predecessor:t.predecessor||'',successor:t.successor||'',planStart:t.planStart||'',planEnd:t.planEnd||'',actualStart:t.actualStart||'',actualEnd:t.actualEnd||'',responsible:t.responsible||'',progress:t.progress||0,order:t.order||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المهام'); }
                 if(appData.risks.length) { const data=appData.risks.map(r=>({id:r.id,projectId:r.projectId,type:r.type,level:r.level,desc:r.desc,action:r.action||'',owner:r.owner||'',status:r.status})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المخاطر'); }
                 if(appData.budgets.length) { const data=appData.budgets.map(b=>({id:b.id,projectId:b.projectId,item:b.item,planned:b.planned,spent:b.spent,date:b.date||'',notes:b.notes||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الموازنة'); }
@@ -1226,34 +1419,75 @@
             }
             function exportGoogleSheets() {
                 let tsv='نوع\tبيانات\n';
-                appData.projects.forEach(p=>{ tsv+='مشروع\t'+[p.name,p.type,p.sector,p.directorate||'',p.status,p.budget].join('\t')+'\n'; });
+                appData.projects.forEach(p=>{ tsv+='مشروع\t'+[p.name,p.type,p.sector,p.directorate||'',p.status,projectPlannedBudget(p),projectAllocatedBudget(p),projectActualCost(p)].join('\t')+'\n'; });
                 navigator.clipboard.writeText(tsv).then(()=>{ alert('تم النسخ. افتح sheets.google.com'); window.open('https://sheets.google.com','_blank'); });
+            }
+
+
+            function renderDashboardChartsFallback() {
+                const money = v => (Number(v||0)/1000000).toFixed(1) + 'M';
+                const topProjects = [...appData.projects].sort((a,b)=>projectPlannedBudget(b)-projectPlannedBudget(a)).slice(0,8);
+                const maxMoney = Math.max(...topProjects.flatMap(p=>[projectPlannedBudget(p), projectAllocatedBudget(p), projectActualCost(p)]), 1);
+                const financeParent = document.getElementById('budgetVsSpentChart')?.parentElement;
+                if (financeParent) {
+                    financeParent.innerHTML = `<div style="height:100%;display:flex;align-items:end;gap:16px;overflow-x:auto;padding:16px 4px 8px;direction:rtl">
+                        ${topProjects.map(p=>`
+                            <div style="min-width:120px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px">
+                                <div style="display:flex;align-items:end;gap:4px;height:190px;width:100%;justify-content:center">
+                                    <div title="الميزانية المخططة: ${formatCurrency(projectPlannedBudget(p))}" style="width:24px;height:${Math.max(4,projectPlannedBudget(p)/maxMoney*180)}px;background:#1e40af;border-radius:6px 6px 0 0"></div>
+                                    <div title="التكلفة المخصصة: ${formatCurrency(projectAllocatedBudget(p))}" style="width:24px;height:${Math.max(4,projectAllocatedBudget(p)/maxMoney*180)}px;background:#10b981;border-radius:6px 6px 0 0"></div>
+                                    <div title="المنفق: ${formatCurrency(projectActualCost(p))}" style="width:24px;height:${Math.max(4,projectActualCost(p)/maxMoney*180)}px;background:#f59e0b;border-radius:6px 6px 0 0"></div>
+                                </div>
+                                <div style="font-size:.68rem;font-weight:700;text-align:center;color:#334155;line-height:1.4;max-width:115px">${p.name}</div>
+                                <div style="font-size:.65rem;color:#64748b;text-align:center">${money(projectPlannedBudget(p))} / ${money(projectAllocatedBudget(p))} / ${money(projectActualCost(p))}</div>
+                            </div>`).join('')}
+                    </div>
+                    <div style="display:flex;gap:14px;justify-content:center;font-size:.75rem;font-weight:700;margin-top:6px;flex-wrap:wrap">
+                        <span><i style="display:inline-block;width:12px;height:12px;background:#1e40af;border-radius:3px"></i> الميزانية المخططة</span>
+                        <span><i style="display:inline-block;width:12px;height:12px;background:#10b981;border-radius:3px"></i> التكلفة المخصصة</span>
+                        <span><i style="display:inline-block;width:12px;height:12px;background:#f59e0b;border-radius:3px"></i> المنفق حتى الآن</span>
+                    </div>`;
+                }
+                const simpleFallbacks = [
+                    ['monthlyCostChart','التكلفة الشهرية محفوظة وتظهر عند توفر مكتبة الرسوم Chart.js'],
+                    ['resourceDistributionChart','توزيع الموارد محفوظ ويظهر عند توفر مكتبة الرسوم Chart.js'],
+                    ['sectorDistributionChart','توزيع المشاريع حسب القطاع محفوظ ويظهر عند توفر مكتبة الرسوم Chart.js'],
+                    ['projectStatusChart','توزيع حالة المشاريع محفوظ ويظهر عند توفر مكتبة الرسوم Chart.js'],
+                    ['projectProgressChart','نسب إنجاز المشاريع محفوظة ويظهر الرسم عند توفر مكتبة الرسوم Chart.js'],
+                    ['strategicObjectivesChart','']
+                ];
+                simpleFallbacks.forEach(([id,msg])=>{ const p=document.getElementById(id)?.parentElement; if(p && msg) p.innerHTML=`<div style="height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:#64748b;font-weight:700;font-size:.85rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:14px;padding:18px">${msg}</div>`; }); renderStrategicObjectivesIndicator();
             }
 
             // ---- دالة رسم المخططات في لوحة المؤشرات ----
             function renderDashboardCharts() {
-                const chartIds = ['budgetVsSpentChart','monthlyCostChart','resourceDistributionChart','sectorDistributionChart','projectStatusChart','projectProgressChart','strategicObjectivesChart'];
+                if (typeof Chart === 'undefined') { renderDashboardChartsFallback(); return; }
+                const chartIds = ['budgetVsSpentChart','monthlyCostChart','resourceDistributionChart','sectorDistributionChart','projectStatusChart','strategicObjectivesChart'];
                 chartIds.forEach(id => { const e = Chart.getChart(id); if(e) e.destroy(); });
 
                 // 1. المخطط مقابل المنفق - عرض النص الكامل
                 const ctx1 = document.getElementById('budgetVsSpentChart')?.getContext('2d');
                 if(ctx1) {
-                    const sorted = [...appData.projects].sort((a,b)=>(b.budget||0)-(a.budget||0)).slice(0,8);
-                    const spent = sorted.map(p=>appData.budgets.filter(b=>b.projectId===p.id).reduce((s,b)=>s+(b.spent||0),0));
+                    const sorted = [...appData.projects].sort((a,b)=>projectPlannedBudget(b)-projectPlannedBudget(a)).slice(0,8);
+                    const planned = sorted.map(p=>projectPlannedBudget(p));
+                    const allocated = sorted.map(p=>projectAllocatedBudget(p));
+                    const spent = sorted.map(p=>projectActualCost(p));
                     new Chart(ctx1, {
                         type:'bar',
                         data: {
                             labels: sorted.map(p=>p.name),
                             datasets: [
-                                { label:'المخطط', data: sorted.map(p=>(p.budget||0)/1000000), backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4 },
-                                { label:'المنفق', data: spent.map(s=>s/1000000), backgroundColor:'rgba(239,68,68,0.7)', borderRadius:4 }
+                                { label:'الميزانية المخططة للمشروع', data: planned.map(v=>v/1000000), backgroundColor:'rgba(30,64,175,0.78)', borderRadius:4 },
+                                { label:'التكلفة المخصصة للمشروع', data: allocated.map(v=>v/1000000), backgroundColor:'rgba(16,185,129,0.78)', borderRadius:4 },
+                                { label:'المنفق من التكلفة حتى الآن', data: spent.map(v=>v/1000000), backgroundColor:'rgba(245,158,11,0.82)', borderRadius:4 }
                             ]
                         },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
                             plugins: {
-                                legend: { position: 'top', labels: { font: { size: 11 } } }
+                                legend: { position: 'top', labels: { font: { size: 11 } } },
+                                tooltip: { callbacks: { afterBody: (items) => { const p=sorted[items[0].dataIndex]; const rem=projectRemainingAllocated(p); return ['نسبة الصرف: '+projectSpendRate(p)+'%', 'المتبقي من المخصص: '+formatCurrency(rem)]; } } }
                             },
                             scales: {
                                 y: { beginAtZero: true, ticks: { callback: v => v + 'M' } },
@@ -1267,7 +1501,7 @@
                 const ctx2 = document.getElementById('monthlyCostChart')?.getContext('2d');
                 if(ctx2) {
                     const months=['يناير','فبراير','مارس','أبريل','مايو','يونيو'];
-                    const avgCost = appData.projects.reduce((s,p)=>s+(p.budget||0),0) / (appData.projects.length||1);
+                    const avgCost = appData.projects.reduce((s,p)=>s+projectAllocatedBudget(p),0) / (appData.projects.length||1);
                     const monthlyData = months.map(()=> Math.round(avgCost * (0.5 + Math.random()*0.8) / 1000) * 1000);
                     new Chart(ctx2, {
                         type:'line',
@@ -1393,6 +1627,19 @@
                         }
                     });
                 }
+                renderStrategicObjectivesIndicator();
+            }
+
+            function renderStrategicObjectivesIndicator(){
+                const holder=document.getElementById('strategicObjectivesIndicator'); if(!holder) return;
+                const objectives=(appData.objectives||[]);
+                if(!objectives.length){ holder.innerHTML='<div style="font-size:.8rem;color:#64748b;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:10px;text-align:center">لا توجد أهداف استراتيجية مسجلة.</div>'; return; }
+                holder.innerHTML=objectives.map(o=>{
+                    const linked=(appData.projects||[]).filter(p=>p.objectiveId===o.id).length;
+                    const val=Math.max(0,Math.min(100,Number(o.progress||0)));
+                    const color=val>=80?'#10b981':val>=50?'#f59e0b':'#ef4444';
+                    return `<div class="objective-mini-row"><div class="objective-mini-head"><span>${o.title||'هدف غير مسمى'}</span><span>${val}%</span></div><div class="objective-mini-track"><div class="objective-mini-fill" style="width:${val}%;background:${color}"></div></div><div class="objective-mini-meta">المشاريع المرتبطة: ${linked} | المنظور: ${o.perspective||'غير محدد'}</div></div>`;
+                }).join('');
             }
 
             // ---- دوال عرض البيانات في الصفحات المختلفة ----
@@ -1400,12 +1647,14 @@
                 const tbody=document.getElementById('objectivesBody');
                 if(!tbody) return;
                 tbody.innerHTML=appData.objectives.map(o=>{
-                    const linked=appData.projects.filter(p=>p.objectiveId===o.id);
-                    const kpis=appData.kpis.filter(k=>k.objectiveId===o.id);
-                    return `<tr><td><strong>${o.title}</strong><br><small style="color:#64748b;">${o.desc||''}</small></td><td>${o.weight}%</td><td><div class="mini-progress"><div class="mini-progress-fill" style="width:${o.progress||0}%;background:#3b82f6;"></div></div> ${o.progress||0}%</td><td>${linked.map(p=>p.name).join('<br>')||'-'}</td><td>${kpis.map(k=>`${k.name}: ${k.actual}/${k.target} ${k.unit}`).join('<br>')||'-'}</td><td><button class="btn btn-sm btn-warning" onclick="editObj('${o.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteObj('${o.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    const linked=appData.projects.filter(p=>p.objectiveId===o.id).length;
+                    const kpis=appData.kpis.filter(k=>k.objectiveId===o.id).length;
+                    const parent=o.parentId ? (appData.objectives.find(x=>x.id===o.parentId)?.title||'-') : 'هدف رئيسي';
+                    return `<tr><td><strong>${o.title}</strong><br><small>${o.desc||''}</small></td><td><span class="badge badge-info">${o.perspective||'المستفيدون'}</span></td><td>${parent}</td><td>${o.weight}%</td><td><div class="mini-progress"><div class="mini-progress-fill" style="width:${o.progress||0}%;background:${(o.progress||0)>=80?'#10b981':(o.progress||0)>=50?'#f59e0b':'#ef4444'};"></div></div> ${o.progress||0}%</td><td>${linked}</td><td>${kpis}</td><td><button class="btn btn-sm btn-outline" onclick="editObj('${o.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteObj('${o.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
                 }).join('');
+                renderBscMap(); renderAdvancedKpiTable();
             }
-            window.editObj=function(id){ const o=appData.objectives.find(ob=>ob.id===id); if(!o) return; document.getElementById('editingObjId').value=o.id; document.getElementById('objTitle').value=o.title; document.getElementById('objDesc').value=o.desc||''; document.getElementById('objWeight').value=o.weight; document.getElementById('objTarget').value=o.target; };
+            window.editObj=function(id){ const o=appData.objectives.find(ob=>ob.id===id); if(!o) return; document.getElementById('editingObjId').value=o.id; document.getElementById('objTitle').value=o.title; document.getElementById('objDesc').value=o.desc||''; document.getElementById('objWeight').value=o.weight; document.getElementById('objTarget').value=o.target; const pp=document.getElementById('objPerspective'); if(pp) pp.value=o.perspective||'المستفيدون'; const par=document.getElementById('objParent'); if(par) par.value=o.parentId||''; };
             window.deleteObj=function(id){ if(confirm('حذف الهدف؟')){ appData.objectives=appData.objectives.filter(o=>o.id!==id); appData.kpis=appData.kpis.filter(k=>k.objectiveId!==id); saveData(); refreshAllViews(); } };
 
             function renderProjects() {
@@ -1413,10 +1662,10 @@
                 if(!tbody) return;
                 tbody.innerHTML=appData.projects.map(p=>{
                     const obj=appData.objectives.find(o=>o.id===p.objectiveId);
-                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td>${p.sector||'-'}</td><td>${p.directorate||'-'}</td><td>${obj?obj.title:'-'}</td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td>${p.progress}%</td><td><button class="btn btn-sm btn-warning" onclick="editProject('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteProject('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td>${p.sector||'-'}</td><td>${p.directorate||'-'}</td><td>${obj?obj.title:'-'}</td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td>${p.progress}%</td><td>${formatCurrency(projectPlannedBudget(p))}</td><td>${formatCurrency(projectAllocatedBudget(p))}</td><td>${formatCurrency(projectActualCost(p))}</td><td><button class="btn btn-sm btn-warning" onclick="editProject('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteProject('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
                 }).join('');
             }
-            window.editProject=function(id){ const p=appData.projects.find(pr=>pr.id===id); if(!p) return; document.getElementById('editingProjectId').value=p.id; document.getElementById('projName').value=p.name; document.getElementById('projType').value=p.type; document.getElementById('projSector').value=p.sector||''; document.getElementById('projObjective').value=p.objectiveId||''; document.getElementById('projStatus').value=p.status; document.getElementById('projStart').value=p.start||''; document.getElementById('projEnd').value=p.end||''; document.getElementById('projBudget').value=p.budget||0; document.getElementById('projProgress').value=p.progress||0; document.getElementById('progVal').innerText=(p.progress||0)+'%'; document.getElementById('projDesc').value=p.description||''; document.getElementById('projDirectorate').value=p.directorate||''; };
+            window.editProject=function(id){ const p=appData.projects.find(pr=>pr.id===id); if(!p) return; document.getElementById('editingProjectId').value=p.id; document.getElementById('projName').value=p.name; document.getElementById('projType').value=p.type; document.getElementById('projSector').value=p.sector||''; document.getElementById('projObjective').value=p.objectiveId||''; document.getElementById('projStatus').value=p.status; document.getElementById('projStart').value=p.start||''; document.getElementById('projEnd').value=p.end||''; document.getElementById('projPlannedBudget').value=projectPlannedBudget(p)||0; document.getElementById('projAllocatedBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projActualCost').value=projectActualCost(p)||0; document.getElementById('projBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projProgress').value=p.progress||0; document.getElementById('progVal').innerText=(p.progress||0)+'%'; document.getElementById('projDesc').value=p.description||''; document.getElementById('projDirectorate').value=p.directorate||''; };
             window.deleteProject=function(id){ if(confirm('حذف المشروع؟')){ appData.projects=appData.projects.filter(p=>p.id!==id); appData.tasks=appData.tasks.filter(t=>t.projectId!==id); appData.risks=appData.risks.filter(r=>r.projectId!==id); appData.budgets=appData.budgets.filter(b=>b.projectId!==id); appData.teamMembers=appData.teamMembers.filter(t=>t.projectId!==id); appData.resources=appData.resources.filter(r=>r.projectId!==id); saveData(); refreshAllViews(); } };
 
             function renderTeamMembers() {
@@ -1493,7 +1742,7 @@
                     return `<tr><td>${proj?proj.name:'-'}</td><td><span class="badge badge-info">${r.type}</span></td><td><span class="badge badge-${levelClass}">${r.level}</span></td><td>${r.desc}</td><td><span class="badge badge-${r.status==='مغلق'?'success':r.status==='قيد المعالجة'?'warning':'danger'}">${r.status}</span></td><td><button class="btn btn-sm btn-warning" onclick="editRisk('${r.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteRisk('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
                 }).join('');
             }
-            window.editRisk=function(id){ const r=appData.risks.find(rk=>rk.id===id); if(!r) return; document.getElementById('editingRiskId').value=r.id; document.getElementById('riskProject').value=r.projectId; document.getElementById('riskType').value=r.type; document.getElementById('riskLevel').value=r.level; document.getElementById('riskDesc').value=r.desc; document.getElementById('riskAction').value=r.action||''; document.getElementById('riskOwner').value=r.owner||''; document.getElementById('riskStatus').value=r.status; };
+            window.editRisk=function(id){ const r=appData.risks.find(rk=>rk.id===id); if(!r) return; document.getElementById('editingRiskId').value=r.id; document.getElementById('riskProject').value=r.projectId; document.getElementById('riskType').value=r.type; document.getElementById('riskLevel').value=r.level; document.getElementById('riskDesc').value=r.desc; document.getElementById('riskAction').value=r.action||''; document.getElementById('riskOwner').value=r.owner||''; document.getElementById('riskStatus').value=r.status; const rp=document.getElementById('riskProbability'); if(rp) rp.value=r.probability||3; const ri=document.getElementById('riskImpact'); if(ri) ri.value=r.impact||3; };
             window.deleteRisk=function(id){ appData.risks=appData.risks.filter(r=>r.id!==id); saveData(); renderRisks(); renderRisksDetailed(); };
 
             // ---- دوال الموازنة والخدمات ----
@@ -1630,65 +1879,136 @@
             function saveGanttTable(){ saveGanttData(); alert('تم حفظ المهام بنجاح!'); renderGanttChart(); }
             function addGanttRow(){ const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return alert('اختر مشروعاً'); const tbody=document.getElementById('ganttEditableBody'); if(tbody.querySelector('tr td[colspan]')) tbody.innerHTML=''; const members=getTeamMembers(pid); const opts=members.map(m=>`<option value="${m.name}">${m.name} (${m.role})</option>`).join(''); const rowCount=tbody.querySelectorAll('tr').length+1; const row=document.createElement('tr'); row.setAttribute('draggable','true'); row.dataset.taskId=generateId(); row.innerHTML=`<td><input type="number" value="${rowCount}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" class="task-name" value="مهمة جديدة"></td><td><input type="text" class="task-pred"></td><td><input type="text" class="task-succ"></td><td><input type="date" class="task-ps"></td><td><input type="date" class="task-pe"></td><td><input type="date" class="task-as"></td><td><input type="date" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts}</select></td><td><input type="number" class="task-prog" value="0" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove(); updateGanttOrderNumbers();"><i class="fas fa-trash"></i></button></td>`; tbody.appendChild(row); setupGanttDragAndDrop(); updateGanttOrderNumbers(); }
 
-            // ---- دوال التقارير ----
+            // ---- دوال المرحلة الثالثة: التقارير التنفيذية والبحث والتنبيهات والواجهة ----
+            function phase3Money(v){ return (Number(v||0)).toLocaleString('ar-OM'); }
+            function phase3HealthColor(score){ return score>=80?'green':score>=60?'amber':'red'; }
+            function phase3RiskScore(r){ return Number(r.probability||3)*Number(r.impact||3); }
+            function phase3ProjectHealth(project){
+                const progress=Number(project.progress||0);
+                const projectRisks=appData.risks.filter(r=>r.projectId===project.id && r.status!=='مغلق');
+                const riskPenalty=Math.min(30, projectRisks.reduce((s,r)=>s+(phase3RiskScore(r)>=20?8:phase3RiskScore(r)>=12?5:2),0));
+                const spent=appData.budgets.filter(b=>b.projectId===project.id).reduce((s,b)=>s+Number(b.spent||0),0);
+                const budget=Number(project.budget||0);
+                const budgetPenalty=budget&&spent>budget?15:0;
+                return Math.max(0, Math.min(100, Math.round(progress - riskPenalty - budgetPenalty + (project.status==='مكتمل'?15:0))));
+            }
+            function phase3BuildAlerts(){
+                const alerts=[];
+                const openRisks=appData.risks.filter(r=>r.status!=='مغلق');
+                const critical=openRisks.filter(r=>phase3RiskScore(r)>=20 || r.level==='حرج');
+                if(critical.length) alerts.push({level:'red',title:'مخاطر حرجة تحتاج قراراً',body:`يوجد ${critical.length} خطر/مشكلة حرجة مفتوحة ضمن المحفظة، ويوصى بتصعيدها لاجتماع متابعة تنفيذي.`,tab:'tab-risks',targetText:critical[0].desc||critical[0].level||'مخاطر'});
+                const delayed=appData.projects.filter(p=>p.status!=='مكتمل' && Number(p.progress||0)<50);
+                if(delayed.length) alerts.push({level:'amber',title:'مشاريع تحتاج تسريع',body:`يوجد ${delayed.length} مشروع أقل من 50% إنجاز، ويحتاج مراجعة للخطة والموارد والمعالم.`,tab:'tab-projects',targetText:delayed[0].name||'مشاريع'});
+                const totalProjectCost=appData.projects.reduce((s,p)=>s+projectAllocatedBudget(p),0);
+                const spent=appData.budgets.reduce((s,b)=>s+Number(b.spent||0),0);
+                if(totalProjectCost && spent/totalProjectCost>0.85) alerts.push({level:'amber',title:'مؤشر إنفاق مرتفع',body:`الصرف الحالي بلغ ${Math.round(spent/totalProjectCost*100)}% من إجمالي التكلفة المخصصة للمشاريع.`,tab:'tab-budget',targetText:'المنفق'});
+                const kpiRed=appData.kpis.filter(k=>Number(k.actual||0)<Number(k.target||0)*0.75);
+                if(kpiRed.length) alerts.push({level:'red',title:'مؤشرات أداء دون المستهدف',body:`يوجد ${kpiRed.length} مؤشر أداء في الحالة الحمراء مقارنة بالمستهدف.`,tab:'tab-strategy',targetText:kpiRed[0].name||'KPI'});
+                const goodProjects=appData.projects.filter(p=>p.status==='مكتمل'||Number(p.progress||0)>=85);
+                if(goodProjects.length) alerts.push({level:'green',title:'إنجازات إيجابية',body:`يوجد ${goodProjects.length} مشروع مكتمل أو يتجاوز 85% من الإنجاز.`,tab:'tab-projects',targetText:goodProjects[0].name||'إنجاز'});
+                if(!alerts.length) alerts.push({level:'green',title:'لا توجد تنبيهات حرجة',body:'المحفظة مستقرة حالياً ولا توجد مؤشرات حرجة مفتوحة.',tab:'tab-dashboard',targetText:'لوحة المؤشرات'});
+                return alerts;
+            }
+            window.toggleNotifications=function(show){
+                const d=document.getElementById('phase3NotificationsDrawer'); if(!d) return;
+                if(show===false) d.classList.remove('show'); else d.classList.toggle('show');
+                phase3RenderNotifications();
+            }
+            function phase3RenderNotifications(){
+                const alerts=phase3BuildAlerts();
+                const list=document.getElementById('phase3NotificationsList'); if(list) list.innerHTML=alerts.map((a,i)=>`<div class="phase3-alert ${a.level}" onclick="phase3OpenAlertTarget('${a.tab||'tab-dashboard'}', ${i})" title="اضغط للانتقال إلى المعلومة المرتبطة"><div class="phase3-alert-title">${a.title}</div><div class="phase3-alert-body">${a.body}<div style="margin-top:6px;font-weight:900;color:#2563eb"><i class="fas fa-arrow-left"></i> الانتقال للمعلومة المرتبطة</div></div></div>`).join('');
+                const c=document.getElementById('phase3AlertCount'); if(c) c.textContent=alerts.filter(a=>a.level!=='green').length;
+            }
+            window.phase3OpenAlertTarget=function(tab, index){
+                document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.click();
+                document.getElementById('phase3NotificationsDrawer')?.classList.remove('show');
+                setTimeout(()=>{
+                    const section=document.getElementById(tab) || document.querySelector('.tab-content.active') || document.querySelector('.card');
+                    const preferred=section?.querySelector('.card, .chart-box, table, .phase2-summary, .phase1-banner') || section;
+                    if(preferred){
+                        preferred.scrollIntoView({behavior:'smooth',block:'center'});
+                        preferred.classList.add('ux-highlight');
+                        setTimeout(()=>preferred.classList.remove('ux-highlight'),2200);
+                    }
+                },350);
+            }
+            window.toggleDarkMode=function(){
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('phase3_dark_mode', document.body.classList.contains('dark-mode')?'1':'0');
+                phase3Toast(document.body.classList.contains('dark-mode')?'تم تفعيل السمة الداكنة':'تم إيقاف السمة الداكنة');
+            }
+            function phase3Toast(msg){ const t=document.createElement('div'); t.style.cssText='position:fixed;bottom:18px;right:18px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:14px;z-index:200;font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25)'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
+            window.phase3SearchButton=function(ev){
+                if(ev && ev.stopPropagation) ev.stopPropagation();
+                const inp=document.getElementById('globalSearchInput');
+                phase3GlobalSearch(inp ? inp.value : '', true);
+            }
+            window.phase3GlobalSearch=function(q, forceShow){
+                const panel=document.getElementById('phase3SearchPanel'); if(!panel) return;
+                const raw=(q||'').trim(); const term=raw.toLowerCase();
+                if(!term){
+                    panel.innerHTML='<div class="phase3-result"><strong>اكتب كلمة للبحث</strong><span>يمكنك البحث باسم المشروع، الهدف، KPI، الخطر، الخدمة أو بند الموازنة.</span></div>';
+                    if(forceShow) panel.classList.add('show'); else panel.classList.remove('show');
+                    return;
+                }
+                const safe=(v)=>String(v??'');
+                const rows=[];
+                const add=(type,title,desc,tab)=>{ const hay=(safe(type)+' '+safe(title)+' '+safe(desc)).toLowerCase(); if(hay.includes(term)) rows.push({type:safe(type),title:safe(title),desc:safe(desc),tab}); };
+                const data=window.appData || appData || {};
+                (data.projects||[]).forEach(p=>add('مشروع',p.name,`${p.status||''} - ${p.sector||''} - إنجاز ${p.progress||0}%`,'tab-projects'));
+                (data.objectives||[]).forEach(o=>add('هدف استراتيجي',o.title,`${o.perspective||''} - وزن ${o.weight||0}%`,'tab-strategy'));
+                (data.kpis||[]).forEach(k=>add('KPI',k.name,`فعلي ${k.actual||0} / مستهدف ${k.target||0} ${k.unit||''}`,'tab-strategy'));
+                (data.risks||[]).forEach(r=>add(r.type||'مخاطر',r.desc,`${r.level||''} - ${r.status||''} - ${typeof projectName==='function'?projectName(r.projectId):r.projectId||''}`,'tab-risks'));
+                (data.services||[]).forEach(s=>add(s.type||'خدمة',s.name,`${s.status||''} - ${s.beneficiaries||''}`,'tab-services'));
+                (data.budgets||[]).forEach(b=>add('موازنة',b.item,`${typeof projectName==='function'?projectName(b.projectId):b.projectId||''} - مخطط ${b.planned||0} - مخصص ${b.allocated||b.planned||0} - منفق ${b.spent||0}`,'tab-budget'));
+                (data.fiveYearPlans||[]).forEach(y=>add('الخطة الخمسية',y.year,`${y.theme||''} - موازنة ${y.budget||0} - مستهدف ${y.target||''}`,'tab-fiveyear'));
+                const escSearch=(s)=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+                panel.innerHTML=rows.length?rows.slice(0,60).map(r=>`<div class="phase3-result" onclick="phase3OpenSearchResult('${r.tab}')"><strong>${escSearch(r.type)}: ${escSearch(r.title)}</strong><span>${escSearch(r.desc)}</span></div>`).join(''):`<div class="phase3-result"><strong>لا توجد نتائج مطابقة</strong><span>جرّب كلمة أخرى أو ابحث باسم مشروع / هدف / مؤشر / خطر.</span></div>`;
+                panel.classList.add('show');
+            }
+            window.phase3OpenSearchResult=function(tab){
+                document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.click();
+                document.getElementById('phase3SearchPanel')?.classList.remove('show');
+                const inp=document.getElementById('globalSearchInput'); if(inp) inp.value='';
+            }
+            function phase3ApplyTheme(){ if(localStorage.getItem('phase3_dark_mode')==='1') document.body.classList.add('dark-mode'); }
+
             function renderReports() {
                 const filter = document.getElementById('reportProjectFilter')?.value || 'all';
                 let projects = appData.projects;
                 let risks = appData.risks;
                 let budgets = appData.budgets;
-                let objectives = appData.objectives;
-                let services = appData.services;
-                if (filter !== 'all') {
-                    projects = appData.projects.filter(p => p.id === filter);
-                    risks = appData.risks.filter(r => r.projectId === filter);
-                    budgets = appData.budgets.filter(b => b.projectId === filter);
-                }
+                if (filter !== 'all') { projects = appData.projects.filter(p => p.id === filter); risks = appData.risks.filter(r => r.projectId === filter); budgets = appData.budgets.filter(b => b.projectId === filter); }
                 const total = projects.length;
                 const active = projects.filter(p => p.status === 'نشط').length;
                 const completed = projects.filter(p => p.status === 'مكتمل').length;
                 const avgProgress = total > 0 ? Math.round(projects.reduce((s, p) => s + (p.progress || 0), 0) / total) : 0;
                 const risksOpen = risks.filter(r => r.status !== 'مغلق').length;
-                const risksCritical = risks.filter(r => r.level === 'حرج' && r.status !== 'مغلق').length;
-                const totalBudget = projects.reduce((s, p) => s + (p.budget || 0), 0);
+                const risksCritical = risks.filter(r => (r.level === 'حرج' || phase3RiskScore(r)>=20) && r.status !== 'مغلق').length;
+                const totalProjectCost = projects.reduce((s, p) => s + projectAllocatedBudget(p), 0);
+                const totalPlanBudget = appData.fiveYearPlans?.reduce((s,y)=>s+Number(y.budget||0),0) || 0;
                 const totalSpent = budgets.reduce((s, b) => s + (b.spent || 0), 0);
-
-                document.getElementById('reportStatsRow').innerHTML = `
-                    <div class="report-stat-card" style="border-bottom-color:#3b82f6;"><div class="stat-number">${total}</div><div class="stat-label">إجمالي المشاريع</div></div>
-                    <div class="report-stat-card" style="border-bottom-color:#f59e0b;"><div class="stat-number">${active}</div><div class="stat-label">مشاريع نشطة</div></div>
-                    <div class="report-stat-card" style="border-bottom-color:#10b981;"><div class="stat-number">${completed}</div><div class="stat-label">مشاريع مكتملة</div></div>
-                    <div class="report-stat-card" style="border-bottom-color:#8b5cf6;"><div class="stat-number">${avgProgress}%</div><div class="stat-label">متوسط الإنجاز</div></div>
-                    <div class="report-stat-card" style="border-bottom-color:#ef4444;"><div class="stat-number">${risksOpen}</div><div class="stat-label">إجمالي المخاطر</div></div>
-                    <div class="report-stat-card" style="border-bottom-color:#ec4899;"><div class="stat-number">${risksCritical}</div><div class="stat-label">مخاطر حرجة</div></div>
-                `;
-
-                const container = document.getElementById('reportsChartsContainer');
-                container.innerHTML = '';
+                const budgetRate = totalProjectCost ? Math.round(totalSpent/totalProjectCost*100) : 0;
+                const planConsumption = totalPlanBudget ? Math.round(totalProjectCost/totalPlanBudget*100) : 0;
+                const health = total ? Math.round(projects.reduce((s,p)=>s+phase3ProjectHealth(p),0)/total) : 0;
+                const rag=phase3HealthColor(health);
+                const exec=document.getElementById('phase3ExecutiveSummary');
+                if(exec) exec.innerHTML=`<h3><i class="fas fa-file-lines"></i> ملخص تنفيذي تلقائي</h3><p>تضم المحفظة ${total} مشروعاً، منها ${active} قيد التنفيذ و${completed} مكتمل. متوسط الإنجاز العام يبلغ ${avgProgress}%، ومؤشر الصحة التنفيذية للمحفظة ${health}% بحالة ${rag==='green'?'خضراء':rag==='amber'?'صفراء':'حمراء'}. بلغ إجمالي الصرف ${phase3Money(totalSpent)} من أصل تكلفة مخصصة للمشاريع قدرها ${phase3Money(totalProjectCost)} بنسبة صرف ${budgetRate}%. كما تمثل تكلفة المشاريع ${planConsumption}% من موازنة الخطة الخمسية المعتمدة ${phase3Money(totalPlanBudget)}. توجد ${risksOpen} مخاطر/مشاكل مفتوحة، منها ${risksCritical} حرجة وتتطلب معالجة فورية.</p><div class="phase3-actions"><button onclick="window.print()"><i class="fas fa-print"></i> طباعة التقرير</button><button onclick="document.querySelector('[data-tab=tab-risks]').click()"><i class="fas fa-shield-halved"></i> عرض المخاطر</button><button onclick="document.querySelector('[data-tab=tab-gantt]').click()"><i class="fas fa-diagram-project"></i> عرض الخطة</button></div>`;
+                const cards=document.getElementById('phase3ExecutiveCards'); if(cards) cards.innerHTML=`<div class="phase3-card ${rag}"><div class="n">${health}%</div><div class="l">صحة المحفظة</div></div><div class="phase3-card green"><div class="n">${avgProgress}%</div><div class="l">متوسط الإنجاز</div></div><div class="phase3-card amber"><div class="n">${budgetRate}%</div><div class="l">نسبة الصرف</div></div><div class="phase3-card red"><div class="n">${risksCritical}</div><div class="l">مخاطر حرجة</div></div><div class="phase3-card purple"><div class="n">${appData.kpis.length}</div><div class="l">مؤشرات أداء مرتبطة</div></div>`;
+                const achievements=document.getElementById('phase3Achievements'); if(achievements){ const rows=projects.filter(p=>p.status==='مكتمل'||Number(p.progress||0)>=75).sort((a,b)=>(b.progress||0)-(a.progress||0)).slice(0,8); achievements.innerHTML=rows.length?rows.map(p=>`<div class="phase3-list-item"><span>${p.name}</span><strong>${p.progress||0}%</strong></div>`).join(''):'<div class="phase3-list-item"><span>لا توجد إنجازات مكتملة بعد.</span></div>'; }
+                const priorities=document.getElementById('phase3Priorities'); if(priorities){ const highRisk=risks.filter(r=>r.status!=='مغلق').sort((a,b)=>phase3RiskScore(b)-phase3RiskScore(a)).slice(0,8); priorities.innerHTML=highRisk.length?highRisk.map(r=>`<div class="phase3-list-item"><span>${r.desc}</span><strong>${projectName(r.projectId)}</strong></div>`).join(''):'<div class="phase3-list-item"><span>لا توجد مخاطر مفتوحة ذات أولوية.</span></div>'; }
+                document.getElementById('reportStatsRow').innerHTML = `<div class="report-stat-card" style="border-bottom-color:#3b82f6;"><div class="stat-number">${total}</div><div class="stat-label">إجمالي المشاريع</div></div><div class="report-stat-card" style="border-bottom-color:#f59e0b;"><div class="stat-number">${active}</div><div class="stat-label">مشاريع نشطة</div></div><div class="report-stat-card" style="border-bottom-color:#10b981;"><div class="stat-number">${completed}</div><div class="stat-label">مشاريع مكتملة</div></div><div class="report-stat-card" style="border-bottom-color:#8b5cf6;"><div class="stat-number">${avgProgress}%</div><div class="stat-label">متوسط الإنجاز</div></div><div class="report-stat-card" style="border-bottom-color:#ef4444;"><div class="stat-number">${risksOpen}</div><div class="stat-label">مخاطر مفتوحة</div></div><div class="report-stat-card" style="border-bottom-color:#ec4899;"><div class="stat-number">${risksCritical}</div><div class="stat-label">مخاطر حرجة</div></div>`;
+                const container = document.getElementById('reportsChartsContainer'); container.innerHTML = '';
                 const charts = [
-                    { id: 'reportSector', title: 'توزيع المشاريع حسب القطاع', type: 'doughnut', data: projects.reduce((acc,p)=>{ acc[p.sector]=(acc[p.sector]||0)+1; return acc; }, {}) },
-                    { id: 'reportStatus', title: 'توزيع المشاريع حسب الحالة', type: 'doughnut', data: projects.reduce((acc,p)=>{ acc[p.status]=(acc[p.status]||0)+1; return acc; }, {}) },
-                    { id: 'reportBudget', title: 'الميزانية حسب المشروع', type: 'bar', data: projects.map(p=>({label:p.name.substring(0,12), value:p.budget||0})) },
-                    { id: 'reportProgress', title: 'الإنجاز حسب المشروع', type: 'bar', data: projects.map(p=>({label:p.name.substring(0,12), value:p.progress||0})) },
+                    { id: 'reportSector', title: 'توزيع المشاريع حسب القطاع', type: 'doughnut', data: projects.reduce((acc,p)=>{ acc[p.sector||'غير محدد']=(acc[p.sector||'غير محدد']||0)+1; return acc; }, {}) },
+                    { id: 'reportStatus', title: 'توزيع المشاريع حسب الحالة', type: 'doughnut', data: projects.reduce((acc,p)=>{ acc[p.status||'غير محدد']=(acc[p.status||'غير محدد']||0)+1; return acc; }, {}) },
+                    { id: 'reportBudget', title: 'تكلفة المشاريع حسب المشروع', type: 'bar', data: projects.map(p=>({label:(p.name||'').substring(0,12), value:p.budget||0})) },
+                    { id: 'reportProgress', title: 'الإنجاز حسب المشروع', type: 'bar', data: projects.map(p=>({label:(p.name||'').substring(0,12), value:p.progress||0})) },
+                    { id: 'reportHealth', title: 'صحة المشاريع', type: 'bar', data: projects.map(p=>({label:(p.name||'').substring(0,12), value:phase3ProjectHealth(p)})) }
                 ];
-                charts.forEach(ch => {
-                    const box = document.createElement('div');
-                    box.className = 'chart-box';
-                    box.innerHTML = `<h3><i class="fas fa-chart-${ch.type==='doughnut'?'pie':'bar'}" style="color:#3b82f6;"></i> ${ch.title}</h3><div class="chart-container"><canvas id="${ch.id}Chart"></canvas></div>`;
-                    container.appendChild(box);
-                });
-                setTimeout(() => {
-                    charts.forEach(ch => {
-                        const ctx = document.getElementById(`${ch.id}Chart`)?.getContext('2d');
-                        if(!ctx) return;
-                        const labels = Object.keys(ch.data);
-                        const values = Object.values(ch.data);
-                        if(labels.length === 0) return;
-                        if(ch.type === 'doughnut') {
-                            new Chart(ctx, { type: 'doughnut', data: { labels, datasets: [{ data: values, backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6'] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '55%', plugins: { legend: { position: 'bottom' } } } });
-                        } else {
-                            new Chart(ctx, { type: 'bar', data: { labels: ch.data.map(d=>d.label), datasets: [{ data: ch.data.map(d=>d.value), backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } });
-                        }
-                    });
-                }, 100);
+                charts.forEach(ch => { const box = document.createElement('div'); box.className = 'chart-box'; box.innerHTML = `<h3><i class="fas fa-chart-${ch.type==='doughnut'?'pie':'bar'}" style="color:#3b82f6;"></i> ${ch.title}</h3><div class="chart-container"><canvas id="${ch.id}Chart"></canvas></div>`; container.appendChild(box); });
+                setTimeout(() => { charts.forEach(ch => { const ctx = document.getElementById(`${ch.id}Chart`)?.getContext('2d'); if(!ctx) return; if(ch.type === 'doughnut') { const labels = Object.keys(ch.data); const values = Object.values(ch.data); if(!labels.length) return; new Chart(ctx, { type: 'doughnut', data: { labels, datasets: [{ data: values, backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6'] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '55%', plugins: { legend: { position: 'bottom' } } } }); } else { new Chart(ctx, { type: 'bar', data: { labels: ch.data.map(d=>d.label), datasets: [{ data: ch.data.map(d=>d.value), backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } }); } }); }, 100);
+                phase3RenderNotifications();
             }
 
             // ---- لوحة المؤشرات الرئيسية ----
@@ -1700,7 +2020,7 @@
                     { id: 'kpi-total', icon: 'fa-folder-tree', color: 'blue', value: stats.total, label: 'إجمالي المشاريع' },
                     { id: 'kpi-active', icon: 'fa-spinner', color: 'orange', value: stats.active, label: 'مشاريع نشطة', borderColor: '#f59e0b' },
                     { id: 'kpi-avg', icon: 'fa-check-circle', color: 'green', value: stats.avgProgress + '%', label: 'متوسط الإنجاز', borderColor: '#10b981' },
-                    { id: 'kpi-budget', icon: 'fa-coins', color: 'purple', value: (stats.totalBudget/1000000).toFixed(1) + 'M', label: 'الميزانية', borderColor: '#8b5cf6' },
+                    { id: 'kpi-budget', icon: 'fa-coins', color: 'purple', value: (stats.totalProjectCost/1000000).toFixed(1) + 'M', label: 'تكلفة المشاريع', borderColor: '#8b5cf6' },
                     { id: 'kpi-risks', icon: 'fa-exclamation-triangle', color: 'red', value: stats.risksOpen, label: 'مخاطر (' + stats.risksHigh + ' عالية)', borderColor: '#ef4444' }
                 ];
                 const savedOrder = loadKpiOrder();
@@ -1716,7 +2036,6 @@
                 const container = document.getElementById('kpiCards');
                 container.innerHTML = kpiData.map(k => `
                     <div class="kpi-card" data-card-id="${k.id}" style="${k.borderColor ? 'border-right-color:' + k.borderColor + ';' : ''}">
-                        <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
                         <div class="kpi-icon ${k.color}"><i class="fas ${k.icon}"></i></div>
                         <div class="kpi-content"><h3>${k.value}</h3><div class="kpi-label">${k.label}</div></div>
                     </div>
@@ -1749,43 +2068,58 @@
                         </div>
                     </div>
                     <div style="font-size:0.85rem;color:#94a3b8;text-align:left;">
-                        <div>إجمالي الميزانية: <strong style="color:white;">${(stats.totalBudget/1000000).toFixed(1)}M</strong></div>
+                        <div>إجمالي تكلفة المشاريع: <strong style="color:white;">${(stats.totalProjectCost/1000000).toFixed(1)}M</strong></div>
                         <div>المنفق: <strong style="color:white;">${(stats.totalSpent/1000000).toFixed(1)}M</strong></div>
                     </div>
                 `;
 
                 // ====== قسم الموازنة والتكلفة ======
-                const totalPlanned = appData.budgets.reduce((s,b) => s + (b.planned||0), 0);
-                const totalSpent = appData.budgets.reduce((s,b) => s + (b.spent||0), 0);
-                const totalBudget = stats.totalBudget;
-                const remaining = totalBudget - totalSpent;
-                const spentPercent = totalBudget > 0 ? Math.round((totalSpent / totalBudget) * 100) : 0;
+                const totalPlannedProjects = appData.projects.reduce((s,p) => s + projectPlannedBudget(p), 0);
+                const totalSpent = appData.projects.reduce((s,p) => s + projectActualCost(p), 0);
+                const totalAllocatedCost = stats.totalProjectCost; // التكلفة المخصصة / المعتمدة للمشاريع
+                const totalPlanBudget = stats.totalPlanBudget;
+                const remainingAllocatedCost = Math.max(0, totalAllocatedCost - totalSpent);
+                const remainingPlanBudget = totalPlanBudget - totalAllocatedCost;
+                const allocationPercent = totalPlanBudget > 0 ? Math.round((totalAllocatedCost / totalPlanBudget) * 100) : 0;
+                const spentPercent = totalAllocatedCost > 0 ? Math.round((totalSpent / totalAllocatedCost) * 100) : 0;
+                const spendColor = spentPercent < 60 ? '#10b981' : (spentPercent <= 85 ? '#f59e0b' : '#ef4444');
+                const allocationColor = allocationPercent < 70 ? '#10b981' : (allocationPercent <= 90 ? '#f59e0b' : '#ef4444');
 
-                // عرض إجمالي موازنة الخطة الخمسية (بدون تكرار "ر.ع")
-                document.getElementById('totalBudgetDisplay').textContent = formatCurrency(totalBudget);
+                // عرض موازنة الخطة الخمسية المعتمدة، وليس مجموع تكاليف المشاريع
+                document.getElementById('totalBudgetDisplay').textContent = formatCurrency(totalPlanBudget);
 
-                // بناء بطاقات الموازنة
+                // بناء بطاقات مالية تفصل الموازنة عن التكلفة المخصصة والمنفق
                 document.getElementById('budgetSummaryCards').innerHTML = `
                     <div class="budget-item" style="border-right:3px solid #3b82f6;">
-                        <div class="amount">${formatCurrency(totalBudget)}</div>
-                        <div class="label">اجمالي تكاليف المشاريع</div>
+                        <div class="amount">${formatCurrency(totalPlanBudget)}</div>
+                        <div class="label">موازنة الخطة الخمسية المعتمدة</div>
+                    </div>
+                    <div class="budget-item" style="border-right:3px solid #1e40af;">
+                        <div class="amount">${formatCurrency(totalPlannedProjects)}</div>
+                        <div class="label">إجمالي الميزانية المخططة للمشاريع</div>
+                    </div>
+                    <div class="budget-item" style="border-right:3px solid #8b5cf6;">
+                        <div class="amount">${formatCurrency(totalAllocatedCost)}</div>
+                        <div class="label">إجمالي التكلفة المخصصة للمشاريع</div>
                     </div>
                     <div class="budget-item" style="border-right:3px solid #ef4444;">
                         <div class="amount">${formatCurrency(totalSpent)}</div>
-                        <div class="label">إجمالي المنفق</div>
+                        <div class="label">إجمالي المنفق حتى الآن</div>
                     </div>
-                    <div class="budget-item" style="border-right:3px solid #10b981;">
-                        <div class="amount">${formatCurrency(remaining)}</div>
-                        <div class="label">المتبقي</div>
+                    <div class="budget-item" style="border-right:3px solid #14b8a6;">
+                        <div class="finance-gauge" style="--deg:${spentPercent*3.6}deg;background:conic-gradient(${spendColor} 0deg,${spendColor} ${spentPercent*3.6}deg,#e5e7eb ${spentPercent*3.6}deg,#e5e7eb 360deg)"><strong>${spentPercent}%</strong></div>
+                        <div class="label">نسبة الصرف من التكلفة المخصصة</div>
+                        <div class="finance-detail">المنفق: ${formatCurrency(totalSpent)}<br>التكلفة المخصصة: ${formatCurrency(totalAllocatedCost)}<br>المتبقي: ${formatCurrency(remainingAllocatedCost)}</div>
                     </div>
                     <div class="budget-item" style="border-right:3px solid #f59e0b;">
-                        <div class="amount">${spentPercent}%</div>
-                        <div class="label">نسبة الصرف إلى إجمالي الموازنة</div>
+                        <div class="finance-gauge" style="--deg:${allocationPercent*3.6}deg;background:conic-gradient(${allocationColor} 0deg,${allocationColor} ${allocationPercent*3.6}deg,#e5e7eb ${allocationPercent*3.6}deg,#e5e7eb 360deg)"><strong>${allocationPercent}%</strong></div>
+                        <div class="label">نسبة تخصيص الميزانية</div>
+                        <div class="finance-detail">التكلفة المخصصة: ${formatCurrency(totalAllocatedCost)}<br>موازنة الخطة: ${formatCurrency(totalPlanBudget)}<br>المتبقي من الخطة: ${formatCurrency(remainingPlanBudget)}</div>
                     </div>
                 `;
 
                 // مؤشرات التكلفة الإضافية - إضافة اسم المشروع لأقل تكلفة
-                const projectCosts = appData.projects.map(p => ({ name: p.name, budget: p.budget||0, spent: appData.budgets.filter(b=>b.projectId===p.id).reduce((s,b)=>s+(b.spent||0),0) }));
+                const projectCosts = appData.projects.map(p => ({ name: p.name, budget: projectAllocatedBudget(p), planned: projectPlannedBudget(p), spent: projectActualCost(p) }));
                 const avgCost = projectCosts.length > 0 ? Math.round(projectCosts.reduce((s,p)=>s+p.budget,0) / projectCosts.length) : 0;
                 const maxCost = projectCosts.length > 0 ? Math.max(...projectCosts.map(p=>p.budget)) : 0;
                 const minCost = projectCosts.length > 0 ? Math.min(...projectCosts.map(p=>p.budget)) : 0;
@@ -1795,7 +2129,7 @@
                     <div class="stat-card" style="border-right-color:#8b5cf6;"><div class="stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);"><i class="fas fa-calculator"></i></div><div><div class="stat-value">${formatCurrency(avgCost)}</div><div class="stat-label">متوسط تكلفة المشروع</div></div></div>
                     <div class="stat-card" style="border-right-color:#ef4444;"><div class="stat-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);"><i class="fas fa-arrow-up"></i></div><div><div class="stat-value">${formatCurrency(maxCost)}</div><div class="stat-label">أعلى تكلفة (${maxCostProject ? maxCostProject.name : '-'})</div></div></div>
                     <div class="stat-card" style="border-right-color:#10b981;"><div class="stat-icon" style="background:linear-gradient(135deg,#10b981,#059669);"><i class="fas fa-arrow-down"></i></div><div><div class="stat-value">${formatCurrency(minCost)}</div><div class="stat-label">أقل تكلفة (${minCostProject ? minCostProject.name : '-'})</div></div></div>
-                    <div class="stat-card" style="border-right-color:#f59e0b;"><div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-percent"></i></div><div><div class="stat-value">${spentPercent}%</div><div class="stat-label">نسبة الصرف</div></div></div>
+                    <div class="stat-card" style="border-right-color:#f59e0b;"><div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-percent"></i></div><div><div class="stat-value">${spentPercent}%</div><div class="stat-label">نسبة الصرف من التكلفة المخصصة</div></div></div>
                 `;
 
                 // Resource Utilization
@@ -1848,7 +2182,7 @@
                 tbody.innerHTML = appData.projects.map(p => {
                     const risks = appData.risks.filter(r => r.projectId === p.id && r.status !== 'مغلق').length;
                     const pc = p.progress >= 80 ? '#10b981' : p.progress >= 50 ? '#3b82f6' : p.progress >= 30 ? '#f59e0b' : '#ef4444';
-                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td><div class="mini-progress"><div class="mini-progress-fill" style="width:${p.progress}%;background:${pc};"></div></div> ${p.progress}%</td><td>${(p.budget/1000000).toFixed(1)}M</td><td>${risks>3?'<span style="color:#ef4444;font-weight:700;">⚠ '+risks+'</span>':risks>0?'<span style="color:#f59e0b;">'+risks+'</span>':'<span style="color:#10b981;">✓ 0</span>'}</td></tr>`;
+                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td><div class="mini-progress"><div class="mini-progress-fill" style="width:${p.progress}%;background:${pc};"></div></div> ${p.progress}%</td><td>${formatCurrency(projectPlannedBudget(p))}</td><td>${formatCurrency(projectAllocatedBudget(p))}</td><td>${formatCurrency(projectActualCost(p))}</td><td>${projectSpendRate(p)}%</td><td>${risks>3?'<span style="color:#ef4444;font-weight:700;">⚠ '+risks+'</span>':risks>0?'<span style="color:#f59e0b;">'+risks+'</span>':'<span style="color:#10b981;">✓ 0</span>'}</td></tr>`;
                 }).join('');
             }
 
@@ -1865,9 +2199,82 @@
                 });
             }
 
+
+            // ===== Phase 1: Five-Year Plan + BSC + Advanced KPI =====
+            function normalizePhaseOneData(){
+                if(!appData.fiveYearPlans || !appData.fiveYearPlans.length){
+                    appData.fiveYearPlans = [
+                        {id:'fy2026',year:2026,focus:'التأسيس والحوكمة',goals:'حوكمة المحفظة، توحيد البيانات، تأسيس مؤشرات الأداء',target:72,actual:45,budget:18000000},
+                        {id:'fy2027',year:2027,focus:'التكامل وتوسيع الخدمات',goals:'تكامل الأنظمة، رفع نضج الخدمات، توسيع قنوات المستفيدين',target:78,actual:0,budget:22000000},
+                        {id:'fy2028',year:2028,focus:'الأتمتة والذكاء الاصطناعي',goals:'أتمتة العمليات، تحليلات تنبؤية، تحسين تجربة المستفيد',target:84,actual:0,budget:26000000},
+                        {id:'fy2029',year:2029,focus:'النضج التشغيلي',goals:'تحسين الكفاءة، خفض المخاطر، رفع جاهزية الاستمرارية',target:90,actual:0,budget:24000000},
+                        {id:'fy2030',year:2030,focus:'الاستدامة والأثر',goals:'استدامة التحول، تعظيم الأثر المجتمعي، مراجعة استراتيجية شاملة',target:95,actual:0,budget:20000000}
+                    ];
+                }
+                appData.objectives.forEach((o,i)=>{ if(!o.perspective) o.perspective=['المستفيدون','العمليات الداخلية','التعلم والنمو','المالي'][i%4]; if(o.parentId===undefined) o.parentId=''; });
+                appData.kpis.forEach(k=>{ if(k.baseline===undefined) k.baseline=Math.max(0, Number(k.actual||0)-10); if(k.q1===undefined) k.q1=Math.round((Number(k.target||0)*.25)||0); if(k.q2===undefined) k.q2=Math.round((Number(k.target||0)*.50)||0); if(k.q3===undefined) k.q3=Math.round((Number(k.target||0)*.75)||0); if(k.q4===undefined) k.q4=Number(k.target||0); });
+                appData.projects.forEach(p=>{ if(p.allocatedBudget===undefined) p.allocatedBudget=Number(p.budget||0); if(p.plannedBudget===undefined) p.plannedBudget=Math.round(Number(p.allocatedBudget||p.budget||0)*1.15); if(p.actualCost===undefined){ const spent=appData.budgets.filter(b=>b.projectId===p.id).reduce((sum,b)=>sum+Number(b.spent||0),0); p.actualCost=spent; } p.budget=Number(p.allocatedBudget||p.budget||0); });
+            }
+            function ragClass(actual,target){ const a=Number(actual||0), t=Number(target||0)||1, r=a/t; return r>=.9?'rag-green':r>=.7?'rag-amber':'rag-red'; }
+            function ragText(actual,target){ const c=ragClass(actual,target); return c==='rag-green'?'أخضر':c==='rag-amber'?'أصفر':'أحمر'; }
+            function renderPhaseOneDashboard(){
+                const el=document.getElementById('phase1Dashboard'); if(!el) return;
+                const fyBudget=appData.fiveYearPlans.reduce((s,y)=>s+Number(y.budget||0),0);
+                const avgFy=appData.fiveYearPlans.length?Math.round(appData.fiveYearPlans.reduce((s,y)=>s+Number(y.actual||0),0)/appData.fiveYearPlans.length):0;
+                const red=appData.kpis.filter(k=>ragClass(k.actual,k.target)==='rag-red').length;
+                const amber=appData.kpis.filter(k=>ragClass(k.actual,k.target)==='rag-amber').length;
+                const green=appData.kpis.filter(k=>ragClass(k.actual,k.target)==='rag-green').length;
+                const linked=appData.objectives.filter(o=>o.parentId).length;
+                el.innerHTML=`<div class="phase1-grid">
+                    <div class="phase1-card"><div class="num">${appData.fiveYearPlans.length}</div><div class="lbl">سنوات الخطة الخمسية</div></div>
+                    <div class="phase1-card"><div class="num">${formatCurrency(fyBudget)}</div><div class="lbl">موازنة 2026–2030</div></div>
+                    <div class="phase1-card"><div class="num">${avgFy}%</div><div class="lbl">متوسط تقدم الخطة</div></div>
+                    <div class="phase1-card"><div class="num">${green}/${amber}/${red}</div><div class="lbl">KPIs حسب RAG أخضر/أصفر/أحمر</div></div>
+                    <div class="phase1-card"><div class="num">${linked}</div><div class="lbl">أهداف مرتبطة هرمياً</div></div>
+                </div>`;
+            }
+            function renderFiveYear(){
+                const road=document.getElementById('fiveYearRoadmap'), body=document.getElementById('fiveYearBody'); if(!road||!body) return;
+                const rows=[...appData.fiveYearPlans].sort((a,b)=>Number(a.year)-Number(b.year));
+                const projectsForYear=(year)=>appData.projects.filter(p=>{
+                    const s=parseInt(String(p.start||'').slice(0,4))||0;
+                    const e=parseInt(String(p.end||'').slice(0,4))||s;
+                    return (s&&e) ? (Number(year)>=s && Number(year)<=e && p.status!=='مكتمل') : false;
+                });
+                const statusKey=(actual,target)=>{const r=(Number(actual||0)/(Number(target||0)||1)); return r>=.9?'green':r>=.7?'amber':'red';};
+                const statusName=(key)=>key==='green'?'أخضر - ضمن المسار':key==='amber'?'أصفر - يحتاج متابعة':'أحمر - يحتاج تدخل';
+                road.innerHTML=rows.map(y=>{
+                    const sk=statusKey(y.actual,y.target);
+                    const activeProjects=projectsForYear(y.year).length;
+                    return `<div class="year-card status-${sk}">
+                        <h3>${y.year}</h3>
+                        <div style="font-weight:800;color:#0f172a;margin-bottom:8px">${y.focus||'-'}</div>
+                        <ul>${String(y.goals||'').split('،').filter(Boolean).map(g=>`<li>${g.trim()}</li>`).join('')}</ul>
+                        <div class="roadmap-metric"><span class="metric-title">الميزانية</span><span class="metric-value">${formatCurrency(y.budget)}</span></div>
+                        <div class="roadmap-metric"><span class="metric-title">الإنجاز المستهدف</span><span class="metric-value">${Number(y.target||0)}%</span></div>
+                        <div class="roadmap-metric"><span class="metric-title">الإنجاز الفعلي</span><span class="metric-value">${Number(y.actual||0)}%</span></div>
+                        <div class="roadmap-metric"><span class="metric-title">المشاريع النشطة</span><span class="metric-value">${activeProjects}</span></div>
+                        <div class="roadmap-status-line"><span class="metric-title" style="font-size:.74rem;color:#64748b;font-weight:900">مؤشر الحالة</span><span class="rag ${ragClass(y.actual,y.target)}">${statusName(sk)}</span></div>
+                    </div>`;
+                }).join('');
+                body.innerHTML=rows.map(y=>`<tr><td><strong>${y.year}</strong></td><td>${y.focus||''}</td><td>${y.goals||''}</td><td>${Number(y.target||0)}%</td><td>${Number(y.actual||0)}%</td><td><span class="rag ${ragClass(y.actual,y.target)}">${ragText(y.actual,y.target)}</span></td><td>${formatCurrency(y.budget)}</td><td><button class="btn btn-sm btn-outline" onclick="editFiveYear('${y.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteFiveYear('${y.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+            }
+            window.editFiveYear=function(id){ const y=appData.fiveYearPlans.find(x=>x.id===id); if(!y)return; document.getElementById('editingFyId').value=y.id; document.getElementById('fyYear').value=y.year; document.getElementById('fyFocus').value=y.focus||''; document.getElementById('fyGoals').value=y.goals||''; document.getElementById('fyTarget').value=y.target||0; document.getElementById('fyActual').value=y.actual||0; document.getElementById('fyBudget').value=y.budget||0; };
+            window.deleteFiveYear=function(id){ if(confirm('حذف سنة الخطة؟')){ appData.fiveYearPlans=appData.fiveYearPlans.filter(x=>x.id!==id); saveData(); refreshAllViews(); }};
+            function renderBscMap(){
+                const el=document.getElementById('bscMap'); if(!el) return;
+                const perspectives=['المستفيدون','العمليات الداخلية','التعلم والنمو','المالي'];
+                el.innerHTML=perspectives.map(p=>{ const obs=appData.objectives.filter(o=>(o.perspective||'المستفيدون')===p); return `<div class="bsc-card"><h3><i class="fas fa-compass"></i> ${p}</h3>${obs.length?obs.map(o=>{const k=appData.kpis.filter(x=>x.objectiveId===o.id); const pr=appData.projects.filter(x=>x.objectiveId===o.id); return `<div class="bsc-item"><strong>${o.title}</strong><div class="meta">${pr.length} مشروع • ${k.length} KPI • إنجاز ${o.progress||0}%</div>${o.parentId?`<span class="tree-link">مرتبط بـ: ${appData.objectives.find(x=>x.id===o.parentId)?.title||'-'}</span>`:''}</div>`}).join(''):'<div style="color:#94a3b8;font-size:.8rem">لا توجد أهداف ضمن هذا المنظور</div>'}</div>`}).join('');
+                const parent=document.getElementById('objParent'); if(parent){ const cur=parent.value; parent.innerHTML='<option value="">— هدف رئيسي —</option>'+appData.objectives.map(o=>`<option value="${o.id}" ${cur===o.id?'selected':''}>${o.title}</option>`).join(''); }
+            }
+            function renderAdvancedKpiTable(){
+                const box=document.getElementById('advancedKpiBox'); if(!box) return;
+                box.innerHTML=`<div class="table-wrapper"><table><thead><tr><th>المؤشر</th><th>الهدف</th><th>Baseline</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>الحالي</th><th>RAG</th><th>الاتجاه</th></tr></thead><tbody>${appData.kpis.map(k=>{const o=appData.objectives.find(x=>x.id===k.objectiveId); const bars=[k.baseline,k.q1,k.q2,k.q3,k.actual].map(v=>`<span style="height:${Math.max(4,Math.min(40,Number(v||0)/(Number(k.target||100)||100)*40))}px"></span>`).join(''); return `<tr><td><strong>${k.name}</strong><br><small>${k.unit||''}</small></td><td>${o?o.title:'-'}</td><td>${k.baseline||0}</td><td>${k.q1||0}</td><td>${k.q2||0}</td><td>${k.q3||0}</td><td>${k.target||0}</td><td>${k.actual||0}</td><td><span class="rag ${ragClass(k.actual,k.target)}">${ragText(k.actual,k.target)}</span></td><td><div class="trend-mini">${bars}</div></td></tr>`}).join('')}</tbody></table></div>`;
+            }
+
             // ---- تحديث شامل ----
             function refreshAllViews() {
-                renderDashboard();
+                renderDashboard(); renderPhase2All();
                 renderObjectives();
                 renderProjects();
                 renderTeamMembers();
@@ -1879,6 +2286,7 @@
                 populateDropdowns();
                 updateZoomDisplay();
                 setupRiskFilters();
+                renderPhaseOneDashboard(); renderFiveYear(); renderBscMap(); renderAdvancedKpiTable();
                 const reportsTab = document.getElementById('tab-reports');
                 if (reportsTab && reportsTab.classList.contains('active')) renderReports();
             }
@@ -1912,11 +2320,11 @@
                 const title = document.getElementById('objTitle').value.trim();
                 if (!title) return alert('الهدف مطلوب');
                 const eid = document.getElementById('editingObjId').value;
-                const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value, weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: eid ? (appData.objectives.find(o=>o.id===eid)?.progress||0) : 0 };
+                const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value, perspective: document.getElementById('objPerspective')?.value||'المستفيدون', parentId: document.getElementById('objParent')?.value||'', weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: eid ? (appData.objectives.find(o=>o.id===eid)?.progress||0) : 0 };
                 if (eid) { const i = appData.objectives.findIndex(o=>o.id===eid); if(i>=0) appData.objectives[i]=data; document.getElementById('editingObjId').value=''; } else appData.objectives.push(data);
                 saveData(); refreshAllViews(); document.getElementById('objTitle').value='';
             });
-            document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingObjId').value=''; });
+            document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget'].forEach(id=>document.getElementById(id).value=''); if(document.getElementById('objParent')) document.getElementById('objParent').value=''; if(document.getElementById('objPerspective')) document.getElementById('objPerspective').value='المستفيدون'; document.getElementById('editingObjId').value=''; });
             document.getElementById('saveProjectBtn')?.addEventListener('click', function() {
                 const name = document.getElementById('projName').value.trim();
                 if(!name) return alert('الاسم مطلوب');
@@ -1932,11 +2340,11 @@
                         document.getElementById('projSector').value = trimmed;
                     } else sectorToSave = '';
                 }
-                const data = { id: eid || generateId(), name, type: document.getElementById('projType').value, sector: sectorToSave, directorate: document.getElementById('projDirectorate').value||'', objectiveId: document.getElementById('projObjective').value||'', status: document.getElementById('projStatus').value, start: document.getElementById('projStart').value||'', end: document.getElementById('projEnd').value||'', budget: parseFloat(document.getElementById('projBudget').value)||0, progress: parseInt(document.getElementById('projProgress').value)||0, description: document.getElementById('projDesc').value };
+                const plannedBudget=parseFloat(document.getElementById('projPlannedBudget').value)||0; const allocatedBudget=parseFloat(document.getElementById('projAllocatedBudget').value)||0; const actualCost=parseFloat(document.getElementById('projActualCost').value)||0; const data = { id: eid || generateId(), name, type: document.getElementById('projType').value, sector: sectorToSave, directorate: document.getElementById('projDirectorate').value||'', objectiveId: document.getElementById('projObjective').value||'', status: document.getElementById('projStatus').value, start: document.getElementById('projStart').value||'', end: document.getElementById('projEnd').value||'', plannedBudget, allocatedBudget, actualCost, budget: allocatedBudget, progress: parseInt(document.getElementById('projProgress').value)||0, description: document.getElementById('projDesc').value };
                 if(eid){ const i=appData.projects.findIndex(p=>p.id===eid); if(i>=0) appData.projects[i]=data; document.getElementById('editingProjectId').value=''; } else appData.projects.push(data);
                 saveData(); refreshAllViews(); document.getElementById('projName').value='';
             });
-            document.getElementById('clearProjectBtn')?.addEventListener('click', function() { ['projName','projStart','projEnd','projBudget','projDesc'].forEach(id=>document.getElementById(id).value=''); document.getElementById('projProgress').value=0; document.getElementById('progVal').innerText='0%'; document.getElementById('editingProjectId').value=''; });
+            document.getElementById('clearProjectBtn')?.addEventListener('click', function() { ['projName','projStart','projEnd','projPlannedBudget','projAllocatedBudget','projActualCost','projBudget','projDesc'].forEach(id=>document.getElementById(id).value=''); document.getElementById('projProgress').value=0; document.getElementById('progVal').innerText='0%'; document.getElementById('editingProjectId').value=''; });
             document.getElementById('saveResourceBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('resourceProject').value;
                 if(!pid) return alert('اختر المشروع');
@@ -1958,15 +2366,105 @@
                 row.innerHTML='<td><input type="text" class="tm-name"></td><td><input type="text" class="tm-role"></td><td><input type="text" class="tm-specialty"></td><td><input type="email" class="tm-email"></td><td><input type="text" class="tm-phone"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove()"><i class="fas fa-trash"></i></button></td>';
                 tbody.appendChild(row);
             });
+
+
+            // ---- المرحلة الثانية: مراحل المشاريع والمعالم والأولوية وخريطة المخاطر ----
+            const PHASE2_STAGES = ['البدء','التخطيط','الطرح والتعاقد','التنفيذ','الإغلاق'];
+            function ensurePhase2Data(){
+                appData.projects.forEach((p,idx)=>{
+                    if(!p.stage) p.stage = PHASE2_STAGES[Math.min(PHASE2_STAGES.length-1, Math.floor(((Number(p.progress)||0)/100)*PHASE2_STAGES.length))] || 'البدء';
+                    if(!p.impact) p.impact = Math.min(5, Math.max(1, (idx%5)+1));
+                    if(!p.urgency) p.urgency = Math.min(5, Math.max(1, ((idx+2)%5)+1));
+                    if(!Array.isArray(p.milestones) || p.milestones.length===0){
+                        p.milestones = [
+                            {name:'اعتماد الميثاق',date:p.start||'2026-01-15',status:(Number(p.progress)||0)>10?'مكتمل':'قيد التنفيذ'},
+                            {name:'اعتماد خطة المشروع',date:p.start||'2026-02-15',status:(Number(p.progress)||0)>30?'مكتمل':'قيد التنفيذ'},
+                            {name:'تسليم رئيسي',date:p.end||'2026-09-30',status:(Number(p.progress)||0)>75?'مكتمل':'مجدول'}
+                        ];
+                    }
+                });
+                appData.risks.forEach((r,idx)=>{
+                    if(!r.probability) r.probability = r.level==='حرج'?5:r.level==='مرتفع'?4:r.level==='متوسط'?3:2;
+                    if(!r.impact) r.impact = r.level==='حرج'?5:r.level==='مرتفع'?4:r.level==='متوسط'?3:2;
+                    if(!r.action) r.action='تحديد خطة استجابة ومتابعة دورية';
+                });
+            }
+            function projectHealth(p){
+                const progress=Number(p.progress)||0;
+                const openRisks=appData.risks.filter(r=>r.projectId===p.id && r.status!=='مغلق');
+                const riskPenalty=openRisks.reduce((s,r)=>s+(Number(r.probability||3)*Number(r.impact||3)),0);
+                return Math.max(0, Math.min(100, Math.round(progress - Math.min(30,riskPenalty/3))));
+            }
+            function renderProjectStages(){
+                const el=document.getElementById('phase2ProjectStages'); if(!el) return; ensurePhase2Data();
+                const total=appData.projects.length||1; const active=appData.projects.filter(p=>p.status==='نشط').length; const avg=Math.round(appData.projects.reduce((s,p)=>s+(Number(p.progress)||0),0)/total);
+                let html=`<div class="phase2-summary"><strong>لوحة مراحل التنفيذ والمعالم</strong><p>توضح اللوحة انتقال المشاريع بين مراحل الحوكمة، مع عرض المعالم الرئيسية ونقاط الاعتماد لكل مشروع.</p></div>
+                <div class="phase2-kpis"><div class="phase2-kpi"><strong>${total}</strong><span>إجمالي المشاريع</span></div><div class="phase2-kpi"><strong>${active}</strong><span>مشاريع نشطة</span></div><div class="phase2-kpi"><strong>${avg}%</strong><span>متوسط الإنجاز</span></div><div class="phase2-kpi"><strong>${appData.projects.filter(p=>projectHealth(p)<60).length}</strong><span>مشاريع تحتاج تدخل</span></div></div>
+                <div class="stage-board">`;
+                PHASE2_STAGES.forEach(st=>{
+                    const items=appData.projects.filter(p=>p.stage===st);
+                    html+=`<div class="stage-col"><div class="stage-title"><span>${st}</span><span class="stage-pill">${items.length}</span></div>`;
+                    if(items.length===0) html+='<div style="font-size:.75rem;color:#94a3b8;text-align:center;padding:20px 0">لا توجد مشاريع</div>';
+                    items.forEach(p=>{
+                        const ms=(p.milestones||[]).map(m=>`<span class="milestone-chip ${m.status==='مكتمل'?'milestone-done':(new Date(m.date)<new Date()&&m.status!=='مكتمل'?'milestone-late':'')}"><i class="fas fa-flag-checkered"></i>${m.name}</span>`).join('');
+                        html+=`<div class="stage-card"><strong>${p.name}</strong><div style="color:#64748b;margin-top:3px">${p.sector||'-'} | صحة المشروع ${projectHealth(p)}%</div><div class="progress"><div style="width:${Number(p.progress)||0}%"></div></div><div style="margin-top:8px">${ms}</div></div>`;
+                    });
+                    html+='</div>';
+                });
+                html+='</div>'; el.innerHTML=html;
+            }
+            function renderPriorityMatrix(){
+                const el=document.getElementById('phase2PriorityMatrix'); if(!el) return; ensurePhase2Data();
+                const labels=['منخفض','متوسط','عالٍ','حرج'];
+                let html='<div class="priority-matrix">';
+                for(let impact=4; impact>=1; impact--){
+                    for(let urg=1; urg<=4; urg++){
+                        const projects=appData.projects.filter(p=>Math.ceil((Number(p.impact)||1)/1.25)===impact && Math.ceil((Number(p.urgency)||1)/1.25)===urg);
+                        const sev=(impact>=4&&urg>=4)?'critical':(impact>=3&&urg>=3)?'high':(impact>=2&&urg>=2)?'medium':'low';
+                        html+=`<div class="priority-cell"><h4>الأثر ${labels[impact-1]} × الاستعجال ${labels[urg-1]}</h4>`;
+                        projects.forEach(p=>html+=`<div class="priority-item priority-${sev}"><strong>${p.name}</strong><br><span>${p.status} | ${p.progress||0}%</span></div>`);
+                        if(!projects.length) html+='<div style="text-align:center;color:#94a3b8;font-size:.7rem;padding:18px 0">—</div>';
+                        html+='</div>';
+                    }
+                }
+                html+='</div>'; el.innerHTML=html;
+            }
+            window.renderRiskHeatMap=function(){
+                const el=document.getElementById('phase2RiskHeatMap'); if(!el) return; ensurePhase2Data();
+                const openRisks=appData.risks.filter(r=>r.status!=='مغلق');
+                let html='<div class="risk-heatmap"><div></div>';
+                [1,2,3,4,5].forEach(i=>html+=`<div class="heat-head">الأثر ${i}</div>`);
+                for(let prob=5; prob>=1; prob--){
+                    html+=`<div class="heat-label">احتمالية ${prob}</div>`;
+                    for(let impact=1; impact<=5; impact++){
+                        const score=prob*impact; const cls=score>=20?'heat-extreme':score>=12?'heat-high':score>=6?'heat-med':'heat-low';
+                        const risks=openRisks.filter(r=>Number(r.probability||3)===prob && Number(r.impact||3)===impact);
+                        html+=`<div class="heat-cell ${cls}">`;
+                        risks.forEach(r=>{const p=appData.projects.find(x=>x.id===r.projectId); html+=`<div class="heat-risk">${r.desc||r.type}<br><span style="font-weight:500;color:#475569">${p?p.name:'-'}</span></div>`});
+                        html+=`</div>`;
+                    }
+                }
+                html+='</div>'; el.innerHTML=html; renderPhase2RiskSummary();
+            }
+            function renderPhase2RiskSummary(){
+                const el=document.getElementById('phase2RiskSummary'); if(!el) return; ensurePhase2Data();
+                const open=appData.risks.filter(r=>r.status!=='مغلق');
+                const critical=open.filter(r=>(Number(r.probability||3)*Number(r.impact||3))>=20).length;
+                const high=open.filter(r=>{const s=Number(r.probability||3)*Number(r.impact||3); return s>=12&&s<20}).length;
+                const owners=[...new Set(open.map(r=>r.owner).filter(Boolean))].length;
+                el.innerHTML=`<div class="phase2-kpis"><div class="phase2-kpi"><strong>${open.length}</strong><span>مخاطر ومشاكل مفتوحة</span></div><div class="phase2-kpi" style="border-right-color:#ef4444"><strong>${critical}</strong><span>حرجة حسب الخريطة</span></div><div class="phase2-kpi" style="border-right-color:#f59e0b"><strong>${high}</strong><span>عالية الأولوية</span></div><div class="phase2-kpi" style="border-right-color:#10b981"><strong>${owners}</strong><span>مسؤولون عن المعالجة</span></div></div>`;
+            }
+            function renderPhase2All(){ ensurePhase2Data(); renderProjectStages(); renderPriorityMatrix(); window.renderRiskHeatMap(); }
+
             document.getElementById('saveRiskBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('riskProject').value;
                 if(!pid) return alert('اختر المشروع');
                 const eid = document.getElementById('editingRiskId').value;
-                const data = { id: eid || generateId(), projectId: pid, type: document.getElementById('riskType').value, level: document.getElementById('riskLevel').value, desc: document.getElementById('riskDesc').value, action: document.getElementById('riskAction').value||'', owner: document.getElementById('riskOwner').value||'', status: document.getElementById('riskStatus').value };
+                const data = { id: eid || generateId(), projectId: pid, type: document.getElementById('riskType').value, level: document.getElementById('riskLevel').value, probability: parseInt(document.getElementById('riskProbability')?.value)||3, impact: parseInt(document.getElementById('riskImpact')?.value)||3, desc: document.getElementById('riskDesc').value, action: document.getElementById('riskAction').value||'', owner: document.getElementById('riskOwner').value||'', status: document.getElementById('riskStatus').value };
                 if(eid){ const i=appData.risks.findIndex(r=>r.id===eid); if(i>=0) appData.risks[i]=data; document.getElementById('editingRiskId').value=''; } else appData.risks.push(data);
                 saveData(); refreshAllViews(); document.getElementById('riskDesc').value=''; document.getElementById('riskAction').value=''; document.getElementById('riskOwner').value='';
             });
-            document.getElementById('clearRiskBtn')?.addEventListener('click', function() { ['riskDesc','riskAction','riskOwner'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingRiskId').value=''; });
+            document.getElementById('clearRiskBtn')?.addEventListener('click', function() { ['riskDesc','riskAction','riskOwner'].forEach(id=>document.getElementById(id).value=''); const rp=document.getElementById('riskProbability'); if(rp) rp.value=3; const ri=document.getElementById('riskImpact'); if(ri) ri.value=3; document.getElementById('editingRiskId').value=''; });
             document.getElementById('saveBudgetBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('budgetProject').value;
                 if(!pid) return alert('اختر المشروع');
@@ -1990,11 +2488,14 @@
                 const name = document.getElementById('kpiName').value.trim();
                 if(!oid || !name) return alert('الهدف والمؤشر مطلوبان');
                 const eid = document.getElementById('editingKpiId').value;
-                const data = { id: eid || generateId(), objectiveId: oid, name, target: parseFloat(document.getElementById('kpiTarget').value)||0, actual: parseFloat(document.getElementById('kpiActual').value)||0, unit: document.getElementById('kpiUnit').value };
+                const data = { id: eid || generateId(), objectiveId: oid, name, baseline: parseFloat(document.getElementById('kpiBaseline')?.value)||0, q1: parseFloat(document.getElementById('kpiQ1')?.value)||0, q2: parseFloat(document.getElementById('kpiQ2')?.value)||0, q3: parseFloat(document.getElementById('kpiQ3')?.value)||0, q4: parseFloat(document.getElementById('kpiTarget').value)||0, target: parseFloat(document.getElementById('kpiTarget').value)||0, actual: parseFloat(document.getElementById('kpiActual').value)||0, unit: document.getElementById('kpiUnit').value };
                 if(eid){ const i=appData.kpis.findIndex(k=>k.id===eid); if(i>=0) appData.kpis[i]=data; document.getElementById('editingKpiId').value=''; } else appData.kpis.push(data);
                 saveData(); refreshAllViews(); document.getElementById('kpiName').value='';
             });
-            document.getElementById('clearKpiBtn')?.addEventListener('click', function() { ['kpiName','kpiTarget','kpiActual','kpiUnit'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingKpiId').value=''; });
+            document.getElementById('clearKpiBtn')?.addEventListener('click', function() { ['kpiName','kpiBaseline','kpiQ1','kpiQ2','kpiQ3','kpiTarget','kpiActual','kpiUnit'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';}); document.getElementById('editingKpiId').value=''; });
+
+            document.getElementById('saveFyBtn')?.addEventListener('click', function(){ const eid=document.getElementById('editingFyId').value; const data={id:eid||generateId(),year:parseInt(document.getElementById('fyYear').value)||2026,focus:document.getElementById('fyFocus').value||'',goals:document.getElementById('fyGoals').value||'',target:parseFloat(document.getElementById('fyTarget').value)||0,actual:parseFloat(document.getElementById('fyActual').value)||0,budget:parseFloat(document.getElementById('fyBudget').value)||0}; if(eid){const i=appData.fiveYearPlans.findIndex(x=>x.id===eid); if(i>=0)appData.fiveYearPlans[i]=data; document.getElementById('editingFyId').value='';} else appData.fiveYearPlans.push(data); saveData(); refreshAllViews(); });
+            document.getElementById('clearFyBtn')?.addEventListener('click', function(){ ['fyFocus','fyGoals','fyTarget','fyActual','fyBudget'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingFyId').value=''; });
 
             // التنقل بين التبويبات
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2004,20 +2505,167 @@
                     btn.classList.add('active');
                     document.getElementById(btn.dataset.tab).classList.add('active');
                     if (btn.dataset.tab === 'tab-dashboard') renderDashboard();
-                    if (btn.dataset.tab === 'tab-gantt') renderGanttEditableTable();
+                    if (btn.dataset.tab === 'tab-fiveyear') renderFiveYear();
+                    if (btn.dataset.tab === 'tab-gantt') { renderGanttEditableTable(); renderProjectStages(); renderPriorityMatrix(); }
                     if (btn.dataset.tab === 'tab-reports') { populateDropdowns(); renderReports(); }
-                    if (btn.dataset.tab === 'tab-strategy') renderObjectives();
+                    if (btn.dataset.tab === 'tab-strategy') { renderObjectives(); renderBscMap(); renderAdvancedKpiTable(); }
                     if (btn.dataset.tab === 'tab-projects') renderProjects();
                     if (btn.dataset.tab === 'tab-resources') { renderResources(); renderTeamMembers(); }
-                    if (btn.dataset.tab === 'tab-risks') { renderRisks(); renderRisksDetailed(); }
+                    if (btn.dataset.tab === 'tab-risks') { renderRisks(); renderRisksDetailed(); renderRiskHeatMap(); }
                     if (btn.dataset.tab === 'tab-budget') renderBudget();
                     if (btn.dataset.tab === 'tab-services') renderServices();
                 });
             });
 
             loadData();
+            phase3ApplyTheme();
             refreshAllViews();
+            phase3RenderNotifications();
+            document.getElementById('applyReportFilter')?.addEventListener('click', renderReports);
+            document.addEventListener('click', function(e){ const panel=document.getElementById('phase3SearchPanel'); const input=document.getElementById('globalSearchInput'); if(panel && !panel.contains(e.target) && e.target!==input) panel.classList.remove('show'); });
         })();
     </script>
+
+
+<!-- تم تعطيل سكربت أدوات تحكم KPI لمنع التكرار -->
+
+
+<style id="ux-all-widgets-style">
+/* ===== UX Controls for all screens/cards/charts ===== */
+.ux-screen-control-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid #dbeafe;border-right:5px solid var(--accent);border-radius:16px;padding:12px 14px;margin:0 0 16px 0;box-shadow:var(--shadow)}
+.ux-screen-control-panel strong{display:block;color:var(--primary);font-size:.9rem}.ux-screen-control-panel small{display:block;color:#64748b;font-size:.72rem;margin-top:3px}.ux-screen-actions{display:flex;gap:7px;flex-wrap:wrap}.ux-screen-actions button,.ux-widget-mini{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:9px;padding:7px 10px;font-size:.75rem;font-weight:800;cursor:pointer}.ux-screen-actions button:hover,.ux-widget-mini:hover{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}.ux-screen-actions button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.ux-screen-actions button.danger{background:#fff1f2;color:#be123c;border-color:#fecdd3}.ux-screen-actions button.dark{background:#0f172a;color:#fff;border-color:#0f172a}
+.ux-managed-widget{position:relative!important;transition:height .2s,max-height .2s,box-shadow .2s,transform .2s;overflow-y:auto;scrollbar-width:thin}.ux-managed-widget::-webkit-scrollbar{width:8px}.ux-managed-widget::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:12px}.ux-managed-widget:hover{box-shadow:0 10px 34px rgba(15,23,42,.12)}
+.ux-managed-widget.ux-widget-small{max-height:260px!important;min-height:120px}.ux-managed-widget.ux-widget-medium{max-height:440px!important}.ux-managed-widget.ux-widget-large{max-height:660px!important}.ux-managed-widget.ux-widget-xlarge{max-height:900px!important}.ux-managed-widget.ux-widget-small{transform:none!important}.ux-managed-widget.ux-widget-large{padding:24px!important}.ux-managed-widget.ux-widget-xlarge{padding:30px!important}
+.ux-widget-controls{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:30;opacity:.18;transition:.2s;background:rgba(255,255,255,.9);backdrop-filter:blur(3px);border-radius:10px;padding:3px}.ux-managed-widget:hover>.ux-widget-controls{opacity:1}.ux-widget-mini{width:30px;height:28px;padding:0;display:inline-flex;align-items:center;justify-content:center}.ux-widget-grip{cursor:grab}.ux-managed-widget.ux-dragging{opacity:.55!important;outline:3px dashed #2563eb}.ux-managed-widget.ux-drag-over{outline:3px solid #2563eb!important;box-shadow:0 0 0 6px rgba(37,99,235,.16)!important}.ux-highlight-widget{animation:uxPulseWidget 1.8s ease 1}@keyframes uxPulseWidget{0%,100%{box-shadow:var(--shadow)}25%,75%{box-shadow:0 0 0 5px rgba(59,130,246,.25),var(--shadow)}}
+body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}body.dark-mode .ux-screen-control-panel strong{color:#f8fafc}body.dark-mode .ux-screen-control-panel small{color:#cbd5e1}body.dark-mode .ux-screen-actions button,body.dark-mode .ux-widget-mini{background:#1e293b;color:#e2e8f0;border-color:#475569}body.dark-mode .ux-widget-controls{background:rgba(15,23,42,.88)}
+@media(max-width:768px){.ux-screen-control-panel{align-items:flex-start}.ux-screen-actions button{font-size:.68rem;padding:6px 8px}.ux-widget-controls{opacity:.9}}
+</style>
+<script id="ux-all-widgets-controls-script">
+(function(){
+  const ORDER_KEY='t16_all_widgets_order_v2_stable';
+  const SIZE_KEY='t16_all_widgets_sizes_v2_stable';
+  const TAB_SIZE_KEY='t16_all_widgets_tab_sizes_v2_stable';
+  const levels=['small','medium','large','xlarge'];
+  const targetSelector='.tab-content.active > .card, .tab-content.active > .overall-card, .tab-content.active .dashboard-grid > .chart-box, .tab-content.active .stats-row > .stat-card, .tab-content.active .budget-summary > .budget-item, .tab-content.active .report-stats-row > .report-stat-card, .tab-content.active .kpi-row > .kpi-card, .tab-content.active .phase2-kpis > .phase2-kpi';
+  let dragged=null, enhancing=false;
+  function read(k,def){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(def))}catch(e){return def}}
+  function write(k,v){localStorage.setItem(k,JSON.stringify(v));}
+  function activeTab(){return document.querySelector('.tab-content.active')?.id||'tab-dashboard'}
+  function toast(msg){ if(typeof window.phase3Toast==='function') return window.phase3Toast(msg); if(typeof window.toast==='function') return window.toast(msg); const t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;bottom:20px;left:20px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;z-index:99999;font-weight:800';document.body.appendChild(t);setTimeout(()=>t.remove(),1800);}
+  function safeText(el){return (el.querySelector(':scope > .card-header, :scope > h3, :scope > h4, .kpi-label, .stat-label, .label')?.textContent||el.id||'widget').replace(/\s+/g,' ').trim().slice(0,45)}
+  function widgets(){return Array.from(document.querySelectorAll(targetSelector)).filter(el=>!el.closest('.ux-screen-control-panel') && !el.classList.contains('ux-screen-control-panel') && !el.classList.contains('ux-widget-controls'));}
+  function widgetId(el,idx){
+    if(!el.dataset.uxWidgetId){
+      const tab=el.closest('.tab-content')?.id||activeTab();
+      const basis=(el.id?el.id:safeText(el).replace(/[^؀-ۿ\w]+/g,'-').slice(0,35))||('widget-'+idx);
+      el.dataset.uxWidgetId=tab+'__'+basis+'__'+idx;
+    }
+    return el.dataset.uxWidgetId;
+  }
+  function parentKey(p){return (p.id||Array.from(p.classList||[]).join('.')||p.tagName).toString().slice(0,90)}
+  function applySize(el,size){el.classList.remove('ux-widget-small','ux-widget-medium','ux-widget-large','ux-widget-xlarge');el.classList.add('ux-widget-'+(size||'medium'));}
+  function getTabSize(){return read(TAB_SIZE_KEY,{})[activeTab()]||'medium'}
+  function updatePanelButtons(size){document.querySelectorAll('.tab-content.active .ux-screen-actions [data-ux-all-size]').forEach(b=>b.classList.toggle('active',b.dataset.uxAllSize===size));}
+  function saveOrder(parent){
+    if(!parent) return;
+    const key=activeTab()+'::'+parentKey(parent);
+    const order=Array.from(parent.children).filter(c=>c.classList&&c.classList.contains('ux-managed-widget')).map((c,i)=>widgetId(c,i));
+    const all=read(ORDER_KEY,{}); all[key]=order; write(ORDER_KEY,all);
+  }
+  function restoreOrders(){
+    const all=read(ORDER_KEY,{}); const tab=activeTab();
+    const parents=[...new Set(widgets().map(w=>w.parentElement).filter(Boolean))];
+    parents.forEach(parent=>{
+      const key=tab+'::'+parentKey(parent); const order=all[key]; if(!order||!order.length) return;
+      const kids=Array.from(parent.children).filter(c=>c.classList&&c.classList.contains('ux-managed-widget'));
+      kids.forEach((c,i)=>widgetId(c,i));
+      kids.sort((a,b)=>{const ia=order.indexOf(a.dataset.uxWidgetId), ib=order.indexOf(b.dataset.uxWidgetId); return (ia<0?9999:ia)-(ib<0?9999:ib);}).forEach(c=>parent.appendChild(c));
+    });
+  }
+  function injectPanel(tabEl){
+    if(!tabEl || tabEl.querySelector(':scope > .ux-screen-control-panel')) return;
+    const panel=document.createElement('div'); panel.className='ux-screen-control-panel no-print';
+    panel.innerHTML='<div><strong><i class="fas fa-sliders-h"></i> التحكم في مؤشرات هذه الشاشة</strong><small>استخدم مقبض السحب داخل كل بطاقة للتحريك المستقر، مع التكبير/التصغير والمسطرة الطولية للبيانات الزائدة.</small></div><div class="ux-screen-actions"><button data-ux-all-size="small">تصغير الكل</button><button data-ux-all-size="medium">متوسط</button><button data-ux-all-size="large">تكبير الكل</button><button data-ux-all-size="xlarge">ضخم</button><button class="danger" data-ux-reset-sizes><i class="fas fa-compress"></i> الحجم الافتراضي</button><button class="dark" data-ux-reset-order><i class="fas fa-rotate-left"></i> الترتيب الافتراضي</button></div>';
+    tabEl.insertBefore(panel,tabEl.firstChild);
+    panel.querySelectorAll('[data-ux-all-size]').forEach(b=>b.addEventListener('click',()=>setAllSize(b.dataset.uxAllSize)));
+    panel.querySelector('[data-ux-reset-sizes]').addEventListener('click',()=>{const sizes=read(SIZE_KEY,{});widgets().forEach((el,i)=>{delete sizes[widgetId(el,i)];applySize(el,'medium');});write(SIZE_KEY,sizes);const tabs=read(TAB_SIZE_KEY,{});tabs[activeTab()]='medium';write(TAB_SIZE_KEY,tabs);updatePanelButtons('medium');toast('تمت إعادة الأحجام الافتراضية لهذه الشاشة');});
+    panel.querySelector('[data-ux-reset-order]').addEventListener('click',()=>{const all=read(ORDER_KEY,{});Object.keys(all).forEach(k=>{if(k.startsWith(activeTab()+'::')) delete all[k];});write(ORDER_KEY,all);toast('تم إرجاع الترتيب الافتراضي');setTimeout(()=>location.reload(),500);});
+  }
+  function setAllSize(size){
+    const sizes=read(SIZE_KEY,{}); widgets().forEach((el,i)=>{const id=widgetId(el,i);sizes[id]=size;applySize(el,size);}); write(SIZE_KEY,sizes);
+    const tabSizes=read(TAB_SIZE_KEY,{}); tabSizes[activeTab()]=size; write(TAB_SIZE_KEY,tabSizes); updatePanelButtons(size); toast('تم تطبيق الحجم على مؤشرات هذه الشاشة');
+  }
+  function addControls(el,id,tabSize){
+    if(el.querySelector(':scope > .ux-widget-controls')) return;
+    const ctrl=document.createElement('div'); ctrl.className='ux-widget-controls no-print';
+    ctrl.innerHTML='<button class="ux-widget-mini ux-widget-grip" draggable="true" title="اسحب لتغيير المكان"><i class="fas fa-grip-vertical"></i></button><button class="ux-widget-mini" title="تصغير">−</button><button class="ux-widget-mini" title="تكبير">+</button><button class="ux-widget-mini" title="افتراضي">↺</button>';
+    el.appendChild(ctrl);
+    const grip=ctrl.children[0];
+    grip.addEventListener('dragstart',e=>{dragged=el; el.classList.add('ux-dragging'); e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain',id)}catch(_){}; e.stopPropagation();});
+    grip.addEventListener('dragend',e=>{el.classList.remove('ux-dragging');document.querySelectorAll('.ux-drag-over').forEach(x=>x.classList.remove('ux-drag-over')); if(dragged) saveOrder(dragged.parentElement); dragged=null; e.stopPropagation();});
+    ctrl.children[1].addEventListener('click',e=>{e.stopPropagation();const st=read(SIZE_KEY,{});const cur=st[id]||tabSize||'medium';const next=levels[Math.max(0,levels.indexOf(cur)-1)];st[id]=next;write(SIZE_KEY,st);applySize(el,next);});
+    ctrl.children[2].addEventListener('click',e=>{e.stopPropagation();const st=read(SIZE_KEY,{});const cur=st[id]||tabSize||'medium';const next=levels[Math.min(levels.length-1,levels.indexOf(cur)+1)];st[id]=next;write(SIZE_KEY,st);applySize(el,next);});
+    ctrl.children[3].addEventListener('click',e=>{e.stopPropagation();const st=read(SIZE_KEY,{});delete st[id];write(SIZE_KEY,st);applySize(el,tabSize||'medium');});
+  }
+  function addDropEvents(el){
+    if(el.dataset.uxAllDnDStable) return; el.dataset.uxAllDnDStable='1'; el.setAttribute('draggable','false');
+    el.addEventListener('dragover',e=>{if(dragged && dragged!==el && dragged.parentElement===el.parentElement){e.preventDefault();el.classList.add('ux-drag-over');}});
+    el.addEventListener('dragleave',()=>el.classList.remove('ux-drag-over'));
+    el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('ux-drag-over'); if(!dragged||dragged===el||dragged.parentElement!==el.parentElement) return; const siblings=Array.from(el.parentElement.children); const from=siblings.indexOf(dragged),to=siblings.indexOf(el); if(from<to) el.parentElement.insertBefore(dragged,el.nextSibling); else el.parentElement.insertBefore(dragged,el); saveOrder(el.parentElement); toast('تم حفظ ترتيب عناصر الشاشة');});
+  }
+  function enhance(){
+    if(enhancing) return; enhancing=true;
+    try{
+      const tab=document.querySelector('.tab-content.active'); if(!tab) return;
+      injectPanel(tab); const sizes=read(SIZE_KEY,{}); const tabSize=getTabSize();
+      const list=widgets();
+      list.forEach((el,idx)=>{const id=widgetId(el,idx); el.classList.add('ux-managed-widget'); applySize(el,sizes[id]||tabSize||'medium'); addControls(el,id,tabSize); addDropEvents(el);});
+      restoreOrders(); updatePanelButtons(tabSize||'medium');
+    } finally { enhancing=false; }
+  }
+  document.addEventListener('click',e=>{if(e.target.closest('.tab-btn')) setTimeout(enhance,250);});
+  document.addEventListener('DOMContentLoaded',()=>{setTimeout(enhance,350);setTimeout(enhance,1200);});
+  window.addEventListener('load',()=>setTimeout(enhance,600));
+  window.uxEnhanceAllWidgets=enhance;
+})();
+</script>
+
+
+<style id="t17-budget-controls-cleanup-style">
+/* إصلاح نهائي: منع تكرار أدوات التحكم داخل البطاقات */
+.ux-card-controls,
+.kpi-card > .drag-handle{display:none!important;visibility:hidden!important;pointer-events:none!important}
+/* محاذاة عنوان تقرير الموازنة ناحية اليمين في واجهة RTL */
+#tab-budget .card-header{
+  direction:rtl!important;
+  text-align:right!important;
+  justify-content:flex-start!important;
+  flex-direction:row!important;
+}
+#tab-budget .card-header i{margin-left:8px;margin-right:0}
+#tab-budget .card-header span{margin-left:auto;text-align:right}
+</style>
+<script id="t17-budget-controls-cleanup-script">
+(function(){
+  function cleanDuplicateControls(){
+    document.querySelectorAll('.ux-card-controls').forEach(el=>el.remove());
+    document.querySelectorAll('.kpi-card > .drag-handle').forEach(el=>el.remove());
+    document.querySelectorAll('.kpi-card').forEach(card=>{
+      const ctrls=card.querySelectorAll(':scope > .ux-widget-controls');
+      ctrls.forEach((el,i)=>{ if(i>0) el.remove(); });
+    });
+    document.querySelectorAll('.ux-managed-widget').forEach(w=>{
+      const ctrls=w.querySelectorAll(':scope > .ux-widget-controls');
+      ctrls.forEach((el,i)=>{ if(i>0) el.remove(); });
+    });
+  }
+  document.addEventListener('DOMContentLoaded',()=>{cleanDuplicateControls();setTimeout(cleanDuplicateControls,500);setTimeout(cleanDuplicateControls,1500);});
+  window.addEventListener('load',()=>{cleanDuplicateControls();setTimeout(cleanDuplicateControls,800);});
+  document.addEventListener('click',e=>{if(e.target.closest('.tab-btn')) setTimeout(cleanDuplicateControls,350);});
+  const obs=new MutationObserver(()=>cleanDuplicateControls());
+  document.addEventListener('DOMContentLoaded',()=>obs.observe(document.body,{childList:true,subtree:true}));
+})();
+</script>
+
 </body>
 </html>
