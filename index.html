@@ -449,6 +449,14 @@
         .roadmap-metric{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin-top:7px;font-size:.74rem}
         .roadmap-metric .metric-title{color:#64748b;font-weight:800}.roadmap-metric .metric-value{color:#0f172a;font-weight:900;text-align:left;direction:ltr}
         .roadmap-status-line{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #dbeafe}
+        .strategy-achievement-grid{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px}
+        .strategy-year-card{background:#fff;border:1px solid #e2e8f0;border-top:5px solid #3b82f6;border-radius:18px;padding:14px;min-width:220px;box-shadow:var(--shadow);max-height:320px;overflow-y:auto}
+        .strategy-year-card.status-green{border-top-color:#10b981}.strategy-year-card.status-amber{border-top-color:#f59e0b}.strategy-year-card.status-red{border-top-color:#ef4444}
+        .strategy-year-card h3{font-size:1.05rem;color:#0f172a;margin-bottom:8px}.strategy-year-card .big-percent{font-size:2rem;font-weight:900;color:#0f172a;line-height:1;margin:8px 0}
+        .strategy-kpi-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.strategy-kpi-meta div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px;font-size:.72rem}.strategy-kpi-meta strong{display:block;font-size:.9rem;color:#0f172a}
+        .strategy-achievement-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:14px}.strategy-achievement-chart{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow);height:300px;overflow:hidden}.strategy-achievement-chart h3{font-size:.9rem;color:#0f172a;margin-bottom:10px}
+        .strategy-kpi-table{max-height:330px;overflow:auto;border-radius:14px;border:1px solid #e2e8f0;margin-top:14px}.strategy-kpi-table table{min-width:880px}
+        body.dark-mode .strategy-year-card, body.dark-mode .strategy-achievement-chart{background:#111827;border-color:#263244}.dark-mode .strategy-year-card h3,.dark-mode .strategy-year-card .big-percent,.dark-mode .strategy-kpi-meta strong{color:#e5e7eb}.dark-mode .strategy-kpi-meta div{background:#0f172a;border-color:#334155}
         body.dark-mode .year-card{background:#111827;border-color:#263244}.dark-mode .roadmap-metric{background:#0f172a;border-color:#334155}.dark-mode .roadmap-metric .metric-value{color:#e5e7eb}
         .bsc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.bsc-card{border-radius:18px;padding:16px;background:#fff;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
         .bsc-card h3{font-size:1rem;color:#0f172a;margin-bottom:8px}.bsc-item{background:#f8fafc;border-radius:12px;padding:10px;margin-top:8px;border-right:4px solid #3b82f6}.bsc-item .meta{font-size:.72rem;color:#64748b;margin-top:4px}
@@ -703,6 +711,15 @@
                 <div class="btn-group"><button class="btn btn-primary" id="saveFyBtn"><i class="fas fa-save"></i> حفظ السنة</button><button class="btn btn-outline" id="clearFyBtn"><i class="fas fa-plus"></i> جديد</button></div>
             </div>
             <div class="card"><div class="card-header"><span><i class="fas fa-road"></i> Roadmap الخطة الخمسية</span></div><div id="fiveYearRoadmap" class="roadmap"></div></div>
+            <div class="card" id="strategicKpiAchievementCard">
+                <div class="card-header"><span><i class="fas fa-bullseye"></i> نسبة تحقيق الأهداف الاستراتيجية 2026–2030</span><span style="font-size:.78rem;color:#64748b">متابعة تحقيق الأهداف الاستراتيجية ونسب إنجاز مؤشرات KPI's موزعة على سنوات الخطة الخمسية</span></div>
+                <div id="strategicKpiAchievementCards" class="strategy-achievement-grid"></div>
+                <div class="strategy-achievement-charts">
+                    <div class="strategy-achievement-chart"><h3><i class="fas fa-chart-column"></i> نسبة إنجاز KPI's حسب السنة</h3><canvas id="strategicKpiYearBarChart"></canvas></div>
+                    <div class="strategy-achievement-chart"><h3><i class="fas fa-chart-line"></i> اتجاه تحقيق الأهداف الاستراتيجية</h3><canvas id="strategicKpiYearTrendChart"></canvas></div>
+                </div>
+                <div id="strategicKpiAchievementTable" class="strategy-kpi-table"></div>
+            </div>
             <div class="card"><div class="card-header"><span><i class="fas fa-table"></i> جدول الخطة السنوية</span></div><div class="table-wrapper"><table><thead><tr><th>السنة</th><th>التركيز</th><th>الأهداف</th><th>المستهدف</th><th>الإنجاز</th><th>RAG</th><th>الموازنة</th><th>إجراءات</th></tr></thead><tbody id="fiveYearBody"></tbody></table></div></div>
         </div>
 
@@ -2258,6 +2275,62 @@
                     </div>`;
                 }).join('');
                 body.innerHTML=rows.map(y=>`<tr><td><strong>${y.year}</strong></td><td>${y.focus||''}</td><td>${y.goals||''}</td><td>${Number(y.target||0)}%</td><td>${Number(y.actual||0)}%</td><td><span class="rag ${ragClass(y.actual,y.target)}">${ragText(y.actual,y.target)}</span></td><td>${formatCurrency(y.budget)}</td><td><button class="btn btn-sm btn-outline" onclick="editFiveYear('${y.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteFiveYear('${y.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+                renderStrategicKpiAchievementByYear(rows);
+            }
+            function getProjectsActiveInYear(year){
+                return (appData.projects||[]).filter(p=>{
+                    const s=parseInt(String(p.start||'').slice(0,4))||0;
+                    const e=parseInt(String(p.end||'').slice(0,4))||s;
+                    return (s&&e) ? (Number(year)>=s && Number(year)<=e) : false;
+                });
+            }
+            function annualStrategicKpiStats(rows){
+                const allKpis=appData.kpis||[];
+                return rows.map(y=>{
+                    const year=Number(y.year);
+                    const activeProjects=getProjectsActiveInYear(year);
+                    const objectiveIds=[...new Set(activeProjects.map(p=>p.objectiveId).filter(Boolean))];
+                    let kpis=objectiveIds.length ? allKpis.filter(k=>objectiveIds.includes(k.objectiveId)) : allKpis;
+                    if(!kpis.length) kpis=[];
+                    const ratios=kpis.map(k=>{
+                        const target=Number(k.target||k.q4||0)||1;
+                        return Math.max(0, Math.min(100, Math.round((Number(k.actual||0)/target)*100)));
+                    });
+                    const kpiAvg=ratios.length ? Math.round(ratios.reduce((a,b)=>a+b,0)/ratios.length) : Math.round((Number(y.actual||0)/(Number(y.target||0)||1))*100);
+                    const achieved=kpis.filter(k=>Number(k.actual||0) >= Number(k.target||k.q4||0)).length;
+                    const delayed=kpis.filter(k=>Number(k.actual||0) < (Number(k.target||k.q4||0)*0.7)).length;
+                    const status=kpiAvg>=90?'green':kpiAvg>=70?'amber':'red';
+                    return {year, focus:y.focus||'', kpis, kpiAvg, achieved, delayed, total:kpis.length, activeProjects:activeProjects.length, status};
+                });
+            }
+            function renderStrategicKpiAchievementByYear(rows){
+                const cards=document.getElementById('strategicKpiAchievementCards');
+                const table=document.getElementById('strategicKpiAchievementTable');
+                if(!cards || !table) return;
+                const stats=annualStrategicKpiStats(rows);
+                const statusLabel=s=>s==='green'?'أخضر - تحقيق قوي':s==='amber'?'أصفر - يحتاج متابعة':'أحمر - يحتاج تدخل';
+                cards.innerHTML=stats.map(s=>`<div class="strategy-year-card status-${s.status}">
+                    <h3>${s.year}</h3>
+                    <div style="font-size:.76rem;color:#64748b;font-weight:800">نسبة إنجاز KPI's</div>
+                    <div class="big-percent">${s.kpiAvg}%</div>
+                    <span class="rag ${s.status==='green'?'rag-green':s.status==='amber'?'rag-amber':'rag-red'}">${statusLabel(s.status)}</span>
+                    <div class="strategy-kpi-meta">
+                        <div><strong>${s.achieved}/${s.total}</strong>KPIs محققة</div>
+                        <div><strong>${s.delayed}</strong>KPIs متأخرة</div>
+                        <div><strong>${s.activeProjects}</strong>مشاريع مرتبطة</div>
+                        <div><strong>${s.focus||'-'}</strong>تركيز السنة</div>
+                    </div>
+                </div>`).join('');
+                table.innerHTML=`<table><thead><tr><th>السنة</th><th>نسبة إنجاز KPI's</th><th>المؤشرات المحققة</th><th>المؤشرات المتأخرة</th><th>المشاريع المرتبطة</th><th>مؤشر الحالة</th><th>أبرز مؤشرات KPI's المرتبطة</th></tr></thead><tbody>${stats.map(s=>`<tr><td><strong>${s.year}</strong></td><td>${s.kpiAvg}%</td><td>${s.achieved} من ${s.total}</td><td>${s.delayed}</td><td>${s.activeProjects}</td><td><span class="rag ${s.status==='green'?'rag-green':s.status==='amber'?'rag-amber':'rag-red'}">${statusLabel(s.status)}</span></td><td>${s.kpis.slice(0,4).map(k=>k.name).join('، ') || 'لا توجد مؤشرات مرتبطة مباشرة'}</td></tr>`).join('')}</tbody></table>`;
+                setTimeout(()=>{
+                    ['strategicKpiYearBarChart','strategicKpiYearTrendChart'].forEach(id=>{ const old=Chart.getChart(id); if(old) old.destroy(); });
+                    const labels=stats.map(s=>String(s.year));
+                    const values=stats.map(s=>s.kpiAvg);
+                    const barCtx=document.getElementById('strategicKpiYearBarChart')?.getContext('2d');
+                    if(barCtx) new Chart(barCtx,{type:'bar',data:{labels,datasets:[{label:'نسبة إنجاز KPI\'s',data:values,backgroundColor:stats.map(s=>s.status==='green'?'rgba(16,185,129,.75)':s.status==='amber'?'rgba(245,158,11,.75)':'rgba(239,68,68,.75)'),borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+                    const lineCtx=document.getElementById('strategicKpiYearTrendChart')?.getContext('2d');
+                    if(lineCtx) new Chart(lineCtx,{type:'line',data:{labels,datasets:[{label:'اتجاه تحقيق الأهداف الاستراتيجية',data:values,borderColor:'rgba(59,130,246,.95)',backgroundColor:'rgba(59,130,246,.15)',fill:true,tension:.35,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+                },80);
             }
             window.editFiveYear=function(id){ const y=appData.fiveYearPlans.find(x=>x.id===id); if(!y)return; document.getElementById('editingFyId').value=y.id; document.getElementById('fyYear').value=y.year; document.getElementById('fyFocus').value=y.focus||''; document.getElementById('fyGoals').value=y.goals||''; document.getElementById('fyTarget').value=y.target||0; document.getElementById('fyActual').value=y.actual||0; document.getElementById('fyBudget').value=y.budget||0; };
             window.deleteFiveYear=function(id){ if(confirm('حذف سنة الخطة؟')){ appData.fiveYearPlans=appData.fiveYearPlans.filter(x=>x.id!==id); saveData(); refreshAllViews(); }};
