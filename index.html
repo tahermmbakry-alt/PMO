@@ -449,6 +449,21 @@
         .roadmap-metric{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:8px 10px;margin-top:7px;font-size:.74rem}
         .roadmap-metric .metric-title{color:#64748b;font-weight:800}.roadmap-metric .metric-value{color:#0f172a;font-weight:900;text-align:left;direction:ltr}
         .roadmap-status-line{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #dbeafe}
+
+        /* Strategic Objective Timeline Roadmap */
+        .strategy-timeline-card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px;box-shadow:var(--shadow);overflow-x:auto}
+        .strategy-timeline{min-width:820px;display:grid;grid-template-columns:240px repeat(5,1fr);gap:8px;align-items:stretch}
+        .strategy-timeline .tl-head{background:#0f172a;color:#fff;border-radius:12px;padding:10px;text-align:center;font-size:.78rem;font-weight:900}
+        .strategy-timeline .tl-objective{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px}
+        .strategy-timeline .tl-objective strong{font-size:.82rem;color:#0f172a;line-height:1.5}.strategy-timeline .tl-objective small{font-size:.68rem;color:#64748b;line-height:1.4}
+        .tl-year-cell{position:relative;min-height:58px;background:#f8fafc;border:1px dashed #dbe4ef;border-radius:14px;padding:6px;display:flex;align-items:center;justify-content:center}
+        .tl-bar{width:100%;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 8px 18px rgba(15,23,42,.08);cursor:pointer;transition:.18s}
+        .tl-bar:hover{transform:translateY(-2px);box-shadow:0 14px 26px rgba(15,23,42,.16)}
+        .tl-green{background:linear-gradient(135deg,#10b981,#059669)}.tl-amber{background:linear-gradient(135deg,#f59e0b,#d97706)}.tl-red{background:linear-gradient(135deg,#ef4444,#b91c1c)}.tl-blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+        .tl-empty{width:100%;height:12px;border-radius:999px;background:#e2e8f0;opacity:.6}
+        .timeline-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;font-size:.75rem;color:#475569;font-weight:800}.timeline-legend span{display:inline-flex;align-items:center;gap:6px}.timeline-legend i{display:inline-block;width:12px;height:12px;border-radius:4px}
+        .objective-year-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:12px;padding-top:12px;border-top:1px dashed #e2e8f0}
+        body.dark-mode .strategy-timeline-card, body.dark-mode .tl-objective, body.dark-mode .tl-year-cell{background:#111827;border-color:#263244} body.dark-mode .tl-objective strong{color:#e5e7eb} body.dark-mode .tl-objective small,.dark-mode .timeline-legend{color:#cbd5e1}
         .strategy-achievement-grid{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px}
         .strategy-year-card{background:#fff;border:1px solid #e2e8f0;border-top:5px solid #3b82f6;border-radius:18px;padding:14px;min-width:220px;box-shadow:var(--shadow);max-height:320px;overflow-y:auto}
         .strategy-year-card.status-green{border-top-color:#10b981}.strategy-year-card.status-amber{border-top-color:#f59e0b}.strategy-year-card.status-red{border-top-color:#ef4444}
@@ -765,6 +780,10 @@
                 <div class="btn-group"><button class="btn btn-primary" id="saveFyBtn"><i class="fas fa-save"></i> حفظ السنة</button><button class="btn btn-outline" id="clearFyBtn"><i class="fas fa-plus"></i> جديد</button></div>
             </div>
             <div class="card"><div class="card-header"><span><i class="fas fa-road"></i> Roadmap الخطة الخمسية</span></div><div id="fiveYearRoadmap" class="roadmap"></div></div>
+            <div class="card" id="strategicObjectiveTimelineCard">
+                <div class="card-header"><span><i class="fas fa-stream"></i> خارطة امتداد الأهداف الاستراتيجية 2026–2030</span><span style="font-size:.78rem;color:#64748b">عرض الأهداف الاستراتيجية الممتدة عبر سنوات الخطة الخمسية وربطها بالمشاريع و KPIs</span></div>
+                <div class="strategy-timeline-card"><div id="strategicObjectiveTimeline"></div></div>
+            </div>
             <div class="card" id="strategicKpiAchievementCard">
                 <div class="card-header"><span><i class="fas fa-bullseye"></i> نسبة تحقيق الأهداف الاستراتيجية 2026–2030</span><span style="font-size:.78rem;color:#64748b">متابعة تحقيق الأهداف الاستراتيجية ونسب إنجاز مؤشرات KPI's موزعة على سنوات الخطة الخمسية</span></div>
                 <div id="strategicKpiAchievementCards" class="strategy-achievement-grid"></div>
@@ -785,6 +804,9 @@
                     <div class="form-group"><label>الوصف</label><textarea id="objDesc" rows="2"></textarea></div>
                     <div class="form-group"><label>منظور بطاقة الأداء المتوازن BSC</label><select id="objPerspective"><option>المستفيدون</option><option>العمليات الداخلية</option><option>التعلم والنمو</option><option>المالي</option></select></div>
                     <div class="form-group"><label>الهدف الأعلى / الربط الهرمي</label><select id="objParent"><option value="">— هدف رئيسي —</option></select></div>
+                    <div class="form-group"><label>سنة بداية الهدف</label><select id="objStartYear"><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div>
+                    <div class="form-group"><label>سنة نهاية الهدف</label><select id="objEndYear"><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option selected>2030</option></select></div>
+                    <div class="form-group"><label>نسبة المساهمة السنوية</label><input type="text" id="objYearWeights" placeholder="مثال: 2026:20, 2027:25, 2028:25"></div>
                     <div class="form-group"><label>الوزن (%)</label><input type="number" id="objWeight" value="25"></div>
                     <div class="form-group"><label>المستهدف (%)</label><input type="number" id="objTarget" value="100"></div>
                 </div>
@@ -1726,7 +1748,7 @@
                 }).join('');
                 renderBscMap(); renderAdvancedKpiTable();
             }
-            window.editObj=function(id){ const o=appData.objectives.find(ob=>ob.id===id); if(!o) return; document.getElementById('editingObjId').value=o.id; document.getElementById('objTitle').value=o.title; document.getElementById('objDesc').value=o.desc||''; document.getElementById('objWeight').value=o.weight; document.getElementById('objTarget').value=o.target; const pp=document.getElementById('objPerspective'); if(pp) pp.value=o.perspective||'المستفيدون'; const par=document.getElementById('objParent'); if(par) par.value=o.parentId||''; };
+            window.editObj=function(id){ const o=appData.objectives.find(ob=>ob.id===id); if(!o) return; document.getElementById('editingObjId').value=o.id; document.getElementById('objTitle').value=o.title; document.getElementById('objDesc').value=o.desc||''; document.getElementById('objWeight').value=o.weight; document.getElementById('objTarget').value=o.target; const pp=document.getElementById('objPerspective'); if(pp) pp.value=o.perspective||'المستفيدون'; const par=document.getElementById('objParent'); if(par) par.value=o.parentId||''; const sy=document.getElementById('objStartYear'); if(sy) sy.value=o.startYear||2026; const ey=document.getElementById('objEndYear'); if(ey) ey.value=o.endYear||2030; const yw=document.getElementById('objYearWeights'); if(yw) yw.value=o.yearWeights||''; };
             window.deleteObj=function(id){ if(confirm('حذف الهدف؟')){ appData.objectives=appData.objectives.filter(o=>o.id!==id); appData.kpis=appData.kpis.filter(k=>k.objectiveId!==id); saveData(); refreshAllViews(); } };
 
             function renderProjects() {
@@ -2283,7 +2305,7 @@
                         {id:'fy2030',year:2030,focus:'الاستدامة والأثر',goals:'استدامة التحول، تعظيم الأثر المجتمعي، مراجعة استراتيجية شاملة',target:95,actual:0,budget:20000000}
                     ];
                 }
-                appData.objectives.forEach((o,i)=>{ if(!o.perspective) o.perspective=['المستفيدون','العمليات الداخلية','التعلم والنمو','المالي'][i%4]; if(o.parentId===undefined) o.parentId=''; });
+                appData.objectives.forEach((o,i)=>{ if(!o.perspective) o.perspective=['المستفيدون','العمليات الداخلية','التعلم والنمو','المالي'][i%4]; if(o.parentId===undefined) o.parentId=''; if(o.startYear===undefined) o.startYear=2026; if(o.endYear===undefined) o.endYear=2030; if(o.yearWeights===undefined) o.yearWeights=''; });
                 appData.kpis.forEach(k=>{ if(k.baseline===undefined) k.baseline=Math.max(0, Number(k.actual||0)-10); if(k.q1===undefined) k.q1=Math.round((Number(k.target||0)*.25)||0); if(k.q2===undefined) k.q2=Math.round((Number(k.target||0)*.50)||0); if(k.q3===undefined) k.q3=Math.round((Number(k.target||0)*.75)||0); if(k.q4===undefined) k.q4=Number(k.target||0); });
                 appData.projects.forEach(p=>{ if(p.allocatedBudget===undefined) p.allocatedBudget=Number(p.budget||0); if(p.plannedBudget===undefined) p.plannedBudget=Math.round(Number(p.allocatedBudget||p.budget||0)*1.15); if(p.actualCost===undefined){ const spent=appData.budgets.filter(b=>b.projectId===p.id).reduce((sum,b)=>sum+Number(b.spent||0),0); p.actualCost=spent; } p.budget=Number(p.allocatedBudget||p.budget||0); });
             }
@@ -2331,6 +2353,7 @@
                 }).join('');
                 body.innerHTML=rows.map(y=>`<tr><td><strong>${y.year}</strong></td><td>${y.focus||''}</td><td>${y.goals||''}</td><td>${Number(y.target||0)}%</td><td>${Number(y.actual||0)}%</td><td><span class="rag ${ragClass(y.actual,y.target)}">${ragText(y.actual,y.target)}</span></td><td>${formatCurrency(y.budget)}</td><td><button class="btn btn-sm btn-outline" onclick="editFiveYear('${y.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteFiveYear('${y.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
                 renderStrategicKpiAchievementByYear(rows);
+                renderStrategicObjectiveTimeline();
             }
             function getProjectsActiveInYear(year){
                 return (appData.projects||[]).filter(p=>{
@@ -2357,6 +2380,47 @@
                     const status=kpiAvg>=90?'green':kpiAvg>=70?'amber':'red';
                     return {year, focus:y.focus||'', kpis, kpiAvg, achieved, delayed, total:kpis.length, activeProjects:activeProjects.length, status};
                 });
+            }
+
+            function objectiveYearWeight(objective, year){
+                const txt=String(objective.yearWeights||'');
+                const parts=txt.split(/[,،]/).map(x=>x.trim()).filter(Boolean);
+                for(const p of parts){ const m=p.match(/(2026|2027|2028|2029|2030)\s*[:=]\s*(\d+(?:\.\d+)?)/); if(m && Number(m[1])===Number(year)) return Number(m[2]); }
+                const s=Number(objective.startYear||2026), e=Number(objective.endYear||2030);
+                const years=Math.max(1,e-s+1);
+                return Math.round(100/years);
+            }
+            function objectiveStatusByYear(objective, year){
+                const relatedProjects=getProjectsActiveInYear(year).filter(p=>p.objectiveId===objective.id);
+                const relatedKpis=(appData.kpis||[]).filter(k=>k.objectiveId===objective.id);
+                const kpiRatios=relatedKpis.map(k=>{const t=Number(k.target||k.q4||0)||1; return Math.max(0,Math.min(100,Math.round(Number(k.actual||0)/t*100)));});
+                const kpiAvg=kpiRatios.length?Math.round(kpiRatios.reduce((a,b)=>a+b,0)/kpiRatios.length):Number(objective.progress||0);
+                const projAvg=relatedProjects.length?Math.round(relatedProjects.reduce((s,p)=>s+Number(p.progress||0),0)/relatedProjects.length):kpiAvg;
+                const avg=Math.round((kpiAvg+projAvg)/2);
+                const cls=avg>=85?'tl-green':avg>=65?'tl-amber':avg>0?'tl-red':'tl-blue';
+                return {avg,cls,projects:relatedProjects,kpis:relatedKpis};
+            }
+            function renderStrategicObjectiveTimeline(){
+                const el=document.getElementById('strategicObjectiveTimeline'); if(!el) return;
+                const years=[2026,2027,2028,2029,2030];
+                const objectives=(appData.objectives||[]).filter(o=>o.title);
+                const esc=(v)=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
+                let html='<div class="strategy-timeline"><div class="tl-head">الهدف الاستراتيجي</div>'+years.map(y=>`<div class="tl-head">${y}</div>`).join('');
+                objectives.forEach(o=>{
+                    const s=Number(o.startYear||2026), e=Number(o.endYear||2030);
+                    html+=`<div class="tl-objective"><strong>${esc(o.title)}</strong><small>${esc(o.perspective||'غير محدد')} • وزن ${Number(o.weight||0)}%</small><small>الامتداد: ${s}–${e}</small></div>`;
+                    years.forEach(y=>{
+                        if(y>=s && y<=e){
+                            const st=objectiveStatusByYear(o,y); const wt=objectiveYearWeight(o,y);
+                            const projects=st.projects.map(p=>p.name).join('، ')||'لا توجد مشاريع مرتبطة بهذه السنة';
+                            const kpis=st.kpis.map(k=>`${k.name}: ${k.actual||0}/${k.target||k.q4||0}`).join(' | ')||'لا توجد KPIs مرتبطة';
+                            const tip=`${o.title}\nالسنة: ${y}\nمساهمة السنة: ${wt}%\nمتوسط الإنجاز: ${st.avg}%\nالمشاريع: ${projects}\nKPIs: ${kpis}`;
+                            html+=`<div class="tl-year-cell"><div class="tl-bar ${st.cls}" title="${esc(tip)}">${st.avg}% • ${wt}%</div></div>`;
+                        } else html+='<div class="tl-year-cell"><div class="tl-empty"></div></div>';
+                    });
+                });
+                html+='</div><div class="timeline-legend"><span><i style="background:#10b981"></i> متقدم</span><span><i style="background:#f59e0b"></i> تحت المتابعة</span><span><i style="background:#ef4444"></i> متأخر</span><span><i style="background:#3b82f6"></i> مخطط / لا توجد بيانات فعلية</span></div>';
+                el.innerHTML=html;
             }
             function renderStrategicKpiAchievementByYear(rows){
                 const cards=document.getElementById('strategicKpiAchievementCards');
@@ -2448,11 +2512,11 @@
                 const title = document.getElementById('objTitle').value.trim();
                 if (!title) return alert('الهدف مطلوب');
                 const eid = document.getElementById('editingObjId').value;
-                const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value, perspective: document.getElementById('objPerspective')?.value||'المستفيدون', parentId: document.getElementById('objParent')?.value||'', weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: eid ? (appData.objectives.find(o=>o.id===eid)?.progress||0) : 0 };
+                const startYear = parseInt(document.getElementById('objStartYear')?.value)||2026; const rawEndYear = parseInt(document.getElementById('objEndYear')?.value)||2030; const endYear = rawEndYear < startYear ? startYear : rawEndYear; const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value, perspective: document.getElementById('objPerspective')?.value||'المستفيدون', parentId: document.getElementById('objParent')?.value||'', startYear, endYear, yearWeights: document.getElementById('objYearWeights')?.value||'', weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: eid ? (appData.objectives.find(o=>o.id===eid)?.progress||0) : 0 };
                 if (eid) { const i = appData.objectives.findIndex(o=>o.id===eid); if(i>=0) appData.objectives[i]=data; document.getElementById('editingObjId').value=''; } else appData.objectives.push(data);
                 saveData(); refreshAllViews(); document.getElementById('objTitle').value='';
             });
-            document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget'].forEach(id=>document.getElementById(id).value=''); if(document.getElementById('objParent')) document.getElementById('objParent').value=''; if(document.getElementById('objPerspective')) document.getElementById('objPerspective').value='المستفيدون'; document.getElementById('editingObjId').value=''; });
+            document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget','objYearWeights'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';}); if(document.getElementById('objParent')) document.getElementById('objParent').value=''; if(document.getElementById('objPerspective')) document.getElementById('objPerspective').value='المستفيدون'; if(document.getElementById('objStartYear')) document.getElementById('objStartYear').value='2026'; if(document.getElementById('objEndYear')) document.getElementById('objEndYear').value='2030'; document.getElementById('editingObjId').value=''; });
             document.getElementById('saveProjectBtn')?.addEventListener('click', function() {
                 const name = document.getElementById('projName').value.trim();
                 if(!name) return alert('الاسم مطلوب');
