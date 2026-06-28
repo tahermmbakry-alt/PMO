@@ -468,10 +468,28 @@
         /* ===== Phase 2 PMO Enhancements ===== */
         .phase2-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px}
         .phase2-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}.phase2-kpi{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow);border-right:5px solid #3b82f6}.phase2-kpi strong{display:block;font-size:1.35rem;color:#0f172a}.phase2-kpi span{font-size:.75rem;color:#64748b}
-        .stage-board{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}.stage-col{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:12px;min-height:180px}.stage-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;color:#0f172a;font-size:.86rem;margin-bottom:10px}.stage-pill{font-size:.65rem;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:3px 8px}.stage-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:0 6px 16px rgba(15,23,42,.05);font-size:.78rem}.stage-card .progress{height:6px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:8px}.stage-card .progress div{height:100%;background:#3b82f6;border-radius:999px}
+        .stage-board{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:10px;overflow-x:auto;padding-bottom:8px}.stage-col{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:10px;min-height:160px}.stage-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;color:#0f172a;font-size:.82rem;margin-bottom:8px}.stage-pill{font-size:.62rem;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:3px 7px}.stage-card{background:#fff;border:1px solid #e2e8f0;border-radius:13px;padding:9px;margin-bottom:7px;box-shadow:0 5px 13px rgba(15,23,42,.05);font-size:.74rem}.stage-card .progress{height:5px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:7px}.stage-card .progress div{height:100%;background:#3b82f6;border-radius:999px}.stage-card-select{width:100%;margin-top:7px;padding:5px 7px;border:1px solid #dbe4ef;border-radius:9px;font-size:.7rem;background:#f8fafc}.phase2-info-note{background:#f8fafc!important;color:#334155!important;border:1px solid #dbe4ef!important;border-right:5px solid #3b82f6!important;border-radius:14px!important;padding:12px!important;margin-bottom:12px!important}.phase2-info-note strong{display:block;color:#0f172a;margin-bottom:5px}.phase2-info-note p{color:#475569!important;font-size:.78rem!important;line-height:1.8!important;margin:0!important}
         .milestone-chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:700;margin:3px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}.milestone-done{background:#dcfce7;color:#166534;border-color:#bbf7d0}.milestone-late{background:#fee2e2;color:#991b1b;border-color:#fecaca}
-        .priority-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-width:620px}.priority-cell{min-height:120px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:8px}.priority-cell h4{font-size:.72rem;color:#475569;margin-bottom:6px;text-align:center}.priority-item{background:#fff;border-radius:10px;border-right:4px solid #3b82f6;padding:7px;margin-bottom:6px;font-size:.72rem;box-shadow:0 4px 12px rgba(15,23,42,.05)}.priority-critical{border-right-color:#ef4444}.priority-high{border-right-color:#f59e0b}.priority-medium{border-right-color:#3b82f6}.priority-low{border-right-color:#10b981}
-        .risk-heatmap{display:grid;grid-template-columns:80px repeat(5,minmax(92px,1fr));gap:6px;min-width:650px;direction:ltr}.heat-label,.heat-head{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:10px;text-align:center;font-size:.72rem;font-weight:800;color:#334155}.heat-cell{min-height:82px;border-radius:12px;padding:6px;border:1px solid rgba(15,23,42,.08);font-size:.7rem;direction:rtl;overflow:auto}.heat-low{background:#dcfce7}.heat-med{background:#fef9c3}.heat-high{background:#fed7aa}.heat-extreme{background:#fecaca}.heat-risk{background:rgba(255,255,255,.82);border-radius:8px;padding:5px;margin-bottom:4px;font-weight:700;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+        .priority-layout{display:grid;grid-template-columns:minmax(560px,1.25fr) minmax(300px,.75fr);gap:12px;align-items:start}.priority-matrix{display:grid;grid-template-columns:repeat(5,minmax(86px,1fr));gap:5px;min-width:560px}.priority-cell{min-height:68px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:5px;overflow-y:auto;max-height:126px}.priority-cell h4{font-size:.56rem;color:#475569;margin-bottom:4px;text-align:center;line-height:1.25;font-weight:900}.priority-item{background:#fff;border-radius:8px;border-right:3px solid #3b82f6;padding:4px 5px;margin-bottom:3px;font-size:.58rem;box-shadow:0 2px 5px rgba(15,23,42,.04);line-height:1.25}.priority-item strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.priority-item span{font-size:.52rem;color:#64748b}.priority-critical{border-right-color:#ef4444}.priority-high{border-right-color:#f59e0b}.priority-medium{border-right-color:#3b82f6}.priority-low{border-right-color:#10b981}.priority-editor{margin-top:0;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:10px;max-height:440px;overflow-y:auto}.priority-editor .card-header{font-size:.86rem;padding-bottom:8px;margin-bottom:8px!important}.priority-editor .phase2-info-note{padding:9px!important;margin-bottom:8px!important}.priority-editor .phase2-info-note p{font-size:.7rem!important;line-height:1.55!important}.priority-edit-list{display:grid;gap:6px}.priority-edit-row{display:grid;grid-template-columns:1fr 66px 66px 52px;gap:6px;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:6px}.priority-edit-title{font-size:.68rem;font-weight:900;color:#0f172a;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.priority-edit-meta{font-size:.55rem;color:#64748b;margin-top:2px}.priority-editor select{padding:5px 6px;font-size:.68rem;border-radius:8px;min-width:0}.priority-editor .btn-sm{padding:5px 8px;font-size:.66rem}.priority-axis-note{display:flex;justify-content:space-between;color:#64748b;font-size:.68rem;font-weight:800;margin:0 0 6px 0;gap:10px}.priority-legend{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;font-size:.62rem;color:#64748b}.priority-legend span{display:inline-flex;align-items:center;gap:4px}.priority-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}@media(max-width:1000px){.priority-layout{grid-template-columns:1fr}.priority-editor{max-height:none}}
+        /* Professional compact Risk Heat Map */
+        .risk-heatmap-wrap{width:100%;overflow:hidden;background:linear-gradient(180deg,#ffffff,#f8fafc);border:1px solid #e2e8f0;border-radius:18px;padding:12px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+        .risk-heatmap{display:grid;grid-template-columns:64px repeat(5,minmax(72px,1fr));gap:4px;width:100%;direction:ltr;align-items:stretch}
+        .heat-label,.heat-head{background:#f8fafc;border:1px solid #dbe4ef;border-radius:10px;padding:7px 5px;text-align:center;font-size:.64rem;font-weight:900;color:#334155;line-height:1.25;display:flex;align-items:center;justify-content:center;min-height:44px}
+        .heat-head{background:#eef6ff;color:#1d4ed8;border-color:#bfdbfe}.heat-label{background:#f8fafc;color:#475569}
+        .heat-cell{min-height:62px;max-height:86px;border-radius:11px;padding:5px;border:2px solid rgba(255,255,255,.95);font-size:.64rem;direction:rtl;overflow-y:auto;position:relative;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;box-shadow:inset 0 0 0 1px rgba(15,23,42,.08)}
+        .heat-cell:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 10px 20px rgba(15,23,42,.16),inset 0 0 0 1px rgba(15,23,42,.08);z-index:2;filter:saturate(1.08)}
+        .heat-low{background:linear-gradient(135deg,#dcfce7,#86efac);color:#14532d}.heat-med{background:linear-gradient(135deg,#fef08a,#facc15);color:#713f12}.heat-high{background:linear-gradient(135deg,#fdba74,#f97316);color:#7c2d12}.heat-extreme{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff}.heat-critical{background:linear-gradient(135deg,#991b1b,#450a0a);color:#fff}
+        .heat-count{position:absolute;top:4px;left:5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:rgba(255,255,255,.88);color:#0f172a;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:1000;border:1px solid rgba(15,23,42,.10)}
+        .heat-critical .heat-count,.heat-extreme .heat-count{background:rgba(255,255,255,.96);color:#991b1b}.heat-empty{height:100%;min-height:42px;display:flex;align-items:center;justify-content:center;color:rgba(15,23,42,.28);font-weight:900}.heat-risk{background:rgba(255,255,255,.88);color:#0f172a;border-radius:8px;padding:4px 5px;margin:20px 0 3px;font-weight:900;box-shadow:0 2px 6px rgba(15,23,42,.12);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-right:3px solid currentColor}.heat-risk span{display:block;font-weight:700;color:#475569;font-size:.56rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.heat-extreme .heat-risk,.heat-critical .heat-risk{background:rgba(255,255,255,.95);color:#111827}.risk-heatmap-legend{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px;font-size:.68rem;font-weight:900;color:#475569}.risk-heatmap-legend span{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:4px 9px}.risk-heatmap-legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+        body.dark-mode .risk-heatmap-wrap{background:#111827;border-color:#263244}.dark-mode .heat-label,.dark-mode .heat-head{background:#0f172a;border-color:#334155;color:#e5e7eb}.dark-mode .heat-head{color:#93c5fd}.dark-mode .heat-count{border-color:#334155}@media(max-width:768px){.risk-heatmap{grid-template-columns:54px repeat(5,minmax(58px,1fr));gap:3px}.heat-cell{min-height:56px;max-height:78px}.heat-label,.heat-head{font-size:.56rem;padding:5px 3px}.heat-risk{display:none}}
+        .risk-smart-tooltip{position:fixed;z-index:9999;min-width:280px;max-width:430px;background:#0f172a;color:#f8fafc;border:1px solid rgba(148,163,184,.35);border-radius:16px;box-shadow:0 22px 60px rgba(15,23,42,.35);padding:12px;pointer-events:none;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .12s ease,transform .12s ease;font-size:.76rem;line-height:1.65;direction:rtl;text-align:right}
+        .risk-smart-tooltip.show{opacity:1;transform:translateY(0) scale(1)}
+        .risk-tooltip-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid rgba(148,163,184,.25)}
+        .risk-tooltip-head strong{font-size:.84rem;color:#fff}.risk-tooltip-head span{background:#1e293b;color:#bfdbfe;border:1px solid rgba(147,197,253,.25);border-radius:999px;padding:3px 8px;font-size:.66rem;font-weight:900;white-space:nowrap}
+        .risk-tooltip-empty{color:#cbd5e1;background:rgba(255,255,255,.06);border-radius:12px;padding:10px;text-align:center;font-weight:800}
+        .risk-tooltip-item{background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.18);border-right:4px solid #60a5fa;border-radius:12px;padding:8px 9px;margin-top:7px}
+        .risk-tooltip-item.level-low{border-right-color:#22c55e}.risk-tooltip-item.level-med{border-right-color:#eab308}.risk-tooltip-item.level-high{border-right-color:#f97316}.risk-tooltip-item.level-critical{border-right-color:#ef4444}
+        .risk-tooltip-title{font-weight:900;color:#fff;margin-bottom:4px;white-space:normal}.risk-tooltip-meta{display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#cbd5e1;font-size:.68rem}.risk-tooltip-meta b{color:#93c5fd}.risk-tooltip-action{margin-top:5px;color:#e2e8f0;font-size:.68rem;border-top:1px dashed rgba(148,163,184,.25);padding-top:5px}.risk-tooltip-more{margin-top:7px;text-align:center;color:#bfdbfe;font-weight:900;font-size:.68rem}
         .phase2-summary{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 12px 36px rgba(15,23,42,.18)}.phase2-summary p{font-size:.83rem;line-height:1.8;color:#dbeafe;margin-top:6px}
 
         /* ===== Phase 3 Executive UX Enhancements ===== */
@@ -518,6 +536,42 @@
 
         .phase3-print-note{display:none}@media print{.phase3-top-tools,.tabs-nav,.btn-group,.phase3-actions,.phase3-tool-btn,.phase3-search-panel,.phase3-drawer{display:none!important}.tab-content{display:block!important}.phase3-print-note{display:block}.card,.chart-box{box-shadow:none!important}}
         @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{top:210px}}
+
+
+        /* ===== T18 RTL Card Header Alignment Fix ===== */
+        .card-header{
+            direction:rtl !important;
+            text-align:right !important;
+            justify-content:space-between !important;
+            flex-direction:row !important;
+        }
+        .card-header > span:first-child,
+        .card-header > .card-title,
+        .card-header > h3:first-child,
+        .card-header > h4:first-child{
+            margin-left:auto !important;
+            margin-right:0 !important;
+            text-align:right !important;
+            justify-content:flex-start !important;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+        }
+        .card-header > .size-controls,
+        .card-header > .gantt-controls,
+        .card-header > .form-group,
+        .card-header > div:not(:first-child){
+            margin-right:auto !important;
+            margin-left:0 !important;
+            text-align:left !important;
+            justify-content:flex-end !important;
+        }
+        .card-header.card-header-title-only{
+            justify-content:flex-start !important;
+        }
+        .card-header.card-header-title-only .card-title{
+            margin-left:0 !important;
+        }
 
     </style>
 
@@ -685,7 +739,7 @@
 
             <!-- جدول حالة المشاريع -->
             <div class="card">
-                <div class="card-header"><i class="fas fa-table"></i> حالة المشاريع الحالية</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-table"></i> حالة المشاريع الحالية</span></div>
                 <div class="table-wrapper"><table id="dashProjectsTable"><thead><tr><th>المشروع</th><th>النوع</th><th>الحالة</th><th>الإنجاز</th><th>الميزانية المخططة</th><th>التكلفة المخصصة</th><th>المنفق حتى الآن</th><th>نسبة الصرف</th><th>المخاطر</th></tr></thead><tbody></tbody></table></div>
             </div>
         </div>
@@ -761,7 +815,7 @@
             </div>
             <div class="card"><div class="card-header"><span><i class="fas fa-wave-square"></i> سجل مؤشرات الأداء المتقدم RAG والاتجاهات الزمنية</span></div><div id="advancedKpiBox"></div></div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> الأهداف الاستراتيجية</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> الأهداف الاستراتيجية</span></div>
                 <div class="table-wrapper"><table id="objectivesTable"><thead><tr><th>الهدف</th><th>المنظور</th><th>الربط الهرمي</th><th>الوزن</th><th>الإنجاز</th><th>المشاريع المرتبطة</th><th>KPIs</th><th>إجراءات</th></tr></thead><tbody id="objectivesBody"></tbody></table></div>
             </div>
             <div class="card"><div class="card-header"><span><i class="fas fa-sitemap"></i> خريطة BSC والربط الهرمي</span></div><div id="bscMap" class="bsc-grid"></div></div>
@@ -811,7 +865,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> قائمة المشاريع</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> قائمة المشاريع</span></div>
                 <div class="table-wrapper"><table id="projectsTable"><thead><tr><th>الاسم</th><th>النوع</th><th>القطاع</th><th>المديرية</th><th>الهدف</th><th>الحالة</th><th>الإنجاز</th><th>المخطط</th><th>المخصص</th><th>المنفق</th><th>إجراءات</th></tr></thead><tbody id="projectsBody"></tbody></table></div>
             </div>
         </div>
@@ -835,7 +889,7 @@
                 <button class="btn btn-primary" id="saveResourceBtn"><i class="fas fa-save"></i> حفظ</button>
             </div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> سجل فرق العمل</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> سجل فرق العمل</span></div>
                 <div class="table-wrapper"><table id="resourcesTable"><thead><tr><th>المشروع</th><th>مدير المشروع</th><th>المديرية</th><th>الفريق</th><th>إجراءات</th></tr></thead><tbody id="resourcesBody"></tbody></table></div>
             </div>
         </div>
@@ -909,7 +963,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> سجل المخاطر</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> سجل المخاطر</span></div>
                 <div class="table-wrapper"><table id="risksTable"><thead><tr><th>المشروع</th><th>النوع</th><th>المستوى</th><th>الوصف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="risksBody"></tbody></table></div>
             </div>
         </div>
@@ -932,7 +986,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> تقرير الموازنة</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> تقرير الموازنة</span></div>
                 <div id="budgetSummary" style="margin-bottom:16px;padding:12px;background:#f0f9ff;border-radius:10px;"></div>
                 <div class="table-wrapper"><table id="budgetTable"><thead><tr><th>المشروع</th><th>البند</th><th>مخطط</th><th>منفق</th><th>متبقي</th><th>إجراءات</th></tr></thead><tbody id="budgetBody"></tbody></table></div>
             </div>
@@ -958,7 +1012,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header"><i class="fas fa-list"></i> الخدمات والمبادرات</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> الخدمات والمبادرات</span></div>
                 <div class="table-wrapper"><table id="servicesTable"><thead><tr><th>النوع</th><th>الاسم</th><th>المشروع</th><th>الحالة</th><th>إنجاز</th><th>إجراءات</th></tr></thead><tbody id="servicesBody"></tbody></table></div>
             </div>
         </div>
@@ -991,7 +1045,7 @@
 
         <div class="tab-content" id="tab-export">
             <div class="card">
-                <div class="card-header"><i class="fas fa-download"></i> تصدير واستيراد البيانات</div>
+                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-download"></i> تصدير واستيراد البيانات</span></div>
                 <div class="btn-group" style="flex-direction:column;align-items:flex-start;">
                     <button class="btn btn-success" id="exportAllExcelBtn"><i class="fas fa-file-excel"></i> تصدير Excel كامل</button>
                     <button class="btn btn-primary" id="importExcelBtn"><i class="fas fa-file-import"></i> استيراد من Excel</button>
@@ -1194,6 +1248,7 @@
             function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
+            function escapeHtml(v){return String(v??'').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
             function projectAllocatedBudget(p) { return Number(p?.allocatedBudget ?? p?.budget ?? 0); }
             function projectPlannedBudget(p) { const allocated = projectAllocatedBudget(p); return Number(p?.plannedBudget ?? (allocated ? Math.round(allocated * 1.15) : 0)); }
             function projectActualCost(p) { const direct = Number(p?.actualCost ?? 0); if (direct > 0) return direct; return appData.budgets.filter(b => b.projectId === p.id).reduce((s,b) => s + Number(b.spent||0), 0); }
@@ -2442,7 +2497,7 @@
 
 
             // ---- المرحلة الثانية: مراحل المشاريع والمعالم والأولوية وخريطة المخاطر ----
-            const PHASE2_STAGES = ['البدء','التخطيط','الطرح والتعاقد','التنفيذ','الإغلاق'];
+            const PHASE2_STAGES = ['البدء','الطرح والتعاقد','التخطيط','التنفيذ','الإغلاق'];
             function ensurePhase2Data(){
                 appData.projects.forEach((p,idx)=>{
                     if(!p.stage) p.stage = PHASE2_STAGES[Math.min(PHASE2_STAGES.length-1, Math.floor(((Number(p.progress)||0)/100)*PHASE2_STAGES.length))] || 'البدء';
@@ -2468,10 +2523,14 @@
                 const riskPenalty=openRisks.reduce((s,r)=>s+(Number(r.probability||3)*Number(r.impact||3)),0);
                 return Math.max(0, Math.min(100, Math.round(progress - Math.min(30,riskPenalty/3))));
             }
+            function setPhase2ProjectStage(projectId, stage){
+                const p=appData.projects.find(x=>x.id===projectId); if(!p) return;
+                p.stage=stage; saveData(); renderProjectStages(); renderPriorityMatrix(); toast('تم تحديث مرحلة المشروع');
+            }
             function renderProjectStages(){
                 const el=document.getElementById('phase2ProjectStages'); if(!el) return; ensurePhase2Data();
                 const total=appData.projects.length||1; const active=appData.projects.filter(p=>p.status==='نشط').length; const avg=Math.round(appData.projects.reduce((s,p)=>s+(Number(p.progress)||0),0)/total);
-                let html=`<div class="phase2-summary"><strong>لوحة مراحل التنفيذ والمعالم</strong><p>توضح اللوحة انتقال المشاريع بين مراحل الحوكمة، مع عرض المعالم الرئيسية ونقاط الاعتماد لكل مشروع.</p></div>
+                let html=`<div class="phase2-summary"><strong>لوحة مراحل التنفيذ والمعالم</strong><p>توضح اللوحة انتقال المشاريع بين مراحل الحوكمة، مع عرض المعالم الرئيسية ونقاط الاعتماد لكل مشروع. تم ترتيب المراحل بحيث تأتي مرحلة <b>الطرح والتعاقد</b> قبل <b>التخطيط</b> حسب المطلوب.</p></div>
                 <div class="phase2-kpis"><div class="phase2-kpi"><strong>${total}</strong><span>إجمالي المشاريع</span></div><div class="phase2-kpi"><strong>${active}</strong><span>مشاريع نشطة</span></div><div class="phase2-kpi"><strong>${avg}%</strong><span>متوسط الإنجاز</span></div><div class="phase2-kpi"><strong>${appData.projects.filter(p=>projectHealth(p)<60).length}</strong><span>مشاريع تحتاج تدخل</span></div></div>
                 <div class="stage-board">`;
                 PHASE2_STAGES.forEach(st=>{
@@ -2480,44 +2539,154 @@
                     if(items.length===0) html+='<div style="font-size:.75rem;color:#94a3b8;text-align:center;padding:20px 0">لا توجد مشاريع</div>';
                     items.forEach(p=>{
                         const ms=(p.milestones||[]).map(m=>`<span class="milestone-chip ${m.status==='مكتمل'?'milestone-done':(new Date(m.date)<new Date()&&m.status!=='مكتمل'?'milestone-late':'')}"><i class="fas fa-flag-checkered"></i>${m.name}</span>`).join('');
-                        html+=`<div class="stage-card"><strong>${p.name}</strong><div style="color:#64748b;margin-top:3px">${p.sector||'-'} | صحة المشروع ${projectHealth(p)}%</div><div class="progress"><div style="width:${Number(p.progress)||0}%"></div></div><div style="margin-top:8px">${ms}</div></div>`;
+                        html+=`<div class="stage-card"><strong>${p.name}</strong><div style="color:#64748b;margin-top:3px">${p.sector||'-'} | صحة المشروع ${projectHealth(p)}%</div><select class="stage-card-select" onchange="setPhase2ProjectStage('${p.id}', this.value)">${PHASE2_STAGES.map(x=>`<option value="${x}" ${p.stage===x?'selected':''}>${x}</option>`).join('')}</select><div class="progress"><div style="width:${Number(p.progress)||0}%"></div></div><div style="margin-top:8px">${ms}</div></div>`;
                     });
                     html+='</div>';
                 });
-                html+='</div>'; el.innerHTML=html;
+                html+='</div>';
+                html += renderMilestoneEditorHtml();
+                el.innerHTML=html;
+            }
+            function renderMilestoneEditorHtml(){
+                if(!appData.projects.length) return '';
+                if(!window._phase2MilestoneProject || !appData.projects.some(p=>p.id===window._phase2MilestoneProject)) window._phase2MilestoneProject=appData.projects[0].id;
+                const current=appData.projects.find(p=>p.id===window._phase2MilestoneProject)||appData.projects[0];
+                const opts=appData.projects.map(p=>`<option value="${p.id}" ${p.id===current.id?'selected':''}>${p.name}</option>`).join('');
+                const rows=(current.milestones||[]).map((m,i)=>`<tr><td><input type="text" class="phase2-ms-name" value="${escapeHtml(m.name||'')}"></td><td><input type="date" class="phase2-ms-date" value="${m.date||''}"></td><td><select class="phase2-ms-status"><option ${m.status==='مجدول'?'selected':''}>مجدول</option><option ${m.status==='قيد التنفيذ'?'selected':''}>قيد التنفيذ</option><option ${m.status==='مكتمل'?'selected':''}>مكتمل</option><option ${m.status==='متأخر'?'selected':''}>متأخر</option></select></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button></td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#94a3b8">لا توجد معالم لهذا المشروع</td></tr>';
+                return `<div class="card" style="margin-top:18px;background:#f8fafc;border:1px solid #e2e8f0">
+                    <div class="card-header"><span><i class="fas fa-flag-checkered"></i> إدارة وتعديل المعالم الرئيسية للمشروع</span></div>
+                    <div class="phase2-info-note"><strong><i class="fas fa-circle-info"></i> ملاحظة عن المعالم</strong><p>المعالم المعروضة هي نقاط متابعة قابلة للتعديل. عند إنشاء مشروع جديد بدون معالم، يضع النظام نموذجاً أولياً فقط ليساعدك على البدء، مثل اعتماد الميثاق وخطة المشروع والتسليم الرئيسي. عدّل الأسماء والتواريخ والحالة من الجدول، أو أضف معالمك الفعلية ثم اضغط حفظ.</p></div>
+                    <div class="form-grid" style="align-items:end;margin-bottom:12px"><div class="form-group"><label>اختر المشروع</label><select id="phase2MilestoneProject" onchange="window._phase2MilestoneProject=this.value; renderProjectStages();">${opts}</select></div><div class="form-group"><label>&nbsp;</label><button class="btn btn-primary" onclick="addPhase2MilestoneRow()"><i class="fas fa-plus"></i> إضافة معلم جديد</button></div></div>
+                    <div class="table-wrapper"><table class="editable-table"><thead><tr><th>اسم المعلم</th><th>التاريخ</th><th>الحالة</th><th>حذف</th></tr></thead><tbody id="phase2MilestoneBody">${rows}</tbody></table></div>
+                    <div class="btn-group"><button class="btn btn-success" onclick="savePhase2Milestones()"><i class="fas fa-save"></i> حفظ المعالم</button><button class="btn btn-outline" onclick="resetPhase2DefaultMilestones()"><i class="fas fa-rotate"></i> إعادة المعالم الافتراضية</button></div>
+                </div>`;
+            }
+            function addPhase2MilestoneRow(){
+                const body=document.getElementById('phase2MilestoneBody'); if(!body) return;
+                if(body.querySelector('td[colspan]')) body.innerHTML='';
+                const tr=document.createElement('tr');
+                tr.innerHTML=`<td><input type="text" class="phase2-ms-name" value="معلم جديد"></td><td><input type="date" class="phase2-ms-date"></td><td><select class="phase2-ms-status"><option>مجدول</option><option>قيد التنفيذ</option><option>مكتمل</option><option>متأخر</option></select></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button></td>`;
+                body.appendChild(tr);
+            }
+            function savePhase2Milestones(){
+                const pid=document.getElementById('phase2MilestoneProject')?.value || window._phase2MilestoneProject;
+                const p=appData.projects.find(x=>x.id===pid); if(!p) return;
+                p.milestones=Array.from(document.querySelectorAll('#phase2MilestoneBody tr')).map(r=>({name:r.querySelector('.phase2-ms-name')?.value||'',date:r.querySelector('.phase2-ms-date')?.value||'',status:r.querySelector('.phase2-ms-status')?.value||'مجدول'})).filter(m=>m.name.trim());
+                saveData(); renderProjectStages(); toast('تم حفظ معالم المشروع');
+            }
+            function resetPhase2DefaultMilestones(){
+                const pid=document.getElementById('phase2MilestoneProject')?.value || window._phase2MilestoneProject;
+                const p=appData.projects.find(x=>x.id===pid); if(!p) return;
+                p.milestones=[{name:'اعتماد الميثاق',date:p.start||'2026-01-15',status:(Number(p.progress)||0)>10?'مكتمل':'قيد التنفيذ'},{name:'اعتماد خطة المشروع',date:p.start||'2026-02-15',status:(Number(p.progress)||0)>30?'مكتمل':'قيد التنفيذ'},{name:'تسليم رئيسي',date:p.end||'2026-09-30',status:(Number(p.progress)||0)>75?'مكتمل':'مجدول'}];
+                saveData(); renderProjectStages(); toast('تمت إعادة المعالم الافتراضية');
             }
             function renderPriorityMatrix(){
                 const el=document.getElementById('phase2PriorityMatrix'); if(!el) return; ensurePhase2Data();
-                const labels=['منخفض','متوسط','عالٍ','حرج'];
-                let html='<div class="priority-matrix">';
-                for(let impact=4; impact>=1; impact--){
-                    for(let urg=1; urg<=4; urg++){
-                        const projects=appData.projects.filter(p=>Math.ceil((Number(p.impact)||1)/1.25)===impact && Math.ceil((Number(p.urgency)||1)/1.25)===urg);
-                        const sev=(impact>=4&&urg>=4)?'critical':(impact>=3&&urg>=3)?'high':(impact>=2&&urg>=2)?'medium':'low';
-                        html+=`<div class="priority-cell"><h4>الأثر ${labels[impact-1]} × الاستعجال ${labels[urg-1]}</h4>`;
-                        projects.forEach(p=>html+=`<div class="priority-item priority-${sev}"><strong>${p.name}</strong><br><span>${p.status} | ${p.progress||0}%</span></div>`);
-                        if(!projects.length) html+='<div style="text-align:center;color:#94a3b8;font-size:.7rem;padding:18px 0">—</div>';
+                const labels=['منخفض جداً','منخفض','متوسط','عالٍ','حرج'];
+                let html='<div class="priority-layout"><div><div class="priority-axis-note"><span>↑ الأثر Impact</span><span>الاستعجال Urgency ←</span></div><div class="priority-matrix">';
+                for(let impact=5; impact>=1; impact--){
+                    for(let urg=1; urg<=5; urg++){
+                        const projects=appData.projects.filter(p=>(Number(p.impact)||1)===impact && (Number(p.urgency)||1)===urg);
+                        const sev=(impact>=4&&urg>=4)?'critical':(impact>=4||urg>=4)?'high':(impact>=3||urg>=3)?'medium':'low';
+                        html+=`<div class="priority-cell"><h4>${labels[impact-1]} × ${labels[urg-1]}</h4>`;
+                        projects.forEach(p=>html+=`<div class="priority-item priority-${sev}" title="${p.name}"><strong>${p.name}</strong><span>${p.status} | ${p.progress||0}%</span></div>`);
+                        if(!projects.length) html+='<div style="text-align:center;color:#cbd5e1;font-size:.62rem;padding:12px 0">—</div>';
                         html+='</div>';
                     }
                 }
-                html+='</div>'; el.innerHTML=html;
+                html+='</div><div class="priority-legend"><span><i style="background:#ef4444"></i>حرج</span><span><i style="background:#f59e0b"></i>مرتفع</span><span><i style="background:#3b82f6"></i>متوسط</span><span><i style="background:#10b981"></i>منخفض</span></div></div>'; html+=renderPriorityEditorHtml(); html+='</div>'; el.innerHTML=html;
+            }
+
+            function renderPriorityEditorHtml(){
+                const labels=[1,2,3,4,5];
+                const rows=appData.projects.map(p=>`<div class="priority-edit-row" data-project-id="${p.id}"><div><div class="priority-edit-title" title="${p.name}">${p.name}</div><div class="priority-edit-meta">${p.status||'-'} | ${p.progress||0}%</div></div><select class="phase2-priority-impact" title="الأثر Impact">${labels.map(v=>`<option value="${v}" ${Number(p.impact||1)===v?'selected':''}>أثر ${v}</option>`).join('')}</select><select class="phase2-priority-urgency" title="الاستعجال Urgency">${labels.map(v=>`<option value="${v}" ${Number(p.urgency||1)===v?'selected':''}>عجلة ${v}</option>`).join('')}</select><button class="btn btn-sm btn-primary" onclick="saveSinglePhase2Priority('${p.id}', this.closest('.priority-edit-row'))"><i class="fas fa-save"></i></button></div>`).join('');
+                return `<div class="priority-editor"><div class="card-header"><span><i class="fas fa-location-crosshairs"></i> تحديد مكان المشروع داخل مصفوفة الأولوية</span></div><div class="phase2-info-note"><strong>طريقة الاستخدام</strong><p>حدد درجة الأثر ودرجة الاستعجال لكل مشروع من 1 إلى 5، ثم اضغط حفظ. ينتقل المشروع مباشرة إلى المربع المناسب داخل المصفوفة.</p></div><div class="priority-edit-list">${rows}</div><div class="btn-group"><button class="btn btn-success" onclick="savePhase2PrioritySettings()"><i class="fas fa-save"></i> حفظ جميع المواقع</button></div></div>`;
+            }
+            function saveSinglePhase2Priority(projectId,row){
+                const p=appData.projects.find(x=>x.id===projectId); if(!p || !row) return;
+                p.impact=Number(row.querySelector('.phase2-priority-impact')?.value)||1;
+                p.urgency=Number(row.querySelector('.phase2-priority-urgency')?.value)||1;
+                saveData(); renderPriorityMatrix(); toast('تم تحديث موقع المشروع في مصفوفة الأولوية');
+            }
+            function savePhase2PrioritySettings(){
+                document.querySelectorAll('#phase2PriorityMatrix .priority-editor [data-project-id]').forEach(row=>{
+                    const p=appData.projects.find(x=>x.id===row.dataset.projectId); if(!p) return;
+                    p.impact=Number(row.querySelector('.phase2-priority-impact')?.value)||1;
+                    p.urgency=Number(row.querySelector('.phase2-priority-urgency')?.value)||1;
+                });
+                saveData(); renderPriorityMatrix(); toast('تم حفظ مواقع المشاريع في مصفوفة الأولوية');
+            }
+
+            function riskTooltipLevelClass(level, score){
+                if(level==='حرج' || score>=18) return 'level-critical';
+                if(level==='مرتفع' || score>=10) return 'level-high';
+                if(level==='متوسط' || score>=5) return 'level-med';
+                return 'level-low';
+            }
+            function buildRiskTooltip(risks, prob, impact, score){
+                const head=`<div class="risk-tooltip-head"><strong>احتمالية ${prob} × أثر ${impact}</strong><span>درجة الخطر ${score} | ${risks.length} عنصر</span></div>`;
+                if(!risks.length) return head+'<div class="risk-tooltip-empty">لا توجد مخاطر مفتوحة في هذا المستوى.</div>';
+                const items=risks.slice(0,6).map(r=>{
+                    const p=appData.projects.find(x=>x.id===r.projectId);
+                    const cls=riskTooltipLevelClass(r.level, score);
+                    return `<div class="risk-tooltip-item ${cls}">
+                        <div class="risk-tooltip-title">${escapeHtml(r.desc||r.type||'مخاطر غير موصوفة')}</div>
+                        <div class="risk-tooltip-meta">
+                            <span><b>المشروع:</b> ${escapeHtml(p?p.name:'غير مرتبط')}</span>
+                            <span><b>المستوى:</b> ${escapeHtml(r.level||'-')}</span>
+                            <span><b>النوع:</b> ${escapeHtml(r.type||'-')}</span>
+                            <span><b>الحالة:</b> ${escapeHtml(r.status||'-')}</span>
+                            <span><b>المسؤول:</b> ${escapeHtml(r.owner||'-')}</span>
+                            <span><b>درجة:</b> ${score}</span>
+                        </div>
+                        ${r.action?`<div class="risk-tooltip-action"><b>الإجراء:</b> ${escapeHtml(r.action)}</div>`:''}
+                    </div>`;
+                }).join('');
+                const more=risks.length>6?`<div class="risk-tooltip-more">+ ${risks.length-6} مخاطر أخرى في نفس المربع</div>`:'';
+                return head+items+more;
+            }
+            function setupRiskHeatmapTooltips(){
+                let tip=document.getElementById('riskSmartTooltip');
+                if(!tip){ tip=document.createElement('div'); tip.id='riskSmartTooltip'; tip.className='risk-smart-tooltip'; document.body.appendChild(tip); }
+                document.querySelectorAll('#phase2RiskHeatMap .heat-cell').forEach(cell=>{
+                    cell.addEventListener('mouseenter',()=>{ tip.innerHTML=cell.dataset.tooltip||''; tip.classList.add('show'); });
+                    cell.addEventListener('mousemove',(e)=>{
+                        const pad=16;
+                        const rect=tip.getBoundingClientRect();
+                        let x=e.clientX+pad, y=e.clientY+pad;
+                        if(x+rect.width>window.innerWidth-10) x=e.clientX-rect.width-pad;
+                        if(y+rect.height>window.innerHeight-10) y=e.clientY-rect.height-pad;
+                        tip.style.left=Math.max(8,x)+'px'; tip.style.top=Math.max(8,y)+'px';
+                    });
+                    cell.addEventListener('mouseleave',()=>{ tip.classList.remove('show'); });
+                });
             }
             window.renderRiskHeatMap=function(){
                 const el=document.getElementById('phase2RiskHeatMap'); if(!el) return; ensurePhase2Data();
                 const openRisks=appData.risks.filter(r=>r.status!=='مغلق');
-                let html='<div class="risk-heatmap"><div></div>';
-                [1,2,3,4,5].forEach(i=>html+=`<div class="heat-head">الأثر ${i}</div>`);
+                const impactLabels=['منخفض','بسيط','متوسط','عالٍ','حرج'];
+                let html='<div class="risk-heatmap-wrap"><div class="risk-heatmap"><div></div>';
+                [1,2,3,4,5].forEach(i=>html+=`<div class="heat-head" title="الأثر ${i}: ${impactLabels[i-1]}">الأثر<br>${i}</div>`);
                 for(let prob=5; prob>=1; prob--){
-                    html+=`<div class="heat-label">احتمالية ${prob}</div>`;
+                    html+=`<div class="heat-label" title="الاحتمالية ${prob}">احتمالية<br>${prob}</div>`;
                     for(let impact=1; impact<=5; impact++){
-                        const score=prob*impact; const cls=score>=20?'heat-extreme':score>=12?'heat-high':score>=6?'heat-med':'heat-low';
+                        const score=prob*impact;
+                        const cls=score>=23?'heat-critical':score>=18?'heat-extreme':score>=10?'heat-high':score>=5?'heat-med':'heat-low';
                         const risks=openRisks.filter(r=>Number(r.probability||3)===prob && Number(r.impact||3)===impact);
-                        html+=`<div class="heat-cell ${cls}">`;
-                        risks.forEach(r=>{const p=appData.projects.find(x=>x.id===r.projectId); html+=`<div class="heat-risk">${r.desc||r.type}<br><span style="font-weight:500;color:#475569">${p?p.name:'-'}</span></div>`});
+                        const title=`احتمالية ${prob} × أثر ${impact} = ${score} | عدد المخاطر: ${risks.length}`;
+                        const tooltip=escapeHtml(buildRiskTooltip(risks, prob, impact, score));
+                        html+=`<div class="heat-cell ${cls}" title="${title}" data-tooltip="${tooltip}"><div class="heat-count">${risks.length}</div>`;
+                        if(risks.length){
+                            risks.slice(0,2).forEach(r=>{const p=appData.projects.find(x=>x.id===r.projectId); html+=`<div class="heat-risk" title="${escapeHtml(r.desc||r.type)} - ${escapeHtml(p?p.name:'-')}">${escapeHtml(r.desc||r.type)}<span>${escapeHtml(p?p.name:'-')}</span></div>`});
+                            if(risks.length>2) html+=`<div class="heat-risk" title="مخاطر إضافية">+${risks.length-2} أخرى<span>اضغط للتفاصيل في السجل</span></div>`;
+                        } else {
+                            html+='<div class="heat-empty">—</div>';
+                        }
                         html+=`</div>`;
                     }
                 }
-                html+='</div>'; el.innerHTML=html; renderPhase2RiskSummary();
+                html+='</div><div class="risk-heatmap-legend"><span><i style="background:#86efac"></i>منخفض</span><span><i style="background:#facc15"></i>متوسط</span><span><i style="background:#f97316"></i>مرتفع</span><span><i style="background:#dc2626"></i>حرج</span><span><i style="background:#450a0a"></i>قصوى</span></div></div>';
+                el.innerHTML=html; setupRiskHeatmapTooltips(); renderPhase2RiskSummary();
             }
             function renderPhase2RiskSummary(){
                 const el=document.getElementById('phase2RiskSummary'); if(!el) return; ensurePhase2Data();
@@ -2528,6 +2697,14 @@
                 el.innerHTML=`<div class="phase2-kpis"><div class="phase2-kpi"><strong>${open.length}</strong><span>مخاطر ومشاكل مفتوحة</span></div><div class="phase2-kpi" style="border-right-color:#ef4444"><strong>${critical}</strong><span>حرجة حسب الخريطة</span></div><div class="phase2-kpi" style="border-right-color:#f59e0b"><strong>${high}</strong><span>عالية الأولوية</span></div><div class="phase2-kpi" style="border-right-color:#10b981"><strong>${owners}</strong><span>مسؤولون عن المعالجة</span></div></div>`;
             }
             function renderPhase2All(){ ensurePhase2Data(); renderProjectStages(); renderPriorityMatrix(); window.renderRiskHeatMap(); }
+            window.addPhase2MilestoneRow=addPhase2MilestoneRow;
+            window.savePhase2Milestones=savePhase2Milestones;
+            window.resetPhase2DefaultMilestones=resetPhase2DefaultMilestones;
+            window.setPhase2ProjectStage=setPhase2ProjectStage;
+            window.renderProjectStages=renderProjectStages;
+            window.renderPriorityMatrix=renderPriorityMatrix;
+            window.savePhase2PrioritySettings=savePhase2PrioritySettings;
+            window.saveSinglePhase2Priority=saveSinglePhase2Priority;
 
             document.getElementById('saveRiskBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('riskProject').value;
@@ -2607,9 +2784,9 @@
 /* ===== UX Controls for all screens/cards/charts ===== */
 .ux-screen-control-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid #dbeafe;border-right:5px solid var(--accent);border-radius:16px;padding:12px 14px;margin:0 0 16px 0;box-shadow:var(--shadow)}
 .ux-screen-control-panel strong{display:block;color:var(--primary);font-size:.9rem}.ux-screen-control-panel small{display:block;color:#64748b;font-size:.72rem;margin-top:3px}.ux-screen-actions{display:flex;gap:7px;flex-wrap:wrap}.ux-screen-actions button,.ux-widget-mini{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:9px;padding:7px 10px;font-size:.75rem;font-weight:800;cursor:pointer}.ux-screen-actions button:hover,.ux-widget-mini:hover{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}.ux-screen-actions button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.ux-screen-actions button.danger{background:#fff1f2;color:#be123c;border-color:#fecdd3}.ux-screen-actions button.dark{background:#0f172a;color:#fff;border-color:#0f172a}
-.ux-managed-widget{position:relative!important;transition:height .2s,max-height .2s,box-shadow .2s,transform .2s;overflow-y:auto;scrollbar-width:thin}.ux-managed-widget::-webkit-scrollbar{width:8px}.ux-managed-widget::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:12px}.ux-managed-widget:hover{box-shadow:0 10px 34px rgba(15,23,42,.12)}
+.ux-managed-widget{position:relative!important;transition:height .2s,max-height .2s,box-shadow .2s;overflow-y:auto;scrollbar-width:thin}.ux-managed-widget::-webkit-scrollbar{width:8px}.ux-managed-widget::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:12px}.ux-managed-widget:hover{box-shadow:0 10px 34px rgba(15,23,42,.12)}
 .ux-managed-widget.ux-widget-small{max-height:260px!important;min-height:120px}.ux-managed-widget.ux-widget-medium{max-height:440px!important}.ux-managed-widget.ux-widget-large{max-height:660px!important}.ux-managed-widget.ux-widget-xlarge{max-height:900px!important}.ux-managed-widget.ux-widget-small{transform:none!important}.ux-managed-widget.ux-widget-large{padding:24px!important}.ux-managed-widget.ux-widget-xlarge{padding:30px!important}
-.ux-widget-controls{position:absolute;top:8px;left:8px;display:flex;gap:5px;z-index:30;opacity:.18;transition:.2s;background:rgba(255,255,255,.9);backdrop-filter:blur(3px);border-radius:10px;padding:3px}.ux-managed-widget:hover>.ux-widget-controls{opacity:1}.ux-widget-mini{width:30px;height:28px;padding:0;display:inline-flex;align-items:center;justify-content:center}.ux-widget-grip{cursor:grab}.ux-managed-widget.ux-dragging{opacity:.55!important;outline:3px dashed #2563eb}.ux-managed-widget.ux-drag-over{outline:3px solid #2563eb!important;box-shadow:0 0 0 6px rgba(37,99,235,.16)!important}.ux-highlight-widget{animation:uxPulseWidget 1.8s ease 1}@keyframes uxPulseWidget{0%,100%{box-shadow:var(--shadow)}25%,75%{box-shadow:0 0 0 5px rgba(59,130,246,.25),var(--shadow)}}
+.ux-widget-controls{position:absolute;top:8px;left:10px;display:flex;flex-direction:row;gap:4px;z-index:30;opacity:.08;transition:opacity .18s,box-shadow .18s,background .18s;background:rgba(248,250,252,.78);backdrop-filter:blur(6px);border:1px solid rgba(203,213,225,.72);border-radius:12px;padding:4px;overflow:hidden;direction:ltr}.ux-widget-controls:hover,.ux-managed-widget:hover>.ux-widget-controls{opacity:1;box-shadow:0 8px 22px rgba(15,23,42,.10);background:rgba(255,255,255,.96)}.ux-widget-mini{width:23px;height:23px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;font-size:.64rem;flex:0 0 auto}.ux-widget-grip{cursor:grab;background:#eff6ff!important;color:#1d4ed8!important}.ux-managed-widget.ux-dragging{opacity:.70!important;outline:2px dashed #2563eb}.ux-managed-widget.ux-drag-over{outline:2px solid #2563eb!important;box-shadow:0 0 0 5px rgba(37,99,235,.14)!important}.ux-highlight-widget{animation:uxPulseWidget 1.8s ease 1}@keyframes uxPulseWidget{0%,100%{box-shadow:var(--shadow)}25%,75%{box-shadow:0 0 0 5px rgba(59,130,246,.25),var(--shadow)}}
 body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}body.dark-mode .ux-screen-control-panel strong{color:#f8fafc}body.dark-mode .ux-screen-control-panel small{color:#cbd5e1}body.dark-mode .ux-screen-actions button,body.dark-mode .ux-widget-mini{background:#1e293b;color:#e2e8f0;border-color:#475569}body.dark-mode .ux-widget-controls{background:rgba(15,23,42,.88)}
 @media(max-width:768px){.ux-screen-control-panel{align-items:flex-start}.ux-screen-actions button{font-size:.68rem;padding:6px 8px}.ux-widget-controls{opacity:.9}}
 </style>
@@ -2739,6 +2916,28 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
   document.addEventListener('DOMContentLoaded',()=>obs.observe(document.body,{childList:true,subtree:true}));
 })();
 </script>
+
+
+<style id="t17-final-user-fixes-style">
+/* استرجاع أسلوب التحكم السابق بشكل أنظف: أزرار صغيرة أفقية لا تغطي البيانات */
+.ux-widget-controls{top:8px!important;left:10px!important;right:auto!important;flex-direction:row!important;border-radius:12px!important;opacity:.08!important;transform:none!important;background:rgba(248,250,252,.78)!important}
+.ux-widget-controls:hover,.ux-managed-widget:hover>.ux-widget-controls{opacity:1!important;background:rgba(255,255,255,.96)!important}
+.ux-widget-mini{width:23px!important;height:23px!important;border-radius:8px!important;font-size:.64rem!important}
+/* مصفوفة الأولوية بشكل مصغر واحترافي */
+#phase2PriorityMatrix .priority-layout{display:grid!important;grid-template-columns:minmax(560px,1.25fr) minmax(300px,.75fr)!important;gap:12px!important;align-items:start!important}
+#phase2PriorityMatrix .priority-matrix{grid-template-columns:repeat(5,minmax(86px,1fr))!important;gap:5px!important;min-width:560px!important}
+#phase2PriorityMatrix .priority-cell{min-height:68px!important;max-height:126px!important;border-radius:10px!important;padding:5px!important}
+#phase2PriorityMatrix .priority-cell h4{font-size:.56rem!important;line-height:1.25!important;margin-bottom:4px!important}
+#phase2PriorityMatrix .priority-item{font-size:.58rem!important;padding:4px 5px!important;margin-bottom:3px!important;border-radius:8px!important}
+#phase2PriorityMatrix .priority-item strong{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#phase2PriorityMatrix .priority-item span{font-size:.52rem!important}
+#phase2PriorityMatrix .priority-editor{max-height:440px!important;overflow-y:auto!important;margin-top:0!important;padding:10px!important}
+#phase2PriorityMatrix .priority-edit-row{display:grid!important;grid-template-columns:1fr 66px 66px 52px!important;gap:6px!important;align-items:center!important;background:#f8fafc!important;border:1px solid #e2e8f0!important;border-radius:10px!important;padding:6px!important;margin-bottom:6px!important}
+#phase2PriorityMatrix .priority-edit-title{font-size:.68rem!important;font-weight:900!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#phase2PriorityMatrix .priority-edit-meta{font-size:.55rem!important;color:#64748b!important}
+#phase2PriorityMatrix .priority-editor select{padding:5px 6px!important;font-size:.68rem!important;border-radius:8px!important;min-width:0!important}
+@media(max-width:1000px){#phase2PriorityMatrix .priority-layout{grid-template-columns:1fr!important}}
+</style>
 
 </body>
 </html>
