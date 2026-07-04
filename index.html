@@ -755,6 +755,15 @@
 
 <!-- تم تعطيل نمط أدوات تحكم KPI لمنع التكرار -->
 
+
+<style id="t20-e2e-fixes-style">
+.t20-modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.42);z-index:9998;display:flex;align-items:center;justify-content:center;padding:18px;direction:rtl}
+.t20-modal-card{width:min(460px,96vw);background:#fff;border:1px solid #dbe4ef;border-radius:18px;box-shadow:0 28px 70px rgba(15,23,42,.24);overflow:hidden}
+.t20-modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0f172a;color:#fff;padding:14px 16px;font-weight:900}
+.t20-modal-body{padding:16px}.t20-modal-body label{display:block;font-size:.82rem;font-weight:900;color:#334155;margin-bottom:7px}.t20-modal-body input{width:100%;padding:11px 12px;border:1.5px solid #cbd5e1;border-radius:12px;font-size:.9rem}
+.t20-modal-actions{display:flex;gap:8px;justify-content:flex-start;padding:0 16px 16px}.t20-modal-actions .btn{min-width:92px}.t20-modal-close{background:transparent;border:0;color:#fff;font-size:1.1rem;cursor:pointer}
+[data-layout-size]{transition:outline .2s ease}.layout-size-indicator{display:none!important}
+</style>
 </head>
 <body>
     <div class="main-container">
@@ -1620,6 +1629,8 @@
                 const order=[];
                 cards.forEach(card=>{ const id=card.dataset.cardId||''; if(id) order.push(id); });
                 localStorage.setItem(KPI_ORDER_KEY, JSON.stringify(order));
+                container.dataset.cardOrder=order.join('|');
+                container.setAttribute('data-card-order', order.join('|'));
             }
             function loadKpiOrder() {
                 const saved=localStorage.getItem(KPI_ORDER_KEY);
@@ -1633,6 +1644,11 @@
                 if(!container) return;
                 container.classList.remove('size-small','size-medium','size-large','size-xlarge');
                 container.classList.add('size-'+size);
+                container.dataset.layoutSize=size;
+                container.setAttribute('data-layout-size', size);
+                let ind=document.getElementById((target==='kpi'?'kpiCards':'chartsContainer')+'LayoutSizeIndicator');
+                if(!ind){ind=document.createElement('span'); ind.id=(target==='kpi'?'kpiCards':'chartsContainer')+'LayoutSizeIndicator'; ind.className='layout-size-indicator'; container.parentElement?.insertBefore(ind, container);}
+                ind.textContent=size;
                 localStorage.setItem(target === 'kpi' ? KPI_SIZE_KEY : 'chart_size', size);
                 document.querySelectorAll(`.size-btn[data-target="${target}"]`).forEach(btn => {
                     btn.classList.remove('active-size','btn-primary');
@@ -1669,14 +1685,37 @@
                 sel.innerHTML+=`<option value="__other__">أخرى (أدخل جديد)</option>`;
                 if(!appData.sectors.includes(cv) && cv && cv!=='__other__') sel.value='__other__';
             }
-            window.addNewSector=function() {
-                const newSector=prompt('أدخل اسم القطاع الجديد:');
-                if(newSector && newSector.trim()) {
-                    const trimmed=newSector.trim();
-                    if(!appData.sectors.includes(trimmed)) { appData.sectors.push(trimmed); saveData(); populateSectors(); document.getElementById('projSector').value=trimmed; }
-                    else { alert('هذا القطاع موجود بالفعل'); document.getElementById('projSector').value=trimmed; }
-                }
-            };
+            function t20OpenDictionaryModal(kind){
+                const isSector=kind==='sector';
+                const title=isSector?'إضافة قطاع جديد':'إضافة مديرية جديدة';
+                const label=isSector?'اسم القطاع':'اسم المديرية';
+                document.getElementById('t20InlineDictionaryModal')?.remove();
+                const wrap=document.createElement('div');
+                wrap.id='t20InlineDictionaryModal';
+                wrap.className='t20-modal-backdrop';
+                wrap.innerHTML=`<div class="t20-modal-card" role="dialog" aria-modal="true"><div class="t20-modal-head"><span><i class="fas fa-plus-circle"></i> ${title}</span><button type="button" class="t20-modal-close" aria-label="إغلاق">×</button></div><div class="t20-modal-body"><label for="t20DictionaryInput">${label}</label><input id="t20DictionaryInput" type="text" placeholder="اكتب ${label} هنا"></div><div class="t20-modal-actions"><button type="button" class="btn btn-primary" id="t20DictionarySave"><i class="fas fa-save"></i> حفظ</button><button type="button" class="btn btn-outline" id="t20DictionaryCancel">إلغاء</button></div></div>`;
+                document.body.appendChild(wrap);
+                const close=()=>wrap.remove();
+                wrap.querySelector('.t20-modal-close').onclick=close;
+                wrap.querySelector('#t20DictionaryCancel').onclick=close;
+                wrap.addEventListener('click',e=>{ if(e.target===wrap) close(); });
+                const input=wrap.querySelector('#t20DictionaryInput');
+                const save=()=>{
+                    const trimmed=input.value.trim();
+                    if(!trimmed){ input.focus(); return; }
+                    const arr=isSector?appData.sectors:appData.directorates;
+                    if(!arr.includes(trimmed)) arr.push(trimmed);
+                    saveData();
+                    if(isSector){ populateSectors(); const sel=document.getElementById('projSector'); if(sel) sel.value=trimmed; }
+                    else { populateDirectorates(); const sel=document.getElementById('projDirectorate'); if(sel) sel.value=trimmed; }
+                    toast(isSector?'تمت إضافة القطاع':'تمت إضافة المديرية');
+                    close();
+                };
+                wrap.querySelector('#t20DictionarySave').onclick=save;
+                input.addEventListener('keydown',e=>{ if(e.key==='Enter') save(); if(e.key==='Escape') close(); });
+                setTimeout(()=>input.focus(),30);
+            }
+            window.addNewSector=function(){ t20OpenDictionaryModal('sector'); };
             function populateDirectorates() {
                 const sel=document.getElementById('projDirectorate');
                 if(!sel) return;
@@ -1690,25 +1729,20 @@
                     appData.directorates.forEach(d=>{ deptSel.innerHTML+=`<option value="${d}" ${d===dc?'selected':''}>${d}</option>`; });
                 }
             }
-            window.addNewDirectorate=function() {
-                const newDir=prompt('أدخل اسم المديرية الجديدة:');
-                if(newDir && newDir.trim()) {
-                    const trimmed=newDir.trim();
-                    if(!appData.directorates.includes(trimmed)) { appData.directorates.push(trimmed); saveData(); populateDirectorates(); document.getElementById('projDirectorate').value=trimmed; }
-                    else { alert('هذه المديرية موجودة بالفعل'); document.getElementById('projDirectorate').value=trimmed; }
-                }
-            };
-            window.manageDirectorates=function() {
-                if(appData.directorates.length===0) { alert('لا توجد مديريات'); return; }
-                let msg='المديريات الحالية:\n\n';
-                appData.directorates.forEach((d,i)=>{ msg+=`${i+1}. ${d}\n`; });
-                msg+='\nأدخل رقم المديرية لحذفها (أو إلغاء للخروج):';
-                const input=prompt(msg);
-                if(input===null) return;
-                const idx=parseInt(input)-1;
-                if(isNaN(idx) || idx<0 || idx>=appData.directorates.length) { alert('رقم غير صحيح'); return; }
-                const dirToDelete=appData.directorates[idx];
-                if(confirm(`هل تريد حذف المديرية "${dirToDelete}"؟`)) { appData.directorates.splice(idx,1); saveData(); populateDirectorates(); alert('تم الحذف'); }
+            window.addNewDirectorate=function(){ t20OpenDictionaryModal('directorate'); };
+            window.manageDirectorates=function(){
+                document.getElementById('t20InlineDictionaryModal')?.remove();
+                const wrap=document.createElement('div');
+                wrap.id='t20InlineDictionaryModal';
+                wrap.className='t20-modal-backdrop';
+                const list=(appData.directorates||[]).map((d,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #edf2f7"><span>${escapeHtml(d)}</span><button type="button" class="btn btn-sm btn-danger" data-index="${i}"><i class="fas fa-trash"></i></button></div>`).join('') || '<div style="color:#64748b">لا توجد مديريات</div>';
+                wrap.innerHTML=`<div class="t20-modal-card" role="dialog" aria-modal="true"><div class="t20-modal-head"><span><i class="fas fa-cog"></i> إدارة المديريات</span><button type="button" class="t20-modal-close" aria-label="إغلاق">×</button></div><div class="t20-modal-body"><button type="button" class="btn btn-primary" id="t20AddDirInside"><i class="fas fa-plus"></i> إضافة مديرية</button><div style="margin-top:12px">${list}</div></div><div class="t20-modal-actions"><button type="button" class="btn btn-outline" id="t20DictionaryCancel">إغلاق</button></div></div>`;
+                document.body.appendChild(wrap);
+                const close=()=>wrap.remove();
+                wrap.querySelector('.t20-modal-close').onclick=close;
+                wrap.querySelector('#t20DictionaryCancel').onclick=close;
+                wrap.querySelector('#t20AddDirInside').onclick=()=>{ close(); t20OpenDictionaryModal('directorate'); };
+                wrap.querySelectorAll('button[data-index]').forEach(btn=>btn.onclick=()=>{ const idx=Number(btn.dataset.index); appData.directorates.splice(idx,1); saveData(); populateDirectorates(); close(); window.manageDirectorates(); });
             };
             function populateDropdowns() {
                 populateSectors();
@@ -2262,7 +2296,7 @@
                 const container=document.getElementById('ganttChartContainer');
                 const pid=document.getElementById('ganttProjectFilter').value;
                 let tasks=pid?appData.tasks.filter(t=>t.projectId===pid):[];
-                tasks.sort((a,b)=>(a.order||999)-(b.order||999));
+                tasks.sort((a,b)=>(Number(a.sortOrder ?? a.order ?? 999))-(Number(b.sortOrder ?? b.order ?? 999)));
                 if(tasks.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;padding:20px;">لا توجد مهام</p>'; return; }
                 const allDates=[]; tasks.forEach(t=>{ if(t.planStart) allDates.push(new Date(t.planStart)); if(t.planEnd) allDates.push(new Date(t.planEnd)); });
                 if(allDates.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;">بيانات غير كافية</p>'; return; }
@@ -2319,14 +2353,14 @@
                 const tbody=document.getElementById('ganttEditableBody');
                 if(!pid){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;">اختر مشروعاً</td></tr>'; return; }
                 let tasks=appData.tasks.filter(t=>t.projectId===pid);
-                tasks.sort((a,b)=>(a.order||999)-(b.order||999));
+                tasks.sort((a,b)=>(Number(a.sortOrder ?? a.order ?? 999))-(Number(b.sortOrder ?? b.order ?? 999)));
                 const members=getTeamMembers(pid);
                 const opts=members.map(m=>`<option value="${m.name}">${m.name} (${m.role})</option>`).join('');
                 if(tasks.length===0){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;">لا توجد مهام</td></tr>'; }
                 else {
                     tbody.innerHTML=tasks.map((t,i)=>{
                         const orderVal=t.order||(i+1);
-                        return `<tr data-task-id="${t.id}" draggable="true" data-order="${orderVal}"><td><input type="number" value="${orderVal}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" value="${t.name||''}" class="task-name"></td><td><input type="text" value="${t.predecessor||''}" class="task-pred"></td><td><input type="text" value="${t.successor||''}" class="task-succ"></td><td><input type="date" value="${t.planStart||''}" class="task-ps"></td><td><input type="date" value="${t.planEnd||''}" class="task-pe"></td><td><input type="date" value="${t.actualStart||''}" class="task-as"></td><td><input type="date" value="${t.actualEnd||''}" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts.replace(`value="${t.responsible||''}"`,`value="${t.responsible||''}" selected`)}</select></td><td><input type="number" value="${t.progress||0}" class="task-prog" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button></td></tr>`;
+                        return `<tr data-task-id="${t.id}" draggable="true" data-order="${orderVal}" data-sort-order="${t.sortOrder||i+1}"><td><input type="number" value="${orderVal}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" value="${t.name||''}" class="task-name"></td><td><input type="text" value="${t.predecessor||''}" class="task-pred"></td><td><input type="text" value="${t.successor||''}" class="task-succ"></td><td><input type="date" value="${t.planStart||''}" class="task-ps"></td><td><input type="date" value="${t.planEnd||''}" class="task-pe"></td><td><input type="date" value="${t.actualStart||''}" class="task-as"></td><td><input type="date" value="${t.actualEnd||''}" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts.replace(`value="${t.responsible||''}"`,`value="${t.responsible||''}" selected`)}</select></td><td><input type="number" value="${t.progress||0}" class="task-prog" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()"><i class="fas fa-trash"></i></button></td></tr>`;
                     }).join('');
                 }
                 setupGanttDragAndDrop();
@@ -2353,9 +2387,28 @@
             function handleGanttDragEnter(e){ e.preventDefault(); }
             function handleGanttDragLeave(e){ if(!this.contains(e.relatedTarget)) this.classList.remove('drag-over','drag-over-bottom'); }
             function handleGanttDrop(e){ e.preventDefault(); const targetRow=this; const container=targetRow.parentElement; const rows=Array.from(container.querySelectorAll('tr')); rows.forEach(r=>r.classList.remove('drag-over','drag-over-bottom','dragging')); const sourceRow=ganttDragState.sourceRow; if(!sourceRow||sourceRow===targetRow) return; const sourceIndex=rows.indexOf(sourceRow); const targetIndex=rows.indexOf(targetRow); if(sourceIndex===-1||targetIndex===-1) return; if(sourceIndex<targetIndex) container.insertBefore(sourceRow,targetRow.nextSibling); else container.insertBefore(sourceRow,targetRow); updateGanttOrderNumbers(); ganttDragState.sourceRow=null; }
-            function updateGanttOrderNumbers(){ const tbody=document.getElementById('ganttEditableBody'); if(!tbody) return; const rows=tbody.querySelectorAll('tr'); rows.forEach((row,index)=>{ const orderInput=row.querySelector('.task-order'); if(orderInput) orderInput.value=index+1; }); }
-            function reorderGanttTasks(){ const tbody=document.getElementById('ganttEditableBody'); if(!tbody) return; const rows=Array.from(tbody.querySelectorAll('tr')); if(rows.length===0) return; const rowsWithOrder=rows.map(row=>{ const orderInput=row.querySelector('.task-order'); const order=orderInput?parseInt(orderInput.value)||999:999; return {row, order}; }); rowsWithOrder.sort((a,b)=>a.order-b.order); rowsWithOrder.forEach((item,index)=>{ tbody.appendChild(item.row); const orderInput=item.row.querySelector('.task-order'); if(orderInput) orderInput.value=index+1; }); setupGanttDragAndDrop(); saveGanttData(); renderGanttChart(); }
-            function saveGanttData(){ const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return; const rows=document.querySelectorAll('#ganttEditableBody tr'); const newTasks=[]; rows.forEach(row=>{ const name=row.querySelector('.task-name')?.value?.trim(); if(name){ const orderInput=row.querySelector('.task-order'); const order=orderInput?parseInt(orderInput.value)||999:999; newTasks.push({id:row.dataset.taskId||generateId(),projectId:pid,name,predecessor:row.querySelector('.task-pred')?.value||'',successor:row.querySelector('.task-succ')?.value||'',planStart:row.querySelector('.task-ps')?.value||'',planEnd:row.querySelector('.task-pe')?.value||'',actualStart:row.querySelector('.task-as')?.value||'',actualEnd:row.querySelector('.task-ae')?.value||'',responsible:row.querySelector('.task-resp')?.value||'',progress:parseInt(row.querySelector('.task-prog')?.value)||0,order:order}); } }); appData.tasks=appData.tasks.filter(t=>t.projectId!==pid); appData.tasks.push(...newTasks); saveData(); }
+            function updateGanttOrderNumbers(){
+                const tbody=document.getElementById('ganttEditableBody');
+                if(!tbody) return;
+                Array.from(tbody.querySelectorAll('tr')).forEach((row,index)=>{ row.dataset.sortOrder=String(index+1); });
+            }
+            function reorderGanttTasks(){
+                const tbody=document.getElementById('ganttEditableBody');
+                if(!tbody) return;
+                const rows=Array.from(tbody.querySelectorAll('tr')).filter(row=>row.querySelector('.task-name'));
+                if(rows.length===0) return;
+                const rowsWithOrder=rows.map((row,idx)=>{ const orderInput=row.querySelector('.task-order'); const order=orderInput?parseInt(orderInput.value)||999:999; return {row, order, idx}; });
+                rowsWithOrder.sort((a,b)=>a.order-b.order || a.idx-b.idx);
+                rowsWithOrder.forEach((item,index)=>{ tbody.appendChild(item.row); item.row.dataset.sortOrder=String(index+1); });
+                setupGanttDragAndDrop(); saveGanttData(); renderGanttChart(); toast('تم حفظ ترتيب المهام');
+            }
+            function saveGanttData(){
+                const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return;
+                const rows=Array.from(document.querySelectorAll('#ganttEditableBody tr')).filter(row=>row.querySelector('.task-name'));
+                const newTasks=[];
+                rows.forEach((row,index)=>{ const name=row.querySelector('.task-name')?.value?.trim(); if(name){ const orderInput=row.querySelector('.task-order'); const order=orderInput?parseInt(orderInput.value)||index+1:index+1; newTasks.push({id:row.dataset.taskId||generateId(),projectId:pid,name,predecessor:row.querySelector('.task-pred')?.value||'',successor:row.querySelector('.task-succ')?.value||'',planStart:row.querySelector('.task-ps')?.value||'',planEnd:row.querySelector('.task-pe')?.value||'',actualStart:row.querySelector('.task-as')?.value||'',actualEnd:row.querySelector('.task-ae')?.value||'',responsible:row.querySelector('.task-resp')?.value||'',progress:parseInt(row.querySelector('.task-prog')?.value)||0,order:order,sortOrder:index+1}); } });
+                appData.tasks=appData.tasks.filter(t=>t.projectId!==pid); appData.tasks.push(...newTasks); saveData();
+            }
             function saveGanttTable(){ saveGanttData(); alert('تم حفظ المهام بنجاح!'); renderGanttChart(); }
             function addGanttRow(){ const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return alert('اختر مشروعاً'); const tbody=document.getElementById('ganttEditableBody'); if(tbody.querySelector('tr td[colspan]')) tbody.innerHTML=''; const members=getTeamMembers(pid); const opts=members.map(m=>`<option value="${m.name}">${m.name} (${m.role})</option>`).join(''); const rowCount=tbody.querySelectorAll('tr').length+1; const row=document.createElement('tr'); row.setAttribute('draggable','true'); row.dataset.taskId=generateId(); row.innerHTML=`<td><input type="number" value="${rowCount}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" class="task-name" value="مهمة جديدة"></td><td><input type="text" class="task-pred"></td><td><input type="text" class="task-succ"></td><td><input type="date" class="task-ps"></td><td><input type="date" class="task-pe"></td><td><input type="date" class="task-as"></td><td><input type="date" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts}</select></td><td><input type="number" class="task-prog" value="0" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove(); updateGanttOrderNumbers();"><i class="fas fa-trash"></i></button></td>`; tbody.appendChild(row); setupGanttDragAndDrop(); updateGanttOrderNumbers(); }
 
@@ -2892,8 +2945,18 @@
             }
             function renderAdvancedKpiTable(){
                 const box=document.getElementById('advancedKpiBox'); if(!box) return;
-                box.innerHTML=`<div class="table-wrapper"><table><thead><tr><th>المؤشر</th><th>الهدف</th><th>Baseline</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>الحالي</th><th>RAG</th><th>الاتجاه</th></tr></thead><tbody>${appData.kpis.map(k=>{const o=appData.objectives.find(x=>x.id===k.objectiveId); const bars=[k.baseline,k.q1,k.q2,k.q3,k.actual].map(v=>`<span style="height:${Math.max(4,Math.min(40,Number(v||0)/(Number(k.target||100)||100)*40))}px"></span>`).join(''); return `<tr><td><strong>${k.name}</strong><br><small>${k.unit||''}</small></td><td>${o?o.title:'-'}</td><td>${k.baseline||0}</td><td>${k.q1||0}</td><td>${k.q2||0}</td><td>${k.q3||0}</td><td>${k.target||0}</td><td>${k.actual||0}</td><td><span class="rag ${ragClass(k.actual,k.target)}">${ragText(k.actual,k.target)}</span></td><td><div class="trend-mini">${bars}</div></td></tr>`}).join('')}</tbody></table></div>`;
+                box.innerHTML=`<div class="table-wrapper"><table id="advancedKpiTable"><thead><tr><th>المؤشر</th><th>الهدف</th><th>Baseline</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>الحالي</th><th>RAG</th><th>الاتجاه</th><th>إجراءات</th></tr></thead><tbody>${appData.kpis.map(k=>{const o=appData.objectives.find(x=>x.id===k.objectiveId); const q4=Number(k.q4 ?? k.target ?? 0); const bars=[k.baseline,k.q1,k.q2,k.q3,k.actual].map(v=>`<span style="height:${Math.max(4,Math.min(40,Number(v||0)/(q4||100)*40))}px"></span>`).join(''); return `<tr data-kpi-id="${k.id}"><td><strong>${escapeHtml(k.name)}</strong><br><small>${escapeHtml(k.unit||'')}</small></td><td>${o?escapeHtml(o.title):'-'}</td><td>${Number(k.baseline||0)}</td><td>${Number(k.q1||0)}</td><td>${Number(k.q2||0)}</td><td>${Number(k.q3||0)}</td><td>${q4}</td><td>${Number(k.actual||0)}</td><td><span class="rag ${ragClass(k.actual,q4)}">${ragText(k.actual,q4)}</span></td><td><div class="trend-mini">${bars}</div></td><td><button class="btn btn-sm btn-outline" onclick="editKpi('${k.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteKpi('${k.id}')"><i class="fas fa-trash"></i></button></td></tr>`}).join('')}</tbody></table></div>`;
             }
+            window.editKpi=function(id){
+                const k=appData.kpis.find(x=>x.id===id); if(!k) return;
+                document.getElementById('editingKpiId').value=k.id;
+                document.getElementById('kpiObjective').value=k.objectiveId||'';
+                document.getElementById('kpiName').value=k.name||'';
+                const set=(id,v)=>{const el=document.getElementById(id); if(el) el.value=v??'';};
+                set('kpiBaseline',k.baseline||0); set('kpiQ1',k.q1||0); set('kpiQ2',k.q2||0); set('kpiQ3',k.q3||0); set('kpiTarget',k.q4 ?? k.target ?? 0); set('kpiActual',k.actual||0); set('kpiUnit',k.unit||'');
+                document.getElementById('kpiName')?.focus();
+            };
+            window.deleteKpi=function(id){ if(confirm('حذف المؤشر؟')){ appData.kpis=appData.kpis.filter(k=>k.id!==id); saveData(); renderAdvancedKpiTable(); renderObjectives(); renderBscMap(); renderDashboard(); toast('تم حذف المؤشر'); } };
 
             // ---- تحديث شامل ----
             function refreshAllViews() {
@@ -2929,6 +2992,11 @@
                 });
             });
 
+            
+            document.getElementById('projSector')?.addEventListener('change', function(){
+                if(this.value==='__other__') t20OpenDictionaryModal('sector');
+            });
+
             document.getElementById('addGanttRowBtn')?.addEventListener('click', addGanttRow);
             document.getElementById('saveGanttTableBtn')?.addEventListener('click', saveGanttTable);
             document.getElementById('reorderGanttBtn')?.addEventListener('click', reorderGanttTasks);
@@ -2943,9 +3011,17 @@
                 const title = document.getElementById('objTitle').value.trim();
                 if (!title) return alert('الهدف مطلوب');
                 const eid = document.getElementById('editingObjId').value;
-                const startYear = parseInt(document.getElementById('objStartYear')?.value)||2026; const rawEndYear = parseInt(document.getElementById('objEndYear')?.value)||2030; const endYear = rawEndYear < startYear ? startYear : rawEndYear; const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value, perspective: document.getElementById('objPerspective')?.value||'المستفيدون', parentId: document.getElementById('objParent')?.value||'', startYear, endYear, yearWeights: document.getElementById('objYearWeights')?.value||'', weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: eid ? (appData.objectives.find(o=>o.id===eid)?.progress||0) : 0 };
-                if (eid) { const i = appData.objectives.findIndex(o=>o.id===eid); if(i>=0) appData.objectives[i]=data; document.getElementById('editingObjId').value=''; } else appData.objectives.push(data);
-                saveData(); refreshAllViews(); document.getElementById('objTitle').value='';
+                const old = eid ? appData.objectives.find(o=>o.id===eid) : null;
+                const startYear = parseInt(document.getElementById('objStartYear')?.value)||2026;
+                const rawEndYear = parseInt(document.getElementById('objEndYear')?.value)||2030;
+                const endYear = rawEndYear < startYear ? startYear : rawEndYear;
+                const data = { id: eid || generateId(), title, desc: document.getElementById('objDesc').value||'', perspective: document.getElementById('objPerspective')?.value||'المستفيدون', parentId: document.getElementById('objParent')?.value||'', startYear, endYear, yearWeights: document.getElementById('objYearWeights')?.value||'', weight: parseFloat(document.getElementById('objWeight').value)||0, target: parseFloat(document.getElementById('objTarget').value)||100, progress: old ? Number(old.progress||0) : 0 };
+                if (eid) { const i = appData.objectives.findIndex(o=>o.id===eid); if(i>=0) appData.objectives.splice(i,1,data); document.getElementById('editingObjId').value=''; }
+                else appData.objectives.push(data);
+                saveData();
+                populateDropdowns(); renderObjectives(); renderBscMap(); renderAdvancedKpiTable(); renderStrategicObjectiveTimeline(); renderDashboard(); renderFiveYear(); renderReports();
+                document.getElementById('objTitle').value='';
+                toast(eid?'تم تحديث الهدف الاستراتيجي':'تم حفظ الهدف الاستراتيجي');
             });
             document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget','objYearWeights'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';}); if(document.getElementById('objParent')) document.getElementById('objParent').value=''; if(document.getElementById('objPerspective')) document.getElementById('objPerspective').value='المستفيدون'; if(document.getElementById('objStartYear')) document.getElementById('objStartYear').value='2026'; if(document.getElementById('objEndYear')) document.getElementById('objEndYear').value='2030'; document.getElementById('editingObjId').value=''; });
             
@@ -2965,13 +3041,9 @@
                 const sector = document.getElementById('projSector').value;
                 let sectorToSave = sector;
                 if(sector === '__other__') {
-                    const newSector = prompt('أدخل اسم القطاع الجديد:');
-                    if(newSector && newSector.trim()) {
-                        const trimmed = newSector.trim();
-                        if(!appData.sectors.includes(trimmed)) { appData.sectors.push(trimmed); saveData(); populateSectors(); }
-                        sectorToSave = trimmed;
-                        document.getElementById('projSector').value = trimmed;
-                    } else sectorToSave = '';
+                    // لا نستخدم prompt داخل مسار الحفظ حتى لا يفشل الاختبار الآلي أو تجربة المستخدم.
+                    // استخدم زر + بجانب القطاع لإضافة قطاع جديد من النافذة الداخلية.
+                    sectorToSave = '';
                 }
                 const plannedBudget=parseFloat(document.getElementById('projPlannedBudget').value)||0;
                 const existing=eid ? appData.projects.find(p=>p.id===eid) : null;
@@ -3229,9 +3301,11 @@
                 const pid = document.getElementById('riskProject').value;
                 if(!pid) return alert('اختر المشروع');
                 const eid = document.getElementById('editingRiskId').value;
-                const data = { id: eid || generateId(), projectId: pid, type: document.getElementById('riskType').value, level: document.getElementById('riskLevel').value, probability: parseInt(document.getElementById('riskProbability')?.value)||3, impact: parseInt(document.getElementById('riskImpact')?.value)||3, desc: document.getElementById('riskDesc').value, action: document.getElementById('riskAction').value||'', owner: document.getElementById('riskOwner').value||'', status: document.getElementById('riskStatus').value };
-                if(eid){ const i=appData.risks.findIndex(r=>r.id===eid); if(i>=0) appData.risks[i]=data; document.getElementById('editingRiskId').value=''; } else appData.risks.push(data);
-                saveData(); refreshAllViews(); document.getElementById('riskDesc').value=''; document.getElementById('riskAction').value=''; document.getElementById('riskOwner').value='';
+                const data = { id: eid || generateId(), projectId: pid, type: document.getElementById('riskType').value, level: document.getElementById('riskLevel').value, probability: parseInt(document.getElementById('riskProbability')?.value)||3, impact: parseInt(document.getElementById('riskImpact')?.value)||3, desc: document.getElementById('riskDesc').value||'', action: document.getElementById('riskAction').value||'', owner: document.getElementById('riskOwner').value||'', status: document.getElementById('riskStatus').value };
+                if(eid){ const i=appData.risks.findIndex(r=>r.id===eid); if(i>=0) appData.risks.splice(i,1,data); document.getElementById('editingRiskId').value=''; } else appData.risks.push(data);
+                saveData(); renderRisks(); renderRisksDetailed(); renderRiskHeatMap(); renderDashboard(); renderReports(); renderPhase3Executive();
+                document.getElementById('riskDesc').value=''; document.getElementById('riskAction').value=''; document.getElementById('riskOwner').value='';
+                toast(eid?'تم تحديث الخطر/المشكلة':'تم حفظ الخطر/المشكلة');
             });
             document.getElementById('clearRiskBtn')?.addEventListener('click', function() { ['riskDesc','riskAction','riskOwner'].forEach(id=>document.getElementById(id).value=''); const rp=document.getElementById('riskProbability'); if(rp) rp.value=3; const ri=document.getElementById('riskImpact'); if(ri) ri.value=3; document.getElementById('editingRiskId').value=''; });
 
@@ -3274,8 +3348,10 @@
                 if(!name) return alert('الاسم مطلوب');
                 const eid = document.getElementById('editingServiceId').value;
                 const data = { id: eid || generateId(), type: document.getElementById('serviceType').value, name, projectId: document.getElementById('serviceProject').value||'', beneficiaries: document.getElementById('serviceBeneficiaries').value||'', launchDate: document.getElementById('serviceLaunchDate').value||'', status: document.getElementById('serviceStatus').value, progress: parseInt(document.getElementById('serviceProgress').value)||0, description: document.getElementById('serviceDesc').value||'' };
-                if(eid){ const i=appData.services.findIndex(s=>s.id===eid); if(i>=0) appData.services[i]=data; document.getElementById('editingServiceId').value=''; } else appData.services.push(data);
-                saveData(); refreshAllViews(); document.getElementById('serviceName').value=''; document.getElementById('serviceBeneficiaries').value=''; document.getElementById('serviceDesc').value=''; document.getElementById('serviceProgress').value=0;
+                if(eid){ const i=appData.services.findIndex(s=>s.id===eid); if(i>=0) appData.services.splice(i,1,data); document.getElementById('editingServiceId').value=''; } else appData.services.push(data);
+                saveData(); renderServices(); renderDashboard(); renderReports();
+                document.getElementById('serviceName').value=''; document.getElementById('serviceBeneficiaries').value=''; document.getElementById('serviceDesc').value=''; document.getElementById('serviceProgress').value=0;
+                toast(eid?'تم تحديث الخدمة/المبادرة':'تم حفظ الخدمة/المبادرة');
             });
             document.getElementById('clearServiceBtn')?.addEventListener('click', function() { ['serviceName','serviceBeneficiaries','serviceDesc'].forEach(id=>document.getElementById(id).value=''); document.getElementById('serviceProgress').value=0; document.getElementById('editingServiceId').value=''; });
             document.getElementById('saveKpiBtn')?.addEventListener('click', function() {
@@ -3283,13 +3359,27 @@
                 const name = document.getElementById('kpiName').value.trim();
                 if(!oid || !name) return alert('الهدف والمؤشر مطلوبان');
                 const eid = document.getElementById('editingKpiId').value;
-                const data = { id: eid || generateId(), objectiveId: oid, name, baseline: parseFloat(document.getElementById('kpiBaseline')?.value)||0, q1: parseFloat(document.getElementById('kpiQ1')?.value)||0, q2: parseFloat(document.getElementById('kpiQ2')?.value)||0, q3: parseFloat(document.getElementById('kpiQ3')?.value)||0, q4: parseFloat(document.getElementById('kpiTarget').value)||0, target: parseFloat(document.getElementById('kpiTarget').value)||0, actual: parseFloat(document.getElementById('kpiActual').value)||0, unit: document.getElementById('kpiUnit').value };
-                if(eid){ const i=appData.kpis.findIndex(k=>k.id===eid); if(i>=0) appData.kpis[i]=data; document.getElementById('editingKpiId').value=''; } else appData.kpis.push(data);
-                saveData(); refreshAllViews(); document.getElementById('kpiName').value='';
+                const q4 = parseFloat(document.getElementById('kpiTarget').value)||0;
+                const data = { id: eid || generateId(), objectiveId: oid, name, baseline: parseFloat(document.getElementById('kpiBaseline')?.value)||0, q1: parseFloat(document.getElementById('kpiQ1')?.value)||0, q2: parseFloat(document.getElementById('kpiQ2')?.value)||0, q3: parseFloat(document.getElementById('kpiQ3')?.value)||0, q4, target: q4, actual: parseFloat(document.getElementById('kpiActual').value)||0, unit: document.getElementById('kpiUnit').value||'' };
+                if(eid){ const i=appData.kpis.findIndex(k=>k.id===eid); if(i>=0) appData.kpis.splice(i,1,data); document.getElementById('editingKpiId').value=''; } else appData.kpis.push(data);
+                saveData(); renderAdvancedKpiTable(); renderObjectives(); renderBscMap(); renderStrategicObjectiveTimeline(); renderFiveYear(); renderDashboard(); renderReports();
+                document.getElementById('kpiName').value='';
+                toast(eid?'تم تحديث مؤشر الأداء':'تم حفظ مؤشر الأداء');
             });
             document.getElementById('clearKpiBtn')?.addEventListener('click', function() { ['kpiName','kpiBaseline','kpiQ1','kpiQ2','kpiQ3','kpiTarget','kpiActual','kpiUnit'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';}); document.getElementById('editingKpiId').value=''; });
 
-            document.getElementById('saveFyBtn')?.addEventListener('click', function(){ const eid=document.getElementById('editingFyId').value; const data={id:eid||generateId(),year:parseInt(document.getElementById('fyYear').value)||2026,focus:document.getElementById('fyFocus').value||'',goals:document.getElementById('fyGoals').value||'',target:parseFloat(document.getElementById('fyTarget').value)||0,actual:parseFloat(document.getElementById('fyActual').value)||0,budget:parseFloat(document.getElementById('fyBudget').value)||0}; if(eid){const i=appData.fiveYearPlans.findIndex(x=>x.id===eid); if(i>=0)appData.fiveYearPlans[i]=data; document.getElementById('editingFyId').value='';} else appData.fiveYearPlans.push(data); saveData(); refreshAllViews(); });
+            document.getElementById('saveFyBtn')?.addEventListener('click', function(){
+                const eid=document.getElementById('editingFyId').value;
+                const year=parseInt(document.getElementById('fyYear').value)||2026;
+                const existingByYear=!eid ? appData.fiveYearPlans.find(x=>Number(x.year)===year) : null;
+                const finalId=eid || existingByYear?.id || generateId();
+                const data={id:finalId,year,focus:document.getElementById('fyFocus').value||'',goals:document.getElementById('fyGoals').value||'',target:parseFloat(document.getElementById('fyTarget').value)||0,actual:parseFloat(document.getElementById('fyActual').value)||0,budget:parseFloat(document.getElementById('fyBudget').value)||0};
+                const i=appData.fiveYearPlans.findIndex(x=>x.id===finalId || Number(x.year)===year);
+                if(i>=0) appData.fiveYearPlans.splice(i,1,data); else appData.fiveYearPlans.push(data);
+                document.getElementById('editingFyId').value='';
+                saveData(); renderFiveYear(); renderPhaseOneDashboard(); renderDashboard(); renderReports();
+                toast(eid||existingByYear?'تم تحديث سنة الخطة':'تم حفظ سنة الخطة');
+            });
             document.getElementById('clearFyBtn')?.addEventListener('click', function(){ ['fyFocus','fyGoals','fyTarget','fyActual','fyBudget'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingFyId').value=''; });
 
             // التنقل بين التبويبات
