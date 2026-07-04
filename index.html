@@ -750,6 +750,12 @@
         @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:1fr;position:relative;top:auto}.t20-sync-chip{min-width:0}.t20-smart-actions{justify-content:flex-start;flex-wrap:wrap}.tabs-nav{position:relative;top:auto}.tab-btn{font-size:.7rem!important;padding:6px 9px!important}}
         @media(max-width:700px){.header h1{font-size:1rem!important}.t20-smart-search .phase3-search-wrap{flex-wrap:wrap}.t20-smart-search .phase3-search{flex:1 0 100%}.t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{flex:1}.t20-sync-chip{width:100%;justify-content:flex-start}.t20-more-content{left:auto;right:0;width:220px}}
 
+
+        /* ===== T20 Ver.4 Portfolio Gantt View ===== */
+        .gantt-project-row .task-bar{transition:filter .18s ease, transform .18s ease}
+        .gantt-project-row:hover .task-bar{filter:saturate(1.15);transform:translateY(-1px)}
+        .gantt-project-row:hover .task-bar-container{background:#eaf1fb!important}
+
 </style>
 
 
@@ -1761,6 +1767,7 @@
                     if(id==='reportProjectFilter') sel.innerHTML='<option value="all">جميع المشاريع</option>';
                     else if(id==='serviceProject') sel.innerHTML='<option value="">-- غير مرتبط --</option>';
                     else sel.innerHTML='<option value="">-- اختر --</option>';
+                    if(id==='ganttProjectFilter') sel.innerHTML += `<option value="__all__" ${cv==='__all__'?'selected':''}>كل المشاريع</option>`;
                     appData.projects.forEach(p=>{ sel.innerHTML+=`<option value="${p.id}" ${p.id===cv?'selected':''}>${p.name}</option>`; });
                 });
                 const deptSel=document.getElementById('department');
@@ -2292,17 +2299,11 @@
             function updateZoomDisplay(){ const display=document.getElementById('zoomLevelDisplay'); if(display) display.textContent=getZoomLabel(); localStorage.setItem('gantt_zoom_level',ganttZoomLevel.toString()); }
             function zoomIn(){ const idx=ZOOM_OFFSETS.indexOf(ganttZoomLevel); if(idx>0) ganttZoomLevel=ZOOM_OFFSETS[idx-1]; else if(idx===-1) ganttZoomLevel=ZOOM_OFFSETS[0]; else ganttZoomLevel=Math.min(ganttZoomLevel+1,1); if(ganttZoomLevel>1) ganttZoomLevel=1; if(ganttZoomLevel<-2) ganttZoomLevel=-2; updateZoomDisplay(); renderGanttChart(); }
             function zoomOut(){ const idx=ZOOM_OFFSETS.indexOf(ganttZoomLevel); if(idx!==-1 && idx<ZOOM_OFFSETS.length-1) ganttZoomLevel=ZOOM_OFFSETS[idx+1]; else if(idx===-1) ganttZoomLevel=ZOOM_OFFSETS[ZOOM_OFFSETS.length-1]; else ganttZoomLevel=Math.max(ganttZoomLevel-1,-2); if(ganttZoomLevel>1) ganttZoomLevel=1; if(ganttZoomLevel<-2) ganttZoomLevel=-2; updateZoomDisplay(); renderGanttChart(); }
-            function renderGanttChart() {
-                const container=document.getElementById('ganttChartContainer');
-                const pid=document.getElementById('ganttProjectFilter').value;
-                let tasks=pid?appData.tasks.filter(t=>t.projectId===pid):[];
-                tasks.sort((a,b)=>(Number(a.sortOrder ?? a.order ?? 999))-(Number(b.sortOrder ?? b.order ?? 999)));
-                if(tasks.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;padding:20px;">لا توجد مهام</p>'; return; }
-                const allDates=[]; tasks.forEach(t=>{ if(t.planStart) allDates.push(new Date(t.planStart)); if(t.planEnd) allDates.push(new Date(t.planEnd)); });
-                if(allDates.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;">بيانات غير كافية</p>'; return; }
-                let minDate=new Date(Math.min(...allDates)), maxDate=new Date(Math.max(...allDates));
-                const zoomFactor=Math.pow(2,Math.abs(ganttZoomLevel)+1); const paddingDays=Math.max(10,20*zoomFactor);
-                minDate.setDate(minDate.getDate()-paddingDays); maxDate.setDate(maxDate.getDate()+paddingDays);
+            function t20GanttColor(index){
+                const colors=['#2563eb','#10b981','#f59e0b','#8b5cf6','#ef4444','#14b8a6','#ec4899','#0ea5e9','#84cc16','#f97316','#6366f1','#64748b'];
+                return colors[Math.abs(index)%colors.length];
+            }
+            function t20BuildGanttHeader(minDate,maxDate,labelText){
                 const totalDays=Math.max(1,(maxDate-minDate)/86400000);
                 let displayUnit='month'; if(ganttZoomLevel<=-2) displayUnit='day'; else if(ganttZoomLevel===-1) displayUnit='week'; else if(ganttZoomLevel===0) displayUnit='month'; else if(ganttZoomLevel>=1) displayUnit='year';
                 let headerHTML='<div class="gantt-timeline" style="display:flex;align-items:stretch;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-bottom:8px;direction:rtl;">';
@@ -2361,24 +2362,79 @@
                         currentDate=nextDate; count++;
                     }
                 }
-                headerHTML+=`<div class="task-label" style="width:170px;min-width:170px;margin-left:10px;font-weight:800;color:#64748b;font-size:.72rem;display:flex;align-items:end;justify-content:flex-start;padding-bottom:3px;">المهمة</div><div style="flex:1;margin:0 10px;direction:ltr;overflow:hidden;"><div class="gantt-year-row" style="display:flex;border-radius:10px 10px 0 0;overflow:hidden;">${yearHTML}</div><div class="gantt-month-row" style="display:flex;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 10px 10px;overflow:hidden;">${unitHTML}</div></div></div>`;
+                headerHTML+=`<div class="task-label" style="width:190px;min-width:190px;margin-left:10px;font-weight:800;color:#64748b;font-size:.72rem;display:flex;align-items:end;justify-content:flex-start;padding-bottom:3px;">${labelText||'المهمة'}</div><div style="flex:1;margin:0 10px;direction:ltr;overflow:hidden;"><div class="gantt-year-row" style="display:flex;border-radius:10px 10px 0 0;overflow:hidden;">${yearHTML}</div><div class="gantt-month-row" style="display:flex;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 10px 10px;overflow:hidden;">${unitHTML}</div></div></div>`;
+                return {headerHTML,totalDays};
+            }
+            function renderGanttChart() {
+                const container=document.getElementById('ganttChartContainer');
+                const pid=document.getElementById('ganttProjectFilter').value;
+                if(!container) return;
+
+                if(pid==='__all__'){
+                    const projects=(appData.projects||[]).filter(p=>p.start && p.end);
+                    if(projects.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;padding:20px;">لا توجد مشاريع تحتوي على تاريخ بداية ونهاية</p>'; return; }
+                    const allDates=[]; projects.forEach(p=>{ allDates.push(new Date(p.start)); allDates.push(new Date(p.end)); });
+                    let minDate=new Date(Math.min(...allDates)), maxDate=new Date(Math.max(...allDates));
+                    const zoomFactor=Math.pow(2,Math.abs(ganttZoomLevel)+1); const paddingDays=Math.max(10,20*zoomFactor);
+                    minDate.setDate(minDate.getDate()-paddingDays); maxDate.setDate(maxDate.getDate()+paddingDays);
+                    const built=t20BuildGanttHeader(minDate,maxDate,'المشروع');
+                    const totalDays=built.totalDays;
+                    let rowsHTML='';
+                    projects.sort((a,b)=>new Date(a.start)-new Date(b.start)).forEach((p,index)=>{
+                        const s=new Date(p.start), e=new Date(p.end);
+                        const leftPercent=Math.max(0,(s-minDate)/86400000/totalDays*100);
+                        const widthPercent=Math.max(1.8,(e-s)/86400000/totalDays*100);
+                        const color=t20GanttColor(index);
+                        const prog=Number(p.progress||0);
+                        const status=p.status||'';
+                        rowsHTML+=`<div class="gantt-row gantt-project-row" data-project-id="${p.id}" style="display:flex;align-items:center;margin:6px 0;font-size:0.8rem;">
+                            <div class="task-label" title="${escapeHtml(p.name)}" style="width:190px;min-width:190px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#0f172a;display:flex;align-items:center;gap:7px;"><span style="width:10px;height:10px;border-radius:999px;background:${color};display:inline-block;flex-shrink:0;"></span>${escapeHtml(p.name)}</div>
+                            <div class="task-bar-container" style="flex:1;height:30px;background:#f1f5f9;border-radius:8px;position:relative;margin:0 10px;min-height:30px;direction:ltr;overflow:hidden;">
+                                <div class="task-bar" title="${escapeHtml(p.name)} | ${p.start} - ${p.end}" style="position:absolute;height:24px;top:3px;border-radius:7px;background:${color};left:${leftPercent}%;width:${Math.max(widthPercent,1.8)}%;box-shadow:0 5px 14px rgba(15,23,42,.15);"></div>
+                                <span class="task-progress-label" style="position:absolute;left:${Math.min(92,leftPercent+Math.max(widthPercent,1.8)/2)}%;top:50%;transform:translate(-50%,-50%);font-size:0.68rem;font-weight:900;color:#111827;z-index:2;pointer-events:none;text-shadow:0 0 5px rgba(255,255,255,.95);white-space:nowrap;">${prog}% - ${status}</span>
+                            </div>
+                        </div>`;
+                    });
+                    container.innerHTML='<div style="font-size:.8rem;color:#475569;font-weight:800;margin-bottom:10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:8px 10px;"><i class="fas fa-layer-group"></i> عرض كل المشاريع: كل مشروع يظهر في صف واحد من تاريخ البداية إلى تاريخ النهاية وبلون مختلف.</div>'+built.headerHTML+rowsHTML;
+                    return;
+                }
+
+                let tasks=pid?appData.tasks.filter(t=>t.projectId===pid):[];
+                tasks.sort((a,b)=>(Number(a.sortOrder ?? a.order ?? 999))-(Number(b.sortOrder ?? b.order ?? 999)));
+                if(tasks.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;padding:20px;">لا توجد مهام</p>'; return; }
+                const allDates=[]; tasks.forEach(t=>{ if(t.planStart) allDates.push(new Date(t.planStart)); if(t.planEnd) allDates.push(new Date(t.planEnd)); });
+                if(allDates.length===0){ container.innerHTML='<p style="text-align:center;color:#64748b;">بيانات غير كافية</p>'; return; }
+                let minDate=new Date(Math.min(...allDates)), maxDate=new Date(Math.max(...allDates));
+                const zoomFactor=Math.pow(2,Math.abs(ganttZoomLevel)+1); const paddingDays=Math.max(10,20*zoomFactor);
+                minDate.setDate(minDate.getDate()-paddingDays); maxDate.setDate(maxDate.getDate()+paddingDays);
+                const built=t20BuildGanttHeader(minDate,maxDate,'المهمة');
+                const totalDays=built.totalDays;
                 let rowsHTML='';
-                tasks.forEach(t=>{
+                tasks.forEach((t,index)=>{
                     const s=t.planStart?new Date(t.planStart):minDate;
                     const e=t.planEnd?new Date(t.planEnd):s;
                     const leftPercent=Math.max(0,(s-minDate)/86400000/totalDays*100);
                     const widthPercent=Math.max(1.5,(e-s)/86400000/totalDays*100);
-                    const color=t.progress>=100?'#16a34a':'#3b82f6';
+                    const color=t.progress>=100?'#16a34a':t20GanttColor(index);
                     const progText=t.progress?t.progress+'%':'';
-                    rowsHTML+=`<div class="gantt-row" style="display:flex;align-items:center;margin:4px 0;font-size:0.8rem;"><div class="task-label" style="width:170px;min-width:170px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${t.name}</div><div class="task-bar-container" style="flex:1;height:26px;background:#f1f5f9;border-radius:6px;position:relative;margin:0 10px;min-height:26px;direction:ltr;"><div class="task-bar" style="position:absolute;height:22px;top:2px;border-radius:5px;background:${color};left:${leftPercent}%;width:${Math.max(widthPercent,1.5)}%;"></div><span class="task-progress-label" style="position:absolute;right:${Math.max(2,100-leftPercent-widthPercent+4)}%;top:50%;transform:translateY(-50%);font-size:0.7rem;font-weight:700;color:#000000;z-index:2;pointer-events:none;text-shadow:0 0 4px rgba(255,255,255,0.9);">${progText}</span></div></div>`;
+                    rowsHTML+=`<div class="gantt-row" style="display:flex;align-items:center;margin:4px 0;font-size:0.8rem;"><div class="task-label" style="width:190px;min-width:190px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(t.name)}</div><div class="task-bar-container" style="flex:1;height:26px;background:#f1f5f9;border-radius:6px;position:relative;margin:0 10px;min-height:26px;direction:ltr;"><div class="task-bar" style="position:absolute;height:22px;top:2px;border-radius:5px;background:${color};left:${leftPercent}%;width:${Math.max(widthPercent,1.5)}%;"></div><span class="task-progress-label" style="position:absolute;right:${Math.max(2,100-leftPercent-widthPercent+4)}%;top:50%;transform:translateY(-50%);font-size:0.7rem;font-weight:700;color:#000000;z-index:2;pointer-events:none;text-shadow:0 0 4px rgba(255,255,255,0.9);">${progText}</span></div></div>`;
                 });
-                container.innerHTML=headerHTML+rowsHTML;
+                container.innerHTML=built.headerHTML+rowsHTML;
             }
 
             function renderGanttEditableTable() {
                 const pid=document.getElementById('ganttProjectFilter').value;
                 const tbody=document.getElementById('ganttEditableBody');
-                if(!pid){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;">اختر مشروعاً</td></tr>'; return; }
+                if(!pid){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;">اختر مشروعاً أو اختر كل المشاريع لعرض مخطط المحفظة</td></tr>'; renderGanttChart(); return; }
+                if(pid==='__all__'){
+                    const projects=(appData.projects||[]).slice().sort((a,b)=>new Date(a.start||0)-new Date(b.start||0));
+                    if(projects.length===0){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;">لا توجد مشاريع</td></tr>'; }
+                    else{
+                        tbody.innerHTML=projects.map((p,i)=>`<tr data-project-id="${p.id}"><td>${i+1}</td><td><strong>${escapeHtml(p.name)}</strong></td><td colspan="2">${escapeHtml(p.sector||'')}</td><td>${p.start||''}</td><td>${p.end||''}</td><td colspan="2">${escapeHtml(p.status||'')}</td><td>${escapeHtml(projectManagerName(p)||'')}</td><td>${Number(p.progress||0)}%</td><td><button class="btn btn-sm btn-outline" onclick="document.getElementById('ganttProjectFilter').value='${p.id}'; renderGanttEditableTable();"><i class="fas fa-edit"></i></button></td></tr>`).join('');
+                    }
+                    renderGanttChart();
+                    return;
+                }
                 let tasks=appData.tasks.filter(t=>t.projectId===pid);
                 tasks.sort((a,b)=>(Number(a.sortOrder ?? a.order ?? 999))-(Number(b.sortOrder ?? b.order ?? 999)));
                 const members=getTeamMembers(pid);
@@ -2430,14 +2486,14 @@
                 setupGanttDragAndDrop(); saveGanttData(); renderGanttChart(); toast('تم حفظ ترتيب المهام');
             }
             function saveGanttData(){
-                const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return;
+                const pid=document.getElementById('ganttProjectFilter').value; if(!pid || pid==='__all__') return;
                 const rows=Array.from(document.querySelectorAll('#ganttEditableBody tr')).filter(row=>row.querySelector('.task-name'));
                 const newTasks=[];
                 rows.forEach((row,index)=>{ const name=row.querySelector('.task-name')?.value?.trim(); if(name){ const orderInput=row.querySelector('.task-order'); const order=orderInput?parseInt(orderInput.value)||index+1:index+1; newTasks.push({id:row.dataset.taskId||generateId(),projectId:pid,name,predecessor:row.querySelector('.task-pred')?.value||'',successor:row.querySelector('.task-succ')?.value||'',planStart:row.querySelector('.task-ps')?.value||'',planEnd:row.querySelector('.task-pe')?.value||'',actualStart:row.querySelector('.task-as')?.value||'',actualEnd:row.querySelector('.task-ae')?.value||'',responsible:row.querySelector('.task-resp')?.value||'',progress:parseInt(row.querySelector('.task-prog')?.value)||0,order:order,sortOrder:index+1}); } });
                 appData.tasks=appData.tasks.filter(t=>t.projectId!==pid); appData.tasks.push(...newTasks); saveData();
             }
             function saveGanttTable(){ saveGanttData(); alert('تم حفظ المهام بنجاح!'); renderGanttChart(); }
-            function addGanttRow(){ const pid=document.getElementById('ganttProjectFilter').value; if(!pid) return alert('اختر مشروعاً'); const tbody=document.getElementById('ganttEditableBody'); if(tbody.querySelector('tr td[colspan]')) tbody.innerHTML=''; const members=getTeamMembers(pid); const opts=members.map(m=>`<option value="${m.name}">${m.name} (${m.role})</option>`).join(''); const rowCount=tbody.querySelectorAll('tr').length+1; const row=document.createElement('tr'); row.setAttribute('draggable','true'); row.dataset.taskId=generateId(); row.innerHTML=`<td><input type="number" value="${rowCount}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" class="task-name" value="مهمة جديدة"></td><td><input type="text" class="task-pred"></td><td><input type="text" class="task-succ"></td><td><input type="date" class="task-ps"></td><td><input type="date" class="task-pe"></td><td><input type="date" class="task-as"></td><td><input type="date" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts}</select></td><td><input type="number" class="task-prog" value="0" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove(); updateGanttOrderNumbers();"><i class="fas fa-trash"></i></button></td>`; tbody.appendChild(row); setupGanttDragAndDrop(); updateGanttOrderNumbers(); }
+            function addGanttRow(){ const pid=document.getElementById('ganttProjectFilter').value; if(!pid || pid==='__all__') return alert('اختر مشروعاً محدداً لإضافة مهمة'); const tbody=document.getElementById('ganttEditableBody'); if(tbody.querySelector('tr td[colspan]')) tbody.innerHTML=''; const members=getTeamMembers(pid); const opts=members.map(m=>`<option value="${m.name}">${m.name} (${m.role})</option>`).join(''); const rowCount=tbody.querySelectorAll('tr').length+1; const row=document.createElement('tr'); row.setAttribute('draggable','true'); row.dataset.taskId=generateId(); row.innerHTML=`<td><input type="number" value="${rowCount}" class="task-order" style="width:45px;text-align:center;" min="1"></td><td><input type="text" class="task-name" value="مهمة جديدة"></td><td><input type="text" class="task-pred"></td><td><input type="text" class="task-succ"></td><td><input type="date" class="task-ps"></td><td><input type="date" class="task-pe"></td><td><input type="date" class="task-as"></td><td><input type="date" class="task-ae"></td><td><select class="task-resp"><option value="">-- اختر --</option>${opts}</select></td><td><input type="number" class="task-prog" value="0" style="width:60px;">%</td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove(); updateGanttOrderNumbers();"><i class="fas fa-trash"></i></button></td>`; tbody.appendChild(row); setupGanttDragAndDrop(); updateGanttOrderNumbers(); }
 
             // ---- دوال المرحلة الثالثة: التقارير التنفيذية والبحث والتنبيهات والواجهة ----
             function phase3Money(v){ return (Number(v||0)).toLocaleString('ar-OM'); }
