@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات</title>
+    <title>نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات - الإصدار 20T</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -68,6 +68,28 @@
         .header .subtitle {
             color: #94a3b8;
             font-size: 0.85rem;
+        }
+
+        .program-version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-right: 12px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.18);
+            color: #dbeafe;
+            border: 1px solid rgba(147, 197, 253, 0.35);
+            font-size: 0.78rem;
+            font-weight: 800;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .program-version-badge::before {
+            content: "الإصدار";
+            font-size: 0.68rem;
+            color: #bfdbfe;
+            font-weight: 700;
         }
 
         .tabs-nav {
@@ -518,7 +540,7 @@
         .phase3-search-wrap{position:relative;display:flex;gap:8px;align-items:center}.phase3-search-wrap i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#64748b}.phase3-search{width:100%;padding:12px 40px 12px 12px;border-radius:14px;border:1.5px solid #dbe4ef;background:#fff;font-weight:700}.phase3-search-btn{white-space:nowrap;border:none;background:#2563eb;color:white;border-radius:14px;padding:0 18px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:7px;min-height:45px}.phase3-search-btn:hover{background:#1d4ed8}
         .phase3-tool-btn{border:none;border-radius:14px;padding:12px 15px;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center;background:#fff;color:#0f172a;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
         .phase3-tool-btn.primary{background:#0f172a;color:#fff}.phase3-tool-btn.warn{background:#fff7ed;color:#9a3412}.phase3-tool-btn.dark{background:#1e293b;color:#fff}
-        .phase3-search-panel{display:none;position:absolute;z-index:80;left:16px;right:16px;top:150px;background:#fff;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 22px 55px rgba(15,23,42,.2);padding:14px;max-height:420px;overflow:auto}.phase3-search-panel.show{display:block}
+        .phase3-search-panel{display:none;position:relative;z-index:20;left:auto;right:auto;top:auto;margin:-6px 0 16px 0;background:#fff;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 14px 35px rgba(15,23,42,.14);padding:14px;max-height:420px;overflow:auto;clear:both}.phase3-search-panel.show{display:block}
         .phase3-result{padding:10px;border-radius:12px;border:1px solid #eef2f7;margin-bottom:8px;cursor:pointer}.phase3-result:hover{background:#f8fafc}.phase3-result strong{display:block;color:#0f172a}.phase3-result span{font-size:.75rem;color:#64748b}
         .phase3-drawer{position:fixed;top:0;bottom:0;left:-420px;width:390px;max-width:94vw;background:#fff;z-index:100;border-right:1px solid #e2e8f0;box-shadow:0 20px 60px rgba(15,23,42,.28);transition:.25s;padding:18px;overflow:auto}.phase3-drawer.show{left:0}body.dark-mode .phase3-drawer{background:#111827;color:#e5e7eb;border-color:#263244}
         .phase3-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid #e2e8f0;padding-bottom:12px}.phase3-close{border:none;background:#fee2e2;color:#991b1b;border-radius:10px;padding:7px 10px;cursor:pointer}
@@ -549,8 +571,72 @@
         @keyframes uxPulse{0%{box-shadow:0 0 0 0 rgba(37,99,235,.45)}70%{box-shadow:0 0 0 14px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}
         body.dark-mode .ux-kpi-reset-btn{background:#172033;color:#e5e7eb;border-color:#334155}
 
+
+
+        /* ===== T18 Search Reset Button Consistency Fix ===== */
+        .phase3-search-wrap > i.fa-search{
+            position:absolute;
+            right:13px;
+            top:50%;
+            transform:translateY(-50%);
+            color:#64748b;
+            z-index:2;
+            pointer-events:none;
+        }
+        .phase3-search-wrap button i{
+            position:static !important;
+            right:auto !important;
+            top:auto !important;
+            transform:none !important;
+            color:inherit !important;
+            pointer-events:auto !important;
+            font-size:.9rem;
+            line-height:1;
+        }
+        .phase3-search-reset-btn{
+            white-space:nowrap;
+            border:1.5px solid #2563eb;
+            background:#ffffff;
+            color:#2563eb;
+            border-radius:14px;
+            padding:0 18px;
+            font-weight:900;
+            cursor:pointer;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            min-height:45px;
+            height:45px;
+            line-height:1;
+            box-shadow:none;
+            font-family:inherit;
+            transition:all .2s ease;
+        }
+        .phase3-search-reset-btn:hover{
+            background:#2563eb;
+            color:#ffffff;
+            border-color:#2563eb;
+        }
+        .phase3-search-btn{
+            height:45px;
+            justify-content:center;
+            line-height:1;
+            font-family:inherit;
+        }
+        body.dark-mode .phase3-search-reset-btn{
+            background:#111827;
+            color:#93c5fd;
+            border-color:#3b82f6;
+        }
+        body.dark-mode .phase3-search-reset-btn:hover{
+            background:#2563eb;
+            color:#fff;
+            border-color:#2563eb;
+        }
+
         .phase3-print-note{display:none}@media print{.phase3-top-tools,.tabs-nav,.btn-group,.phase3-actions,.phase3-tool-btn,.phase3-search-panel,.phase3-drawer{display:none!important}.tab-content{display:block!important}.phase3-print-note{display:block}.card,.chart-box{box-shadow:none!important}}
-        @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{top:210px}}
+        @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{margin-top:0}}
 
 
         /* ===== T18 RTL Card Header Alignment Fix ===== */
@@ -588,7 +674,68 @@
             margin-left:0 !important;
         }
 
-    </style>
+    
+        /* ===== T18 Projects Form Layout Fix: prevent field/button overlap ===== */
+        .form-grid > .form-group{
+            min-width:0 !important;
+            overflow:visible !important;
+        }
+        .form-grid input,
+        .form-grid select,
+        .form-grid textarea{
+            width:100% !important;
+            max-width:100% !important;
+            min-width:0 !important;
+        }
+        .select-with-add{
+            width:100% !important;
+            display:flex !important;
+            align-items:stretch !important;
+            gap:6px !important;
+            min-width:0 !important;
+            overflow:visible !important;
+        }
+        .select-with-add select{
+            flex:1 1 auto !important;
+            min-width:0 !important;
+            width:auto !important;
+        }
+        .select-with-add .btn{
+            flex:0 0 40px !important;
+            width:40px !important;
+            min-width:40px !important;
+            height:42px !important;
+            padding:0 !important;
+            display:inline-flex !important;
+            align-items:center !important;
+            justify-content:center !important;
+            margin:0 !important;
+            white-space:nowrap !important;
+        }
+        #tab-projects .form-grid{
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) !important;
+            align-items:start !important;
+        }
+        #tab-projects .form-group{
+            position:relative !important;
+            z-index:1 !important;
+        }
+        #tab-projects .form-group:has(#projDirectorate){
+            grid-column:auto !important;
+        }
+        #tab-projects .form-group:has(#projManager){
+            grid-column:auto !important;
+        }
+        @media(max-width:640px){
+            #tab-projects .form-grid{grid-template-columns:1fr !important;}
+            .select-with-add .btn{
+                flex-basis:38px !important;
+                width:38px !important;
+                min-width:38px !important;
+            }
+        }
+
+</style>
 
 
 <!-- تم تعطيل نمط أدوات تحكم KPI لمنع التكرار -->
@@ -599,7 +746,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات</h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span id="programVersionBadge" class="program-version-badge">20T</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -623,6 +770,7 @@
                 <i class="fas fa-search"></i>
                 <input id="globalSearchInput" class="phase3-search" type="text" placeholder="بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة..." oninput="phase3GlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){phase3SearchButton(event)}">
                 <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)"><i class="fas fa-magnifying-glass"></i> بحث</button>
+                <button type="button" class="phase3-search-reset-btn" onclick="resetGlobalSearch()"><i class="fas fa-rotate-left"></i> إعادة تعيين</button>
             </div>
             <button class="phase3-tool-btn warn" onclick="toggleNotifications()"><i class="fas fa-bell"></i> مركز التنبيهات <span id="phase3AlertCount" class="badge badge-danger">0</span></button>
             <button class="phase3-tool-btn dark" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> سمة داكنة</button>
@@ -639,15 +787,7 @@
             <div class="card">
                 <div class="card-header">
                     <span><i class="fas fa-grip-vertical"></i> مربعات المؤشرات - اسحب لتغيير الترتيب</span>
-                    <div class="size-controls">
-                        <span class="size-label">حجم البطاقات:</span>
-                        <button class="btn btn-sm btn-outline size-btn" data-size="small" data-target="kpi">صغير</button>
-                        <button class="btn btn-sm btn-primary size-btn active-size" data-size="medium" data-target="kpi">متوسط</button>
-                        <button class="btn btn-sm btn-outline size-btn" data-size="large" data-target="kpi">كبير</button>
-                        <button class="btn btn-sm btn-outline size-btn" data-size="xlarge" data-target="kpi">ضخم</button>
-                        <button type="button" class="ux-kpi-reset-btn" onclick="resetKpiSize()"><i class="fas fa-compress-arrows-alt"></i> الحجم الافتراضي</button>
-                        <button type="button" class="ux-kpi-reset-btn" onclick="resetKpiLayout()"><i class="fas fa-rotate-left"></i> الترتيب الافتراضي</button>
-                    </div>
+                    
                 </div>
                 <div class="kpi-row size-medium" id="kpiCards"></div>
             </div>
@@ -857,38 +997,43 @@
                         </div>
                     </div>
                     <div class="form-group"><label>الهدف الاستراتيجي</label><select id="projObjective"></select></div>
+                    <div class="form-group">
+                        <label>المديرية</label>
+                        <div class="select-with-add">
+                            <select id="projDirectorate"></select>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="addNewDirectorate()" title="إضافة مديرية"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="manageDirectorates()" title="إدارة المديريات"><i class="fas fa-cog"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>مدير المشروع</label><input type="text" id="projManager" placeholder="اسم مدير المشروع المكلف"></div>
                     <div class="form-group"><label>الحالة</label><select id="projStatus"><option value="قيد التخطيط">قيد التخطيط</option><option value="نشط">نشط</option><option value="مكتمل">مكتمل</option><option value="معلق">معلق</option></select></div>
                     <div class="form-group"><label>تاريخ البدء</label><input type="date" id="projStart"></div>
                     <div class="form-group"><label>تاريخ الانتهاء</label><input type="date" id="projEnd"></div>
                     <div class="form-group"><label>الميزانية المخططة للمشروع</label><input type="number" id="projPlannedBudget" step="0.01" placeholder="القيمة المعتمدة في الخطة"></div>
-                    <div class="form-group"><label>التكلفة المخصصة / المعتمدة</label><input type="number" id="projAllocatedBudget" step="0.01" placeholder="القيمة المخصصة للتنفيذ"></div>
-                    <div class="form-group"><label>المنفق من التكلفة حتى الآن</label><input type="number" id="projActualCost" step="0.01" placeholder="Actual Cost"></div>
+                    <div class="form-group readonly-metric"><label>إجمالي تكاليف البنود Cost - تلقائي</label><input type="number" id="projAllocatedBudget" step="0.01" placeholder="يحتسب من صفحة الميزانية" readonly aria-readonly="true"></div>
+                    <div class="form-group readonly-metric"><label>المنفق من بنود التكلفة - تلقائي</label><input type="number" id="projActualCost" step="0.01" placeholder="يحتسب من صفحة الميزانية" readonly aria-readonly="true"></div>
                     <input type="hidden" id="projBudget">
                     <div class="form-group"><label>الإنجاز (%)</label><input type="range" id="projProgress" min="0" max="100" value="0" oninput="document.getElementById('progVal').innerText=this.value+'%'"><span id="progVal">0%</span></div>
                     <div class="form-group"><label>الوصف</label><textarea id="projDesc" rows="2"></textarea></div>
                 </div>
                 <input type="hidden" id="editingProjectId">
                 <div class="btn-group">
-                    <button class="btn btn-primary" id="saveProjectBtn"><i class="fas fa-save"></i> حفظ</button>
+                    <button class="btn btn-primary" id="saveProjectBtn" type="button"><i class="fas fa-save"></i> حفظ</button>
                     <button class="btn btn-outline" id="clearProjectBtn"><i class="fas fa-plus"></i> جديد</button>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-header"><span><i class="fas fa-building"></i> المديريات</span></div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>المديرية</label>
-                        <div class="select-with-add">
-                            <select id="projDirectorate"></select>
-                            <button class="btn btn-sm btn-primary" onclick="addNewDirectorate()"><i class="fas fa-plus"></i></button>
-                            <button class="btn btn-sm btn-warning" onclick="manageDirectorates()"><i class="fas fa-cog"></i></button>
-                        </div>
-                    </div>
-                </div>
+                <div id="projectSaveConfirm" class="inline-save-confirm" role="status" aria-live="polite"></div>
             </div>
             <div class="card">
                 <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> قائمة المشاريع</span></div>
-                <div class="table-wrapper"><table id="projectsTable"><thead><tr><th>الاسم</th><th>النوع</th><th>القطاع</th><th>المديرية</th><th>الهدف</th><th>الحالة</th><th>الإنجاز</th><th>المخطط</th><th>المخصص</th><th>المنفق</th><th>إجراءات</th></tr></thead><tbody id="projectsBody"></tbody></table></div>
+                <div class="project-search-toolbar">
+                    <div class="form-group">
+                        <label>بحث عن مشروع</label>
+                        <input type="text" id="projectSearchInput" placeholder="ابحث باسم المشروع أو القطاع أو الهدف الاستراتيجي أو اسم مدير المشروع" oninput="renderProjects()" onkeydown="if(event.key==='Enter'){searchProjectsNow()}">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="searchProjectsNow()"><i class="fas fa-search"></i> بحث</button>
+                    <button type="button" class="btn btn-outline" onclick="resetProjectSearch()"><i class="fas fa-rotate-left"></i> إعادة تعيين</button>
+                </div>
+                <div class="table-wrapper"><table id="projectsTable"><thead><tr><th>الاسم</th><th>النوع</th><th>القطاع</th><th>المديرية</th><th>مدير المشروع</th><th>الهدف</th><th>الحالة</th><th>الإنجاز</th><th>Budget</th><th>Cost</th><th>المنفق</th><th>إجراءات</th></tr></thead><tbody id="projectsBody"></tbody></table></div>
             </div>
         </div>
 
@@ -995,9 +1140,10 @@
                 <div class="card-header"><span><i class="fas fa-calculator"></i> إضافة / تعديل بند</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>المشروع *</label><select id="budgetProject"></select></div>
-                    <div class="form-group"><label>البند</label><input type="text" id="budgetItem"></div>
-                    <div class="form-group"><label>مخطط</label><input type="number" id="plannedAmount" step="0.01"></div>
-                    <div class="form-group"><label>منفق</label><input type="number" id="actualSpent" step="0.01"></div>
+                    <div class="form-group"><label>الميزانية المخططة للمشروع (Budget)</label><input type="number" id="budgetProjectPlannedBudget" step="0.01" placeholder="إجمالي الاعتماد قبل بدء المشروع"></div>
+                    <div class="form-group"><label>البند / Cost Item</label><input type="text" id="budgetItem" placeholder="مثال: استشارات، تراخيص، أجهزة"></div>
+                    <div class="form-group"><label>التكلفة المخططة للبند (Cost)</label><input type="number" id="plannedAmount" step="0.01"></div>
+                    <div class="form-group"><label>التكلفة المنفقة فعليًا</label><input type="number" id="actualSpent" step="0.01"></div>
                     <div class="form-group"><label>التاريخ</label><input type="date" id="budgetDate"></div>
                     <div class="form-group"><label>ملاحظات</label><input type="text" id="budgetNotes"></div>
                 </div>
@@ -1006,11 +1152,12 @@
                     <button class="btn btn-primary" id="saveBudgetBtn"><i class="fas fa-save"></i> حفظ</button>
                     <button class="btn btn-outline" id="clearBudgetBtn"><i class="fas fa-plus"></i> جديد</button>
                 </div>
+                <div id="budgetSaveConfirm" class="inline-save-confirm" role="status" aria-live="polite"></div>
             </div>
             <div class="card">
                 <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> تقرير الموازنة</span></div>
                 <div id="budgetSummary" style="margin-bottom:16px;padding:12px;background:#f0f9ff;border-radius:10px;"></div>
-                <div class="table-wrapper"><table id="budgetTable"><thead><tr><th>المشروع</th><th>البند</th><th>مخطط</th><th>منفق</th><th>متبقي</th><th>إجراءات</th></tr></thead><tbody id="budgetBody"></tbody></table></div>
+                <div class="table-wrapper"><table id="budgetTable"><thead><tr><th>المشروع</th><th>البند</th><th>ميزانية المشروع Budget</th><th>تكلفة البند Cost</th><th>المنفق</th><th>المتبقي من Budget</th><th>نسبة الصرف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="budgetBody"></tbody></table></div>
             </div>
         </div>
 
@@ -1079,6 +1226,13 @@
     </div>
 
     <script>
+        const PROGRAM_VERSION = '20T';
+        function updateProgramVersionDisplay() {
+            const badge = document.getElementById('programVersionBadge');
+            if (badge) badge.textContent = PROGRAM_VERSION;
+            if (!document.title.includes(PROGRAM_VERSION)) document.title = `${document.title} - الإصدار ${PROGRAM_VERSION}`;
+        }
+        document.addEventListener('DOMContentLoaded', updateProgramVersionDisplay);
         (function() {
             const STORAGE_KEY = 'motc_t5_final';
             const KPI_ORDER_KEY = 'kpi_card_order';
@@ -1271,11 +1425,13 @@
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
             function escapeHtml(v){return String(v??'').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
-            function projectAllocatedBudget(p) { return Number(p?.allocatedBudget ?? p?.budget ?? 0); }
-            function projectPlannedBudget(p) { const allocated = projectAllocatedBudget(p); return Number(p?.plannedBudget ?? (allocated ? Math.round(allocated * 1.15) : 0)); }
-            function projectActualCost(p) { const direct = Number(p?.actualCost ?? 0); if (direct > 0) return direct; return appData.budgets.filter(b => b.projectId === p.id).reduce((s,b) => s + Number(b.spent||0), 0); }
-            function projectRemainingAllocated(p) { return projectAllocatedBudget(p) - projectActualCost(p); }
-            function projectSpendRate(p) { const allocated = projectAllocatedBudget(p); return allocated ? Math.round((projectActualCost(p)/allocated)*100) : 0; }
+            function projectPlannedBudget(p) { return Number(p?.plannedBudget ?? p?.budget ?? p?.allocatedBudget ?? 0); }
+            function projectAllocatedBudget(p) { return appData.budgets.filter(b => b.projectId === p?.id).reduce((s,b) => s + Number(b.planned||0), 0); }
+            function projectActualCost(p) { return appData.budgets.filter(b => b.projectId === p?.id).reduce((s,b) => s + Number(b.spent||0), 0); }
+            function projectRemainingAllocated(p) { return projectPlannedBudget(p) - projectActualCost(p); }
+            function projectSpendRate(p) { const budget = projectPlannedBudget(p); return budget ? Math.round((projectActualCost(p)/budget)*100) : 0; }
+            function projectBudgetStatus(p) { const rate = projectSpendRate(p); return rate > 100 ? 'تجاوز الميزانية' : rate >= 85 ? 'قريب من الحد' : 'ضمن الميزانية'; }
+            function projectBudgetStatusClass(p) { const rate = projectSpendRate(p); return rate > 100 ? 'danger' : rate >= 85 ? 'warning' : 'success'; }
 
 
             function getProjectStats() {
@@ -1458,6 +1614,14 @@
                 }
             }
             function getTeamMembers(pid) { return appData.teamMembers.filter(t=>t.projectId===pid); }
+            function projectManagerName(p) {
+                if(!p) return '';
+                if(p.manager || p.projectManager) return p.manager || p.projectManager;
+                const r = (appData.resources||[]).find(x=>x.projectId===p.id && x.manager);
+                if(r?.manager) return r.manager;
+                const tm = (appData.teamMembers||[]).find(x=>x.projectId===p.id && /مدير/.test(x.role||''));
+                return tm?.name || '';
+            }
 
             // ---- Excel Import/Export ----
             function importFromExcel(file) {
@@ -1467,29 +1631,73 @@
                         const data=new Uint8Array(e.target.result);
                         const workbook=XLSX.read(data,{type:'array'});
                         const sheetMap={'المشاريع':'projects','الأهداف':'objectives','المهام':'tasks','المخاطر':'risks','الموازنة':'budgets','الخدمات':'services','أعضاء الفريق':'teamMembers','الموارد':'resources'};
+                        const normVal=(v)=>String(v??'').trim().replace(/\s+/g,' ').toLowerCase();
+                        const projectKey=(p)=>normVal(p?.id)||['project',normVal(p?.name),normVal(p?.sector),normVal(p?.directorate),normVal(p?.start)].join('|');
+                        const resolveProjectId=(v)=>{
+                            const raw=String(v??'').trim();
+                            if(!raw) return '';
+                            const direct=(appData.projects||[]).find(p=>String(p.id)===raw);
+                            if(direct) return direct.id;
+                            const byName=(appData.projects||[]).find(p=>normVal(p.name)===normVal(raw));
+                            return byName ? byName.id : raw;
+                        };
+                        const recordKey=(key,item)=>{
+                            if(key==='projects') return projectKey(item);
+                            if(item?.id) return 'id|'+normVal(item.id);
+                            if(key==='objectives') return ['objective',normVal(item.title)].join('|');
+                            if(key==='tasks') return ['task',normVal(resolveProjectId(item.projectId)),normVal(item.name),normVal(item.planStart),normVal(item.planEnd)].join('|');
+                            if(key==='risks') return ['risk',normVal(resolveProjectId(item.projectId)),normVal(item.type),normVal(item.desc)].join('|');
+                            if(key==='budgets') return ['budget',normVal(resolveProjectId(item.projectId)),normVal(item.item),normVal(item.date)].join('|');
+                            if(key==='services') return ['service',normVal(item.type),normVal(item.name),normVal(resolveProjectId(item.projectId))].join('|');
+                            if(key==='teamMembers') return ['team',normVal(resolveProjectId(item.projectId)),normVal(item.email||item.name),normVal(item.role)].join('|');
+                            if(key==='resources') return ['resource',normVal(resolveProjectId(item.projectId)),normVal(item.manager),normVal(item.department)].join('|');
+                            return JSON.stringify(item);
+                        };
+                        const mergeUnique=(key, incoming)=>{
+                            const existing=Array.isArray(appData[key]) ? appData[key] : [];
+                            const map=new Map();
+                            existing.forEach(item=>{
+                                const k=recordKey(key,item);
+                                if(k) map.set(k,item);
+                            });
+                            let added=0, updated=0, skipped=0;
+                            incoming.forEach(item=>{
+                                if(!item) { skipped++; return; }
+                                if(key!=='projects' && item.projectId) item.projectId=resolveProjectId(item.projectId);
+                                const k=recordKey(key,item);
+                                if(!k || /\|\|*$/.test(k) && Object.values(item).every(v=>String(v??'').trim()==='')) { skipped++; return; }
+                                if(map.has(k)) { map.set(k,{...map.get(k),...item}); updated++; }
+                                else { map.set(k,item); added++; }
+                            });
+                            appData[key]=Array.from(map.values());
+                            return {added,updated,skipped,total:incoming.length};
+                        };
+                        const uniqueStrings=(arr)=>Array.from(new Map((arr||[]).map(x=>String(x??'').trim()).filter(Boolean).map(x=>[normVal(x),x])).values());
                         let imported=false;
+                        let importSummary=[];
                         for(const [sheetName,key] of Object.entries(sheetMap)) {
                             if(workbook.SheetNames.includes(sheetName)) {
                                 const ws=workbook.Sheets[sheetName];
                                 const jsonData=XLSX.utils.sheet_to_json(ws);
                                 if(jsonData.length>0) {
                                     let mappedData=jsonData;
-                                    if(key==='projects') mappedData=jsonData.map(row=>({id:row.id||generateId(),name:row.name||row.الاسم||'',type:row.type||row.النوع||'مشروع',sector:row.sector||row.القطاع||'',directorate:row.directorate||row.المديرية||'',objectiveId:row.objectiveId||row.الهدف||'',status:row.status||row.الحالة||'نشط',start:row.start||row.تاريخ_البدء||'',end:row.end||row.تاريخ_الانتهاء||'',budget:parseFloat(row.budget||row.الميزانية)||0,progress:parseInt(row.progress||row.الإنجاز)||0,description:row.description||row.الوصف||''}));
-                                    else if(key==='objectives') mappedData=jsonData.map(row=>({id:row.id||generateId(),title:row.title||row.الهدف||'',desc:row.desc||row.الوصف||'',weight:parseFloat(row.weight||row.الوزن)||0,target:parseFloat(row.target||row.المستهدف)||100,progress:parseInt(row.progress||row.الإنجاز)||0}));
-                                    else if(key==='tasks') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||'',name:row.name||row.المهمة||'',predecessor:row.predecessor||row.المهمة_السابقة||'',successor:row.successor||row.المهمة_التالية||'',planStart:row.planStart||row.بدء_مخطط||'',planEnd:row.planEnd||row.انتهاء_مخطط||'',actualStart:row.actualStart||row.بدء_فعلي||'',actualEnd:row.actualEnd||row.انتهاء_فعلي||'',responsible:row.responsible||row.المسؤول||'',progress:parseInt(row.progress||row.الإنجاز)||0,order:parseInt(row.order||row.الترتيب)||0}));
-                                    else if(key==='risks') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||'',type:row.type||row.النوع||'خطر',level:row.level||row.المستوى||'متوسط',desc:row.desc||row.الوصف||'',action:row.action||row.الإجراء||'',owner:row.owner||row.المسؤول||'',status:row.status||row.الحالة||'مفتوح'}));
-                                    else if(key==='budgets') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||'',item:row.item||row.البند||'',planned:parseFloat(row.planned||row.مخطط)||0,spent:parseFloat(row.spent||row.منفق)||0,date:row.date||row.التاريخ||'',notes:row.notes||row.ملاحظات||''}));
-                                    else if(key==='services') mappedData=jsonData.map(row=>({id:row.id||generateId(),type:row.type||row.النوع||'خدمة',name:row.name||row.الاسم||'',projectId:row.projectId||row.المشروع||'',beneficiaries:row.beneficiaries||row.المستفيدون||'',launchDate:row.launchDate||row.تاريخ_الإطلاق||'',status:row.status||row.الحالة||'مخطط',progress:parseInt(row.progress||row.الإنجاز)||0,description:row.description||row.الوصف||''}));
-                                    else if(key==='teamMembers') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||'',name:row.name||row.الاسم||'',role:row.role||row.الدور||'',specialty:row.specialty||row.التخصص||'',email:row.email||row.البريد||'',phone:row.phone||row.الهاتف||''}));
-                                    else if(key==='resources') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||'',manager:row.manager||row.مدير_المشروع||'',email:row.email||row.البريد||'',phone:row.phone||row.الهاتف||'',department:row.department||row.المديرية||'',stakeholders:row.stakeholders||row.أصحاب_المصلحة||''}));
-                                    appData[key]=mappedData;
+                                    if(key==='projects') mappedData=jsonData.map(row=>({id:row.id||row.ID||row['رقم']||generateId(),name:row.name||row.الاسم||row['اسم المشروع']||'',type:row.type||row.النوع||'مشروع',sector:row.sector||row.القطاع||'',directorate:row.directorate||row.المديرية||'',manager:row.manager||row.projectManager||row.مدير_المشروع||row['مدير المشروع']||'',objectiveId:row.objectiveId||row.الهدف||'',status:row.status||row.الحالة||'نشط',start:row.start||row.تاريخ_البدء||row['تاريخ البدء']||'',end:row.end||row.تاريخ_الانتهاء||row['تاريخ الانتهاء']||'',budget:parseFloat(row.budget||row.plannedBudget||row.الميزانية||row['ميزانية المشروع Budget'])||0,progress:parseInt(row.progress||row.الإنجاز)||0,description:row.description||row.الوصف||''})).filter(x=>x.name||x.id);
+                                    else if(key==='objectives') mappedData=jsonData.map(row=>({id:row.id||generateId(),title:row.title||row.الهدف||'',desc:row.desc||row.الوصف||'',weight:parseFloat(row.weight||row.الوزن)||0,target:parseFloat(row.target||row.المستهدف)||100,progress:parseInt(row.progress||row.الإنجاز)||0})).filter(x=>x.title||x.id);
+                                    else if(key==='tasks') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',name:row.name||row.المهمة||'',predecessor:row.predecessor||row.المهمة_السابقة||'',successor:row.successor||row.المهمة_التالية||'',planStart:row.planStart||row.بدء_مخطط||'',planEnd:row.planEnd||row.انتهاء_مخطط||'',actualStart:row.actualStart||row.بدء_فعلي||'',actualEnd:row.actualEnd||row.انتهاء_فعلي||'',responsible:row.responsible||row.المسؤول||'',progress:parseInt(row.progress||row.الإنجاز)||0,order:parseInt(row.order||row.الترتيب)||0})).filter(x=>x.name||x.id);
+                                    else if(key==='risks') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',type:row.type||row.النوع||'خطر',level:row.level||row.المستوى||'متوسط',desc:row.desc||row.الوصف||'',action:row.action||row.الإجراء||'',owner:row.owner||row.المسؤول||'',status:row.status||row.الحالة||'مفتوح'})).filter(x=>x.desc||x.id);
+                                    else if(key==='budgets') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',item:row.item||row.البند||row['بند التكلفة']||'',planned:parseFloat(row.planned||row.مخطط||row['تكلفة البند Cost'])||0,spent:parseFloat(row.spent||row.منفق||row.المنفق)||0,date:row.date||row.التاريخ||'',notes:row.notes||row.ملاحظات||''})).filter(x=>x.item||x.id);
+                                    else if(key==='services') mappedData=jsonData.map(row=>({id:row.id||generateId(),type:row.type||row.النوع||'خدمة',name:row.name||row.الاسم||'',projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',beneficiaries:row.beneficiaries||row.المستفيدون||'',launchDate:row.launchDate||row.تاريخ_الإطلاق||'',status:row.status||row.الحالة||'مخطط',progress:parseInt(row.progress||row.الإنجاز)||0,description:row.description||row.الوصف||''})).filter(x=>x.name||x.id);
+                                    else if(key==='teamMembers') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',name:row.name||row.الاسم||'',role:row.role||row.الدور||'',specialty:row.specialty||row.التخصص||'',email:row.email||row.البريد||'',phone:row.phone||row.الهاتف||''})).filter(x=>x.name||x.email||x.id);
+                                    else if(key==='resources') mappedData=jsonData.map(row=>({id:row.id||generateId(),projectId:row.projectId||row.المشروع||row['اسم المشروع']||'',manager:row.manager||row.مدير_المشروع||row['مدير المشروع']||'',email:row.email||row.البريد||'',phone:row.phone||row.الهاتف||'',department:row.department||row.المديرية||'',stakeholders:row.stakeholders||row.أصحاب_المصلحة||''})).filter(x=>x.manager||x.department||x.id);
+                                    const r=mergeUnique(key,mappedData);
+                                    importSummary.push(`${sheetName}: جديد ${r.added}، تحديث ${r.updated}`);
                                     imported=true;
                                 }
                             }
                         }
-                        if(workbook.SheetNames.includes('القطاعات')) { const ws=workbook.Sheets['القطاعات']; const jsonData=XLSX.utils.sheet_to_json(ws); if(jsonData.length>0) appData.sectors=jsonData.map(row=>row.القطاع||row.name||'').filter(Boolean); }
-                        if(workbook.SheetNames.includes('المديريات')) { const ws=workbook.Sheets['المديريات']; const jsonData=XLSX.utils.sheet_to_json(ws); if(jsonData.length>0) appData.directorates=jsonData.map(row=>row.المديرية||row.name||'').filter(Boolean); }
-                        if(imported) { saveData(); refreshAllViews(); alert('تم استيراد البيانات بنجاح!'); }
+                        if(workbook.SheetNames.includes('القطاعات')) { const ws=workbook.Sheets['القطاعات']; const jsonData=XLSX.utils.sheet_to_json(ws); if(jsonData.length>0) appData.sectors=uniqueStrings([...(appData.sectors||[]),...jsonData.map(row=>row.القطاع||row.name||'')]); }
+                        if(workbook.SheetNames.includes('المديريات')) { const ws=workbook.Sheets['المديريات']; const jsonData=XLSX.utils.sheet_to_json(ws); if(jsonData.length>0) appData.directorates=uniqueStrings([...(appData.directorates||[]),...jsonData.map(row=>row.المديرية||row.name||'')]); }
+                        if(imported) { saveData(); refreshAllViews(); alert('تم استيراد البيانات بنجاح دون تكرار.\n'+importSummary.join('\n')); }
                         else alert('لم يتم العثور على بيانات قابلة للاستيراد في الملف.');
                     } catch(err) { alert('خطأ في قراءة الملف: '+err.message); console.error(err); }
                 };
@@ -1497,7 +1705,7 @@
             }
             function exportAllExcel() {
                 const wb=XLSX.utils.book_new();
-                if(appData.projects.length) { const data=appData.projects.map(p=>({id:p.id,name:p.name,type:p.type,sector:p.sector,directorate:p.directorate||'',objectiveId:p.objectiveId,status:p.status,start:p.start,end:p.end,plannedBudget:projectPlannedBudget(p),allocatedBudget:projectAllocatedBudget(p),actualCost:projectActualCost(p),budget:projectAllocatedBudget(p),progress:p.progress,description:p.description||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المشاريع'); }
+                if(appData.projects.length) { const data=appData.projects.map(p=>({id:p.id,name:p.name,type:p.type,sector:p.sector,directorate:p.directorate||'',manager:projectManagerName(p),objectiveId:p.objectiveId,status:p.status,start:p.start,end:p.end,plannedBudget:projectPlannedBudget(p),allocatedBudget:projectAllocatedBudget(p),actualCost:projectActualCost(p),budget:projectAllocatedBudget(p),progress:p.progress,description:p.description||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'المشاريع'); }
                 if(appData.fiveYearPlans?.length) { const data=appData.fiveYearPlans.map(y=>({id:y.id,year:y.year,focus:y.focus||'',goals:y.goals||'',target:y.target||0,actual:y.actual||0,budget:y.budget||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الخطة الخمسية'); }
                 if(appData.objectives.length) { const data=appData.objectives.map(o=>({id:o.id,title:o.title,desc:o.desc||'',perspective:o.perspective||'',parentId:o.parentId||'',weight:o.weight,target:o.target,progress:o.progress||0})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'الأهداف'); }
                 if(appData.kpis.length) { const data=appData.kpis.map(k=>({id:k.id,objectiveId:k.objectiveId,name:k.name,baseline:k.baseline||0,q1:k.q1||0,q2:k.q2||0,q3:k.q3||0,q4:k.q4||k.target||0,target:k.target||0,actual:k.actual||0,unit:k.unit||''})); XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),'مؤشرات BSC'); }
@@ -1556,8 +1764,9 @@
             // ---- دالة رسم المخططات في لوحة المؤشرات ----
             function renderDashboardCharts() {
                 if (typeof Chart === 'undefined') { renderDashboardChartsFallback(); return; }
-                const chartIds = ['budgetVsSpentChart','monthlyCostChart','resourceDistributionChart','sectorDistributionChart','projectStatusChart','strategicObjectivesChart'];
-                chartIds.forEach(id => { const e = Chart.getChart(id); if(e) e.destroy(); });
+                // إصلاح تكرار إنشاء المخططات بعد الاستيراد أو التحديث: يتم تدمير أي مخطط سابق مرتبط بنفس canvas أولاً.
+                const chartIds = ['budgetVsSpentChart','monthlyCostChart','resourceDistributionChart','sectorDistributionChart','projectStatusChart','projectProgressChart','strategicObjectivesChart'];
+                chartIds.forEach(id => { try { const e = Chart.getChart(id); if(e) e.destroy(); } catch(err) {} });
 
                 // 1. المخطط مقابل المنفق - عرض النص الكامل
                 const ctx1 = document.getElementById('budgetVsSpentChart')?.getContext('2d');
@@ -1678,6 +1887,7 @@
                 // 6. الإنجاز حسب المشروع - عرض النص الكامل
                 const ctx7 = document.getElementById('projectProgressChart')?.getContext('2d');
                 if(ctx7) {
+                    try { const oldProgressChart = Chart.getChart('projectProgressChart'); if(oldProgressChart) oldProgressChart.destroy(); } catch(err) {}
                     const sorted=[...appData.projects].sort((a,b)=>(b.progress||0)-(a.progress||0));
                     const labels=sorted.map(p=>p.name);
                     const data=sorted.map(p=>p.progress||0);
@@ -1754,12 +1964,29 @@
             function renderProjects() {
                 const tbody=document.getElementById('projectsBody');
                 if(!tbody) return;
-                tbody.innerHTML=appData.projects.map(p=>{
+                const q=(document.getElementById('projectSearchInput')?.value||'').trim().toLowerCase();
+                const rows=appData.projects.filter(p=>{
                     const obj=appData.objectives.find(o=>o.id===p.objectiveId);
-                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td>${p.sector||'-'}</td><td>${p.directorate||'-'}</td><td>${obj?obj.title:'-'}</td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td>${p.progress}%</td><td>${formatCurrency(projectPlannedBudget(p))}</td><td>${formatCurrency(projectAllocatedBudget(p))}</td><td>${formatCurrency(projectActualCost(p))}</td><td><button class="btn btn-sm btn-warning" onclick="editProject('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteProject('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    const manager=projectManagerName(p);
+                    if(!q) return true;
+                    return [p.id,p.name,p.sector,p.directorate,obj?.title,manager,p.status,p.type].some(v=>String(v||'').toLowerCase().includes(q));
+                });
+                if(rows.length===0){ tbody.innerHTML='<tr><td colspan="12" style="text-align:center;color:#64748b;padding:18px">لا توجد مشاريع مطابقة لمعايير البحث</td></tr>'; return; }
+                tbody.innerHTML=rows.map(p=>{
+                    const obj=appData.objectives.find(o=>o.id===p.objectiveId);
+                    const manager=projectManagerName(p) || '-';
+                    return `<tr><td><strong>${p.name}</strong></td><td><span class="badge badge-info">${p.type}</span></td><td>${p.sector||'-'}</td><td>${p.directorate||'-'}</td><td>${manager}</td><td>${obj?obj.title:'-'}</td><td><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td>${p.progress}%</td><td>${formatCurrency(projectPlannedBudget(p))}</td><td>${formatCurrency(projectAllocatedBudget(p))}</td><td>${formatCurrency(projectActualCost(p))}</td><td><button class="btn btn-sm btn-warning" onclick="editProject('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteProject('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
                 }).join('');
             }
-            window.editProject=function(id){ const p=appData.projects.find(pr=>pr.id===id); if(!p) return; document.getElementById('editingProjectId').value=p.id; document.getElementById('projName').value=p.name; document.getElementById('projType').value=p.type; document.getElementById('projSector').value=p.sector||''; document.getElementById('projObjective').value=p.objectiveId||''; document.getElementById('projStatus').value=p.status; document.getElementById('projStart').value=p.start||''; document.getElementById('projEnd').value=p.end||''; document.getElementById('projPlannedBudget').value=projectPlannedBudget(p)||0; document.getElementById('projAllocatedBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projActualCost').value=projectActualCost(p)||0; document.getElementById('projBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projProgress').value=p.progress||0; document.getElementById('progVal').innerText=(p.progress||0)+'%'; document.getElementById('projDesc').value=p.description||''; document.getElementById('projDirectorate').value=p.directorate||''; };
+            window.renderProjects = renderProjects;
+            window.searchProjectsNow = function(){ renderProjects(); };
+            window.resetProjectSearch = function(){
+                const input=document.getElementById('projectSearchInput');
+                if(input) input.value='';
+                renderProjects();
+            };
+
+            window.editProject=function(id){ const p=appData.projects.find(pr=>pr.id===id); if(!p) return; document.getElementById('editingProjectId').value=p.id; document.getElementById('projName').value=p.name; document.getElementById('projType').value=p.type; document.getElementById('projSector').value=p.sector||''; document.getElementById('projObjective').value=p.objectiveId||''; document.getElementById('projStatus').value=p.status; document.getElementById('projStart').value=p.start||''; document.getElementById('projEnd').value=p.end||''; document.getElementById('projPlannedBudget').value=projectPlannedBudget(p)||0; document.getElementById('projAllocatedBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projActualCost').value=projectActualCost(p)||0; document.getElementById('projBudget').value=projectAllocatedBudget(p)||0; document.getElementById('projProgress').value=p.progress||0; document.getElementById('progVal').innerText=(p.progress||0)+'%'; document.getElementById('projDesc').value=p.description||''; document.getElementById('projDirectorate').value=p.directorate||''; document.getElementById('projManager').value=projectManagerName(p)||''; };
             window.deleteProject=function(id){ if(confirm('حذف المشروع؟')){ appData.projects=appData.projects.filter(p=>p.id!==id); appData.tasks=appData.tasks.filter(t=>t.projectId!==id); appData.risks=appData.risks.filter(r=>r.projectId!==id); appData.budgets=appData.budgets.filter(b=>b.projectId!==id); appData.teamMembers=appData.teamMembers.filter(t=>t.projectId!==id); appData.resources=appData.resources.filter(r=>r.projectId!==id); saveData(); refreshAllViews(); } };
 
             function renderTeamMembers() {
@@ -1840,20 +2067,56 @@
             window.deleteRisk=function(id){ appData.risks=appData.risks.filter(r=>r.id!==id); saveData(); renderRisks(); renderRisksDetailed(); };
 
             // ---- دوال الموازنة والخدمات ----
+            function syncBudgetProjectFields(){
+                const pid=document.getElementById('budgetProject')?.value||'';
+                const p=appData.projects.find(pr=>pr.id===pid);
+                const budgetInput=document.getElementById('budgetProjectPlannedBudget');
+                if(budgetInput) budgetInput.value=p?projectPlannedBudget(p):'';
+            }
+
+            // ---- دوال الموازنة والخدمات ----
             function renderBudget() {
                 const tbody=document.getElementById('budgetBody');
                 if(!tbody) return;
                 tbody.innerHTML='';
-                let tp=0,ts=0;
-                appData.budgets.forEach(b=>{
-                    const proj=appData.projects.find(p=>p.id===b.projectId);
-                    tp+=(b.planned||0); ts+=(b.spent||0);
-                    tbody.innerHTML+=`<tr><td>${proj?proj.name:'-'}</td><td>${b.item}</td><td>${formatCurrency(b.planned)}</td><td>${formatCurrency(b.spent)}</td><td>${formatCurrency((b.planned||0)-(b.spent||0))}</td><td><button class="btn btn-sm btn-warning" onclick="editBudget('${b.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteBudget('${b.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                let totalProjectBudget=0,totalCostPlanned=0,totalSpent=0;
+                syncBudgetProjectFields();
+                appData.projects.forEach(p=>{
+                    const projectItems=appData.budgets.filter(b=>b.projectId===p.id);
+                    const budget=projectPlannedBudget(p);
+                    const cost=projectItems.reduce((s,b)=>s+Number(b.planned||0),0);
+                    const spent=projectItems.reduce((s,b)=>s+Number(b.spent||0),0);
+                    const remaining=budget-spent;
+                    const rate=budget?Math.round((spent/budget)*100):0;
+                    totalProjectBudget+=budget; totalCostPlanned+=cost; totalSpent+=spent;
+                    tbody.innerHTML+=`<tr class="budget-project-separator"><td colspan="9"><i class="fas fa-folder-open"></i> ${p.name}</td></tr>`;
+                    tbody.innerHTML+=`<tr class="budget-project-summary-row"><td><strong>${p.name}</strong><div class="budget-row-note">ملخص مشروع</div></td><td></td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(cost)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(remaining)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-${projectBudgetStatusClass(p)}">${projectBudgetStatus(p)}</span></td><td><button class="btn btn-sm btn-warning" title="تعديل ميزانية المشروع من نفس صفحة الموازنة" onclick="editProjectBudgetSummary('${p.id}')"><i class="fas fa-edit"></i></button></td></tr>`;
+                    if(!projectItems.length){
+                        tbody.innerHTML+=`<tr class="budget-empty-items-row"><td colspan="9">لا توجد بنود تكلفة مسجلة لهذا المشروع حتى الآن.</td></tr>`;
+                    }
+                    projectItems.forEach(b=>{
+                        tbody.innerHTML+=`<tr class="budget-cost-item-row"><td>${p.name}</td><td>${b.item||'-'}</td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(b.planned)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(b.spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(budget-spent)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-info">Cost Item</span></td><td><button class="btn btn-sm btn-warning" onclick="editBudget('${b.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteBudget('${b.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                    });
                 });
-                document.getElementById('budgetSummary').innerHTML=`<strong>إجمالي مخطط:</strong> ${formatCurrency(tp)} | <strong>منفق:</strong> ${formatCurrency(ts)} | <strong>متبقي:</strong> ${formatCurrency(tp-ts)}`;
+                const totalRemaining=totalProjectBudget-totalSpent;
+                const totalRate=totalProjectBudget?Math.round((totalSpent/totalProjectBudget)*100):0;
+                document.getElementById('budgetSummary').innerHTML=`<strong>إجمالي الميزانية المخططة للمشاريع Budget:</strong> ${formatCurrency(totalProjectBudget)} | <strong>إجمالي تكاليف البنود Cost:</strong> ${formatCurrency(totalCostPlanned)} | <strong>إجمالي المنفق:</strong> ${formatCurrency(totalSpent)} | <strong>المتبقي من الميزانية:</strong> ${formatCurrency(totalRemaining)} | <strong>نسبة الصرف:</strong> ${totalRate}%`;
             }
-            window.editBudget=function(id){ const b=appData.budgets.find(bg=>bg.id===id); if(!b) return; document.getElementById('editingBudgetId').value=b.id; document.getElementById('budgetProject').value=b.projectId; document.getElementById('budgetItem').value=b.item; document.getElementById('plannedAmount').value=b.planned; document.getElementById('actualSpent').value=b.spent; document.getElementById('budgetDate').value=b.date||''; document.getElementById('budgetNotes').value=b.notes||''; };
-            window.deleteBudget=function(id){ appData.budgets=appData.budgets.filter(b=>b.id!==id); saveData(); renderBudget(); };
+            window.editBudget=function(id){ const b=appData.budgets.find(bg=>bg.id===id); if(!b) return; document.getElementById('editingBudgetId').value=b.id; document.getElementById('budgetProject').value=b.projectId; syncBudgetProjectFields(); document.getElementById('budgetItem').value=b.item; document.getElementById('plannedAmount').value=b.planned; document.getElementById('actualSpent').value=b.spent; document.getElementById('budgetDate').value=b.date||''; document.getElementById('budgetNotes').value=b.notes||''; };
+            window.editProjectBudgetSummary=function(id){
+                const p=appData.projects.find(pr=>pr.id===id);
+                if(!p) return;
+                const sel=document.getElementById('budgetProject');
+                const budgetInput=document.getElementById('budgetProjectPlannedBudget');
+                if(sel) sel.value=p.id;
+                if(budgetInput) budgetInput.value=projectPlannedBudget(p)||0;
+                ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(fid=>{ const el=document.getElementById(fid); if(el) el.value=''; });
+                const dateEl=document.getElementById('budgetDate'); if(dateEl) dateEl.value='';
+                const editEl=document.getElementById('editingBudgetId'); if(editEl) editEl.value='';
+                toast('يمكنك الآن تعديل ميزانية المشروع ثم الضغط على حفظ');
+                document.getElementById('budgetProjectPlannedBudget')?.focus();
+            };
+            window.deleteBudget=function(id){ appData.budgets=appData.budgets.filter(b=>b.id!==id); saveData(); refreshAllViews(); };
 
             function renderServices() {
                 const tbody=document.getElementById('servicesBody');
@@ -2035,35 +2298,80 @@
             window.phase3SearchButton=function(ev){
                 if(ev && ev.stopPropagation) ev.stopPropagation();
                 const inp=document.getElementById('globalSearchInput');
-                phase3GlobalSearch(inp ? inp.value : '', true);
+                phase3GlobalSearch(inp ? inp.value : '', true, true);
             }
-            window.phase3GlobalSearch=function(q, forceShow){
+            window.resetGlobalSearch=function(){
+                const inp=document.getElementById('globalSearchInput');
+                if(inp) inp.value='';
+                const panel=document.getElementById('phase3SearchPanel');
+                if(panel){ panel.innerHTML=''; panel.classList.remove('show'); }
+                const activeTab=document.querySelector('.tab-content.active')?.id || '';
+                if(activeTab==='tab-projects'){
+                    const pInp=document.getElementById('projectSearchInput');
+                    if(pInp){ pInp.value=''; renderProjects(); }
+                }
+            }
+            window.phase3GlobalSearch=function(q, forceShow, openDirect){
                 const panel=document.getElementById('phase3SearchPanel'); if(!panel) return;
                 const raw=(q||'').trim(); const term=raw.toLowerCase();
                 if(!term){
-                    panel.innerHTML='<div class="phase3-result"><strong>اكتب كلمة للبحث</strong><span>يمكنك البحث باسم المشروع، الهدف، KPI، الخطر، الخدمة أو بند الموازنة.</span></div>';
-                    if(forceShow) panel.classList.add('show'); else panel.classList.remove('show');
+                    panel.innerHTML='';
+                    panel.classList.remove('show');
+                    return;
+                }
+                if(term.length < 3 && !forceShow){
+                    panel.innerHTML='';
+                    panel.classList.remove('show');
                     return;
                 }
                 const safe=(v)=>String(v??'');
+                const esc=(s)=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
                 const rows=[];
-                const add=(type,title,desc,tab)=>{ const hay=(safe(type)+' '+safe(title)+' '+safe(desc)).toLowerCase(); if(hay.includes(term)) rows.push({type:safe(type),title:safe(title),desc:safe(desc),tab}); };
+                const add=(type,title,desc,tab,filterText,extra)=>{
+                    const hay=(safe(type)+' '+safe(title)+' '+safe(desc)+' '+safe(filterText)+' '+safe(extra)).toLowerCase();
+                    if(hay.includes(term)) rows.push({type:safe(type),title:safe(title),desc:safe(desc),tab,filterText:safe(filterText||title)});
+                };
                 const data=window.appData || appData || {};
-                (data.projects||[]).forEach(p=>add('مشروع',p.name,`${p.status||''} - ${p.sector||''} - إنجاز ${p.progress||0}%`,'tab-projects'));
-                (data.objectives||[]).forEach(o=>add('هدف استراتيجي',o.title,`${o.perspective||''} - وزن ${o.weight||0}%`,'tab-strategy'));
-                (data.kpis||[]).forEach(k=>add('KPI',k.name,`فعلي ${k.actual||0} / مستهدف ${k.target||0} ${k.unit||''}`,'tab-strategy'));
-                (data.risks||[]).forEach(r=>add(r.type||'مخاطر',r.desc,`${r.level||''} - ${r.status||''} - ${typeof projectName==='function'?projectName(r.projectId):r.projectId||''}`,'tab-risks'));
-                (data.services||[]).forEach(s=>add(s.type||'خدمة',s.name,`${s.status||''} - ${s.beneficiaries||''}`,'tab-services'));
-                (data.budgets||[]).forEach(b=>add('موازنة',b.item,`${typeof projectName==='function'?projectName(b.projectId):b.projectId||''} - مخطط ${b.planned||0} - مخصص ${b.allocated||b.planned||0} - منفق ${b.spent||0}`,'tab-budget'));
-                (data.fiveYearPlans||[]).forEach(y=>add('الخطة الخمسية',y.year,`${y.theme||''} - موازنة ${y.budget||0} - مستهدف ${y.target||''}`,'tab-fiveyear'));
-                const escSearch=(s)=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-                panel.innerHTML=rows.length?rows.slice(0,60).map(r=>`<div class="phase3-result" onclick="phase3OpenSearchResult('${r.tab}')"><strong>${escSearch(r.type)}: ${escSearch(r.title)}</strong><span>${escSearch(r.desc)}</span></div>`).join(''):`<div class="phase3-result"><strong>لا توجد نتائج مطابقة</strong><span>جرّب كلمة أخرى أو ابحث باسم مشروع / هدف / مؤشر / خطر.</span></div>`;
+                (data.projects||[]).forEach(p=>{
+                    const obj=(data.objectives||[]).find(o=>o.id===p.objectiveId);
+                    const manager=projectManagerName(p)||'';
+                    add('مشروع',p.name,`رقم المشروع: ${p.id||'-'} | القطاع: ${p.sector||'-'} | المديرية: ${p.directorate||'-'} | الهدف: ${obj?.title||'-'} | مدير المشروع: ${manager||'-'} | الحالة: ${p.status||'-'} | الإنجاز: ${p.progress||0}%`,'tab-projects',raw,[p.id,p.name,p.sector,p.directorate,obj?.title,manager,p.status,p.type].join(' '));
+                });
+                (data.objectives||[]).forEach(o=>add('هدف استراتيجي',o.title,`${o.perspective||''} - وزن ${o.weight||0}% - إنجاز ${o.progress||0}%`,'tab-strategy',raw,[o.id,o.title,o.desc,o.perspective].join(' ')));
+                (data.kpis||[]).forEach(k=>{ const obj=(data.objectives||[]).find(o=>o.id===k.objectiveId); add('KPI',k.name,`الهدف: ${obj?.title||'-'} | فعلي ${k.actual||0} / مستهدف ${k.target||0} ${k.unit||''}`,'tab-strategy',raw,[k.id,k.name,obj?.title,k.unit].join(' ')); });
+                (data.risks||[]).forEach(r=>add(r.type||'مخاطر',r.desc,`${r.level||''} - ${r.status||''} - ${typeof projectName==='function'?projectName(r.projectId):r.projectId||''} - المسؤول: ${r.owner||'-'}`,'tab-risks',raw,[r.id,r.desc,r.level,r.status,r.owner,typeof projectName==='function'?projectName(r.projectId):r.projectId].join(' ')));
+                (data.services||[]).forEach(s=>add(s.type||'خدمة',s.name,`${s.status||''} - ${s.beneficiaries||''} - ${typeof projectName==='function'?projectName(s.projectId):s.projectId||''}`,'tab-services',raw,[s.id,s.name,s.status,s.beneficiaries].join(' ')));
+                (data.budgets||[]).forEach(b=>add('موازنة',b.item,`${typeof projectName==='function'?projectName(b.projectId):b.projectId||''} - مخطط ${b.planned||0} - مخصص ${b.allocated||b.planned||0} - منفق ${b.spent||0}`,'tab-budget',raw,[b.id,b.item,b.projectId,b.planned,b.spent].join(' ')));
+                (data.fiveYearPlans||[]).forEach(y=>add('الخطة الخمسية',y.year,`${y.theme||y.focus||''} - موازنة ${y.budget||0} - مستهدف ${y.target||''}`,'tab-fiveyear',raw,[y.id,y.year,y.theme,y.focus,y.goals].join(' ')));
+                const highlight=(s)=>{
+                    const txt=esc(s);
+                    if(!raw) return txt;
+                    try{ return txt.replace(new RegExp(esc(raw).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`); }catch(e){ return txt; }
+                };
+                panel.innerHTML=rows.length?rows.slice(0,80).map((r,i)=>`<div class="phase3-result" onclick="phase3OpenSearchResult('${r.tab}', '${esc(r.filterText).replace(/'/g,'&#39;')}')"><strong>${highlight(r.type)}: ${highlight(r.title)}</strong><span>${highlight(r.desc)}</span></div>`).join(''):`<div class="phase3-result"><strong>لا توجد نتائج مطابقة</strong><span>جرّب كلمة أخرى أو ابحث باسم مشروع / قطاع / هدف / مدير مشروع / مؤشر / خطر.</span></div>`;
                 panel.classList.add('show');
+                if(openDirect && rows.length===1){
+                    phase3OpenSearchResult(rows[0].tab, rows[0].filterText || raw);
+                }
             }
-            window.phase3OpenSearchResult=function(tab){
+            window.phase3OpenSearchResult=function(tab, filterText){
                 document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.click();
                 document.getElementById('phase3SearchPanel')?.classList.remove('show');
-                const inp=document.getElementById('globalSearchInput'); if(inp) inp.value='';
+                const raw=(document.getElementById('globalSearchInput')?.value||filterText||'').trim();
+                if(tab==='tab-projects'){
+                    setTimeout(()=>{
+                        const pInp=document.getElementById('projectSearchInput');
+                        if(pInp){ pInp.value=raw; renderProjects(); }
+                        const projectCard=document.querySelector('#tab-projects .card:nth-of-type(2)') || document.getElementById('projectsTable');
+                        if(projectCard){ projectCard.scrollIntoView({behavior:'smooth',block:'center'}); projectCard.classList.add('ux-highlight'); setTimeout(()=>projectCard.classList.remove('ux-highlight'),2200); }
+                    },180);
+                } else {
+                    setTimeout(()=>{
+                        const section=document.getElementById(tab);
+                        const preferred=section?.querySelector('.card, .chart-box, table, .phase2-summary, .phase1-banner') || section;
+                        if(preferred){ preferred.scrollIntoView({behavior:'smooth',block:'center'}); preferred.classList.add('ux-highlight'); setTimeout(()=>preferred.classList.remove('ux-highlight'),2200); }
+                    },180);
+                }
             }
             function phase3ApplyTheme(){ if(localStorage.getItem('phase3_dark_mode')==='1') document.body.classList.add('dark-mode'); }
 
@@ -2101,7 +2409,7 @@
                     { id: 'reportHealth', title: 'صحة المشاريع', type: 'bar', data: projects.map(p=>({label:(p.name||'').substring(0,12), value:phase3ProjectHealth(p)})) }
                 ];
                 charts.forEach(ch => { const box = document.createElement('div'); box.className = 'chart-box'; box.innerHTML = `<h3><i class="fas fa-chart-${ch.type==='doughnut'?'pie':'bar'}" style="color:#3b82f6;"></i> ${ch.title}</h3><div class="chart-container"><canvas id="${ch.id}Chart"></canvas></div>`; container.appendChild(box); });
-                setTimeout(() => { charts.forEach(ch => { const ctx = document.getElementById(`${ch.id}Chart`)?.getContext('2d'); if(!ctx) return; if(ch.type === 'doughnut') { const labels = Object.keys(ch.data); const values = Object.values(ch.data); if(!labels.length) return; new Chart(ctx, { type: 'doughnut', data: { labels, datasets: [{ data: values, backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6'] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '55%', plugins: { legend: { position: 'bottom' } } } }); } else { new Chart(ctx, { type: 'bar', data: { labels: ch.data.map(d=>d.label), datasets: [{ data: ch.data.map(d=>d.value), backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } }); } }); }, 100);
+                setTimeout(() => { charts.forEach(ch => { const canvasId = `${ch.id}Chart`; try { const oldChart = Chart.getChart(canvasId); if(oldChart) oldChart.destroy(); } catch(err) {} const ctx = document.getElementById(canvasId)?.getContext('2d'); if(!ctx) return; if(ch.type === 'doughnut') { const labels = Object.keys(ch.data); const values = Object.values(ch.data); if(!labels.length) return; new Chart(ctx, { type: 'doughnut', data: { labels, datasets: [{ data: values, backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6'] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '55%', plugins: { legend: { position: 'bottom' } } } }); } else { new Chart(ctx, { type: 'bar', data: { labels: ch.data.map(d=>d.label), datasets: [{ data: ch.data.map(d=>d.value), backgroundColor: 'rgba(59,130,246,0.7)', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } }); } }); }, 100);
                 phase3RenderNotifications();
             }
 
@@ -2517,7 +2825,17 @@
                 saveData(); refreshAllViews(); document.getElementById('objTitle').value='';
             });
             document.getElementById('clearObjBtn')?.addEventListener('click', function() { ['objTitle','objDesc','objWeight','objTarget','objYearWeights'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';}); if(document.getElementById('objParent')) document.getElementById('objParent').value=''; if(document.getElementById('objPerspective')) document.getElementById('objPerspective').value='المستفيدون'; if(document.getElementById('objStartYear')) document.getElementById('objStartYear').value='2026'; if(document.getElementById('objEndYear')) document.getElementById('objEndYear').value='2030'; document.getElementById('editingObjId').value=''; });
-            document.getElementById('saveProjectBtn')?.addEventListener('click', function() {
+            
+            function showInlineSaveConfirm(id,msg){
+                const el=document.getElementById(id);
+                if(!el) return;
+                el.innerHTML=`<i class="fas fa-check-circle"></i> ${msg}`;
+                el.classList.add('show');
+                clearTimeout(el._hideTimer);
+                el._hideTimer=setTimeout(()=>{el.classList.remove('show');},4200);
+            }
+
+            function saveProjectAndRefreshT19_2(){
                 const name = document.getElementById('projName').value.trim();
                 if(!name) return alert('الاسم مطلوب');
                 const eid = document.getElementById('editingProjectId').value;
@@ -2532,11 +2850,25 @@
                         document.getElementById('projSector').value = trimmed;
                     } else sectorToSave = '';
                 }
-                const plannedBudget=parseFloat(document.getElementById('projPlannedBudget').value)||0; const allocatedBudget=parseFloat(document.getElementById('projAllocatedBudget').value)||0; const actualCost=parseFloat(document.getElementById('projActualCost').value)||0; const data = { id: eid || generateId(), name, type: document.getElementById('projType').value, sector: sectorToSave, directorate: document.getElementById('projDirectorate').value||'', objectiveId: document.getElementById('projObjective').value||'', status: document.getElementById('projStatus').value, start: document.getElementById('projStart').value||'', end: document.getElementById('projEnd').value||'', plannedBudget, allocatedBudget, actualCost, budget: allocatedBudget, progress: parseInt(document.getElementById('projProgress').value)||0, description: document.getElementById('projDesc').value };
-                if(eid){ const i=appData.projects.findIndex(p=>p.id===eid); if(i>=0) appData.projects[i]=data; document.getElementById('editingProjectId').value=''; } else appData.projects.push(data);
-                saveData(); refreshAllViews(); document.getElementById('projName').value='';
-            });
-            document.getElementById('clearProjectBtn')?.addEventListener('click', function() { ['projName','projStart','projEnd','projPlannedBudget','projAllocatedBudget','projActualCost','projBudget','projDesc'].forEach(id=>document.getElementById(id).value=''); document.getElementById('projProgress').value=0; document.getElementById('progVal').innerText='0%'; document.getElementById('editingProjectId').value=''; });
+                const plannedBudget=parseFloat(document.getElementById('projPlannedBudget').value)||0;
+                const existing=eid ? appData.projects.find(p=>p.id===eid) : null;
+                const data = { id: eid || generateId(), name, type: document.getElementById('projType').value, sector: sectorToSave, directorate: document.getElementById('projDirectorate').value||'', manager: document.getElementById('projManager').value||'', objectiveId: document.getElementById('projObjective').value||'', status: document.getElementById('projStatus').value, start: document.getElementById('projStart').value||'', end: document.getElementById('projEnd').value||'', plannedBudget, allocatedBudget: existing?.allocatedBudget||0, actualCost: existing?.actualCost||0, budget: plannedBudget, progress: parseInt(document.getElementById('projProgress').value)||0, description: document.getElementById('projDesc').value };
+                if(eid){ const i=appData.projects.findIndex(p=>p.id===eid); if(i>=0) appData.projects[i]=data; document.getElementById('editingProjectId').value=''; }
+                else appData.projects.push(data);
+                saveData();
+                try { renderProjects(); } catch(e) { console.warn('renderProjects failed', e); }
+                try { renderBudget(); } catch(e) { console.warn('renderBudget failed', e); }
+                try { populateDropdowns(); } catch(e) { console.warn('populateDropdowns failed', e); }
+                try { renderDashboard(); } catch(e) { console.warn('renderDashboard failed', e); }
+                try { renderReports(); } catch(e) { console.warn('renderReports failed', e); }
+                try { renderPhase3Executive(); } catch(e) { console.warn('renderPhase3Executive failed', e); }
+                document.getElementById('projName').value='';
+                showInlineSaveConfirm('projectSaveConfirm','تم حفظ بيانات المشروع بنجاح وتحديث قائمة المشاريع مباشرة');
+                if(typeof window.toast==='function') window.toast('تم حفظ بيانات المشروع وتحديث قائمة المشاريع بنجاح');
+            }
+            window.saveProjectAndRefreshT19_2 = saveProjectAndRefreshT19_2;
+            document.getElementById('saveProjectBtn')?.addEventListener('click', saveProjectAndRefreshT19_2);
+            document.getElementById('clearProjectBtn')?.addEventListener('click', function() { ['projName','projStart','projEnd','projPlannedBudget','projAllocatedBudget','projActualCost','projBudget','projDesc','projManager'].forEach(id=>document.getElementById(id).value=''); document.getElementById('projProgress').value=0; document.getElementById('progVal').innerText='0%'; document.getElementById('editingProjectId').value=''; const pd=document.getElementById('projDirectorate'); if(pd) pd.value=''; });
             document.getElementById('saveResourceBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('resourceProject').value;
                 if(!pid) return alert('اختر المشروع');
@@ -2779,15 +3111,41 @@
                 saveData(); refreshAllViews(); document.getElementById('riskDesc').value=''; document.getElementById('riskAction').value=''; document.getElementById('riskOwner').value='';
             });
             document.getElementById('clearRiskBtn')?.addEventListener('click', function() { ['riskDesc','riskAction','riskOwner'].forEach(id=>document.getElementById(id).value=''); const rp=document.getElementById('riskProbability'); if(rp) rp.value=3; const ri=document.getElementById('riskImpact'); if(ri) ri.value=3; document.getElementById('editingRiskId').value=''; });
+
+            document.getElementById('budgetProject')?.addEventListener('change', function(){ syncBudgetProjectFields(); renderBudget(); });
             document.getElementById('saveBudgetBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('budgetProject').value;
                 if(!pid) return alert('اختر المشروع');
                 const eid = document.getElementById('editingBudgetId').value;
-                const data = { id: eid || generateId(), projectId: pid, item: document.getElementById('budgetItem').value, planned: parseFloat(document.getElementById('plannedAmount').value)||0, spent: parseFloat(document.getElementById('actualSpent').value)||0, date: document.getElementById('budgetDate').value||'', notes: document.getElementById('budgetNotes').value||'' };
-                if(eid){ const i=appData.budgets.findIndex(b=>b.id===eid); if(i>=0) appData.budgets[i]=data; document.getElementById('editingBudgetId').value=''; } else appData.budgets.push(data);
-                saveData(); refreshAllViews(); document.getElementById('budgetItem').value=''; document.getElementById('plannedAmount').value=''; document.getElementById('actualSpent').value=''; document.getElementById('budgetNotes').value='';
+                const project=appData.projects.find(p=>p.id===pid);
+                const newBudget=parseFloat(document.getElementById('budgetProjectPlannedBudget')?.value)||0;
+                if(project){ project.plannedBudget=newBudget; project.budget=newBudget; }
+
+                const item=(document.getElementById('budgetItem').value||'').trim();
+                const planned=parseFloat(document.getElementById('plannedAmount').value)||0;
+                const spent=parseFloat(document.getElementById('actualSpent').value)||0;
+                const hasCostItem = item || planned || spent || eid;
+                if(hasCostItem){
+                    const data = { id: eid || generateId(), projectId: pid, item, planned, spent, date: document.getElementById('budgetDate').value||'', notes: document.getElementById('budgetNotes').value||'' };
+                    if(eid){ const i=appData.budgets.findIndex(b=>b.id===eid); if(i>=0) appData.budgets[i]=data; document.getElementById('editingBudgetId').value=''; }
+                    else appData.budgets.push(data);
+                }
+
+                saveData();
+                renderBudget();
+                renderProjects();
+                renderDashboard();
+                renderReports();
+                renderPhase3Executive();
+                document.getElementById('budgetItem').value='';
+                document.getElementById('plannedAmount').value='';
+                document.getElementById('actualSpent').value='';
+                document.getElementById('budgetNotes').value='';
+                document.getElementById('budgetDate').value='';
+                syncBudgetProjectFields();
+                showInlineSaveConfirm('budgetSaveConfirm','تم حفظ بيانات الموازنة بنجاح وتحديث التقرير مباشرة'); toast('تم حفظ بيانات الموازنة وتحديث الجدول بنجاح');
             });
-            document.getElementById('clearBudgetBtn')?.addEventListener('click', function() { ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingBudgetId').value=''; });
+            document.getElementById('clearBudgetBtn')?.addEventListener('click', function() { ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingBudgetId').value=''; syncBudgetProjectFields(); });
             document.getElementById('saveServiceBtn')?.addEventListener('click', function() {
                 const name = document.getElementById('serviceName').value.trim();
                 if(!name) return alert('الاسم مطلوب');
@@ -2836,7 +3194,7 @@
             refreshAllViews();
             phase3RenderNotifications();
             document.getElementById('applyReportFilter')?.addEventListener('click', renderReports);
-            document.addEventListener('click', function(e){ const panel=document.getElementById('phase3SearchPanel'); const input=document.getElementById('globalSearchInput'); if(panel && !panel.contains(e.target) && e.target!==input) panel.classList.remove('show'); });
+            document.addEventListener('click', function(e){ const panel=document.getElementById('phase3SearchPanel'); const wrap=document.querySelector('.phase3-search-wrap'); if(panel && !panel.contains(e.target) && !(wrap && wrap.contains(e.target))) panel.classList.remove('show'); });
         })();
     </script>
 
@@ -2944,6 +3302,45 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
 })();
 </script>
 
+
+
+<style id="t19-2-budget-report-toast-style">
+#tab-budget #budgetTable{border-collapse:separate!important;border-spacing:0 6px!important;background:#f8fafc;min-width:980px}
+#tab-budget #budgetTable thead th{background:#0f172a!important;color:#fff!important;border-bottom:none!important}
+#tab-budget #budgetBody tr.budget-project-separator td{background:linear-gradient(135deg,#1e3a8a,#2563eb)!important;color:#fff!important;font-weight:900!important;font-size:.92rem!important;padding:12px 14px!important;border-radius:12px 12px 0 0!important;border-bottom:0!important}
+#tab-budget #budgetBody tr.budget-project-separator i{margin-left:8px;color:#bfdbfe}
+#tab-budget #budgetBody tr.budget-project-summary-row td{background:#e0f2fe!important;border-top:1px solid #93c5fd!important;border-bottom:1px solid #bfdbfe!important;font-weight:800!important;color:#0f172a!important}
+#tab-budget .budget-summary-label{display:inline-flex;align-items:center;gap:6px;background:#0f172a;color:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem;font-weight:900}
+#tab-budget .budget-summary-label:before{content:none!important}
+#tab-budget #budgetBody tr.budget-cost-item-row td{background:#fff!important;border-bottom:1px solid #e2e8f0!important}
+#tab-budget #budgetBody tr.budget-cost-item-row td:first-child{border-right:4px solid #bfdbfe!important;font-weight:700;color:#334155}
+#tab-budget #budgetBody tr.budget-empty-items-row td{background:#fff7ed!important;color:#9a3412!important;text-align:center!important;font-weight:800!important;border-bottom:1px dashed #fdba74!important}
+.t19-toast{position:fixed;bottom:24px;left:24px;z-index:999999;background:#0f172a;color:#fff;border-radius:16px;padding:13px 18px;font-weight:900;font-size:.88rem;box-shadow:0 18px 45px rgba(15,23,42,.28);display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(16px);transition:.25s;direction:rtl;border:1px solid rgba(255,255,255,.14)}
+.t19-toast.show{opacity:1;transform:translateY(0)}
+.t19-toast i{color:#86efac;font-size:1rem}
+
+#tab-budget .budget-cell-label{display:block;color:#64748b;font-size:.68rem;font-weight:900;margin-bottom:3px;line-height:1.2}
+#tab-budget .budget-row-note{margin-top:4px;color:#1e3a8a;font-size:.72rem;font-weight:900;background:#dbeafe;display:inline-flex;border-radius:999px;padding:2px 8px}
+#tab-projects .readonly-metric input[readonly],#tab-projects input[readonly]#projAllocatedBudget,#tab-projects input[readonly]#projActualCost{background:#eef2f7!important;color:#64748b!important;border-color:#cbd5e1!important;cursor:not-allowed!important;opacity:.72!important;box-shadow:none!important}
+#tab-projects .readonly-metric label{color:#64748b!important}
+.inline-save-confirm{display:none;margin-top:12px;padding:12px 15px;border-radius:12px;background:#dcfce7;color:#14532d;border:1.5px solid #22c55e;font-weight:900;font-size:.9rem;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(34,197,94,.16)}
+.inline-save-confirm.show{display:flex}
+.inline-save-confirm i{color:#16a34a}
+</style>
+<script id="t19-2-global-toast-fix">
+(function(){
+  window.toast=function(msg){
+    document.querySelectorAll('.t19-toast').forEach(el=>el.remove());
+    const t=document.createElement('div');
+    t.className='t19-toast';
+    t.innerHTML='<i class="fas fa-check-circle"></i><span></span>';
+    t.querySelector('span').textContent=msg||'تم الحفظ بنجاح';
+    document.body.appendChild(t);
+    requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),280);},2600);
+  };
+})();
+</script>
 
 <style id="t17-budget-controls-cleanup-style">
 /* إصلاح نهائي: منع تكرار أدوات التحكم داخل البطاقات */
