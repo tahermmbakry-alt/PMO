@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T20 - نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات</title>
+    <title>T20.4 - نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -728,7 +728,7 @@
         body.dark-mode .t20-sync-panel{background:#111827;border-color:#263244} body.dark-mode .t20-sync-title{color:#e5e7eb} body.dark-mode .t20-sync-sub,body.dark-mode .t20-sync-meta{color:#cbd5e1}
 
 
-        /* ===== T20 Ver.3 Smart Compact Top Area ===== */
+        /* ===== T20 Ver.4 Smart Compact Top Area ===== */
         .header{padding:14px 22px!important;margin-bottom:12px!important;border-radius:18px!important;min-height:64px!important}
         .header i{font-size:1.55rem!important;padding:10px!important;border-radius:13px!important}
         .header h1{font-size:1.22rem!important;line-height:1.35!important;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -770,7 +770,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T20 | Ver.3</span></h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T20 | Ver.4</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -2305,36 +2305,63 @@
                 minDate.setDate(minDate.getDate()-paddingDays); maxDate.setDate(maxDate.getDate()+paddingDays);
                 const totalDays=Math.max(1,(maxDate-minDate)/86400000);
                 let displayUnit='month'; if(ganttZoomLevel<=-2) displayUnit='day'; else if(ganttZoomLevel===-1) displayUnit='week'; else if(ganttZoomLevel===0) displayUnit='month'; else if(ganttZoomLevel>=1) displayUnit='year';
-                let headerHTML='<div class="gantt-timeline" style="display:flex;border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-bottom:8px;direction:rtl;">';
+                let headerHTML='<div class="gantt-timeline" style="display:flex;align-items:stretch;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-bottom:8px;direction:rtl;">';
                 const months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-                let currentDate=new Date(minDate), unitHTML='';
+                const dayMs=86400000;
+                const clampStart=(d)=> new Date(Math.max(d.getTime(), minDate.getTime()));
+                const clampEnd=(d)=> new Date(Math.min(d.getTime(), maxDate.getTime()));
+                const segFlex=(start,end)=> Math.max(0.5,(clampEnd(end)-clampStart(start))/dayMs/totalDays*100);
+                let currentDate=new Date(minDate), unitHTML='', yearHTML='';
                 if(displayUnit==='month'){
+                    const monthCursor=new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+                    const yearCursor=new Date(minDate.getFullYear(), 0, 1);
+                    currentDate=new Date(monthCursor);
                     while(currentDate<=maxDate){
                         const year=currentDate.getFullYear(), month=currentDate.getMonth();
-                        const monthStart=new Date(year,month,1), monthEnd=new Date(year,month+1,0);
-                        const monthWidth=Math.max(1,(monthEnd-monthStart)/86400000/totalDays*100);
-                        unitHTML=`<span style="flex:${monthWidth};text-align:center;font-size:0.6rem;padding:1px 0;">${months[month]}</span>`+unitHTML;
+                        const monthStart=new Date(year,month,1), monthEnd=new Date(year,month+1,1);
+                        const monthWidth=segFlex(monthStart,monthEnd);
+                        unitHTML+=`<span style="flex:${monthWidth};text-align:center;font-size:0.62rem;padding:3px 2px;border-left:1px solid #e2e8f0;white-space:nowrap;">${months[month]}</span>`;
                         currentDate.setMonth(currentDate.getMonth()+1);
                     }
-                } else if(displayUnit==='year'){
+                    currentDate=new Date(yearCursor);
                     while(currentDate<=maxDate){
                         const year=currentDate.getFullYear();
-                        const yearStart=new Date(year,0,1), yearEnd=new Date(year,11,31);
-                        const yearWidth=Math.max(1,(yearEnd-yearStart)/86400000/totalDays*100);
-                        unitHTML=`<span style="flex:${yearWidth};text-align:center;font-size:0.7rem;padding:2px 0;">${year}</span>`+unitHTML;
+                        const yearStart=new Date(year,0,1), yearEnd=new Date(year+1,0,1);
+                        const yearWidth=segFlex(yearStart,yearEnd);
+                        yearHTML+=`<span style="flex:${yearWidth};text-align:center;font-size:0.74rem;font-weight:900;color:#1e3a8a;background:#eff6ff;border:1px solid #bfdbfe;border-left:none;padding:4px 2px;white-space:nowrap;">${year}</span>`;
+                        currentDate.setFullYear(currentDate.getFullYear()+1);
+                    }
+                } else if(displayUnit==='year'){
+                    currentDate=new Date(minDate.getFullYear(),0,1);
+                    while(currentDate<=maxDate){
+                        const year=currentDate.getFullYear();
+                        const yearStart=new Date(year,0,1), yearEnd=new Date(year+1,0,1);
+                        const yearWidth=segFlex(yearStart,yearEnd);
+                        yearHTML+=`<span style="flex:${yearWidth};text-align:center;font-size:0.76rem;font-weight:900;color:#1e3a8a;background:#eff6ff;border:1px solid #bfdbfe;border-left:none;padding:4px 2px;white-space:nowrap;">${year}</span>`;
+                        unitHTML+=`<span style="flex:${yearWidth};text-align:center;font-size:0.62rem;padding:3px 2px;border-left:1px solid #e2e8f0;white-space:nowrap;">السنة</span>`;
                         currentDate.setFullYear(currentDate.getFullYear()+1);
                     }
                 } else {
+                    currentDate=new Date(minDate.getFullYear(),0,1);
+                    while(currentDate<=maxDate){
+                        const year=currentDate.getFullYear();
+                        const yearStart=new Date(year,0,1), yearEnd=new Date(year+1,0,1);
+                        const yearWidth=segFlex(yearStart,yearEnd);
+                        yearHTML+=`<span style="flex:${yearWidth};text-align:center;font-size:0.72rem;font-weight:900;color:#1e3a8a;background:#eff6ff;border:1px solid #bfdbfe;border-left:none;padding:4px 2px;white-space:nowrap;">${year}</span>`;
+                        currentDate.setFullYear(currentDate.getFullYear()+1);
+                    }
+                    currentDate=new Date(minDate);
                     let count=0;
                     while(currentDate<=maxDate){
-                        const width=displayUnit==='day'?(1/totalDays*100):(7/totalDays*100);
+                        const nextDate=new Date(currentDate);
+                        if(displayUnit==='day') nextDate.setDate(nextDate.getDate()+1); else nextDate.setDate(nextDate.getDate()+7);
+                        const width=segFlex(currentDate,nextDate);
                         const label=displayUnit==='day'?currentDate.getDate():'أ'+(count+1);
-                        unitHTML=`<span style="flex:${width};text-align:center;font-size:0.55rem;padding:1px 0;">${label}</span>`+unitHTML;
-                        if(displayUnit==='day') currentDate.setDate(currentDate.getDate()+1);
-                        else { currentDate.setDate(currentDate.getDate()+7); count++; }
+                        unitHTML+=`<span style="flex:${width};text-align:center;font-size:0.55rem;padding:2px 1px;border-left:1px solid #e2e8f0;white-space:nowrap;">${label}</span>`;
+                        currentDate=nextDate; count++;
                     }
                 }
-                headerHTML+=`<div style="display:flex;flex-direction:column;width:100%;"><div style="display:flex;">${unitHTML}</div></div></div>`;
+                headerHTML+=`<div class="task-label" style="width:170px;min-width:170px;margin-left:10px;font-weight:800;color:#64748b;font-size:.72rem;display:flex;align-items:end;justify-content:flex-start;padding-bottom:3px;">المهمة</div><div style="flex:1;margin:0 10px;direction:ltr;overflow:hidden;"><div class="gantt-year-row" style="display:flex;border-radius:10px 10px 0 0;overflow:hidden;">${yearHTML}</div><div class="gantt-month-row" style="display:flex;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 10px 10px;overflow:hidden;">${unitHTML}</div></div></div>`;
                 let rowsHTML='';
                 tasks.forEach(t=>{
                     const s=t.planStart?new Date(t.planStart):minDate;
