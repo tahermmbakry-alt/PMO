@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات - الإصدار 20T</title>
+    <title>T20 - نظام إدارة المشاريع المتكامل | وزارة النقل والاتصالات وتقنية المعلومات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -68,28 +68,6 @@
         .header .subtitle {
             color: #94a3b8;
             font-size: 0.85rem;
-        }
-
-        .program-version-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-right: 12px;
-            padding: 5px 12px;
-            border-radius: 999px;
-            background: rgba(59, 130, 246, 0.18);
-            color: #dbeafe;
-            border: 1px solid rgba(147, 197, 253, 0.35);
-            font-size: 0.78rem;
-            font-weight: 800;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-        .program-version-badge::before {
-            content: "الإصدار";
-            font-size: 0.68rem;
-            color: #bfdbfe;
-            font-weight: 700;
         }
 
         .tabs-nav {
@@ -735,6 +713,43 @@
             }
         }
 
+
+        /* ===== T20 Central Sync Layer ===== */
+        .program-version-badge{display:inline-flex;align-items:center;margin-right:10px;background:#dbeafe;color:#1e3a8a;border:1px solid #93c5fd;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:900;vertical-align:middle}
+        .t20-sync-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid #dbeafe;border-right:5px solid #3b82f6;border-radius:16px;padding:12px 14px;margin:0 0 16px 0;box-shadow:var(--shadow)}
+        .t20-sync-main{display:flex;align-items:center;gap:10px;min-width:260px}
+        .t20-sync-dot{width:12px;height:12px;border-radius:999px;background:#94a3b8;box-shadow:0 0 0 4px rgba(148,163,184,.16);flex-shrink:0}
+        .t20-sync-title{font-size:.86rem;font-weight:900;color:#0f172a}.t20-sync-sub{font-size:.72rem;color:#64748b;font-weight:700;margin-top:2px}
+        .t20-sync-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.t20-sync-actions .btn{margin:0}.t20-sync-meta{font-size:.7rem;color:#64748b;font-weight:800}
+        .t20-sync-ok .t20-sync-dot{background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,.16)}
+        .t20-sync-pending .t20-sync-dot{background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.18)}
+        .t20-sync-error .t20-sync-dot{background:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.16)}
+        .t20-sync-off .t20-sync-dot{background:#64748b;box-shadow:0 0 0 4px rgba(100,116,139,.16)}
+        body.dark-mode .t20-sync-panel{background:#111827;border-color:#263244} body.dark-mode .t20-sync-title{color:#e5e7eb} body.dark-mode .t20-sync-sub,body.dark-mode .t20-sync-meta{color:#cbd5e1}
+
+
+        /* ===== T20 Ver.3 Smart Compact Top Area ===== */
+        .header{padding:14px 22px!important;margin-bottom:12px!important;border-radius:18px!important;min-height:64px!important}
+        .header i{font-size:1.55rem!important;padding:10px!important;border-radius:13px!important}
+        .header h1{font-size:1.22rem!important;line-height:1.35!important;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .header .subtitle{font-size:.76rem!important;margin-top:2px!important}
+        .program-version-badge{padding:4px 10px!important;font-size:.72rem!important;margin-right:6px!important;background:rgba(59,130,246,.18)!important;color:#dbeafe!important;border-color:rgba(147,197,253,.35)!important}
+        .program-version-badge::before{content:"الإصدار";font-size:.62rem;color:#bfdbfe;font-weight:800;margin-left:3px}
+        .tabs-nav{min-height:44px!important;padding:6px!important;gap:3px!important;margin-bottom:10px!important;border-radius:15px!important;align-items:center;box-shadow:0 6px 18px rgba(15,23,42,.05)!important;position:sticky;top:8px;z-index:70;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(10px)}
+        .tab-btn{height:32px!important;padding:6px 12px!important;font-size:.76rem!important;border-radius:10px!important;gap:5px!important;line-height:1!important}
+        .tab-btn i{font-size:.82rem!important;color:inherit!important}
+        .tab-btn.active{background:#2563eb!important;box-shadow:0 8px 18px rgba(37,99,235,.18)!important}
+        .t20-smart-toolbar{display:grid;grid-template-columns:minmax(300px,1fr) auto auto;gap:8px;align-items:center;background:rgba(255,255,255,.96);border:1px solid #dbe4ef;border-right:4px solid #2563eb;border-radius:16px;padding:8px 10px;margin:0 0 10px 0;box-shadow:0 8px 24px rgba(15,23,42,.06);position:sticky;top:62px;z-index:65;backdrop-filter:blur(10px)}
+        .t20-smart-search{display:flex;align-items:center;gap:7px;min-width:0}.t20-smart-search .phase3-search-wrap{flex:1;margin:0;display:flex;gap:7px;align-items:center;position:relative}.t20-smart-search .phase3-search{height:38px!important;border-radius:12px!important;padding:9px 38px 9px 10px!important;font-size:.8rem!important;background:#f8fafc!important}.t20-smart-search .phase3-search-wrap>i{right:12px!important;font-size:.9rem!important;color:#64748b!important}
+        .t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{height:38px!important;min-height:38px!important;border-radius:12px!important;padding:0 12px!important;font-size:.76rem!important;white-space:nowrap!important}.t20-smart-search .phase3-search-reset-btn{background:#fff!important;border:1px solid #cbd5e1!important;color:#2563eb!important}
+        .t20-sync-chip{display:flex;align-items:center;gap:8px;min-width:220px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:7px 10px;cursor:pointer;transition:.18s}.t20-sync-chip:hover{background:#eef6ff;border-color:#bfdbfe}.t20-sync-chip .t20-sync-title{font-size:.76rem!important;white-space:nowrap}.t20-sync-chip .t20-sync-sub{display:none!important}.t20-sync-chip .t20-sync-meta{font-size:.68rem!important;color:#64748b!important;white-space:nowrap}.t20-sync-chip .t20-sync-dot{width:9px!important;height:9px!important;box-shadow:0 0 0 3px rgba(148,163,184,.14)!important}
+        .t20-smart-actions{display:flex;align-items:center;gap:6px}.t20-smart-icon-btn,.t20-more-summary{height:38px;min-width:38px;border:1px solid #dbe4ef;background:#fff;color:#334155;border-radius:12px;padding:0 11px;font-size:.78rem;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:.18s}.t20-smart-icon-btn:hover,.t20-more-summary:hover{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}.t20-smart-icon-btn.dark{background:#0f172a;color:#fff;border-color:#0f172a}.t20-smart-icon-btn.warn{background:#fff7ed;color:#9a3412;border-color:#fed7aa;position:relative}.t20-smart-icon-btn .badge{position:absolute;top:-6px;left:-6px;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;font-size:.62rem;border-radius:999px}
+        .t20-more-menu{position:relative}.t20-more-menu summary{list-style:none}.t20-more-menu summary::-webkit-details-marker{display:none}.t20-more-content{display:none;position:absolute;left:0;top:45px;width:245px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 18px 45px rgba(15,23,42,.16);padding:9px;z-index:100}.t20-more-menu[open] .t20-more-content{display:grid;gap:7px}.t20-more-content .btn{width:100%;height:36px!important;padding:0 10px!important;font-size:.74rem!important;justify-content:flex-start!important;border-radius:10px!important}.t20-more-label{font-size:.68rem;font-weight:900;color:#64748b;padding:4px 6px;border-bottom:1px solid #eef2f7;margin-bottom:2px}
+        .phase3-top-tools{display:none!important}.t20-sync-panel{display:none!important}.ux-screen-control-panel{margin:0 0 10px 0!important;padding:8px 10px!important;border-radius:14px!important;box-shadow:0 6px 18px rgba(15,23,42,.05)!important;gap:8px!important}.ux-screen-control-panel strong{font-size:.78rem!important}.ux-screen-control-panel small{display:none!important}.ux-screen-actions{gap:5px!important}.ux-screen-actions button{height:32px!important;padding:0 9px!important;font-size:.68rem!important;border-radius:9px!important}.card{margin-bottom:14px!important}.card-header{padding-bottom:9px!important;margin-bottom:12px!important}
+        body.dark-mode .tabs-nav,body.dark-mode .t20-smart-toolbar,body.dark-mode .t20-more-content{background:rgba(17,24,39,.96)!important;border-color:#263244!important;color:#e5e7eb!important}body.dark-mode .t20-sync-chip,body.dark-mode .t20-smart-icon-btn,body.dark-mode .t20-more-summary{background:#0f172a!important;border-color:#334155!important;color:#e5e7eb!important}body.dark-mode .t20-smart-search .phase3-search{background:#0f172a!important;color:#e5e7eb!important;border-color:#334155!important}
+        @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:1fr;position:relative;top:auto}.t20-sync-chip{min-width:0}.t20-smart-actions{justify-content:flex-start;flex-wrap:wrap}.tabs-nav{position:relative;top:auto}.tab-btn{font-size:.7rem!important;padding:6px 9px!important}}
+        @media(max-width:700px){.header h1{font-size:1rem!important}.t20-smart-search .phase3-search-wrap{flex-wrap:wrap}.t20-smart-search .phase3-search{flex:1 0 100%}.t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{flex:1}.t20-sync-chip{width:100%;justify-content:flex-start}.t20-more-content{left:auto;right:0;width:220px}}
+
 </style>
 
 
@@ -746,7 +761,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span id="programVersionBadge" class="program-version-badge">20T</span></h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T20 | Ver.3</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -765,15 +780,41 @@
             <button class="tab-btn" data-tab="tab-export"><i class="fas fa-download"></i> تصدير</button>
         </div>
 
-        <div class="phase3-top-tools no-print">
-            <div class="phase3-search-wrap">
-                <i class="fas fa-search"></i>
-                <input id="globalSearchInput" class="phase3-search" type="text" placeholder="بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة..." oninput="phase3GlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){phase3SearchButton(event)}">
-                <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)"><i class="fas fa-magnifying-glass"></i> بحث</button>
-                <button type="button" class="phase3-search-reset-btn" onclick="resetGlobalSearch()"><i class="fas fa-rotate-left"></i> إعادة تعيين</button>
+
+
+        <div class="t20-smart-toolbar no-print">
+            <div class="t20-smart-search">
+                <div class="phase3-search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input id="globalSearchInput" class="phase3-search" type="text" placeholder="بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة..." oninput="phase3GlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){phase3SearchButton(event)}">
+                    <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)"><i class="fas fa-magnifying-glass"></i> بحث</button>
+                    <button type="button" class="phase3-search-reset-btn" onclick="resetGlobalSearch()"><i class="fas fa-rotate-left"></i> إعادة تعيين</button>
+                </div>
             </div>
-            <button class="phase3-tool-btn warn" onclick="toggleNotifications()"><i class="fas fa-bell"></i> مركز التنبيهات <span id="phase3AlertCount" class="badge badge-danger">0</span></button>
-            <button class="phase3-tool-btn dark" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> سمة داكنة</button>
+            <div id="t20SyncPanel" class="t20-sync-chip t20-sync-off" title="حالة المزامنة المركزية">
+                <span class="t20-sync-dot"></span>
+                <div>
+                    <div id="t20SyncTitle" class="t20-sync-title">التخزين المركزي غير مفعل</div>
+                    <div id="t20SyncSub" class="t20-sync-sub">أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.</div>
+                    <span id="t20SyncMeta" class="t20-sync-meta">نسخة محلية محفوظة</span>
+                </div>
+            </div>
+            <div class="t20-smart-actions">
+                <button class="t20-smart-icon-btn warn" onclick="toggleNotifications()" title="مركز التنبيهات"><i class="fas fa-bell"></i><span id="phase3AlertCount" class="badge badge-danger">0</span></button>
+                <button class="t20-smart-icon-btn dark" onclick="toggleDarkMode()" title="سمة داكنة"><i class="fas fa-moon"></i></button>
+                <details class="t20-more-menu">
+                    <summary class="t20-more-summary" title="المزيد"><i class="fas fa-ellipsis-h"></i> المزيد</summary>
+                    <div class="t20-more-content">
+                        <div class="t20-more-label">إجراءات البيانات والمزامنة</div>
+                        <button type="button" class="btn btn-success" onclick="t20SyncNow()"><i class="fas fa-cloud-upload-alt"></i> مزامنة الآن</button>
+                        <button type="button" class="btn btn-outline" onclick="t20PullFromCentral()"><i class="fas fa-cloud-download-alt"></i> تحميل المركزي</button>
+                        <button type="button" class="btn btn-outline" onclick="document.querySelector('[data-tab=&quot;tab-export&quot;]')?.click()"><i class="fas fa-file-export"></i> التصدير والاستيراد</button>
+                        <div class="t20-more-label">إعدادات العرض</div>
+                        <button type="button" class="btn btn-outline" onclick="document.querySelector('.tab-content.active [data-ux-reset-sizes]')?.click()"><i class="fas fa-compress"></i> الحجم الافتراضي</button>
+                        <button type="button" class="btn btn-dark" onclick="document.querySelector('.tab-content.active [data-ux-reset-order]')?.click()"><i class="fas fa-rotate-left"></i> الترتيب الافتراضي</button>
+                    </div>
+                </details>
+            </div>
         </div>
         <div id="phase3SearchPanel" class="phase3-search-panel no-print"></div>
         <div id="phase3NotificationsDrawer" class="phase3-drawer no-print">
@@ -1226,17 +1267,16 @@
     </div>
 
     <script>
-        const PROGRAM_VERSION = '20T';
-        function updateProgramVersionDisplay() {
-            const badge = document.getElementById('programVersionBadge');
-            if (badge) badge.textContent = PROGRAM_VERSION;
-            if (!document.title.includes(PROGRAM_VERSION)) document.title = `${document.title} - الإصدار ${PROGRAM_VERSION}`;
-        }
-        document.addEventListener('DOMContentLoaded', updateProgramVersionDisplay);
         (function() {
             const STORAGE_KEY = 'motc_t5_final';
             const KPI_ORDER_KEY = 'kpi_card_order';
             const KPI_SIZE_KEY = 'kpi_card_size';
+
+            // T20: ضع رابط Google Apps Script Web App هنا فقط لتفعيل التخزين المركزي.
+            // مثال: const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/XXXXX/exec';
+            const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzI9-eQL782r-bq_w2ZSz0J4OrJL67rWuIS9yIn9aO_kpZ_giZQ5pPOaDrxP2sEwaic0A/exec';
+            const T20_SYNC_INTERVAL_MS = 120000; // رفع تلقائي كل دقيقتين عند وجود تغييرات
+            const T20_SYNC_META_KEY = 'motc_t20_sync_meta';
 
             let appData = { projects: [], resources: [], tasks: [], risks: [], budgets: [], objectives: [],
                 kpis: [], services: [], teamMembers: [], sectors: [], directorates: [], fiveYearPlans: [] };
@@ -1421,7 +1461,90 @@
                 saveData();
             }
 
-            function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
+            function saveData() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+                t20MarkDirty();
+            }
+
+            function t20SyncEnabled(){ return !!(T20_CENTRAL_SYNC_URL && T20_CENTRAL_SYNC_URL.indexOf('http') === 0); }
+            function t20ReadSyncMeta(){ try{return JSON.parse(localStorage.getItem(T20_SYNC_META_KEY)||'{}');}catch(e){return {};} }
+            function t20WriteSyncMeta(meta){ localStorage.setItem(T20_SYNC_META_KEY, JSON.stringify(meta||{})); }
+            function t20SetSyncStatus(state,title,sub){
+                const panel=document.getElementById('t20SyncPanel');
+                if(!panel) return;
+                panel.classList.remove('t20-sync-ok','t20-sync-pending','t20-sync-error','t20-sync-off');
+                panel.classList.add('t20-sync-'+state);
+                const t=document.getElementById('t20SyncTitle'), s=document.getElementById('t20SyncSub'), m=document.getElementById('t20SyncMeta');
+                if(t) t.textContent=title||'';
+                if(s) s.textContent=sub||'';
+                const meta=t20ReadSyncMeta();
+                if(m){
+                    if(meta.lastSyncAt) m.textContent='آخر مزامنة: '+new Date(meta.lastSyncAt).toLocaleString('ar-OM');
+                    else m.textContent='نسخة محلية محفوظة';
+                }
+            }
+            function t20MarkDirty(){
+                const meta=t20ReadSyncMeta();
+                meta.dirty=true; meta.lastLocalSaveAt=new Date().toISOString();
+                t20WriteSyncMeta(meta);
+                if(t20SyncEnabled()) t20SetSyncStatus('pending','تم الحفظ محلياً بانتظار المزامنة','سيتم رفع البيانات تلقائياً كل فترة، ويمكن الضغط على زر مزامنة الآن.');
+                else t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.');
+                clearTimeout(window.__t20SyncTimer);
+                window.__t20SyncTimer=setTimeout(()=>t20SyncNow(false),1500);
+            }
+            async function t20CentralRequest(payload){
+                if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
+                const res=await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+                const txt=await res.text();
+                let data={}; try{data=JSON.parse(txt||'{}');}catch(e){data={ok:res.ok,raw:txt};}
+                if(!res.ok || data.ok===false) throw new Error(data.error||('HTTP '+res.status));
+                return data;
+            }
+            async function t20SyncNow(showMessage=true){
+                if(!t20SyncEnabled()){ t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.'); if(showMessage) alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
+                try{
+                    t20SetSyncStatus('pending','جاري المزامنة مع Google Sheet','يتم رفع نسخة JSON مركزية دون تعطيل العمل المحلي.');
+                    const payload={action:'setDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY,db:appData,clientUpdatedAt:new Date().toISOString(),source:location.href};
+                    const result=await t20CentralRequest(payload);
+                    const meta=t20ReadSyncMeta();
+                    meta.dirty=false; meta.lastSyncAt=new Date().toISOString(); meta.remoteVersion=result.version||result.updatedAt||meta.lastSyncAt;
+                    t20WriteSyncMeta(meta);
+                    t20SetSyncStatus('ok','تمت المزامنة بنجاح','تم حفظ البيانات مركزياً في Google Sheet مع استمرار النسخة المحلية.');
+                    if(showMessage) toast('تمت المزامنة مع Google Sheet بنجاح');
+                }catch(err){
+                    console.error('T20 sync failed',err);
+                    t20SetSyncStatus('error','تعذرت المزامنة المركزية','تم الاحتفاظ بالبيانات محلياً، وسيعاد الرفع عند توفر الاتصال أو تصحيح الرابط.');
+                    if(showMessage) alert('تعذرت المزامنة المركزية: '+err.message);
+                }
+            }
+            async function t20PullFromCentral(){
+                if(!t20SyncEnabled()){ alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
+                if(!confirm('سيتم تحميل آخر نسخة مركزية واستبدال البيانات الحالية محلياً. هل تريد المتابعة؟')) return;
+                try{
+                    t20SetSyncStatus('pending','جاري تحميل النسخة المركزية','يتم جلب آخر نسخة محفوظة من Google Sheet.');
+                    const res=await t20CentralRequest({action:'getDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY});
+                    const remote=res.db||res.data;
+                    if(!remote) throw new Error('لا توجد بيانات مركزية صالحة');
+                    appData=remote;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.lastSyncAt=new Date().toISOString(); t20WriteSyncMeta(meta);
+                    refreshAllViews();
+                    t20SetSyncStatus('ok','تم تحميل النسخة المركزية','تم تحديث البيانات المحلية من Google Sheet.');
+                    toast('تم تحميل البيانات المركزية بنجاح');
+                }catch(err){
+                    t20SetSyncStatus('error','تعذر تحميل النسخة المركزية','تحقق من رابط Google Apps Script وصلاحيات النشر.');
+                    alert('تعذر تحميل النسخة المركزية: '+err.message);
+                }
+            }
+            window.t20SyncNow=t20SyncNow;
+            window.t20PullFromCentral=t20PullFromCentral;
+            function t20InitSync(){
+                const meta=t20ReadSyncMeta();
+                if(!t20SyncEnabled()) t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.');
+                else if(meta.dirty) t20SetSyncStatus('pending','توجد تغييرات محفوظة محلياً','سيتم رفعها تلقائياً أو عبر زر مزامنة الآن.');
+                else t20SetSyncStatus('ok','المزامنة المركزية مفعلة','يتم الحفظ محلياً فوراً والرفع مركزياً بشكل دوري.');
+                setInterval(()=>{ const m=t20ReadSyncMeta(); if(t20SyncEnabled() && m.dirty) t20SyncNow(false); }, T20_SYNC_INTERVAL_MS);
+            }
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
             function escapeHtml(v){return String(v??'').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
@@ -2090,7 +2213,7 @@
                     const rate=budget?Math.round((spent/budget)*100):0;
                     totalProjectBudget+=budget; totalCostPlanned+=cost; totalSpent+=spent;
                     tbody.innerHTML+=`<tr class="budget-project-separator"><td colspan="9"><i class="fas fa-folder-open"></i> ${p.name}</td></tr>`;
-                    tbody.innerHTML+=`<tr class="budget-project-summary-row"><td><strong>${p.name}</strong><div class="budget-row-note">ملخص مشروع</div></td><td></td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(cost)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(remaining)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-${projectBudgetStatusClass(p)}">${projectBudgetStatus(p)}</span></td><td><button class="btn btn-sm btn-warning" title="تعديل ميزانية المشروع من نفس صفحة الموازنة" onclick="editProjectBudgetSummary('${p.id}')"><i class="fas fa-edit"></i></button></td></tr>`;
+                    tbody.innerHTML+=`<tr class="budget-project-summary-row"><td><strong>${p.name}</strong><div class="budget-row-note">ملخص مشروع</div></td><td><span class="budget-summary-label">ملخص مشروع</span></td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(cost)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(remaining)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-${projectBudgetStatusClass(p)}">${projectBudgetStatus(p)}</span></td><td><button class="btn btn-sm btn-warning" title="تعديل ميزانية المشروع من نفس صفحة الموازنة" onclick="editProjectBudgetSummary('${p.id}')"><i class="fas fa-edit"></i></button></td></tr>`;
                     if(!projectItems.length){
                         tbody.innerHTML+=`<tr class="budget-empty-items-row"><td colspan="9">لا توجد بنود تكلفة مسجلة لهذا المشروع حتى الآن.</td></tr>`;
                     }
@@ -3193,6 +3316,8 @@
             phase3ApplyTheme();
             refreshAllViews();
             phase3RenderNotifications();
+            t20InitSync();
+            document.getElementById('exportGoogleSheetBtn')?.addEventListener('click', ()=>t20SyncNow(true));
             document.getElementById('applyReportFilter')?.addEventListener('click', renderReports);
             document.addEventListener('click', function(e){ const panel=document.getElementById('phase3SearchPanel'); const wrap=document.querySelector('.phase3-search-wrap'); if(panel && !panel.contains(e.target) && !(wrap && wrap.contains(e.target))) panel.classList.remove('show'); });
         })();
