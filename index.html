@@ -666,6 +666,29 @@
   #reportsGanttContainer, #reportsGanttContainer * { overflow:visible!important; max-height:none!important; height:auto!important; }
   .t2014-gantt-table { page-break-inside:auto!important; }
   .t2014-gantt-track { overflow:visible!important; }
+
+  /* تحسينات إضافية للطباعة - إظهار كل المحتوى */
+  .phase3-exec-summary { overflow:visible!important; max-height:none!important; height:auto!important; page-break-inside:auto!important; }
+  .phase3-list { overflow:visible!important; max-height:none!important; height:auto!important; page-break-inside:auto!important; }
+  .phase3-card { overflow:visible!important; max-height:none!important; height:auto!important; page-break-inside:avoid!important; }
+  .report-stat-card { overflow:visible!important; max-height:none!important; height:auto!important; page-break-inside:avoid!important; }
+  .chart-box { overflow:visible!important; max-height:none!important; height:auto!important; page-break-inside:auto!important; }
+  .chart-container { overflow:visible!important; max-height:none!important; height:auto!important; }
+  canvas { max-height:none!important; }
+
+  /* إزالة القيود على الجداول */
+  .table-wrapper { overflow:visible!important; max-height:none!important; height:auto!important; }
+  div[style*="overflow-y:auto"], div[style*="overflow-y: scroll"], div[style*="max-height"] {
+    overflow:visible!important; max-height:none!important; height:auto!important;
+  }
+
+  /* ضمان طباعة المخططات البيانية بالكامل */
+  #reportsChartsContainer { display:block!important; }
+  #reportsChartsContainer .chart-box { page-break-inside:auto!important; break-inside:auto!important; }
+
+  /* منع الصفحات الفارغة */
+  body { overflow:visible!important; }
+  .main-container { overflow:visible!important; }
 }
         @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{margin-top:0}}
 
@@ -2797,7 +2820,7 @@
                     <div style="overflow-x:auto;max-height:250px;overflow-y:auto">
                     <table style="font-size:.76rem;min-width:800px;width:100%;border-collapse:collapse">
                     <thead><tr style="background:#dbeafe"><th style="padding:6px 8px;text-align:right">المشروع</th><th style="padding:6px 8px;text-align:right">الحالة</th><th style="padding:6px 8px;text-align:right">الإنجاز</th><th style="padding:6px 8px;text-align:right">الصحة</th><th style="padding:6px 8px;text-align:right">الميزانية</th><th style="padding:6px 8px;text-align:right">المنفق</th><th style="padding:6px 8px;text-align:right">مخاطر</th><th style="padding:6px 8px;text-align:right">تاريخ</th></tr></thead>
-                    <tbody>${projectDetails.map(p=>`<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 8px">${p.name}</td><td style="padding:6px 8px"><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td style="padding:6px 8px">${p.progress}%</td><td style="padding:6px 8px"><span class="badge badge-${p.health>=80?'success':p.health>=60?'warning':'danger'}">${p.health}%</span></td><td style="padding:6px 8px">${formatCurrency(p.budget)}</td><td style="padding:6px 8px">${formatCurrency(p.spent)}</td><td style="padding:6px 8px">${p.riskCount}${p.critical?' <span style="color:#ef4444;font-weight:700">(حرجة: ${p.critical})</span>':''}</td><td style="padding:6px 8px;white-space:nowrap">${p.start} - ${p.end}</td></tr>`).join('')}</tbody>
+                    <tbody>${projectDetails.map(p=>`<tr style="border-bottom:1px solid #e2e8f0"><td style="padding:6px 8px">${p.name}</td><td style="padding:6px 8px"><span class="badge badge-${p.status==='نشط'?'active':p.status==='مكتمل'?'info':'warning'}">${p.status}</span></td><td style="padding:6px 8px">${p.progress}%</td><td style="padding:6px 8px"><span class="badge badge-${p.health>=80?'success':p.health>=60?'warning':'danger'}">${p.health}%</span></td><td style="padding:6px 8px">${formatCurrency(p.budget)}</td><td style="padding:6px 8px">${formatCurrency(p.spent)}</td><td style="padding:6px 8px">${p.riskCount}${p.critical?' <span style="color:#ef4444;font-weight:700">(حرجة: '+p.critical+')</span>':''}</td><td style="padding:6px 8px;white-space:nowrap">${p.start} - ${p.end}</td></tr>`).join('')}</tbody>
                     </table>
                     </div>
                 </div>` : `
@@ -4471,16 +4494,14 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
     var box=document.getElementById("reportsGanttContainer");
     if(!box) return;
     box.id="reportsGanttContainer";
-    var list=(projects&&projects.length?projects:((window.appData&&window.appData.projects)||[]));
+    // Always load all projects from appData when filter is "all" or not specified
+    var list = projects;
+    if(!list || !list.length){
+      list = (window.appData && window.appData.projects) || [];
+    }
     if(!list.length){
-      // إذا لم يتم تمرير مشاريع، نحاول جلبها من window.appData
-      var allProjects = (window.appData && window.appData.projects) || [];
-      if(allProjects.length){
-        list = allProjects;
-      } else {
-        box.innerHTML="<h4><i class='fas fa-diagram-project'></i> مخطط جانت &mdash; الجدول الزمني للمشاريع</h4><div style='color:#64748b;font-size:.85rem'>لا توجد مشاريع لعرضها.</div>";
-        return;
-      }
+      box.innerHTML="<h4><i class='fas fa-diagram-project'></i> مخطط جانت &mdash; الجدول الزمني للمشاريع</h4><div style='color:#64748b;font-size:.85rem'>لا توجد مشاريع لعرضها.</div>";
+      return;
     }
 
     var starts=[],ends=[];
@@ -4533,12 +4554,10 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
     }catch(e){}
   });
 
-  function init(){ try{ build(null); }catch(e){} }
+  function init(){ try{ build((window.appData&&window.appData.projects)||[]); }catch(e){} }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
   else init();
-  document.addEventListener("click",function(e){
-    if(e.target.closest && e.target.closest("[data-tab=tab-reports]")) setTimeout(init,400);
-  });
+  // Gantt chart loads automatically on init, no need to re-render on tab click
 })();
 </script>
 </body>
