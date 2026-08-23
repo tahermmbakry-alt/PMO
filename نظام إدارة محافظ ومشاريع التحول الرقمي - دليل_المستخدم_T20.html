@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل المستخدم | نظام إدارة المشاريع المتكامل T20</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root{
+    color-scheme: light;
+    --navy:#0f172a; --blue:#1d4ed8; --sky:#3b82f6; --cyan:#0ea5e9;
+    --green:#10b981; --amber:#f59e0b; --red:#ef4444; --purple:#8b5cf6; --pink:#ec4899;
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",Tahoma,system-ui,sans-serif;background:var(--bg);color:var(--ink);margin:0;line-height:1.9}
+  .page{max-width:1000px;margin:0 auto;padding:0 20px}
+
+  /* ===== Cover ===== */
+  .cover{background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 60%,#0ea5e9 100%);color:#fff;padding:70px 20px 90px;text-align:center;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 40%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 45%)}
+  .cover-in{position:relative;z-index:2}
+  .cover .logo{width:92px;height:92px;border-radius:26px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);display:inline-flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:22px;backdrop-filter:blur(6px)}
+  .cover h1{font-size:2.5rem;margin:0 0 10px;font-weight:900;letter-spacing:-.5px}
+  .cover .tag{font-size:1.15rem;color:#dbeafe;font-weight:700}
+  .cover .badge{display:inline-block;margin-top:26px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 22px;font-weight:800;font-size:.95rem}
+  .cover .org{margin-top:34px;font-size:1rem;color:#eff6ff;font-weight:700}
+  .wave{position:absolute;bottom:-1px;left:0;right:0;z-index:1;line-height:0}
+
+  /* ===== Sections ===== */
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;background:#dbeafe;color:#1e3a8a;font-weight:900;font-size:.8rem;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+  h2.sec{font-size:1.85rem;font-weight:900;margin:0 0 8px;color:var(--navy)}
+  .lead{font-size:1.05rem;color:#334155;margin:0 0 22px;max-width:760px}
+  p{margin:0 0 14px;color:#334155}
+
+  /* ===== Feature grid ===== */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 6px 22px rgba(15,23,42,.05);border-top:4px solid var(--sky)}
+  .fcard i{font-size:1.5rem;color:var(--sky);margin-bottom:10px}
+  .fcard h4{margin:0 0 6px;font-size:1.02rem;color:var(--navy)}
+  .fcard p{font-size:.88rem;margin:0;color:var(--muted);line-height:1.75}
+
+  /* ===== Chapter (per page) ===== */
+  .chapter{padding:48px 0;border-bottom:1px solid var(--line)}
+  .chapter-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .chapter-num{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;flex-shrink:0;box-shadow:0 8px 20px rgba(29,78,216,.28)}
+  .chapter h3{font-size:1.5rem;font-weight:900;margin:0;color:var(--navy)}
+  .chapter .sub{color:var(--muted);font-size:.92rem;font-weight:700}
+  .cap-desc{font-size:1rem;color:#334155;margin:14px 0 20px;max-width:820px}
+  .caps{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+  .caps li{display:flex;gap:10px;align-items:flex-start;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:.9rem;color:#1e293b}
+  .caps li i{color:var(--green);margin-top:4px;flex-shrink:0}
+
+  /* ===== Mockup shell ===== */
+  .shot{background:#fff;border:1px solid #cbd5e1;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.14);margin:8px 0 6px}
+  .shot-bar{background:#0f172a;display:flex;align-items:center;gap:7px;padding:9px 13px}
+  .shot-bar span{width:11px;height:11px;border-radius:50%}
+  .dot-r{background:#ff5f57}.dot-y{background:#febc2e}.dot-g{background:#28c840}
+  .shot-bar .url{margin-right:12px;background:rgba(255,255,255,.1);color:#cbd5e1;border-radius:7px;padding:3px 12px;font-size:.72rem;flex:1;text-align:center}
+  .shot-body{padding:16px;background:#f1f5f9}
+  .cap{font-size:.8rem;color:var(--muted);text-align:center;font-weight:700;margin:4px 0 0}
+
+  /* mini header inside mockup */
+  .m-head{background:linear-gradient(135deg,#0f172a,#1d4ed8);border-radius:12px;padding:12px 16px;color:#fff;display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .m-head i{font-size:1.3rem;background:rgba(255,255,255,.16);padding:8px;border-radius:9px}
+  .m-head b{font-size:.95rem}.m-head small{display:block;color:#bfdbfe;font-size:.7rem;font-weight:700}
+  .m-vbadge{margin-right:auto;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 11px;font-size:.68rem;font-weight:900}
+  .m-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+  .m-tab{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:.72rem;font-weight:800;color:#475569}
+  .m-tab.on{background:var(--sky);color:#fff;border-color:var(--sky)}
+
+  .m-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+  .m-kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;border-right:5px solid var(--sky)}
+  .m-kpi .n{font-size:1.4rem;font-weight:900;color:var(--navy)}
+  .m-kpi .l{font-size:.68rem;color:var(--muted);font-weight:700}
+  .m-kpi.g{border-right-color:var(--green)} .m-kpi.a{border-right-color:var(--amber)}
+  .m-kpi.r{border-right-color:var(--red)} .m-kpi.p{border-right-color:var(--purple)}
+
+  .m-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .m-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px}
+  .m-box h5{margin:0 0 10px;font-size:.8rem;color:var(--navy);font-weight:800}
+  .m-bars{display:flex;align-items:flex-end;gap:9px;height:110px;padding-top:8px}
+  .m-bars .bar{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--sky),#93c5fd)}
+  .m-donut{width:120px;height:120px;border-radius:50%;margin:6px auto;background:conic-gradient(var(--sky) 0 40%,var(--green) 40% 65%,var(--amber) 65% 85%,var(--red) 85% 100%);position:relative}
+  .m-donut::after{content:"";position:absolute;inset:26px;background:#fff;border-radius:50%}
+  .m-line{height:110px;background:
+      linear-gradient(90deg,transparent 0 0),
+      #fff;border-radius:8px;position:relative;overflow:hidden;border:1px solid var(--line)}
+  .m-line svg{width:100%;height:100%}
+  .m-table{width:100%;border-collapse:collapse;font-size:.72rem}
+  .m-table th{background:#1e3a8a;color:#fff;padding:6px 8px;text-align:right;font-weight:800}
+  .m-table td{padding:6px 8px;border-bottom:1px solid var(--line);color:#334155}
+  .m-table tr:nth-child(even) td{background:#f8fafc}
+  .chip{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.66rem;font-weight:800}
+  .chip.green{background:#dcfce7;color:#166534}.chip.amber{background:#fef3c7;color:#92400e}
+  .chip.red{background:#fee2e2;color:#991b1b}.chip.blue{background:#dbeafe;color:#1e40af}
+  .m-form{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:11px}
+  .m-field{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px}
+  .m-field label{display:block;font-size:.62rem;color:var(--muted);font-weight:800;margin-bottom:4px}
+  .m-field .v{height:9px;background:#e2e8f0;border-radius:5px;width:80%}
+  .m-btn{display:inline-block;background:var(--sky);color:#fff;border-radius:8px;padding:7px 15px;font-size:.72rem;font-weight:800}
+  .m-btn.g{background:var(--green)}.m-btn.o{background:#fff;color:#475569;border:1px solid var(--line)}
+
+  .m-gantt{display:flex;flex-direction:column;gap:7px}
+  .m-grow{display:grid;grid-template-columns:130px 1fr;gap:8px;align-items:center;font-size:.7rem}
+  .m-track{height:15px;background:#e2e8f0;border-radius:8px;position:relative;overflow:hidden}
+  .m-fill{position:absolute;top:0;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--sky),var(--blue))}
+  .m-fill.g{background:linear-gradient(90deg,var(--green),#047857)}
+  .m-fill.a{background:linear-gradient(90deg,var(--amber),#b45309)}
+  .m-fill.r{background:linear-gradient(90deg,var(--red),#b91c1c)}
+
+  .m-heat{display:grid;grid-template-columns:60px repeat(5,1fr);gap:5px}
+  .m-heat .hc{height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:#fff}
+  .m-heat .hl{background:transparent;color:var(--muted);font-size:.62rem}
+  .hg{background:#10b981}.hy{background:#f59e0b}.ho{background:#fb923c}.hr{background:#ef4444}
+
+  .m-bsc{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .m-bsc .q{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;border-top:4px solid var(--purple)}
+  .m-bsc .q h6{margin:0 0 8px;font-size:.72rem;color:var(--navy)}
+  .m-bsc .q .it{background:#f8fafc;border-right:3px solid var(--sky);border-radius:7px;padding:6px;font-size:.64rem;margin-bottom:5px;color:#475569}
+
+  /* callout */
+  .callout{background:linear-gradient(135deg,#eff6ff,#f0f9ff);border:1px solid #bfdbfe;border-right:5px solid var(--sky);border-radius:14px;padding:16px 18px;margin:22px 0;display:flex;gap:13px;align-items:flex-start}
+  .callout i{color:var(--blue);font-size:1.3rem;margin-top:2px}
+  .callout b{color:var(--navy)}
+  .callout p{margin:0;font-size:.9rem}
+
+  /* highlight banner */
+  .hl-banner{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:20px;padding:34px;margin:30px 0;text-align:center}
+  .hl-banner h3{font-size:1.5rem;margin:0 0 10px;font-weight:900}
+  .hl-banner p{color:#dbeafe;max-width:680px;margin:0 auto}
+
+  .foot{background:var(--navy);color:#cbd5e1;text-align:center;padding:34px 20px;font-size:.85rem}
+  .foot b{color:#fff}
+
+  @media(max-width:720px){
+    .m-kpis{grid-template-columns:repeat(2,1fr)}
+    .m-2col{grid-template-columns:1fr}
+    .m-form{grid-template-columns:1fr 1fr}
+    .m-bsc{grid-template-columns:1fr 1fr}
+    .cover h1{font-size:1.8rem}
+  }
+  @media print{
+    body{background:#fff}
+    .chapter,section{page-break-inside:avoid}
+    .shot{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== COVER ========== -->
+<div class="cover">
+  <div class="cover-in">
+    <div class="logo"><i class="fas fa-satellite-dish"></i></div>
+    <h1>نظام إدارة المشاريع المتكامل</h1>
+    <div class="tag">Project Portfolio Management &mdash; منصّة القيادة التنفيذية للمشاريع والاستراتيجية</div>
+    <div class="badge"><i class="fas fa-shield-halved"></i>&nbsp; الإصدار T20 &bull; دليل المستخدم الشامل</div>
+    <div class="org">نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه
+</div>
+  </div>
+  <div class="wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:100%;height:60px"><path fill="#f1f5f9" d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z"></path></svg>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ========== INTRO ========== -->
+<section>
+  <span class="kicker"><i class="fas fa-star"></i> لماذا هذا النظام</span>
+  <h2 class="sec">منصّة واحدة تدير دورة حياة المشروع من الاستراتيجية إلى التنفيذ</h2>
+  <p class="lead">نظام <b>T20</b> هو حلٌّ متكامل لإدارة محافظ المشاريع الحكومية، يجمع في واجهة عربية واحدة بين التخطيط الخمسي، والأهداف الاستراتيجية ببطاقة الأداء المتوازن BSC، ومؤشرات الأداء KPIs، وإدارة المشاريع والموارد والمخاطر والموازنات — مع لوحات قيادة تفاعلية وتقارير تنفيذية جاهزة للطباعة. يعمل النظام بالكامل داخل المتصفح دون الحاجة لخوادم معقّدة، مع طبقة مزامنة مركزية سحابية اختيارية ونظام صلاحيات وأمان متقدّم.</p>
+
+  <div class="fgrid">
+    <div class="fcard"><i class="fas fa-layer-group"></i><h4>11 وحدة متكاملة</h4><p>من لوحة المؤشرات حتى التصدير، كل وحدة مترابطة مع الأخرى وتتحدّث بياناتها تلقائياً.</p></div>
+    <div class="fcard"><i class="fas fa-bolt"></i><h4>تحديث لحظي</h4><p>أي تعديل في مشروع أو موازنة ينعكس فوراً على المؤشرات والتقارير ولوحة القيادة.</p></div>
+    <div class="fcard"><i class="fas fa-cloud"></i><h4>مزامنة سحابية</h4><p>تخزين مركزي اختياري عبر Google Apps Script لمشاركة البيانات بين الفرق.</p></div>
+    <div class="fcard"><i class="fas fa-shield-halved"></i><h4>أمان وصلاحيات</h4><p>تسجيل دخول، أدوار (مدير نظام/مدير/مطّلع)، ومصفوفة صلاحيات لكل صفحة.</p></div>
+    <div class="fcard"><i class="fas fa-language"></i><h4>عربي 100%</h4><p>واجهة RTL كاملة مصمّمة للمستخدم العربي مع دعم المصطلحات ثنائية اللغة.</p></div>
+    <div class="fcard"><i class="fas fa-file-export"></i><h4>تصدير احترافي</h4><p>Excel كامل، Google Sheets، وتقارير PDF بحجم A4 جاهزة للاعتماد.</p></div>
+  </div>
+</section>
+
+<!-- ========== 1 DASHBOARD ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">1</div>
+    <div><h3>لوحة المؤشرات</h3><div class="sub">Dashboard &mdash; مركز القيادة التنفيذي</div></div>
+  </div>
+  <p class="cap-desc">نقطة الانطلاق اليومية للقيادة: مربّعات مؤشرات رئيسية قابلة للسحب وإعادة الترتيب، وأداء عام للمحفظة، وملخص المرحلة الأولى (الخطة الخمسية + BSC + مؤشرات RAG)، وقسم كامل للموازنة والتكلفة برسوم بيانية حيّة.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">لوحة المؤشرات — Dashboard</div></div>
+    <div class="shot-body">
+      <div class="m-head"><i class="fas fa-satellite-dish"></i><div><b>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه
+</b><small>نظام إدارة المشاريع المتكامل</small></div><span class="m-vbadge">T20 | Ver.14</span></div>
+      <div class="m-tabs"><span class="m-tab on">لوحة المؤشرات</span><span class="m-tab">الخطة الخمسية</span><span class="m-tab">الأهداف BSC</span><span class="m-tab">المشاريع</span><span class="m-tab">المخاطر</span><span class="m-tab">الموازنة</span><span class="m-tab">التقارير</span></div>
+      <div class="m-kpis">
+        <div class="m-kpi"><div class="n">15</div><div class="l">إجمالي المشاريع</div></div>
+        <div class="m-kpi a"><div class="n">8</div><div class="l">مشاريع نشطة</div></div>
+        <div class="m-kpi g"><div class="n">4</div><div class="l">مشاريع مكتملة</div></div>
+        <div class="m-kpi p"><div class="n">67%</div><div class="l">متوسط الإنجاز</div></div>
+      </div>
+      <div class="m-2col">
+        <div class="m-box"><h5><i class="fas fa-chart-bar" style="color:var(--sky)"></i> الميزانية · التكلفة · المنفق (بالمليون)</h5>
+          <div class="m-bars"><div class="bar" style="height:85%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:45%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:38%"></div></div>
+        </div>
+        <div class="m-box"><h5><i class="fas fa-chart-pie" style="color:var(--green)"></i> توزيع الموازنة حسب القطاع</h5>
+          <div class="m-donut"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="cap">لوحة المؤشرات الرئيسية مع المربّعات القابلة للسحب والرسوم المالية الحيّة</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> مربّعات مؤشرات (KPI Cards) قابلة للسحب وإعادة الترتيب وتغيير الحجم وحفظ التخطيط تلقائياً</li>
+    <li><i class="fas fa-check-circle"></i> بطاقة الأداء العام للمحفظة بمؤشر صحة تنفيذي ملوّن (أخضر/أصفر/أحمر)</li>
+    <li><i class="fas fa-check-circle"></i> ملخص المرحلة الأولى يربط الخطة الخمسية بالأهداف الاستراتيجية ومؤشرات RAG</li>
+    <li><i class="fas fa-check-circle"></i> قسم الموازنة والتكلفة برسمين بيانيين: مقارنة الميزانية بالمنفق واتجاه الصرف</li>
+    <li><i class="fas fa-check-circle"></i> عرض موازنة الخطة الخمسية المعتمدة في أعلى القسم</li>
+    <li><i class="fas fa-check-circle"></i> بحث شامل فوري في كل بيانات النظام من شريط واحد أعلى الصفحة</li>
+  </ul>
+</div>
+
+<!-- ========== 2 FIVE YEAR ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">2</div>
+    <div><h3>الخطة الخمسية</h3><div class="sub">2026 – 2030 &mdash; التخطيط الاستراتيجي متعدّد السنوات</div></div>
+  </div>
+  <p class="cap-desc">تقسيم سنوي للأهداف والمبادرات والموازنات، مع ربط كل سنة بالأهداف الاستراتيجية والمشاريع واحتساب الموازنة السنوية تلقائياً من مشاريع تلك السنة.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">الخطة الخمسية — Five Year Plan</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#7c3aed)"><i class="fas fa-calendar-alt"></i><div><b>الخطة الخمسية 2026 – 2030</b><small>تقسيم سنوي للأهداف والمبادرات والموازنات</small></div></div>
+      <div class="m-kpis" style="grid-template-columns:repeat(5,1fr)">
+        <div class="m-kpi"><div class="n">2026</div><div class="l">تأسيس الممكّنات</div></div>
+        <div class="m-kpi a"><div class="n">2027</div><div class="l">التوسّع الرقمي</div></div>
+        <div class="m-kpi g"><div class="n">2028</div><div class="l">التكامل</div></div>
+        <div class="m-kpi p"><div class="n">2029</div><div class="l">التحوّل</div></div>
+        <div class="m-kpi r"><div class="n">2030</div><div class="l">الريادة</div></div>
+      </div>
+      <div class="m-box"><h5><i class="fas fa-table"></i> جدول الخطة السنوية</h5>
+        <table class="m-table"><thead><tr><th>السنة</th><th>التركيز</th><th>المستهدف</th><th>الإنجاز</th><th>RAG</th><th>الموازنة</th></tr></thead>
+        <tbody>
+          <tr><td>2026</td><td>تأسيس الممكّنات الرقمية</td><td>80%</td><td>72%</td><td><span class="chip amber">متابعة</span></td><td>12.4M</td></tr>
+          <tr><td>2027</td><td>التوسّع في الخدمات</td><td>85%</td><td>78%</td><td><span class="chip green">جيد</span></td><td>15.1M</td></tr>
+          <tr><td>2028</td><td>التكامل المؤسسي</td><td>90%</td><td>60%</td><td><span class="chip red">متأخر</span></td><td>18.0M</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">جدول الخطة الخمسية مع مؤشرات RAG والموازنات المحتسبة تلقائياً</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> إضافة/تعديل كل سنة بتركيزها الاستراتيجي وأهدافها الرئيسية ومستهدفاتها</li>
+    <li><i class="fas fa-check-circle"></i> احتساب الموازنة السنوية تلقائياً من مجموع ميزانيات مشاريع السنة</li>
+    <li><i class="fas fa-check-circle"></i> مؤشرات RAG لونية لكل سنة تعكس نسبة الإنجاز مقابل المستهدف</li>
+    <li><i class="fas fa-check-circle"></i> رسوم بيانية لاتجاه تحقيق الأهداف الاستراتيجية عبر السنوات</li>
+    <li><i class="fas fa-check-circle"></i> جدول مؤشرات الأداء المتقدم KPIs بقيم Baseline وربعية Q1–Q4</li>
+    <li><i class="fas fa-check-circle"></i> عرض بصري لتحقيق KPIs السنوية مع اتجاهات زمنية</li>
+  </ul>
+</div>
+
+<!-- ========== 3 STRATEGY BSC ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">3</div>
+    <div><h3>الأهداف الاستراتيجية BSC</h3><div class="sub">بطاقة الأداء المتوازن &mdash; Balanced Scorecard</div></div>
+  </div>
+  <p class="cap-desc">إدارة الأهداف الاستراتيجية وفق منظورات بطاقة الأداء المتوازن الأربعة (المستفيدون، العمليات الداخلية، التعلّم والنمو، المالي)، مع ربط هرمي بين الأهداف وأوزان ومشاريع ومؤشرات مرتبطة.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">الأهداف الاستراتيجية — BSC</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#8b5cf6)"><i class="fas fa-bullseye"></i><div><b>خريطة BSC والربط الهرمي</b><small>بطاقة الأداء المتوازن</small></div></div>
+      <div class="m-bsc">
+        <div class="q"><h6><i class="fas fa-users"></i> المستفيدون</h6><div class="it">رفع رضا المستفيدين 90%</div><div class="it">تحسين زمن الخدمة</div></div>
+        <div class="q"><h6><i class="fas fa-gears"></i> العمليات الداخلية</h6><div class="it">أتمتة الإجراءات</div><div class="it">حوكمة البيانات</div></div>
+        <div class="q"><h6><i class="fas fa-graduation-cap"></i> التعلّم والنمو</h6><div class="it">بناء القدرات الرقمية</div><div class="it">استقطاب الكفاءات</div></div>
+        <div class="q"><h6><i class="fas fa-coins"></i> المالي</h6><div class="it">كفاءة الإنفاق</div><div class="it">تنويع الموارد</div></div>
+      </div>
+      <div class="m-box" style="margin-top:12px"><h5><i class="fas fa-list"></i> الأهداف الاستراتيجية</h5>
+        <table class="m-table"><thead><tr><th>الهدف</th><th>المنظور</th><th>الوزن</th><th>الإنجاز</th><th>المشاريع</th><th>KPIs</th></tr></thead>
+        <tbody>
+          <tr><td>التحوّل الرقمي الحكومي</td><td>المستفيدون</td><td>25%</td><td><span class="chip green">82%</span></td><td>4</td><td>6</td></tr>
+          <tr><td>البنية التحتية للاتصالات</td><td>العمليات</td><td>20%</td><td><span class="chip amber">65%</span></td><td>3</td><td>4</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">خريطة بطاقة الأداء المتوازن بالمنظورات الأربعة وجدول الأهداف المرتبطة</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تصنيف الأهداف وفق منظورات BSC الأربعة المعتمدة عالمياً</li>
+    <li><i class="fas fa-check-circle"></i> ربط هرمي بين الأهداف (هدف رئيسي وأهداف فرعية) مع أوزان نسبية</li>
+    <li><i class="fas fa-check-circle"></i> نطاق زمني لكل هدف (سنة بداية ونهاية) داخل الخطة الخمسية</li>
+    <li><i class="fas fa-check-circle"></i> احتساب إنجاز الهدف تلقائياً من المشاريع والمؤشرات المرتبطة به</li>
+    <li><i class="fas fa-check-circle"></i> سجل KPIs متقدّم بمؤشرات RAG واتجاهات مصغّرة (Sparklines)</li>
+    <li><i class="fas fa-check-circle"></i> خريطة بصرية للربط الهرمي بين الأهداف والمشاريع</li>
+  </ul>
+</div>
+
+<!-- ========== 4 PROJECTS ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">4</div>
+    <div><h3>المشاريع</h3><div class="sub">Projects &mdash; قلب النظام التشغيلي</div></div>
+  </div>
+  <p class="cap-desc">السجل المركزي لكل المشاريع والبرامج والمحافظ: تصنيف بالقطاع والمديرية والهدف الاستراتيجي ومدير المشروع، مع تتبّع الحالة والتواريخ والإنجاز والميزانية والتكلفة والمنفق — وبحث فوري متعدّد المعايير.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">المشاريع — Projects</div></div>
+    <div class="shot-body">
+      <div class="m-head"><i class="fas fa-folder"></i><div><b>إضافة / تعديل مشروع</b><small>السجل المركزي للمشاريع</small></div></div>
+      <div class="m-form">
+        <div class="m-field"><label>اسم المشروع</label><div class="v"></div></div>
+        <div class="m-field"><label>القطاع</label><div class="v"></div></div>
+        <div class="m-field"><label>المديرية</label><div class="v"></div></div>
+        <div class="m-field"><label>مدير المشروع</label><div class="v"></div></div>
+        <div class="m-field"><label>الحالة</label><div class="v"></div></div>
+        <div class="m-field"><label>الميزانية المخططة</label><div class="v"></div></div>
+      </div>
+      <div style="margin-bottom:11px"><span class="m-btn"><i class="fas fa-save"></i> حفظ</span> <span class="m-btn o">جديد</span></div>
+      <div class="m-box"><h5><i class="fas fa-list"></i> سجل المشاريع</h5>
+        <table class="m-table"><thead><tr><th>الاسم</th><th>القطاع</th><th>مدير المشروع</th><th>الحالة</th><th>الإنجاز</th><th>Budget</th><th>المنفق</th></tr></thead>
+        <tbody>
+          <tr><td>تطوير البنية التحتية للاتصالات</td><td>الاتصالات</td><td>سعيد الرحبي</td><td><span class="chip green">نشط</span></td><td>68%</td><td>8.5M</td><td>5.2M</td></tr>
+          <tr><td>تحديث أنظمة النقل الذكية</td><td>النقل</td><td>خالد الحارثي</td><td><span class="chip amber">قيد التخطيط</span></td><td>25%</td><td>6.0M</td><td>1.1M</td></tr>
+          <tr><td>المركز الوطني للبيانات</td><td>تقنية المعلومات</td><td>رنا الخروصية</td><td><span class="chip blue">مكتمل</span></td><td>100%</td><td>12.0M</td><td>11.4M</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">نموذج إضافة المشروع وسجل المشاريع بأعمدة Budget / Cost / المنفق</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تصنيف المشروع كـ (مشروع/برنامج/محفظة) مع قطاع ومديرية قابلين للإضافة فوراً</li>
+    <li><i class="fas fa-check-circle"></i> ربط كل مشروع بهدف استراتيجي ومدير مشروع مكلّف</li>
+    <li><i class="fas fa-check-circle"></i> فصل واضح بين الميزانية المخططة (Budget) وتكلفة البنود (Cost) والمنفق الفعلي</li>
+    <li><i class="fas fa-check-circle"></i> احتساب التكلفة والمنفق تلقائياً من صفحة الموازنة</li>
+    <li><i class="fas fa-check-circle"></i> بحث فوري بالاسم أو القطاع أو الهدف أو اسم مدير المشروع</li>
+    <li><i class="fas fa-check-circle"></i> تتبّع الحالة (قيد التخطيط/نشط/مكتمل/معلق) والتواريخ ونسبة الإنجاز</li>
+  </ul>
+</div>
+
+<!-- ========== 5 RESOURCES ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">5</div>
+    <div><h3>الموارد</h3><div class="sub">Resources &mdash; إدارة الفرق والموارد البشرية</div></div>
+  </div>
+  <p class="cap-desc">إدارة فرق العمل ومديري المشاريع وأعضاء الفرق وأصحاب المصلحة، مع ربط كل فريق بمشروعه ومديريته وبيانات التواصل الكاملة.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">الموارد — Resources</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#0ea5e9)"><i class="fas fa-users"></i><div><b>إدارة الموارد البشرية وفرق العمل</b><small>مديرو المشاريع وأعضاء الفرق وأصحاب المصلحة</small></div></div>
+      <div class="m-form" style="grid-template-columns:repeat(4,1fr)">
+        <div class="m-field"><label>المشروع</label><div class="v"></div></div>
+        <div class="m-field"><label>مدير المشروع</label><div class="v"></div></div>
+        <div class="m-field"><label>البريد</label><div class="v"></div></div>
+        <div class="m-field"><label>المديرية</label><div class="v"></div></div>
+      </div>
+      <div class="m-box"><h5><i class="fas fa-people-arrows"></i> سجل فرق العمل</h5>
+        <table class="m-table"><thead><tr><th>المشروع</th><th>مدير المشروع</th><th>المديرية</th><th>الفريق</th></tr></thead>
+        <tbody>
+          <tr><td>البنية التحتية للاتصالات</td><td>سعيد الرحبي</td><td>الإدارة العامة للاتصالات</td><td>5 أعضاء</td></tr>
+          <tr><td>المركز الوطني للبيانات</td><td>رنا الخروصية</td><td>تقنية المعلومات</td><td>4 أعضاء</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">إدارة فرق العمل مع ربطها بالمشاريع والمديريات</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تسجيل مدير المشروع وبيانات تواصله (بريد/هاتف) لكل مشروع</li>
+    <li><i class="fas fa-check-circle"></i> جدول أعضاء الفريق بأدوارهم وتخصّصاتهم وبيانات الاتصال</li>
+    <li><i class="fas fa-check-circle"></i> تسجيل أصحاب المصلحة (Stakeholders) لكل مشروع</li>
+    <li><i class="fas fa-check-circle"></i> ربط الفرق بالمديريات لتحليل توزيع الموارد مؤسسياً</li>
+  </ul>
+</div>
+
+<!-- ========== 6 GANTT / PLAN ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">6</div>
+    <div><h3>خطة المشروع</h3><div class="sub">Gantt &mdash; الجدولة الزمنية والمعالم والأولويات</div></div>
+  </div>
+  <p class="cap-desc">وحدة تخطيط متقدّمة: جدول مهام قابل للتحرير مع علاقات التسلسل، ومراحل ومعالم (Stage Gates / Milestones)، ومصفوفة أولوية المشاريع (الأثر × الإلحاح)، ومخطط جانت تفاعلي بمستويات تكبير.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">خطة المشروع — Gantt Chart</div></div>
+    <div class="shot-body">
+      <div class="m-head"><i class="fas fa-project-diagram"></i><div><b>مخطط جانت والجدولة الزمنية</b><small>المهام والمعالم والمسار الحرج</small></div></div>
+      <div class="m-box"><h5><i class="fas fa-chart-gantt"></i> مخطط جانت التفاعلي</h5>
+        <div class="m-gantt">
+          <div class="m-grow"><span>مرحلة التحليل</span><div class="m-track"><div class="m-fill g" style="right:0;width:22%"></div></div></div>
+          <div class="m-grow"><span>التصميم</span><div class="m-track"><div class="m-fill" style="right:18%;width:28%"></div></div></div>
+          <div class="m-grow"><span>التنفيذ</span><div class="m-track"><div class="m-fill a" style="right:40%;width:35%"></div></div></div>
+          <div class="m-grow"><span>الاختبار</span><div class="m-track"><div class="m-fill r" style="right:70%;width:20%"></div></div></div>
+          <div class="m-grow"><span>الإطلاق</span><div class="m-track"><div class="m-fill" style="right:86%;width:12%"></div></div></div>
+        </div>
+      </div>
+      <div class="m-box" style="margin-top:11px"><h5><i class="fas fa-th"></i> مصفوفة أولوية المشاريع (الأثر × الإلحاح)</h5>
+        <div class="m-heat">
+          <div class="hc hl">أثر عالٍ</div><div class="hc hy">P4</div><div class="hc ho">P2</div><div class="hc hr">P1</div><div class="hc hr">P6</div><div class="hc hr"></div>
+          <div class="hc hl">أثر متوسط</div><div class="hc hg">P8</div><div class="hc hy">P5</div><div class="hc ho">P3</div><div class="hc hr">P7</div><div class="hc ho"></div>
+          <div class="hc hl">أثر منخفض</div><div class="hc hg"></div><div class="hc hg">P9</div><div class="hc hy"></div><div class="hc hy"></div><div class="hc ho"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="cap">مخطط جانت التفاعلي ومصفوفة أولوية المشاريع الحرارية</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> جدول مهام قابل للتحرير مع المهمة السابقة والتالية وبدء/انتهاء مخطط وفعلي</li>
+    <li><i class="fas fa-check-circle"></i> إعادة ترتيب المهام بالسحب أو بترقيم يدوي</li>
+    <li><i class="fas fa-check-circle"></i> مراحل المشروع والمعالم (Stage Gates / Milestones)</li>
+    <li><i class="fas fa-check-circle"></i> مصفوفة أولوية حرارية تصنّف المشاريع حسب الأثر والإلحاح</li>
+    <li><i class="fas fa-check-circle"></i> مخطط جانت بصري مع مستويات تكبير قابلة للتحكّم</li>
+    <li><i class="fas fa-check-circle"></i> ملخص مخاطر تنفيذي مرتبط بخطة المشروع</li>
+  </ul>
+</div>
+
+<!-- ========== 7 RISKS ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">7</div>
+    <div><h3>المخاطر</h3><div class="sub">Risks &mdash; إدارة المخاطر والمشكلات</div></div>
+  </div>
+  <p class="cap-desc">سجل موحّد للمخاطر والمشكلات مع تقييم الاحتمالية والأثر (1–5)، واحتساب درجة الخطورة تلقائياً، وخريطة حرارية للمخاطر، وفلترة حسب المستوى (حرج/مرتفع/متوسط/منخفض).</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">المخاطر — Risk Management</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#ef4444)"><i class="fas fa-exclamation-triangle"></i><div><b>إدارة المخاطر والمشكلات</b><small>تقييم · معالجة · متابعة</small></div></div>
+      <div class="m-kpis">
+        <div class="m-kpi r"><div class="n">3</div><div class="l">مخاطر حرجة</div></div>
+        <div class="m-kpi a"><div class="n">7</div><div class="l">مخاطر مرتفعة</div></div>
+        <div class="m-kpi"><div class="n">12</div><div class="l">قيد المعالجة</div></div>
+        <div class="m-kpi g"><div class="n">9</div><div class="l">مغلقة</div></div>
+      </div>
+      <div class="m-2col">
+        <div class="m-box"><h5><i class="fas fa-fire"></i> الخريطة الحرارية للمخاطر</h5>
+          <div class="m-heat" style="grid-template-columns:repeat(5,1fr)">
+            <div class="hc hy">2</div><div class="hc ho">4</div><div class="hc hr">6</div><div class="hc hr">8</div><div class="hc hr">10</div>
+            <div class="hc hg">1</div><div class="hc hy">3</div><div class="hc ho">5</div><div class="hc hr">7</div><div class="hc hr">9</div>
+            <div class="hc hg">1</div><div class="hc hg">2</div><div class="hc hy">3</div><div class="hc ho">4</div><div class="hc hr">6</div>
+          </div>
+        </div>
+        <div class="m-box"><h5><i class="fas fa-bug"></i> سجل المخاطر</h5>
+          <table class="m-table"><thead><tr><th>المشروع</th><th>المستوى</th><th>الحالة</th></tr></thead>
+          <tbody>
+            <tr><td>الاتصالات</td><td><span class="chip red">حرج</span></td><td>مفتوح</td></tr>
+            <tr><td>النقل الذكي</td><td><span class="chip amber">مرتفع</span></td><td>قيد المعالجة</td></tr>
+            <tr><td>البيانات</td><td><span class="chip green">منخفض</span></td><td>مغلق</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="cap">لوحة المخاطر مع الخريطة الحرارية وتصنيف مستويات الخطورة</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تسجيل موحّد للمخاطر والمشكلات مع الوصف والإجراء والمسؤول</li>
+    <li><i class="fas fa-check-circle"></i> تقييم الاحتمالية والأثر (1–5) واحتساب درجة الخطورة تلقائياً</li>
+    <li><i class="fas fa-check-circle"></i> خريطة حرارية بصرية توزّع المخاطر حسب الاحتمالية × الأثر</li>
+    <li><i class="fas fa-check-circle"></i> فلترة سريعة حسب المستوى (حرج/مرتفع/متوسط/منخفض)</li>
+    <li><i class="fas fa-check-circle"></i> فصل جدولي بين المخاطر والمشكلات لسهولة المتابعة</li>
+    <li><i class="fas fa-check-circle"></i> ملخص تنفيذي للمخاطر يظهر في لوحة القيادة والتقارير</li>
+  </ul>
+</div>
+
+<!-- ========== 8 BUDGET ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">8</div>
+    <div><h3>الموازنة</h3><div class="sub">Budget &mdash; إدارة التكاليف والإنفاق</div></div>
+  </div>
+  <p class="cap-desc">إدارة تفصيلية لبنود التكلفة لكل مشروع مع التكلفة المخططة والمنفقة الفعلية ونسبة الصرف وحالة الموازنة، وربط تلقائي بالميزانية المخططة للمشروع في صفحة المشاريع.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">الموازنة — Budget</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#10b981)"><i class="fas fa-money-bill-wave"></i><div><b>إدارة الموازنة والتكاليف</b><small>بنود التكلفة والصرف الفعلي</small></div></div>
+      <div class="m-box"><h5><i class="fas fa-list"></i> تقرير الموازنة</h5>
+        <table class="m-table"><thead><tr><th>المشروع</th><th>البند</th><th>Budget</th><th>Cost</th><th>المنفق</th><th>نسبة الصرف</th><th>الحالة</th></tr></thead>
+        <tbody>
+          <tr><td>الاتصالات</td><td>أجهزة وشبكات</td><td>8.5M</td><td>7.9M</td><td>5.2M</td><td>61%</td><td><span class="chip green">سليم</span></td></tr>
+          <tr><td>النقل الذكي</td><td>تراخيص برمجية</td><td>6.0M</td><td>5.4M</td><td>4.9M</td><td>91%</td><td><span class="chip amber">تحذير</span></td></tr>
+          <tr><td>البيانات</td><td>استشارات</td><td>12M</td><td>12M</td><td>12.6M</td><td>105%</td><td><span class="chip red">تجاوز</span></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">تقرير الموازنة التفصيلي مع نسب الصرف وحالة كل بند</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> بنود تكلفة تفصيلية (استشارات/تراخيص/أجهزة...) لكل مشروع</li>
+    <li><i class="fas fa-check-circle"></i> تتبّع التكلفة المخططة مقابل المنفق الفعلي لكل بند</li>
+    <li><i class="fas fa-check-circle"></i> احتساب نسبة الصرف وحالة الموازنة تلقائياً (سليم/تحذير/تجاوز)</li>
+    <li><i class="fas fa-check-circle"></i> مقارنة تلقائية بين Budget المخطط و Cost المخصّص والمنفق</li>
+    <li><i class="fas fa-check-circle"></i> ملخص موازنة مرئي في أعلى الصفحة وربط مباشر بلوحة القيادة</li>
+  </ul>
+</div>
+
+<!-- ========== 9 SERVICES ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">9</div>
+    <div><h3>الخدمات والمبادرات</h3><div class="sub">Services &amp; Initiatives</div></div>
+  </div>
+  <p class="cap-desc">تسجيل الخدمات الحكومية والمبادرات المرتبطة بالمشاريع، مع تتبّع المستفيدين وتواريخ الإطلاق والحالة ونسبة الإنجاز.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">الخدمات والمبادرات — Services</div></div>
+    <div class="shot-body">
+      <div class="m-head" style="background:linear-gradient(135deg,#0f172a,#ec4899)"><i class="fas fa-concierge-bell"></i><div><b>الخدمات والمبادرات</b><small>الخدمات الحكومية الرقمية</small></div></div>
+      <div class="m-box"><h5><i class="fas fa-list"></i> سجل الخدمات والمبادرات</h5>
+        <table class="m-table"><thead><tr><th>النوع</th><th>الاسم</th><th>المشروع</th><th>الحالة</th><th>الإنجاز</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip blue">خدمة</span></td><td>منصة الخدمات الموحّدة</td><td>التحوّل الرقمي</td><td><span class="chip green">تم الإطلاق</span></td><td>100%</td></tr>
+          <tr><td><span class="chip blue">مبادرة</span></td><td>النقل الذكي المستدام</td><td>النقل الذكي</td><td><span class="chip amber">قيد التنفيذ</span></td><td>45%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <p class="cap">سجل الخدمات والمبادرات مع الحالة ونسبة الإنجاز</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تصنيف كل عنصر كـ (خدمة/مبادرة) وربطه بمشروعه</li>
+    <li><i class="fas fa-check-circle"></i> تسجيل المستفيدين وتاريخ الإطلاق ونسبة الإنجاز</li>
+    <li><i class="fas fa-check-circle"></i> تتبّع الحالة (مخطط/قيد التنفيذ/تم الإطلاق)</li>
+    <li><i class="fas fa-check-circle"></i> ربط الخدمات بالأثر على المستفيدين ضمن منظور BSC</li>
+  </ul>
+</div>
+
+<!-- ========== 10 REPORTS ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">10</div>
+    <div><h3>التقارير</h3><div class="sub">Reports &mdash; التقارير التنفيذية الشاملة</div></div>
+  </div>
+  <p class="cap-desc">مركز التقارير التنفيذية: ملخص تنفيذي تلقائي ذكي، ومؤشرات وبطاقات أداء، ورسوم بيانية تحليلية، ومخطط جانت زمني لكل المشاريع، وطباعة/تصدير PDF بحجم A4 جاهز للاعتماد — مع فلترة حسب المشروع.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">التقارير — Executive Reports</div></div>
+    <div class="shot-body">
+      <div class="m-head"><i class="fas fa-chart-bar"></i><div><b>التقارير التنفيذية الشاملة</b><small>ملخص تنفيذي · مؤشرات · جانت · طباعة PDF</small></div></div>
+      <div style="background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:12px;padding:14px;margin-bottom:12px">
+        <b style="font-size:.85rem"><i class="fas fa-file-lines"></i> ملخص تنفيذي تلقائي</b>
+        <p style="color:#dbeafe;font-size:.72rem;margin:7px 0 0;line-height:1.7">تضم المحفظة 15 مشروعاً، منها 8 قيد التنفيذ و4 مكتملة. متوسط الإنجاز 67%. مؤشر الصحة التنفيذية 74% (خضراء). إجمالي المنفق 42.6M من تكلفة مخصّصة 58.1M (73% صرف).</p>
+      </div>
+      <div class="m-kpis" style="grid-template-columns:repeat(6,1fr)">
+        <div class="m-kpi"><div class="n">15</div><div class="l">مشاريع</div></div>
+        <div class="m-kpi a"><div class="n">8</div><div class="l">نشطة</div></div>
+        <div class="m-kpi g"><div class="n">4</div><div class="l">مكتملة</div></div>
+        <div class="m-kpi p"><div class="n">67%</div><div class="l">الإنجاز</div></div>
+        <div class="m-kpi r"><div class="n">10</div><div class="l">مخاطر</div></div>
+        <div class="m-kpi"><div class="n">73%</div><div class="l">الصرف</div></div>
+      </div>
+      <div class="m-box"><h5><i class="fas fa-diagram-project"></i> مخطط جانت — الجدول الزمني للمشاريع</h5>
+        <div class="m-gantt">
+          <div class="m-grow"><span>البنية التحتية</span><div class="m-track"><div class="m-fill" style="right:5%;width:55%"></div></div></div>
+          <div class="m-grow"><span>النقل الذكي</span><div class="m-track"><div class="m-fill a" style="right:20%;width:40%"></div></div></div>
+          <div class="m-grow"><span>المركز الوطني</span><div class="m-track"><div class="m-fill g" style="right:0;width:75%"></div></div></div>
+        </div>
+      </div>
+      <div style="margin-top:11px"><span class="m-btn g"><i class="fas fa-file-pdf"></i> طباعة / PDF</span></div>
+    </div>
+  </div>
+  <p class="cap">مركز التقارير التنفيذية بالملخص الذكي ومخطط جانت وتصدير PDF</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> ملخص تنفيذي يُكتب تلقائياً من بيانات المحفظة الحيّة</li>
+    <li><i class="fas fa-check-circle"></i> بطاقات مؤشرات ورسوم تحليلية (قطاع/حالة/ميزانية/اتجاه الصرف)</li>
+    <li><i class="fas fa-check-circle"></i> جدول تفصيلي لكل المشاريع بالصحة والميزانية والمخاطر</li>
+    <li><i class="fas fa-check-circle"></i> مخطط جانت زمني لكل المشاريع بألوان تعكس الحالة والتأخّر</li>
+    <li><i class="fas fa-check-circle"></i> فلترة التقرير حسب مشروع محدّد أو كل المحفظة</li>
+    <li><i class="fas fa-check-circle"></i> طباعة/تصدير PDF بحجم A4 محسّن يعرض كل البيانات كاملة</li>
+  </ul>
+</div>
+
+<!-- ========== 11 EXPORT ========== -->
+<div class="chapter">
+  <div class="chapter-head">
+    <div class="chapter-num">11</div>
+    <div><h3>التصدير والاستيراد</h3><div class="sub">Export / Import &mdash; تبادل البيانات</div></div>
+  </div>
+  <p class="cap-desc">تصدير واستيراد كامل بيانات النظام عبر Excel، والتكامل مع Google Sheets، لسهولة النسخ الاحتياطي والمشاركة والتحليل الخارجي.</p>
+
+  <div class="shot">
+    <div class="shot-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><div class="url">التصدير — Export / Import</div></div>
+    <div class="shot-body">
+      <div class="m-head"><i class="fas fa-download"></i><div><b>تصدير واستيراد البيانات</b><small>Excel · Google Sheets · نسخ احتياطي</small></div></div>
+      <div class="m-box" style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+        <span class="m-btn g" style="padding:10px 18px"><i class="fas fa-file-excel"></i> تصدير Excel كامل</span>
+        <span class="m-btn" style="padding:10px 18px"><i class="fas fa-file-import"></i> استيراد من Excel</span>
+        <span class="m-btn" style="padding:10px 18px;background:#0f9d58"><i class="fas fa-cloud"></i> Google Sheets</span>
+      </div>
+    </div>
+  </div>
+  <p class="cap">أدوات التصدير والاستيراد والتكامل السحابي</p>
+
+  <ul class="caps">
+    <li><i class="fas fa-check-circle"></i> تصدير كل بيانات النظام إلى ملف Excel واحد منظّم بأوراق متعدّدة</li>
+    <li><i class="fas fa-check-circle"></i> استيراد البيانات من Excel لتحديث النظام دفعة واحدة</li>
+    <li><i class="fas fa-check-circle"></i> تكامل مع Google Sheets للعمل السحابي المشترك</li>
+    <li><i class="fas fa-check-circle"></i> يصلح كنسخة احتياطية دورية وكجسر للتحليل الخارجي</li>
+  </ul>
+</div>
+
+<!-- ========== SECURITY ========== -->
+<section>
+  <span class="kicker"><i class="fas fa-shield-halved"></i> الأمان والحوكمة</span>
+  <h2 class="sec">نظام صلاحيات وأمان على مستوى المؤسسة</h2>
+  <p class="lead">يتضمّن النظام طبقة أمان متكاملة: تسجيل دخول بكلمات مرور مشفّرة، وأدوار مستخدمين (مدير نظام / مدير / مطّلع)، ومصفوفة صلاحيات دقيقة تتحكّم في الوصول لكل صفحة (تعديل/قراءة/إخفاء)، مع تصدير/استيراد مشفّر لإعدادات الصلاحيات.</p>
+  <div class="fgrid">
+    <div class="fcard" style="border-top-color:var(--red)"><i class="fas fa-user-lock" style="color:var(--red)"></i><h4>تسجيل دخول آمن</h4><p>كلمات مرور مشفّرة (Hash + Salt) وإجبار تغيير كلمة المرور الافتراضية.</p></div>
+    <div class="fcard" style="border-top-color:var(--purple)"><i class="fas fa-users-gear" style="color:var(--purple)"></i><h4>أدوار متعدّدة</h4><p>مدير نظام، مدير، مطّلع — كل دور بصلاحياته الافتراضية القابلة للتخصيص.</p></div>
+    <div class="fcard" style="border-top-color:var(--sky)"><i class="fas fa-table-cells" style="color:var(--sky)"></i><h4>مصفوفة صلاحيات</h4><p>تحكّم بمستوى الوصول لكل صفحة: تعديل / قراءة فقط / مخفي تماماً.</p></div>
+    <div class="fcard" style="border-top-color:var(--green)"><i class="fas fa-file-shield" style="color:var(--green)"></i><h4>تصدير مشفّر</h4><p>حفظ إعدادات المستخدمين والصلاحيات في ملف مشفّر بكلمة مرور.</p></div>
+  </div>
+  <div class="callout"><i class="fas fa-lightbulb"></i><p><b>ضمان استمرارية الخدمة:</b> يشترط النظام بقاء حساب مدير نظام واحد نشط على الأقل ويمنع حذف الحساب الحالي، لحماية المؤسسة من فقدان الوصول.</p></div>
+</section>
+
+<!-- ========== SYNC ========== -->
+<section>
+  <span class="kicker"><i class="fas fa-cloud"></i> المزامنة المركزية</span>
+  <h2 class="sec">اعمل منفرداً أو شارك فريقك سحابياً</h2>
+  <p class="lead">يعمل النظام بالكامل محلياً داخل المتصفح (يحفظ بياناتك تلقائياً)، ويوفّر طبقة مزامنة مركزية اختيارية عبر Google Apps Script ترفع التغييرات تلقائياً كل دقيقتين وتُظهر حالة المزامنة (متصل/قيد الرفع/خطأ) بمؤشر لوني حيّ.</p>
+  <div class="callout"><i class="fas fa-bolt"></i><p><b>لا حاجة لبنية تحتية معقّدة:</b> ملف واحد يعمل على أي متصفح حديث دون تنصيب. البيانات تُحفظ محلياً فوراً، والمزامنة السحابية تُفعَّل برابط واحد فقط عند الحاجة.</p></div>
+</section>
+
+<!-- ========== CLOSING ========== -->
+<div class="hl-banner">
+  <h3><i class="fas fa-award"></i> منظومة قيادة تنفيذية متكاملة في ملف واحد</h3>
+  <p>من التخطيط الاستراتيجي الخمسي إلى تتبّع المهمة اليومية، ومن إدارة المخاطر إلى التقارير التنفيذية الجاهزة للاعتماد — نظام T20 يمنح القيادة رؤية 360 درجة على محفظة المشاريع بالكامل، بواجهة عربية أنيقة وأداء لحظي وأمان مؤسسي.</p>
+</div>
+
+<section style="border-bottom:none">
+  <span class="kicker"><i class="fas fa-rocket"></i> البدء السريع</span>
+  <h2 class="sec">ثلاث خطوات للانطلاق</h2>
+  <div class="fgrid">
+    <div class="fcard"><i class="fas fa-circle-1"></i><h4>1 · افتح النظام</h4><p>افتح ملف النظام في أي متصفح حديث وسجّل الدخول بحسابك.</p></div>
+    <div class="fcard"><i class="fas fa-circle-2"></i><h4>2 · أدخل بياناتك</h4><p>ابدأ من الخطة الخمسية والأهداف، ثم أضف المشاريع والموارد والموازنات.</p></div>
+    <div class="fcard"><i class="fas fa-circle-3"></i><h4>3 · تابع وقرّر</h4><p>راقب لوحة المؤشرات، استخرج التقارير التنفيذية، وشارك الفريق سحابياً.</p></div>
+  </div>
+</section>
+
+</div>
+
+<div class="foot">
+  <p><b>نظام إدارة المشاريع المتكامل — T20</b></p>
+  <p>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه
+ &bull; Project Portfolio Management</p>
+  <p style="margin-top:10px;color:#64748b">دليل المستخدم — جميع الرسوم التوضيحية تمثيلية لواجهات النظام الفعلية</p>
+</div>
+
+</body>
+</html>
