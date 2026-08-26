@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T20.14 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.0 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -852,7 +852,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T20 | Ver.14</span></h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T21 | Ver.0</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -4560,5 +4560,698 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
   // Gantt chart loads automatically on init, no need to re-render on tab click
 })();
 </script>
+<!-- ================= T21.0 : i18n (AR/EN) + Enterprise Theming ================= -->
+<style id="t21-theme-style">
+/* ---------- Theme tokens ---------- */
+:root{
+  --t21-bg:#f1f5f9; --t21-surface:#ffffff; --t21-surface2:#f8fafc; --t21-surface3:#eef2f7;
+  --t21-text:#0f172a; --t21-heading:#0f172a; --t21-muted:#64748b; --t21-border:#e2e8f0;
+  --t21-brand:#0f172a; --t21-brand2:#1e3a5f; --t21-onbrand:#ffffff;
+  --t21-accent:#3b82f6; --t21-accent-soft:#eff6ff; --t21-focus:#3b82f6;
+  --t21-success:#10b981; --t21-warning:#f59e0b; --t21-danger:#ef4444;
+  --t21-shadow:0 4px 20px rgba(15,23,42,.06);
+}
+html[data-theme="ministry"]{ color-scheme:light; }
+html[data-theme="midnight"]{
+  color-scheme:dark;
+  --t21-bg:#0b1120; --t21-surface:#151d2e; --t21-surface2:#1b2438; --t21-surface3:#202b42;
+  --t21-text:#e8edf7; --t21-heading:#f8fafc; --t21-muted:#a9b6cd; --t21-border:#2c3855;
+  --t21-brand:#1d283f; --t21-brand2:#0f172a; --t21-onbrand:#ffffff;
+  --t21-accent:#60a5fa; --t21-accent-soft:#1b2a44; --t21-focus:#60a5fa;
+  --t21-success:#34d399; --t21-warning:#fbbf24; --t21-danger:#f87171;
+  --t21-shadow:0 4px 22px rgba(0,0,0,.45);
+}
+html[data-theme="teal"]{
+  color-scheme:light;
+  --t21-bg:#eef7f5; --t21-surface:#ffffff; --t21-surface2:#f2faf8; --t21-surface3:#e3f2ee;
+  --t21-text:#12312c; --t21-heading:#0f4f47; --t21-muted:#3f5f59; --t21-border:#cfe6e0;
+  --t21-brand:#0f766e; --t21-brand2:#115e59; --t21-onbrand:#ffffff;
+  --t21-accent:#0d9488; --t21-accent-soft:#d7f0eb; --t21-focus:#0d9488;
+  --t21-shadow:0 4px 20px rgba(13,148,136,.12);
+}
+html[data-theme="purple"]{
+  color-scheme:dark;
+  --t21-bg:#141020; --t21-surface:#1e1830; --t21-surface2:#261e3d; --t21-surface3:#2d2447;
+  --t21-text:#ece9f5; --t21-heading:#f5f3ff; --t21-muted:#b6acd4; --t21-border:#3a2f5c;
+  --t21-brand:#6d28d9; --t21-brand2:#4c1d95; --t21-onbrand:#ffffff;
+  --t21-accent:#a78bfa; --t21-accent-soft:#2c2148; --t21-focus:#a78bfa;
+  --t21-success:#4ade80; --t21-warning:#fbbf24; --t21-danger:#fb7185;
+  --t21-shadow:0 4px 22px rgba(0,0,0,.5);
+}
+html[data-theme="desert"]{
+  color-scheme:light;
+  --t21-bg:#f7f1e7; --t21-surface:#fffdf9; --t21-surface2:#f5ece0; --t21-surface3:#efe3d2;
+  --t21-text:#3b2a17; --t21-heading:#7c4a12; --t21-muted:#6b5537; --t21-border:#e3d3bc;
+  --t21-brand:#92400e; --t21-brand2:#78350f; --t21-onbrand:#ffffff;
+  --t21-accent:#c2710c; --t21-accent-soft:#f6e6d0; --t21-focus:#c2710c;
+  --t21-shadow:0 4px 20px rgba(120,53,15,.12);
+}
+html[data-theme="contrast"]{
+  color-scheme:dark;
+  --t21-bg:#000000; --t21-surface:#000000; --t21-surface2:#0d0d0d; --t21-surface3:#161616;
+  --t21-text:#ffffff; --t21-heading:#ffe600; --t21-muted:#e6e6e6; --t21-border:#ffffff;
+  --t21-brand:#000000; --t21-brand2:#000000; --t21-onbrand:#ffe600;
+  --t21-accent:#ffe600; --t21-accent-soft:#1a1a00; --t21-focus:#ffe600;
+  --t21-success:#00ff88; --t21-warning:#ffe600; --t21-danger:#ff5c5c;
+  --t21-shadow:none;
+}
+
+/* ---------- Legacy variable remap: makes color:var(--primary) readable in every theme ---------- */
+html[data-theme]{
+  --primary:var(--t21-heading); --secondary:var(--t21-brand2); --accent:var(--t21-accent);
+  --light:var(--t21-surface2); --white:var(--t21-surface); --border:var(--t21-border);
+  --success:var(--t21-success); --warning:var(--t21-warning); --danger:var(--t21-danger);
+  --shadow:var(--t21-shadow);
+}
+
+/* ---------- Base ---------- */
+html[data-theme] body{ background:var(--t21-bg)!important; color:var(--t21-text)!important; }
+
+/* ---------- Brand surfaces (were background:var(--primary)) ---------- */
+html[data-theme] .header,
+html[data-theme] .overall-card,
+html[data-theme] .phase1-banner,
+html[data-theme] .phase2-summary{
+  background:linear-gradient(135deg,var(--t21-brand),var(--t21-brand2))!important;
+  color:var(--t21-onbrand)!important; border:1px solid var(--t21-border)!important;
+}
+html[data-theme] .header *,
+html[data-theme] .overall-card *,
+html[data-theme] .phase1-banner *,
+html[data-theme] .phase2-summary *{ color:inherit!important; }
+html[data-theme="contrast"] .header,
+html[data-theme="contrast"] .overall-card,
+html[data-theme="contrast"] .phase1-banner,
+html[data-theme="contrast"] .phase2-summary{ border:2px solid var(--t21-accent)!important; }
+
+/* ---------- Card / panel surfaces ---------- */
+html[data-theme] .card, html[data-theme] .kpi-card, html[data-theme] .chart-box,
+html[data-theme] .stat-card, html[data-theme] .risk-item, html[data-theme] .budget-item,
+html[data-theme] .report-stat-card, html[data-theme] .phase1-card, html[data-theme] .year-card,
+html[data-theme] .roadmap-metric, html[data-theme] .strategy-timeline-card,
+html[data-theme] .strategy-timeline .tl-objective, html[data-theme] .tl-year-cell,
+html[data-theme] .strategy-year-card, html[data-theme] .strategy-kpi-meta div,
+html[data-theme] .strategy-achievement-chart, html[data-theme] .bsc-card, html[data-theme] .bsc-item,
+html[data-theme] .tree-link, html[data-theme] .phase2-toolbar, html[data-theme] .phase2-kpi,
+html[data-theme] .stage-col, html[data-theme] .stage-card, html[data-theme] .stage-card-select,
+html[data-theme] .phase2-info-note, html[data-theme] .priority-cell, html[data-theme] .priority-item,
+html[data-theme] .priority-editor, html[data-theme] .priority-edit-row,
+html[data-theme] .risk-heatmap-legend span, html[data-theme] .risk-heatmap-wrap,
+html[data-theme] .phase3-search-panel, html[data-theme] .phase3-drawer, html[data-theme] .phase3-alert,
+html[data-theme] .phase3-card, html[data-theme] .phase3-list, html[data-theme] .phase3-exec-summary,
+html[data-theme] .t20-sync-panel, html[data-theme] .t20-more-content, html[data-theme] .t20-modal-card,
+html[data-theme] .ux-screen-control-panel, html[data-theme] .gantt-controls,
+html[data-theme] .t207-login, html[data-theme] .t207-scope, html[data-theme] #tab-security .t207-card,
+html[data-theme] #phase3ExecutiveSummary > div{
+  background:var(--t21-surface)!important; color:var(--t21-text)!important;
+  border-color:var(--t21-border)!important; box-shadow:var(--t21-shadow);
+}
+
+/* ---------- Headings / emphasis (the dark-on-dark bug) ---------- */
+html[data-theme] .card-header, html[data-theme] .kpi-card h3, html[data-theme] .chart-box h3,
+html[data-theme] .stat-card .stat-value, html[data-theme] .budget-item .amount,
+html[data-theme] .report-stat-card .stat-number, html[data-theme] .phase1-card .num,
+html[data-theme] .roadmap-metric .metric-value, html[data-theme] .strategy-timeline .tl-objective strong,
+html[data-theme] .strategy-year-card h3, html[data-theme] .strategy-year-card .big-percent,
+html[data-theme] .strategy-kpi-meta strong, html[data-theme] .strategy-achievement-chart h3,
+html[data-theme] .bsc-card h3, html[data-theme] .phase2-kpi strong, html[data-theme] .stage-title,
+html[data-theme] .priority-cell h4, html[data-theme] .priority-edit-title,
+html[data-theme] .phase3-result strong, html[data-theme] .phase3-alert-title,
+html[data-theme] .phase3-card .n, html[data-theme] .phase3-list h4,
+html[data-theme] .finance-gauge strong, html[data-theme] .objective-mini-head,
+html[data-theme] .ux-screen-control-panel strong, html[data-theme] .t20-sync-title,
+html[data-theme] .t207-login h2, html[data-theme] #tab-security .t207-card h3,
+html[data-theme] #t2014GanttBox h4, html[data-theme] #phase3ExecutiveSummary > div strong{
+  color:var(--t21-heading)!important;
+}
+html[data-theme] .form-group label, html[data-theme] .t20-modal-body label,
+html[data-theme] .t207-login label, html[data-theme] .year-card ul,
+html[data-theme] .phase2-info-note, html[data-theme] .phase2-info-note *,
+html[data-theme] .phase3-alert-body, html[data-theme] .timeline-legend,
+html[data-theme] .risk-heatmap-legend, html[data-theme] .gantt-controls .zoom-label,
+html[data-theme] .t20-sync-sub, html[data-theme] .t20-sync-meta,
+html[data-theme] .phase3-print-note, html[data-theme] .ux-screen-control-panel small{ color:var(--t21-muted)!important; }
+html[data-theme] .header .subtitle{ color:var(--t21-onbrand)!important; opacity:.85; }
+html[data-theme] .phase3-exec-summary, html[data-theme] .phase3-exec-summary *,
+html[data-theme] #phase3ExecutiveSummary > div,
+html[data-theme] #phase3ExecutiveSummary > div *{ color:var(--t21-text)!important; }
+html[data-theme] #phase3ExecutiveSummary > div th{ background:var(--t21-surface2)!important; }
+
+/* ---------- Tables ---------- */
+html[data-theme] table{ background:transparent!important; }
+html[data-theme] th{ background:var(--t21-surface2)!important; color:var(--t21-heading)!important;
+  border-bottom:2px solid var(--t21-border)!important; }
+html[data-theme] td{ color:var(--t21-text)!important; border-color:var(--t21-border)!important; }
+html[data-theme] tr:hover td, html[data-theme] #tab-security tr:hover td{ background:var(--t21-surface3)!important; }
+html[data-theme] .t2014-gantt-table td{ color:var(--t21-text)!important; border-color:var(--t21-border)!important; }
+html[data-theme] .t2014-gantt-table tr:nth-child(even) td{ background:var(--t21-surface2)!important; }
+html[data-theme] #tab-budget #budgetTable{ background:var(--t21-surface)!important; }
+html[data-theme] #tab-budget #budgetBody tr.budget-project-summary-row td{
+  background:var(--t21-surface3)!important; color:var(--t21-heading)!important; }
+html[data-theme] #tab-budget #budgetBody tr.budget-cost-item-row td,
+html[data-theme] #tab-budget #budgetBody tr.budget-empty-items-row td{
+  background:var(--t21-surface)!important; color:var(--t21-text)!important; }
+
+/* ---------- Form controls ---------- */
+html[data-theme] input, html[data-theme] select, html[data-theme] textarea,
+html[data-theme] #tab-security input, html[data-theme] #tab-security select,
+html[data-theme] .stage-card-select, html[data-theme] .phase3-search,
+html[data-theme] .t20-smart-search .phase3-search{
+  background:var(--t21-surface2)!important; color:var(--t21-text)!important;
+  border:1px solid var(--t21-border)!important;
+}
+html[data-theme] input::placeholder, html[data-theme] textarea::placeholder{ color:var(--t21-muted)!important; opacity:1; }
+html[data-theme] input:focus, html[data-theme] select:focus, html[data-theme] textarea:focus{
+  outline:2px solid var(--t21-focus)!important; outline-offset:1px;
+  border-color:var(--t21-focus)!important; background:var(--t21-surface)!important;
+}
+html[data-theme] option{ background:var(--t21-surface)!important; color:var(--t21-text)!important; }
+
+/* ---------- Tabs ---------- */
+html[data-theme] .tabs-nav{ background:var(--t21-surface)!important; border-color:var(--t21-border)!important; }
+html[data-theme] .tab-btn{ color:var(--t21-muted)!important; background:transparent!important; }
+html[data-theme] .tab-btn:hover:not(.active){ background:var(--t21-surface3)!important; color:var(--t21-heading)!important; }
+html[data-theme] .tab-btn.active{
+  background:linear-gradient(135deg,var(--t21-brand),var(--t21-brand2))!important;
+  color:var(--t21-onbrand)!important; }
+html[data-theme="contrast"] .tab-btn.active{ background:var(--t21-accent)!important; color:#000!important; }
+
+/* ---------- Toolbar chips / buttons ---------- */
+html[data-theme] .t20-smart-toolbar{ background:var(--t21-surface)!important; border-color:var(--t21-border)!important; }
+html[data-theme] .t20-sync-chip, html[data-theme] .t20-smart-icon-btn, html[data-theme] .t20-more-summary,
+html[data-theme] .ux-screen-actions button, html[data-theme] .ux-widget-mini,
+html[data-theme] .ux-kpi-reset-btn, html[data-theme] .phase3-search-reset-btn,
+html[data-theme] .phase3-tool-btn, html[data-theme] .btn-outline{
+  background:var(--t21-surface2)!important; color:var(--t21-text)!important;
+  border:1px solid var(--t21-border)!important;
+}
+html[data-theme] .t20-smart-icon-btn:hover, html[data-theme] .t20-more-summary:hover,
+html[data-theme] .ux-screen-actions button:hover, html[data-theme] .ux-widget-mini:hover,
+html[data-theme] .phase3-search-reset-btn:hover, html[data-theme] .btn-outline:hover{
+  background:var(--t21-accent-soft)!important; border-color:var(--t21-accent)!important;
+  color:var(--t21-heading)!important;
+}
+html[data-theme] .t20-smart-icon-btn.dark, html[data-theme] .ux-screen-actions button.dark,
+html[data-theme] .btn-dark{ background:var(--t21-brand)!important; color:var(--t21-onbrand)!important;
+  border-color:var(--t21-brand2)!important; }
+html[data-theme] .ux-screen-actions button.active{ background:var(--t21-accent)!important; color:#fff!important; }
+html[data-theme] .ux-widget-controls{ background:color-mix(in srgb, var(--t21-surface) 88%, transparent)!important; }
+html[data-theme] .finance-gauge:after{ background:var(--t21-surface)!important; }
+
+/* ---------- Heat map ---------- */
+html[data-theme] .heat-label, html[data-theme] .heat-head{
+  background:var(--t21-surface2)!important; color:var(--t21-heading)!important; border-color:var(--t21-border)!important; }
+html[data-theme] .heat-count{ border-color:var(--t21-border)!important; color:var(--t21-text)!important; }
+
+/* ---------- Focus visibility (accessibility, all themes) ---------- */
+html[data-theme] :is(button,a,summary,[tabindex]):focus-visible{
+  outline:3px solid var(--t21-focus)!important; outline-offset:2px; border-radius:6px;
+}
+
+/* ---------- Bilingual data: auto direction for user content ---------- */
+html[data-theme] input[dir="auto"], html[data-theme] textarea[dir="auto"],
+html[data-theme] td[dir="auto"], html[data-theme] [data-t21-auto]{ unicode-bidi:plaintext; }
+
+/* ---------- LTR mirroring ---------- */
+html[dir="ltr"] body{ direction:ltr; }
+html[dir="ltr"] th, html[dir="ltr"] td{ text-align:left; }
+html[dir="ltr"] .phase3-drawer{ left:auto; right:-420px; border-right:0;
+  border-left:1px solid var(--t21-border); transition:.25s; }
+html[dir="ltr"] .phase3-drawer.show{ right:0; left:auto; }
+
+/* ---------- T21 switcher UI ---------- */
+.t21-ctl{ display:inline-flex; align-items:center; gap:6px; }
+.t21-lang-btn{ display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+  background:var(--t21-surface2); color:var(--t21-text); border:1px solid var(--t21-border);
+  border-radius:9px; padding:7px 11px; font-size:.78rem; font-weight:800; }
+.t21-lang-btn:hover{ background:var(--t21-accent-soft); border-color:var(--t21-accent); }
+.t21-theme-menu{ position:relative; }
+.t21-theme-pop{ position:absolute; top:calc(100% + 8px); inset-inline-end:0; z-index:9999;
+  background:var(--t21-surface); border:1px solid var(--t21-border); border-radius:12px;
+  box-shadow:0 18px 50px rgba(0,0,0,.28); padding:9px; min-width:230px; display:none; }
+.t21-theme-pop.show{ display:block; }
+.t21-theme-opt{ display:flex; align-items:center; gap:10px; width:100%; cursor:pointer;
+  background:transparent; border:1px solid transparent; border-radius:9px; padding:8px 9px;
+  font-size:.78rem; font-weight:700; color:var(--t21-text); text-align:start; }
+.t21-theme-opt:hover{ background:var(--t21-surface3); }
+.t21-theme-opt[aria-checked="true"]{ border-color:var(--t21-accent); background:var(--t21-accent-soft); }
+.t21-sw{ width:34px; height:18px; border-radius:5px; border:1px solid var(--t21-border); flex:0 0 auto; }
+@media print{ .t21-ctl, .t21-theme-pop{ display:none!important; } }
+</style>
+
+<script id="t21-i18n-theme-script">
+(function(){
+"use strict";
+
+/* ============================ 1. THEMES ============================ */
+var THEMES=[
+ {id:'ministry',ar:'الأزرق الرسمي',en:'Ministry Light',sw:'linear-gradient(135deg,#0f172a,#1e3a5f)'},
+ {id:'midnight',ar:'ليلي احترافي',en:'Midnight Pro',sw:'linear-gradient(135deg,#151d2e,#60a5fa)'},
+ {id:'teal',ar:'فيروزي تنفيذي',en:'Teal Executive',sw:'linear-gradient(135deg,#0f766e,#5eead4)'},
+ {id:'purple',ar:'بنفسجي ملكي',en:'Royal Purple',sw:'linear-gradient(135deg,#4c1d95,#a78bfa)'},
+ {id:'desert',ar:'رملي دافئ',en:'Desert Sand',sw:'linear-gradient(135deg,#92400e,#e7c9a0)'},
+ {id:'contrast',ar:'تباين عالٍ',en:'High Contrast',sw:'linear-gradient(135deg,#000,#ffe600)'}
+];
+var LS_THEME='t21_theme', LS_LANG='t21_lang';
+
+function applyTheme(id){
+  if(!THEMES.some(function(t){return t.id===id;})) id='ministry';
+  document.documentElement.setAttribute('data-theme',id);
+  /* legacy dark-mode class is intentionally never used: its 40+ patch rules caused the dark-on-dark bug */
+  document.body.classList.remove('dark-mode');
+  try{ localStorage.setItem(LS_THEME,id); localStorage.setItem('phase3_dark_mode','0'); }catch(e){}
+  document.querySelectorAll('.t21-theme-opt').forEach(function(b){
+    b.setAttribute('aria-checked', b.dataset.theme===id ? 'true':'false');
+  });
+  if(window.Chart&&Chart.instances) retintCharts();
+}
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function retintCharts(){
+  try{
+    var text=cssVar('--t21-text'), grid=cssVar('--t21-border');
+    Chart.defaults.color=text; Chart.defaults.borderColor=grid;
+    var reg = Chart.instances || {};
+    Object.keys(reg).forEach(function(k){
+      var c=reg[k]; if(!c||!c.options) return;
+      if(c.options.plugins&&c.options.plugins.legend&&c.options.plugins.legend.labels)
+        c.options.plugins.legend.labels.color=text;
+      if(c.options.scales) Object.keys(c.options.scales).forEach(function(s){
+        var sc=c.options.scales[s]; if(!sc) return;
+        sc.ticks=sc.ticks||{}; sc.ticks.color=text;
+        sc.grid=sc.grid||{}; sc.grid.color=grid;
+      });
+      c.update('none');
+    });
+  }catch(e){}
+}
+
+/* ============================ 2. DICTIONARY ============================ */
+var DICT={
+/* -- tabs / shell -- */
+"لوحة المؤشرات":"Dashboard","الخطة الخمسية":"Five-Year Plan","الأهداف الاستراتيجية BSC":"Strategic Objectives (BSC)",
+"المشاريع":"Projects","الموارد":"Resources","خطة المشروع":"Project Plan","المخاطر":"Risks","الموازنة":"Budget",
+"الخدمات والمبادرات":"Services & Initiatives","التقارير":"Reports","تصدير":"Export",
+"وزارة النقل والاتصالات وتقنية المعلومات":"Ministry of Transport, Communications and Information Technology",
+"نظام إدارة المشاريع المتكامل":"Integrated Project Management System",
+"نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل":"Integrated Portfolio & Strategic Plan Management System",
+"حقوق النقل والاستخدام محفوظه":"All transfer and usage rights reserved","الإصدار":"Version",
+/* -- toolbar -- */
+"بحث":"Search","إعادة تعيين":"Reset","المزيد":"More","الحجم الافتراضي":"Default Size","الترتيب الافتراضي":"Default Order",
+"بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة...":"Search across projects, objectives, KPIs, risks, services, budget...",
+"حالة المزامنة المركزية":"Central sync status","التخزين المركزي غير مفعل":"Central storage not enabled",
+"نسخة محلية محفوظة":"Local copy saved","مركز التنبيهات":"Alerts Center","سمة داكنة":"Dark theme",
+"إجراءات البيانات والمزامنة":"Data & Sync Actions","مزامنة الآن":"Sync Now","تحميل المركزي":"Pull from Central",
+"التصدير والاستيراد":"Export & Import","إعدادات العرض":"Display Settings","مركز التنبيهات التنفيذية":"Executive Alerts Center",
+"أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.":"Add your Google Apps Script URL to T20_CENTRAL_SYNC_URL to enable sync.",
+/* -- generic fields -- */
+"الحالة":"Status","المشروع":"Project","المشروع *":"Project *","الوصف":"Description","النوع":"Type","حفظ":"Save",
+"إجراءات":"Actions","جديد":"New","المديرية":"Directorate","اختر":"Select","المسؤول":"Owner","الإنجاز":"Progress",
+"نسبة الصرف":"Spend Rate","الاسم":"Name","الاسم *":"Name *","المنفق":"Spent","اسم المشروع":"Project Name",
+"المستوى":"Level","الإجراء":"Action","الهدف":"Objective","الهدف *":"Objective *","البريد":"Email","حذف":"Delete",
+"تعديل":"Edit","إضافة":"Add","إغلاق":"Close","إلغاء":"Cancel","تحديث":"Refresh","الميزانية":"Budget",
+"القطاع":"Sector","مدير المشروع":"Project Manager","الهاتف":"Phone","السنة":"Year","السنة *":"Year *",
+"المستفيدون":"Beneficiaries","تاريخ البدء":"Start Date","تاريخ الانتهاء":"End Date","الدور":"Role","التاريخ":"Date",
+"الميزانية المخططة":"Planned Budget","التكلفة المخصصة":"Allocated Cost","ملاحظات":"Notes","البند":"Item",
+"التخصص":"Specialty","المهمة":"Task","إعادة ترتيب":"Reorder","الكل":"All","المشاكل":"Issues","الفريق":"Team",
+"التركيز":"Focus","الأهداف":"Objectives","المستهدف":"Target","المنظور":"Perspective","الوزن":"Weight",
+"الربط الهرمي":"Hierarchy Link","المتبقي":"Remaining","الصحة":"Health","اسم المستخدم":"Username",
+"الإنجاز (%)":"Progress (%)","الوزن (%)":"Weight (%)","المستهدف (%)":"Target (%)","إنجاز%":"Progress %",
+"وحدة القياس":"Unit of Measure","قيمة الأساس":"Baseline Value","المستهدف السنوي":"Annual Target",
+"القيمة الفعلية الحالية":"Current Actual Value","المؤشر *":"Indicator *","الاحتمالية (1-5)":"Likelihood (1-5)",
+"الأثر (1-5)":"Impact (1-5)","الأثر Impact":"Impact","تاريخ الإطلاق":"Launch Date","إنجاز":"Progress",
+/* -- statuses / levels -- */
+"مكتمل":"Completed","نشط":"Active","معلق":"On Hold","قيد التنفيذ":"In Progress","قيد التخطيط":"Planning",
+"متأخر":"Delayed","حرج":"Critical","مرتفع":"High","متوسط":"Medium","منخفض":"Low","مفتوح":"Open","مغلق":"Closed",
+"قيد المعالجة":"In Treatment","خطر":"Risk","مشكلة":"Issue","مخطط":"Planned","مجدول":"Scheduled",
+"تم الإطلاق":"Launched","خدمة":"Service","مبادرة":"Initiative","مشروع":"Project","برنامج":"Programme",
+"محفظة":"Portfolio","غير محدد":"Unspecified","غير مرتبط":"Unlinked","غير معروف":"Unknown",
+/* -- dashboard -- */
+"مربعات المؤشرات - اسحب لتغيير الترتيب":"KPI Tiles — drag to reorder","الأداء العام للمحفظة":"Overall Portfolio Performance",
+"ملخص المرحلة الأولى: الخطة الخمسية + BSC + مؤشرات RAG":"Phase 1 Summary: Five-Year Plan + BSC + RAG Indicators",
+"الموازنة والتكلفة":"Budget & Cost","الميزانية المخططة والتكلفة المخصصة والمنفق (بالمليون)":"Planned Budget, Allocated Cost and Spend (millions)",
+"التكلفة الشهرية":"Monthly Cost","استغلال الموارد":"Resource Utilization","نسبة الاستغلال الإجمالية":"Overall Utilization Rate",
+"توزيع الموارد حسب المشروع":"Resource Distribution by Project","المخاطر والمشاكل":"Risks & Issues",
+"إجمالي المخاطر النشطة":"Total Active Risks","المشاريع والأهداف الاستراتيجية":"Projects & Strategic Objectives",
+"توزيع المشاريع حسب القطاع":"Projects by Sector","توزيع المشاريع حسب الحالة":"Projects by Status",
+"الإنجاز حسب المشروع":"Progress by Project","جدول حالة المشاريع":"Project Status Table","حالة المشاريع الحالية":"Current Project Status",
+"إجمالي المشاريع":"Total Projects","مشاريع نشطة":"Active Projects","متوسط الإنجاز":"Average Progress",
+"مخاطر مفتوحة":"Open Risks","مخاطر حرجة":"Critical Risks","المنفق حتى الآن":"Spent to Date",
+"موازنة الخطة الخمسية المعتمدة":"Approved Five-Year Plan Budget","الأهداف الاستراتيجية":"Strategic Objectives",
+"نسبة الصرف من التكلفة المخصصة":"Spend Rate of Allocated Cost","مؤشر الحالة":"Status Indicator",
+"نسبة إنجاز KPI's":"KPI Achievement Rate","أهداف محققة":"Objectives Achieved","تكلفة المشاريع":"Project Cost",
+/* -- five year plan -- */
+"الخطة الخمسية 2026–2030":"Five-Year Plan 2026–2030","إضافة / تعديل سنة في الخطة":"Add / Edit Plan Year",
+"التركيز الاستراتيجي":"Strategic Focus","مثال: تأسيس الممكنات الرقمية":"e.g. Establishing digital enablers",
+"الأهداف الرئيسية":"Key Objectives","افصل بين الأهداف بفاصلة عربية":"Separate objectives with an Arabic comma",
+"المستهدف السنوي (%)":"Annual Target (%)","الإنجاز الحالي (%)":"Current Progress (%)",
+"الموازنة السنوية (تُحسب تلقائياً)":"Annual Budget (auto-calculated)","حفظ السنة":"Save Year",
+"يحتسب من صفحة الميزانية":"Calculated from the Budget page",
+"خارطة امتداد الأهداف الاستراتيجية 2026–2030":"Strategic Objectives Roadmap 2026–2030",
+"نسبة تحقيق الأهداف الاستراتيجية 2026–2030":"Strategic Objectives Achievement 2026–2030",
+"نسبة إنجاز KPI's حسب السنة":"KPI Achievement by Year","اتجاه تحقيق الأهداف الاستراتيجية":"Strategic Objectives Trend",
+"جدول الخطة السنوية":"Annual Plan Table",
+/* -- BSC -- */
+"إضافة / تعديل هدف استراتيجي":"Add / Edit Strategic Objective","منظور بطاقة الأداء المتوازن BSC":"Balanced Scorecard Perspective",
+"العمليات الداخلية":"Internal Processes","التعلم والنمو":"Learning & Growth","المالي":"Financial",
+"الهدف الأعلى / الربط الهرمي":"Parent Objective / Hierarchy","سنة بداية الهدف":"Objective Start Year",
+"سنة نهاية الهدف":"Objective End Year","نسبة المساهمة السنوية":"Annual Contribution %",
+"مؤشرات الأداء KPIs":"Key Performance Indicators (KPIs)","هدف رئيسي":"Parent Objective",
+"سجل مؤشرات الأداء المتقدم RAG والاتجاهات الزمنية":"Advanced KPI Register (RAG) & Trends",
+"خريطة BSC والربط الهرمي":"BSC Map & Hierarchy","المشاريع المرتبطة":"Linked Projects",
+/* -- projects -- */
+"إضافة / تعديل مشروع":"Add / Edit Project","اسم مدير المشروع المكلف":"Assigned project manager name",
+"الميزانية المخططة للمشروع":"Planned project budget","القيمة المعتمدة في الخطة":"Approved value in the plan",
+"إجمالي تكاليف البنود Cost - تلقائي":"Total cost items — automatic","المنفق من بنود التكلفة - تلقائي":"Spent from cost items — automatic",
+"قائمة المشاريع":"Project List","بحث عن مشروع":"Search for a project","الهدف الاستراتيجي":"Strategic Objective",
+"ابحث باسم المشروع أو القطاع أو الهدف الاستراتيجي أو اسم مدير المشروع":"Search by project name, sector, strategic objective or project manager",
+"جميع المشاريع":"All Projects","كل المشاريع":"All Projects","إضافة مديرية":"Add Directorate","إدارة المديريات":"Manage Directorates",
+"أخرى (أدخل جديد)":"Other (enter new)",
+/* -- resources -- */
+"إدارة الموارد البشرية":"Human Resource Management","أعضاء الفريق":"Team Members","أصحاب المصلحة":"Stakeholders",
+"سجل فرق العمل":"Team Register",
+/* -- plan / gantt -- */
+"خطة المشروع - جدول تفاعلي":"Project Plan — Interactive Table","المهمة السابقة":"Predecessor","المهمة التالية":"Successor",
+"بدء مخطط":"Planned Start","انتهاء مخطط":"Planned Finish","بدء فعلي":"Actual Start","انتهاء فعلي":"Actual Finish",
+"إضافة صف":"Add Row","مراحل المشروع والمعالم Stage Gates / Milestones":"Stage Gates / Milestones",
+"مصفوفة أولوية المشاريع Impact × Urgency":"Project Priority Matrix — Impact × Urgency",
+"مخطط جانت":"Gantt Chart","التكبير":"Zoom","أشهر":"months","مهمة جديدة":"New Task",
+"مخطط جانت — الجدول الزمني للمشاريع":"Gantt Chart — Project Timeline",
+/* -- risks -- */
+"خريطة المخاطر الحرارية Risk Heat Map":"Risk Heat Map","تحديث الخريطة":"Refresh Map",
+"ملخص المخاطر التنفيذي":"Executive Risk Summary","إضافة / تعديل خطر":"Add / Edit Risk","سجل المخاطر":"Risk Register",
+/* -- budget -- */
+"إضافة / تعديل بند":"Add / Edit Item","الميزانية المخططة للمشروع (Budget)":"Planned Project Budget",
+"إجمالي الاعتماد قبل بدء المشروع":"Total approval before project start","البند / Cost Item":"Cost Item",
+"مثال: استشارات، تراخيص، أجهزة":"e.g. consulting, licenses, hardware","التكلفة المخططة للبند (Cost)":"Planned Item Cost",
+"التكلفة المنفقة فعليًا":"Actually spent cost","تقرير الموازنة":"Budget Report",
+"ميزانية المشروع Budget":"Project Budget","تكلفة البند Cost":"Item Cost","المتبقي من Budget":"Remaining Budget",
+"إجمالي الميزانية المخططة للمشاريع Budget":"Total Planned Project Budget","إجمالي تكاليف البنود Cost":"Total Cost Items",
+"المتبقي من الميزانية":"Remaining Budget","إجمالي المنفق":"Total Spent",
+"تعديل ميزانية المشروع من نفس صفحة الموازنة":"Edit project budget from this Budget page",
+/* -- services -- */
+"إضافة / تعديل خدمة":"Add / Edit Service",
+/* -- reports -- */
+"التقارير التنفيذية الشاملة":"Comprehensive Executive Reports","طباعة / PDF":"Print / PDF","طباعة التقرير":"Print Report",
+"أهم الإنجازات":"Key Achievements","أولويات الإدارة العليا":"Executive Priorities",
+"مؤشرات الأداء والاتجاهات":"Performance Indicators & Trends","ملخص تنفيذي تلقائي":"Automatic Executive Summary",
+"نظرة عامة":"Overview","تقرير المشروع المحدد":"Selected Project Report","صحة المحفظة":"Portfolio Health",
+"مؤشرات أداء مرتبطة":"Linked KPIs","عرض المخاطر":"View Risks","عرض الخطة":"View Plan",
+"تقرير تنفيذي صادر من نظام إدارة المشاريع المتكامل":"Executive report generated by the Integrated Project Management System",
+"توزيع المشاريع":"Project Distribution","حسب الحالة":"By Status","حسب الإنجاز":"By Progress","حسب الصحة":"By Health",
+"أكبر قطاع":"Largest Sector","أكبر مديرية":"Largest Directorate","الموقف المالي":"Financial Position",
+"المخاطر والتحديات":"Risks & Challenges","مشاريع معرضة للخطر":"At-Risk Projects","مشاريع متأخرة":"Delayed Projects",
+"تفاصيل المشاريع":"Project Details","مشاريع مكتملة":"Completed Projects","معرض للخطر":"At Risk",
+/* -- export -- */
+"تصدير واستيراد البيانات":"Data Export & Import","تصدير Excel كامل":"Full Excel Export","استيراد من Excel":"Import from Excel",
+/* -- empty states / messages -- */
+"لا توجد مهام":"No tasks","لا توجد مشاريع":"No projects","لا توجد مديريات":"No directorates","لا يوجد أعضاء":"No members",
+"لا توجد مخاطر":"No risks","لا توجد مشاكل":"No issues","لا توجد نتائج مطابقة":"No matching results",
+"لا توجد أهداف استراتيجية مسجلة":"No strategic objectives recorded",
+"لا توجد مشاريع مطابقة لمعايير البحث":"No projects match the search criteria",
+"لا توجد مخاطر حرجة حالياً.":"No critical risks at present.","لا توجد مخاطر مفتوحة ذات أولوية":"No open priority risks",
+"لا توجد إنجازات مكتملة بعد":"No completed achievements yet","بيانات غير كافية":"Insufficient data",
+"لا توجد بنود تكلفة مسجلة لهذا المشروع حتى الآن":"No cost items recorded for this project yet",
+"لا توجد مشاريع تحتوي على تاريخ بداية ونهاية":"No projects have both a start and end date",
+"اختر مشروعاً أو اختر كل المشاريع لعرض مخطط المحفظة":"Select a project, or choose All Projects for the portfolio chart",
+"اضغط للانتقال إلى المعلومة المرتبطة":"Click to jump to the related item","الانتقال للمعلومة المرتبطة":"Go to related item",
+"تجاوز الميزانية":"Over budget","قريب من الحد":"Near the limit","ضمن الميزانية":"Within budget",
+"ضمن المسار":"On Track","يحتاج متابعة":"Needs Follow-up","سليم":"Healthy",
+/* -- security / session -- */
+"صلاحيات المستخدمين":"User Permissions","مدير النظام":"System Administrator","مدير النظام PMO":"PMO System Administrator",
+"خروج":"Sign out","دخول":"Sign in","كلمة المرور":"Password","الصلاحية":"Permission","قراءة فقط":"Read only",
+/* -- sync -- */
+"تمت المزامنة بنجاح":"Synced successfully","آخر مزامنة":"Last sync","جارٍ المزامنة":"Syncing",
+"فشلت المزامنة":"Sync failed","تم تفعيل السمة الداكنة":"Dark theme enabled","تم إيقاف السمة الداكنة":"Dark theme disabled",
+/* -- alerts -- */
+"مخاطر حرجة تحتاج قراراً":"Critical risks requiring a decision","مشاريع تحتاج تسريع":"Projects needing acceleration",
+"مؤشرات أداء دون المستهدف":"KPIs below target","إنجازات إيجابية":"Positive achievements",
+"مؤشر إنفاق مرتفع":"High spend indicator",
+/* -- UX widget controls -- */
+"التحكم في مؤشرات هذه الشاشة":"Controls for this screen's widgets","تصغير الكل":"Shrink all","تكبير الكل":"Enlarge all",
+"ضخم":"Extra large","صغير":"Small","كبير":"Large","ضخم جداً":"Huge",
+/* -- five-year summary tiles -- */
+"سنوات الخطة الخمسية":"Five-Year Plan Years","موازنة 2026–2030":"Budget 2026–2030","متوسط تقدم الخطة":"Average Plan Progress",
+"KPIs حسب RAG أخضر/أصفر/أحمر":"KPIs by RAG (Green/Amber/Red)","أهداف مرتبطة هرمياً":"Hierarchically Linked Objectives",
+/* -- budget summary tiles -- */
+"إجمالي الميزانية المخططة للمشاريع":"Total Planned Project Budget","إجمالي التكلفة المخصصة للمشاريع":"Total Allocated Project Cost",
+"إجمالي المنفق حتى الآن":"Total Spent to Date","نسبة تخصيص الميزانية":"Budget Allocation Rate",
+"متوسط تكلفة المشروع":"Average Project Cost","إجمالي تكلفة المشاريع":"Total Project Cost",
+"أعلى تكلفة":"Highest cost","أقل تكلفة":"Lowest cost","موازنة الخطة":"Plan budget","المتبقي من الخطة":"Remaining in plan",
+"المخططة":"Planned","المخصصة":"Allocated","المنفقة":"Spent","المتبقية":"Remaining","الصرف":"Spend",
+"مخاطر":"Risks","عالية":"high","مشروع":"project","مشاريع":"projects","خضراء":"Green","صفراء":"Amber","حمراء":"Red",
+"إجمالي المخاطر":"Total Risks","مخاطر مرتفعة":"High Risks","مخاطر متوسطة":"Medium Risks","مخاطر منخفضة":"Low Risks",
+"أعضاء":"members","موارد":"resources","مهام":"tasks","بنود":"items"
+};
+
+/* Composite templates: "{n} unit ..." style sentences produced at runtime */
+var PATTERNS=[
+ [/^يوجد (\d+) مؤشر أداء في الحالة الحمراء مقارنة بالمستهدف\.?$/, "$1 KPI(s) are in red status versus target."],
+ [/^يوجد (\d+) مشروع مكتمل أو يتجاوز 85% من الإنجاز\.?$/, "$1 project(s) completed or above 85% progress."],
+ [/^يوجد (\d+) مشروع أقل من 50% إنجاز، ويحتاج مراجعة للخطة والموارد والمعالم\.?$/, "$1 project(s) below 50% progress — plan, resources and milestones need review."],
+ [/^يوجد (\d+) مخاطر حرجة تحتاج قراراً\.?$/, "$1 critical risk(s) require a decision."],
+ [/^مخاطر \((\d+) عالية\)$/, "Risks ($1 high)"],
+ [/^(\d+) مشروع$/, "$1 projects"],
+ [/^(\d+) مخاطر$/, "$1 risks"],
+ [/^(\d+)% \((\d+) أعضاء \/ (\d+) موارد\)$/, "$1% ($2 members / $3 resources)"],
+ [/^(\d+) أعضاء \/ (\d+) موارد$/, "$1 members / $2 resources"]
+];
+
+/* ============================ 3. i18n ENGINE ============================ */
+/* Translation is lossless: every mutated text node / attribute keeps its original
+   Arabic on the node itself, so switching back to AR restores byte-for-byte
+   instead of relying on a reverse dictionary (which cannot undo digit or
+   currency normalisation). */
+var LANG='ar', busy=false, observer=null;
+var ATTRS=['placeholder','title','aria-label','alt'];
+var SKIP={SCRIPT:1,STYLE:1,NOSCRIPT:1,CODE:1,PRE:1};
+var AR_DIGITS=/[٠-٩]/g, AR_SEP=/[٬٫]/g;
+
+/* Arabic-Indic -> Latin digits, Arabic thousands/decimal separators, currency token */
+function normalizeNumerals(s){
+  return s.replace(AR_DIGITS,function(d){ return String.fromCharCode(d.charCodeAt(0)-0x0660+48); })
+          .replace(/٬/g,',').replace(/٫/g,'.')
+          .replace(/ر\.ع/g,'OMR')
+          .replace(/[‎‏]/g,'')                                  /* bidi marks inside dates */
+          .replace(/(\d{1,2}:\d{2}(?::\d{2})?)\s*ص/g,'$1 AM')             /* only in a time context, */
+          .replace(/(\d{1,2}:\d{2}(?::\d{2})?)\s*م/g,'$1 PM')             /* so ordinary م/ص are safe */
+          .replace(/،/g,',');
+}
+
+/* Translate one visible string: exact -> pattern -> "label: rest" -> "label (rest)" */
+function translateString(s){
+  var t=s.trim(); if(!t) return null;
+  var hit=DICT[t];
+  if(hit) return hit;
+  for(var i=0;i<PATTERNS.length;i++){
+    var m=t.match(PATTERNS[i][0]);
+    if(m) return t.replace(PATTERNS[i][0],PATTERNS[i][1]);
+  }
+  var ci=t.indexOf(':');
+  if(ci>0){
+    var lab=DICT[t.slice(0,ci).trim()];
+    if(lab) return lab+': '+normalizeNumerals(t.slice(ci+1).trim());
+  }
+  var pi=t.indexOf('(');
+  if(pi>0){
+    var lab2=DICT[t.slice(0,pi).trim()];
+    if(lab2) return lab2+' ('+t.slice(pi+1).replace(/\)\s*$/,'')+')';
+  }
+  var norm=normalizeNumerals(t);
+  return norm!==t ? norm : null;
+}
+
+/* Protect <option> logic: freeze the Arabic value before its label is translated,
+   because JS reads option.value and a missing value attribute defaults to the text. */
+function freezeOptionValues(root){
+  root.querySelectorAll&&root.querySelectorAll('option').forEach(function(o){
+    if(!o.hasAttribute('value')) o.setAttribute('value', o.textContent.trim());
+  });
+}
+
+function translateTextNodes(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+    if(!n.nodeValue||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+    var p=n.parentNode;
+    if(!p||SKIP[p.nodeName]) return NodeFilter.FILTER_REJECT;
+    if(p.closest&&p.closest('[data-t21-skip]')) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+  }});
+  var n, batch=[];
+  while((n=w.nextNode())) batch.push(n);
+  batch.forEach(function(node){
+    var raw=node.nodeValue, key=raw.trim();
+    var hit=translateString(key);
+    if(hit!=null && hit!==key){
+      if(node.__t21o===undefined) node.__t21o=raw;
+      node.nodeValue = raw.replace(key, hit);
+    }
+  });
+}
+
+function translateAttrs(root){
+  var els = root.querySelectorAll ? root.querySelectorAll('*') : [];
+  var all = root.nodeType===1 ? [root].concat(Array.prototype.slice.call(els)) : Array.prototype.slice.call(els);
+  all.forEach(function(el){
+    ATTRS.forEach(function(a){
+      if(!el.hasAttribute||!el.hasAttribute(a)) return;
+      var v=el.getAttribute(a).trim(), hit=translateString(v);
+      if(hit!=null && hit!==v){
+        if(!el.__t21a) el.__t21a={};
+        if(el.__t21a[a]===undefined) el.__t21a[a]=el.getAttribute(a);
+        el.setAttribute(a,hit);
+      }
+    });
+    if(el.tagName==='INPUT'&&/^(button|submit|reset)$/i.test(el.type||'')){
+      var hv=translateString((el.value||'').trim());
+      if(hv!=null){
+        if(el.__t21v===undefined) el.__t21v=el.value;
+        el.value=hv;
+      }
+    }
+  });
+}
+
+/* Restore every recorded original — exact reverse of translateTree */
+function restoreTree(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n;
+  while((n=w.nextNode())) if(n.__t21o!==undefined){ n.nodeValue=n.__t21o; delete n.__t21o; }
+  (root.querySelectorAll?root.querySelectorAll('*'):[]).forEach(function(el){
+    if(el.__t21a){ Object.keys(el.__t21a).forEach(function(a){ el.setAttribute(a,el.__t21a[a]); }); delete el.__t21a; }
+    if(el.__t21v!==undefined){ el.value=el.__t21v; delete el.__t21v; }
+  });
+}
+
+/* Bilingual data entry: any free-text field renders in its own script direction */
+function applyAutoDir(root){
+  var sel='input[type="text"],input:not([type]),input[type="search"],textarea,[data-t21-auto]';
+  (root.querySelectorAll?root.querySelectorAll(sel):[]).forEach(function(el){
+    if(!el.hasAttribute('dir')) el.setAttribute('dir','auto');
+  });
+  (root.querySelectorAll?root.querySelectorAll('td,th'):[]).forEach(function(c){
+    if(!c.hasAttribute('dir')) c.setAttribute('dir','auto');
+  });
+}
+
+function translateTree(root){
+  if(!root) return;
+  freezeOptionValues(root);
+  translateTextNodes(root);
+  translateAttrs(root);
+  applyAutoDir(root);
+}
+
+function setLang(lang){
+  if(lang!=='ar'&&lang!=='en') lang='ar';
+  if(lang===LANG) return;
+  LANG=lang;
+  busy=true;
+  document.documentElement.setAttribute('lang',lang);
+  document.documentElement.setAttribute('dir', lang==='en'?'ltr':'rtl');
+  document.body.style.direction = lang==='en'?'ltr':'rtl';
+  if(lang==='en') translateTree(document.body); else restoreTree(document.body);
+  try{ localStorage.setItem(LS_LANG,lang); }catch(e){}
+  var lbl=document.getElementById('t21LangLabel');
+  if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
+  document.title = lang==='en'
+    ? "T21.0 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.0 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+  if(window.Chart) retintCharts();
+  busy=false;
+}
+
+function startObserver(){
+  observer=new MutationObserver(function(muts){
+    if(busy||LANG!=='en') return;
+    busy=true;
+    muts.forEach(function(m){
+      m.addedNodes&&m.addedNodes.forEach(function(n){
+        if(n.nodeType===1) translateTree(n);
+        else if(n.nodeType===3&&n.nodeValue&&n.nodeValue.trim()){
+          var k=n.nodeValue.trim(), hit=translateString(k);
+          if(hit!=null&&hit!==k){ if(n.__t21o===undefined) n.__t21o=n.nodeValue; n.nodeValue=n.nodeValue.replace(k,hit); }
+        }
+      });
+    });
+    busy=false;
+  });
+  observer.observe(document.body,{childList:true,subtree:true});
+}
+
+/* ============================ 4. SWITCHER UI ============================ */
+function buildUI(){
+  var host=document.querySelector('.t20-smart-actions');
+  if(!host) return;
+  var wrap=document.createElement('div');
+  wrap.className='t21-ctl'; wrap.setAttribute('data-t21-skip','');
+  wrap.innerHTML=
+    '<button type="button" class="t21-lang-btn" id="t21LangBtn" title="Switch language / تبديل اللغة">'+
+      '<i class="fas fa-language"></i><span id="t21LangLabel">English</span></button>'+
+    '<div class="t21-theme-menu">'+
+      '<button type="button" class="t21-lang-btn" id="t21ThemeBtn" title="Theme / السمة" aria-haspopup="true" aria-expanded="false">'+
+        '<i class="fas fa-palette"></i></button>'+
+      '<div class="t21-theme-pop" id="t21ThemePop" role="radiogroup"></div>'+
+    '</div>';
+  host.insertBefore(wrap, host.firstChild);
+
+  var pop=wrap.querySelector('#t21ThemePop');
+  THEMES.forEach(function(t){
+    var b=document.createElement('button');
+    b.type='button'; b.className='t21-theme-opt'; b.dataset.theme=t.id;
+    b.setAttribute('role','radio'); b.setAttribute('aria-checked','false');
+    b.innerHTML='<span class="t21-sw" style="background:'+t.sw+'"></span>'+
+                '<span>'+t.ar+' <small style="opacity:.7">'+t.en+'</small></span>';
+    b.addEventListener('click',function(){ applyTheme(t.id); pop.classList.remove('show');
+      wrap.querySelector('#t21ThemeBtn').setAttribute('aria-expanded','false'); });
+    pop.appendChild(b);
+  });
+
+  wrap.querySelector('#t21LangBtn').addEventListener('click',function(){
+    setLang(LANG==='ar'?'en':'ar');
+  });
+  var tb=wrap.querySelector('#t21ThemeBtn');
+  tb.addEventListener('click',function(e){
+    e.stopPropagation();
+    var open=pop.classList.toggle('show');
+    tb.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',function(e){
+    if(!wrap.contains(e.target)){ pop.classList.remove('show'); tb.setAttribute('aria-expanded','false'); }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ pop.classList.remove('show'); tb.setAttribute('aria-expanded','false'); }
+  });
+
+  /* Retire the old dark-mode button: it drove the broken 40-rule patch theme */
+  var old=host.querySelector('.t20-smart-icon-btn.dark[onclick*="toggleDarkMode"]');
+  if(old) old.remove();
+}
+
+/* Neutralise the legacy toggle if anything still calls it */
+window.toggleDarkMode=function(){
+  var cur=document.documentElement.getAttribute('data-theme')||'ministry';
+  applyTheme(cur==='midnight'?'ministry':'midnight');
+};
+
+/* ============================ 5. BOOT ============================ */
+function boot(){
+  var savedTheme='ministry', savedLang='ar';
+  try{
+    savedTheme=localStorage.getItem(LS_THEME)||'ministry';
+    savedLang=localStorage.getItem(LS_LANG)||'ar';
+  }catch(e){}
+  applyTheme(savedTheme);
+  buildUI();
+  applyAutoDir(document.body);
+  freezeOptionValues(document.body);
+  startObserver();
+  if(savedLang==='en') setTimeout(function(){ setLang('en'); },350);
+  window.T21={setLang:setLang,applyTheme:applyTheme,themes:THEMES,dict:DICT,
+              get lang(){return LANG;}, retranslate:function(){ if(LANG==='en') translateTree(document.body); }};
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+else boot();
+})();
+</script>
+
 </body>
 </html>
