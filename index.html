@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.0 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.3 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -852,7 +852,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T21 | Ver.0</span></h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T21.3 | Ver.3</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -1366,9 +1366,12 @@
 
             // T20: ضع رابط Google Apps Script Web App هنا فقط لتفعيل التخزين المركزي.
             // مثال: const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/XXXXX/exec';
-            const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzI9-eQL782r-bq_w2ZSz0J4OrJL67rWuIS9yIn9aO_kpZ_giZQ5pPOaDrxP2sEwaic0A/exec';
+            //const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbyvDv9LH7FOfluI6OjaSXqay1IYlJNjaJSzBjnQefAR8O4rpQT-cZ-KVpGH2dFGPWxmwA/exec';
+			const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzWnKDmoHTXJEIzoA2rAhv_EcOl7Ipt9tPd2pmr8lyp04I36uWxi3ECJYH-4ll2zTgq/exec';
+			
             const T20_SYNC_INTERVAL_MS = 120000; // رفع تلقائي كل دقيقتين عند وجود تغييرات
             const T20_SYNC_META_KEY = 'motc_t20_sync_meta';
+            let t20PullInProgress = false;
 
             let appData = { projects: [], resources: [], tasks: [], risks: [], budgets: [], objectives: [],
                 kpis: [], services: [], teamMembers: [], sectors: [], directorates: [], fiveYearPlans: [] };
@@ -1384,6 +1387,22 @@
             let currentRiskFilter = 'all';
 
             // ---- تحميل وتهيئة البيانات ----
+            function t21DateOnly(value){
+                if(value===null || value===undefined || value==='') return '';
+                const match=String(value).trim().match(/^(\d{4}-\d{2}-\d{2})/);
+                return match ? match[1] : String(value).trim();
+            }
+            function t21NormalizeAppDates(data){
+                if(!data || typeof data!=='object') return data;
+                (data.projects||[]).forEach(item=>{ item.start=t21DateOnly(item.start); item.end=t21DateOnly(item.end); });
+                (data.tasks||[]).forEach(item=>{
+                    item.planStart=t21DateOnly(item.planStart); item.planEnd=t21DateOnly(item.planEnd);
+                    item.actualStart=t21DateOnly(item.actualStart); item.actualEnd=t21DateOnly(item.actualEnd);
+                });
+                (data.budgets||[]).forEach(item=>{ item.date=t21DateOnly(item.date); });
+                (data.services||[]).forEach(item=>{ item.launchDate=t21DateOnly(item.launchDate); });
+                return data;
+            }
             function loadData() {
                 const s = localStorage.getItem(STORAGE_KEY);
                 if (s) {
@@ -1396,6 +1415,7 @@
                 ['projects','resources','tasks','risks','budgets','objectives','kpis','services','teamMembers','sectors','directorates','fiveYearPlans'].forEach(k => {
                     if (!appData[k]) appData[k] = [];
                 });
+                t21NormalizeAppDates(appData);
                 if (appData.sectors.length === 0) appData.sectors = [...DEFAULT_SECTORS];
                 if (appData.directorates.length === 0) appData.directorates = [...DEFAULT_DIRECTORATES];
                 normalizePhaseOneData();
@@ -1618,15 +1638,57 @@
                 if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
                 const __actor=(window.T20Security&&window.T20Security.identity&&window.T20Security.identity())||null;
                 const __payload=Object.assign({},payload,{actor:__actor});
+                const __signal=window.__t20SyncAbortController ? window.__t20SyncAbortController.signal : undefined;
                 if(__payload.action==='setDB' && __actor && __actor.canWrite===false) throw new Error('صلاحيات القراءة فقط: لا يمكن رفع التعديلات');
-                const res=await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(__payload)});
-                const txt=await res.text();
-                let data={}; try{data=JSON.parse(txt||'{}');}catch(e){data={ok:res.ok,raw:txt};}
-                if(!res.ok || data.ok===false) throw new Error(data.error||('HTTP '+res.status));
-                return data;
+                try{
+                    const res=await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(__payload),redirect:'follow',signal:__signal});
+                    const txt=await res.text();
+                    let data={}; try{data=JSON.parse(txt||'{}');}catch(e){data={ok:res.ok,raw:txt};}
+                    if(!res.ok || data.ok===false) throw new Error(data.error||('HTTP '+res.status));
+                    return data;
+                }catch(err){
+                    // Apps Script قد يحجب قراءة الاستجابة من صفحات file:// بسبب CORS.
+                    // إعادة الإرسال no-cors صالحة للكتابة فقط؛ القراءة تستخدم JSONP أدناه.
+                    if(__payload.action!=='setDB' || !(err instanceof TypeError || /Failed to fetch/i.test(err.message||''))) throw err;
+                    await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(__payload),redirect:'follow',signal:__signal});
+                    return {ok:true,opaque:true,updatedAt:new Date().toISOString()};
+                }
+            }
+
+            function t20CentralGetDB(){
+                if(!t20SyncEnabled()) return Promise.reject(new Error('لم يتم ضبط رابط التخزين المركزي'));
+                return new Promise((resolve,reject)=>{
+                    const token='t20_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+                    const frame=document.createElement('iframe');
+                    let frameLoaded=false;
+                    frame.setAttribute('aria-hidden','true');
+                    frame.style.cssText='position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;border:0;opacity:0;pointer-events:none';
+                    frame.onload=()=>{ frameLoaded=true; };
+                    const cleanup=()=>{ clearTimeout(timer); window.removeEventListener('message',onMessage); frame.remove(); };
+                    const onMessage=(event)=>{
+                        const message=event.data;
+                        if(!message || message.type!=='T20_CENTRAL_DB_RESPONSE' || message.token!==token) return;
+                        cleanup();
+                        const result=message.result;
+                        if(!result || result.ok===false) reject(new Error((result&&result.error)||'استجابة مركزية غير صالحة'));
+                        else resolve(result);
+                    };
+                    const timer=setTimeout(()=>{
+                        cleanup();
+                        reject(new Error(frameLoaded
+                            ? 'تم تحميل صفحة Apps Script لكن لم تصل رسالة البيانات. تأكد أن المنشور هو code_new_v2.3.gs وليس إصداراً أقدم.'
+                            : 'تعذر تحميل صفحة Apps Script داخل جسر القراءة. تحقق من رابط /exec وإتاحة الوصول للجميع.'));
+                    },45000);
+                    window.addEventListener('message',onMessage);
+                    frame.src=T20_CENTRAL_SYNC_URL+'?action=bridgeGetDB&token='+encodeURIComponent(token)+'&_='+Date.now();
+                    document.body.appendChild(frame);
+                });
             }
             async function t20SyncNow(showMessage=true){
                 if(!t20SyncEnabled()){ t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.'); if(showMessage) alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
+                if(t20PullInProgress){ if(showMessage) alert('انتظر حتى يكتمل تحميل النسخة المركزية.'); return; }
+                const syncController=new AbortController();
+                window.__t20SyncAbortController=syncController;
                 try{
                     t20SetSyncStatus('pending','جاري المزامنة مع Google Sheet','يتم رفع نسخة JSON مركزية دون تعطيل العمل المحلي.');
                     const payload={action:'setDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY,db:appData,clientUpdatedAt:new Date().toISOString(),source:location.href};
@@ -1637,28 +1699,41 @@
                     t20SetSyncStatus('ok','تمت المزامنة بنجاح','تم حفظ البيانات مركزياً في Google Sheet مع استمرار النسخة المحلية.');
                     if(showMessage) toast('تمت المزامنة مع Google Sheet بنجاح');
                 }catch(err){
+                    if(err && err.name==='AbortError') return;
                     console.error('T20 sync failed',err);
                     t20SetSyncStatus('error','تعذرت المزامنة المركزية','تم الاحتفاظ بالبيانات محلياً، وسيعاد الرفع عند توفر الاتصال أو تصحيح الرابط.');
                     if(showMessage) alert('تعذرت المزامنة المركزية: '+err.message);
+                }finally{
+                    if(window.__t20SyncAbortController===syncController) window.__t20SyncAbortController=null;
                 }
             }
             async function t20PullFromCentral(){
                 if(!t20SyncEnabled()){ alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
                 if(!confirm('سيتم تحميل آخر نسخة مركزية واستبدال البيانات الحالية محلياً. هل تريد المتابعة؟')) return;
+                t20PullInProgress=true;
+                clearTimeout(window.__t20SyncTimer);
+                if(window.__t20SyncAbortController) window.__t20SyncAbortController.abort();
+                const pullMeta=t20ReadSyncMeta();
+                pullMeta.dirty=false;
+                pullMeta.pullInProgress=true;
+                t20WriteSyncMeta(pullMeta);
                 try{
                     t20SetSyncStatus('pending','جاري تحميل النسخة المركزية','يتم جلب آخر نسخة محفوظة من Google Sheet.');
-                    const res=await t20CentralRequest({action:'getDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY});
+                    const res=await t20CentralGetDB();
                     const remote=res.db||res.data;
                     if(!remote) throw new Error('لا توجد بيانات مركزية صالحة');
-                    appData=remote;
+                    appData=t21NormalizeAppDates(remote);
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.lastSyncAt=new Date().toISOString(); t20WriteSyncMeta(meta);
+                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.pullInProgress=false; meta.pullFailed=false; meta.lastSyncAt=new Date().toISOString(); t20WriteSyncMeta(meta);
                     refreshAllViews();
                     t20SetSyncStatus('ok','تم تحميل النسخة المركزية','تم تحديث البيانات المحلية من Google Sheet.');
                     toast('تم تحميل البيانات المركزية بنجاح');
                 }catch(err){
+                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.pullInProgress=false; meta.pullFailed=true; t20WriteSyncMeta(meta);
                     t20SetSyncStatus('error','تعذر تحميل النسخة المركزية','تحقق من رابط Google Apps Script وصلاحيات النشر.');
                     alert('تعذر تحميل النسخة المركزية: '+err.message);
+                }finally{
+                    t20PullInProgress=false;
                 }
             }
             window.t20SyncNow=t20SyncNow;
@@ -1668,7 +1743,7 @@
                 if(!t20SyncEnabled()) t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.');
                 else if(meta.dirty) t20SetSyncStatus('pending','توجد تغييرات محفوظة محلياً','سيتم رفعها تلقائياً أو عبر زر مزامنة الآن.');
                 else t20SetSyncStatus('ok','المزامنة المركزية مفعلة','يتم الحفظ محلياً فوراً والرفع مركزياً بشكل دوري.');
-                setInterval(()=>{ const m=t20ReadSyncMeta(); if(t20SyncEnabled() && m.dirty) t20SyncNow(false); }, T20_SYNC_INTERVAL_MS);
+                setInterval(()=>{ const m=t20ReadSyncMeta(); if(t20SyncEnabled() && m.dirty && !t20PullInProgress) t20SyncNow(false); }, T20_SYNC_INTERVAL_MS);
             }
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
@@ -4560,7 +4635,7 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
   // Gantt chart loads automatically on init, no need to re-render on tab click
 })();
 </script>
-<!-- ================= T21.0 : i18n (AR/EN) + Enterprise Theming ================= -->
+<!-- ================= T21.3 : i18n (AR/EN) + Enterprise Theming ================= -->
 <style id="t21-theme-style">
 /* ---------- Theme tokens ---------- */
 :root{
@@ -5153,8 +5228,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.0 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.0 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21.3 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.3 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
