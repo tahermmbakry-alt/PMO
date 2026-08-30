@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.3 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.4 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -852,7 +852,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T21.3 | Ver.3</span></h1>
+                <h1>وزارة النقل والاتصالات وتقنية المعلومات <span class="program-version-badge">T21.4 | Ver.4</span></h1>
                 <div class="subtitle">نظام إدارة المشاريع المتكامل | Project Portfolio Management</div>
             </div>
         </div>
@@ -1655,8 +1655,41 @@
                 }
             }
 
-            function t20CentralGetDB(){
-                if(!t20SyncEnabled()) return Promise.reject(new Error('لم يتم ضبط رابط التخزين المركزي'));
+            async function t20GetDBByFetch(){
+                const controller=new AbortController();
+                const timer=setTimeout(()=>controller.abort(),12000);
+                try{
+                    const response=await fetch(T20_CENTRAL_SYNC_URL+'?_='+Date.now(),{
+                        method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+                        body:JSON.stringify({action:'getDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY}),
+                        redirect:'follow',signal:controller.signal
+                    });
+                    const text=await response.text();
+                    let result; try{ result=JSON.parse(text||'{}'); }catch(e){ throw new Error('استجابة fetch ليست JSON صالحاً'); }
+                    if(!response.ok || !result || result.ok===false) throw new Error((result&&result.error)||('HTTP '+response.status));
+                    return result;
+                }finally{ clearTimeout(timer); }
+            }
+
+            function t20GetDBByJsonp(){
+                return new Promise((resolve,reject)=>{
+                    const callback='__t21Central_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+                    const script=document.createElement('script');
+                    const cleanup=()=>{ clearTimeout(timer); script.remove(); try{delete window[callback];}catch(e){window[callback]=undefined;} };
+                    const timer=setTimeout(()=>{ cleanup(); reject(new Error('انتهت مهلة JSONP')); },20000);
+                    window[callback]=(result)=>{
+                        cleanup();
+                        if(!result || result.ok===false) reject(new Error((result&&result.error)||'استجابة JSONP غير صالحة'));
+                        else resolve(result);
+                    };
+                    script.async=true;
+                    script.onerror=()=>{ cleanup(); reject(new Error('تعذر تنفيذ JSONP')); };
+                    script.src=T20_CENTRAL_SYNC_URL+'?action=getDB&callback='+encodeURIComponent(callback)+'&_='+Date.now();
+                    document.head.appendChild(script);
+                });
+            }
+
+            function t20GetDBByFrame(){
                 return new Promise((resolve,reject)=>{
                     const token='t20_'+Date.now()+'_'+Math.random().toString(36).slice(2);
                     const frame=document.createElement('iframe');
@@ -1676,13 +1709,22 @@
                     const timer=setTimeout(()=>{
                         cleanup();
                         reject(new Error(frameLoaded
-                            ? 'تم تحميل صفحة Apps Script لكن لم تصل رسالة البيانات. تأكد أن المنشور هو code_new_v2.3.gs وليس إصداراً أقدم.'
+                            ? 'تم تحميل إطار Apps Script لكن لم تصل رسالة البيانات.'
                             : 'تعذر تحميل صفحة Apps Script داخل جسر القراءة. تحقق من رابط /exec وإتاحة الوصول للجميع.'));
-                    },45000);
+                    },30000);
                     window.addEventListener('message',onMessage);
                     frame.src=T20_CENTRAL_SYNC_URL+'?action=bridgeGetDB&token='+encodeURIComponent(token)+'&_='+Date.now();
                     document.body.appendChild(frame);
                 });
+            }
+
+            async function t20CentralGetDB(){
+                if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
+                const errors=[];
+                try{ return await t20GetDBByFetch(); }catch(err){ errors.push('fetch: '+(err.message||err)); }
+                try{ return await t20GetDBByJsonp(); }catch(err){ errors.push('JSONP: '+(err.message||err)); }
+                try{ return await t20GetDBByFrame(); }catch(err){ errors.push('iframe: '+(err.message||err)); }
+                throw new Error('فشلت طرق القراءة المتاحة من GitHub Pages — '+errors.join(' | '));
             }
             async function t20SyncNow(showMessage=true){
                 if(!t20SyncEnabled()){ t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.'); if(showMessage) alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
@@ -4635,7 +4677,7 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
   // Gantt chart loads automatically on init, no need to re-render on tab click
 })();
 </script>
-<!-- ================= T21.3 : i18n (AR/EN) + Enterprise Theming ================= -->
+<!-- ================= T21.4 : i18n (AR/EN) + Enterprise Theming ================= -->
 <style id="t21-theme-style">
 /* ---------- Theme tokens ---------- */
 :root{
@@ -5228,8 +5270,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.3 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.3 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21.4 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.4 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
