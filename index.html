@@ -1,9 +1,38 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+        <style>
+            .fy-edit-card { position: sticky !important; top: 8px !important; z-index: 100 !important; background: white !important; border:2px solid #dbeafe !important; box-shadow:0 14px 36px rgba(15,23,42,.16) !important; }
+            body.dark-mode .fy-edit-card { background: #111827 !important; }
+            .fy-edit-card.is-editing { border-color:#3b82f6 !important; }
+            .fy-editor-status { display:inline-flex;align-items:center;gap:7px;margin-inline-start:10px;padding:6px 11px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:.74rem;font-weight:800; }
+            .fy-editor-status.is-editing { background:#dbeafe;color:#1e40af; }
+            .fy-table-card { scroll-margin-top:290px; }
+            #fiveYearBody tr.fy-row-editing td { background:#eff6ff !important; border-top:1px solid #93c5fd;border-bottom:1px solid #93c5fd; }
+            #fiveYearBody tr.fy-row-editing td:first-child { box-shadow:inset -4px 0 #2563eb; }
+            .strategy-edit-card { position:sticky !important;top:8px !important;z-index:90 !important;background:#fff !important;border:2px solid #dbeafe !important;box-shadow:0 14px 36px rgba(15,23,42,.14) !important; }
+            body.dark-mode .strategy-edit-card { background:#111827 !important; }
+            .project-edit-card { position:sticky !important;top:8px !important;z-index:90 !important;background:#fff !important;border:2px solid #dbeafe !important;box-shadow:0 14px 36px rgba(15,23,42,.14) !important; }
+            body.dark-mode .project-edit-card { background:#111827 !important; }
+            .risk-edit-card { position:sticky !important;top:8px !important;z-index:90 !important;background:#fff !important;border:2px solid #fee2e2 !important;box-shadow:0 14px 36px rgba(15,23,42,.14) !important; }
+            body.dark-mode .risk-edit-card { background:#111827 !important; }
+            .budget-edit-card { position:relative !important;background:#fff !important;border:2px solid #d1fae5 !important;box-shadow:0 14px 36px rgba(15,23,42,.14) !important;scroll-margin-top:70px; }
+            body.dark-mode .budget-edit-card { background:#111827 !important; }
+            .budget-edit-card.is-collapsed{display:none!important}.budget-editor-head{display:flex!important;align-items:center;justify-content:space-between!important;gap:12px}.budget-editor-close{border:1px solid #cbd5e1;background:#fff;color:#475569;border-radius:9px;width:34px;height:34px;cursor:pointer}.budget-editor-close:hover{background:#f1f5f9;color:#0f172a}
+            .budget-filter-toolbar { display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f8fafc;border:1px solid #dbeafe;border-right:4px solid #2563eb;border-radius:14px; }
+            .budget-filter-toolbar .form-group { min-width:280px;margin:0; }
+            .budget-filter-toolbar .filter-context { color:#475569;font-size:.78rem;font-weight:800;padding-bottom:10px; }
+            .budget-action-divider{width:1px;height:40px;background:#cbd5e1;margin:0 3px}.budget-filter-toolbar .btn[disabled]{opacity:.45;cursor:not-allowed}.budget-cost-item-row{cursor:pointer}.budget-cost-item-row.is-selected td{background:#eff6ff!important;border-top:1px solid #93c5fd!important;border-bottom:1px solid #93c5fd!important}.budget-cost-item-row.is-selected td:first-child{box-shadow:inset -4px 0 #2563eb}.budget-selection-hint{font-size:.7rem;color:#64748b;font-weight:800;width:100%}
+            @media (max-width:900px){ .fy-edit-card{position:relative !important;top:auto !important;} }
+            @media (max-width:900px){ .strategy-edit-card{position:relative !important;top:auto !important;} }
+            @media (max-width:900px){ .project-edit-card{position:relative !important;top:auto !important;} }
+            @media (max-width:900px){ .risk-edit-card{position:relative !important;top:auto !important;} }
+            @media (max-width:900px){ .budget-edit-card{position:relative !important;top:auto !important;} .budget-filter-toolbar .form-group{min-width:100%;} }
+        </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.6 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.15 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -42,6 +71,84 @@
         .main-container {
             max-width: 1500px;
             margin: 0 auto;
+        }
+
+        /* ===== Sub-tabs System (fixed and expanded in T21.8) ===== */
+        .sub-tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--t21-surface2, #f8fafc);
+            border-radius: 14px;
+            border: 1px solid var(--t21-border, #e2e8f0);
+            margin-bottom: 18px;
+            overflow-x: auto;
+        }
+        .sub-tab-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--t21-muted, #64748b);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sub-tab-btn i {
+            font-size: 0.85rem;
+        }
+        .sub-tab-btn:hover {
+            background: var(--t21-surface3, #eef2f7);
+            color: var(--t21-heading, #0f172a);
+        }
+        .sub-tab-btn.active {
+            background: var(--t21-brand, #0f172a);
+            color: var(--t21-onbrand, #ffffff);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+        .sub-tab-content,
+        .t21-sub-tab-panel {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+        .sub-tab-content.active,
+        .t21-sub-tab-panel.active {
+            display: block;
+        }
+        .sub-tabs-nav[role="tablist"] {
+            scrollbar-width: thin;
+        }
+        .sub-tab-btn:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--t21-brand, #2563eb) 35%, transparent);
+            outline-offset: 2px;
+        }
+        .t21-sub-tab-panel[hidden] { display: none !important; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media print {
+            .sub-tab-content,
+            .t21-sub-tab-panel,
+            .t21-sub-tab-panel[hidden] { display: block !important; }
+        }
+
+        /* تحسين توافق السمة الداكنة */
+        html[data-theme="midnight"] .sub-tabs-nav,
+        html[data-theme="purple"] .sub-tabs-nav,
+        html[data-theme="contrast"] .sub-tabs-nav {
+            background: var(--t21-surface2, #1b2438);
+            border-color: var(--t21-border, #2c3855);
+        }
+        html[data-theme="contrast"] .sub-tab-btn.active {
+            background: var(--t21-accent, #ffe600);
+            color: #000;
         }
 
         .header {
@@ -526,6 +633,17 @@
         .phase3-exec-summary{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:22px;padding:20px;box-shadow:0 14px 42px rgba(15,23,42,.24);margin-bottom:18px}.phase3-exec-summary h3{margin-bottom:8px}.phase3-exec-summary p{color:#dbeafe;line-height:1.9;font-size:.9rem}.phase3-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.phase3-actions button{border:none;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
         .phase3-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}.phase3-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow);border-right:5px solid #3b82f6}.phase3-card .n{font-size:1.45rem;font-weight:900;color:#0f172a}.phase3-card .l{font-size:.76rem;color:#64748b}.phase3-card.red{border-right-color:#ef4444}.phase3-card.amber{border-right-color:#f59e0b}.phase3-card.green{border-right-color:#10b981}.phase3-card.purple{border-right-color:#8b5cf6}
         .phase3-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.phase3-list{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px;box-shadow:var(--shadow)}.phase3-list h4{margin-bottom:10px;color:#0f172a}.phase3-list-item{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #eef2f7;font-size:.82rem}.phase3-list-item:last-child{border-bottom:none}
+        .executive-report-shell{direction:rtl;display:grid;gap:16px}
+        .executive-report-head{display:flex;justify-content:space-between;align-items:center;gap:22px;padding:24px 26px;border-radius:22px;background:linear-gradient(135deg,#07152d 0%,#123a72 62%,#176b87 100%);color:#fff;box-shadow:0 18px 45px rgba(15,23,42,.22);position:relative;overflow:hidden}
+        .executive-report-head:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;left:-90px;top:-130px;background:rgba(255,255,255,.07)}
+        .executive-report-head h2{font-size:1.55rem;margin:7px 0 5px}.executive-report-head p{color:#dbeafe;font-size:.84rem}.executive-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:900;color:#bae6fd;letter-spacing:.02em}
+        .executive-report-meta{display:grid;grid-template-columns:repeat(3,minmax(105px,1fr));gap:8px;position:relative;z-index:1}.executive-report-meta div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:13px;padding:9px 11px;backdrop-filter:blur(5px)}.executive-report-meta span{display:block;color:#bfdbfe;font-size:.62rem;margin-bottom:3px}.executive-report-meta strong{color:#fff;font-size:.78rem}
+        .executive-filter{display:flex;align-items:end;gap:9px;flex-wrap:wrap;background:#fff;border:1px solid #dbeafe;border-radius:15px;padding:10px 12px;box-shadow:0 8px 22px rgba(15,23,42,.06)}.executive-filter .form-group{min-width:260px;margin:0}.executive-filter .btn{min-height:40px}
+        .executive-kpis{grid-template-columns:repeat(6,minmax(135px,1fr))}.executive-kpis .phase3-card{position:relative;overflow:hidden;padding:15px}.executive-kpis .phase3-card .n{font-size:1.55rem}.executive-kpis .phase3-card .l{font-weight:800}.executive-kpis .phase3-card .s{font-size:.65rem;color:#94a3b8;margin-top:5px}
+        .executive-pulse{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.executive-pulse-item{background:#fff;border:1px solid #e2e8f0;border-radius:15px;padding:13px;box-shadow:var(--shadow)}.executive-pulse-head{display:flex;justify-content:space-between;gap:8px;font-size:.75rem;font-weight:900;color:#334155;margin-bottom:8px}.executive-pulse-head strong{color:#0f172a}.executive-pulse-track{height:9px;background:#e2e8f0;border-radius:999px;overflow:hidden}.executive-pulse-fill{height:100%;border-radius:999px}.executive-pulse-note{font-size:.64rem;color:#64748b;margin-top:6px}
+        .executive-three-col{grid-template-columns:repeat(3,1fr);gap:12px}.executive-list{border-top:4px solid #3b82f6}.executive-list.success{border-top-color:#10b981}.executive-list.attention{border-top-color:#f59e0b}.executive-list.decision{border-top-color:#8b5cf6}.executive-list .phase3-list-item strong{white-space:nowrap}.executive-list.decision .phase3-list-item{align-items:flex-start}.executive-list.decision .phase3-list-item i{color:#8b5cf6;margin-top:3px}
+        @media(max-width:1100px){.executive-report-head{align-items:flex-start;flex-direction:column}.executive-report-meta{width:100%}.executive-kpis{grid-template-columns:repeat(3,1fr)}.executive-pulse{grid-template-columns:repeat(2,1fr)}.executive-three-col{grid-template-columns:1fr}}
+        @media(max-width:650px){.executive-report-meta{grid-template-columns:1fr}.executive-kpis,.executive-pulse{grid-template-columns:1fr 1fr}.executive-report-head{padding:18px}.executive-filter .form-group{min-width:100%}}
 
         .finance-gauge{width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;background:conic-gradient(#10b981 0deg,#10b981 var(--deg),#e5e7eb var(--deg),#e5e7eb 360deg);position:relative}
         .finance-gauge:after{content:"";position:absolute;width:58px;height:58px;border-radius:50%;background:#fff}
@@ -690,6 +808,19 @@
   body { overflow:visible!important; }
   .main-container { overflow:visible!important; }
 }
+@media print{
+  #reports-charts,#reports-tables,.phase3-print-note{display:none!important}
+  #reports-summary{display:block!important}
+  .executive-report-shell{display:block!important;direction:rtl!important}
+  .executive-report-head{display:flex!important;background:#123a72!important;color:#fff!important;border:0!important;border-radius:5mm!important;padding:7mm!important;margin:0 0 4mm!important;box-shadow:none!important;page-break-inside:avoid!important;break-inside:avoid!important}
+  .executive-report-head h2{font-size:16pt!important;color:#fff!important}.executive-report-head p,.executive-eyebrow{color:#dbeafe!important}
+  .executive-report-meta{display:grid!important;grid-template-columns:repeat(3,1fr)!important;min-width:72mm!important}.executive-report-meta div{padding:2.5mm!important}.executive-report-meta span{color:#bfdbfe!important}.executive-report-meta strong{color:#fff!important}
+  .executive-kpis{display:grid!important;grid-template-columns:repeat(6,1fr)!important;gap:2mm!important;margin-bottom:3mm!important}.executive-kpis .phase3-card{min-height:20mm!important;padding:2.5mm!important}.executive-kpis .phase3-card .s{font-size:6.5pt!important}
+  .executive-pulse{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:2mm!important;margin:0 0 3mm!important}.executive-pulse-item{box-shadow:none!important;padding:2.5mm!important;break-inside:avoid!important}.executive-pulse-head{font-size:7.5pt!important}.executive-pulse-note{font-size:6.5pt!important}
+  .phase3-exec-summary{break-inside:auto!important;page-break-inside:auto!important;padding:4mm!important;margin-bottom:3mm!important}.phase3-exec-summary>div{break-inside:avoid!important;page-break-inside:avoid!important}
+  .executive-three-col{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:2mm!important}.executive-three-col .phase3-list{font-size:7.5pt!important;padding:3mm!important;break-inside:avoid!important;page-break-inside:avoid!important}.executive-three-col .phase3-list-item{font-size:7pt!important;padding:1.5mm 0!important}
+  p{orphans:3;widows:3} h2,h3,h4{break-after:avoid!important;page-break-after:avoid!important}
+}
         @media(max-width:800px){.phase3-top-tools{grid-template-columns:1fr}.phase3-report-grid{grid-template-columns:1fr}.phase3-search-panel{margin-top:0}}
 
 
@@ -852,7 +983,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.6 | Ver.6</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.15 | Ver.15</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -899,6 +1030,7 @@
                         <div class="t20-more-label">إجراءات البيانات والمزامنة</div>
                         <button type="button" class="btn btn-success" onclick="t20SyncNow()"><i class="fas fa-cloud-upload-alt"></i> مزامنة الآن</button>
                         <button type="button" class="btn btn-outline" onclick="t20PullFromCentral()"><i class="fas fa-cloud-download-alt"></i> تحميل المركزي</button>
+                        <button type="button" id="t20AutoSyncToggleBtn" class="btn btn-outline" onclick="t20ToggleAutoSync()"><i class="fas fa-play-circle"></i> تفعيل المزامنة التلقائية</button>
                         <button type="button" class="btn btn-outline" onclick="document.querySelector('[data-tab=&quot;tab-export&quot;]')?.click()"><i class="fas fa-file-export"></i> التصدير والاستيراد</button>
                         <div class="t20-more-label">إعدادات العرض</div>
                         <button type="button" class="btn btn-outline" onclick="document.querySelector('.tab-content.active [data-ux-reset-sizes]')?.click()"><i class="fas fa-compress"></i> الحجم الافتراضي</button>
@@ -913,122 +1045,137 @@
             <div id="phase3NotificationsList"></div>
         </div>
 
-        <!-- ====== لوحة المؤشرات (المعدلة) ====== -->
+        <!-- ====== لوحة المؤشرات (المعدلة مع تبويبات فرعية) ====== -->
         <div class="tab-content active" id="tab-dashboard">
-            <!-- صف مربعات المؤشرات الرئيسية -->
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-grip-vertical"></i> مربعات المؤشرات - اسحب لتغيير الترتيب</span>
-                    
-                </div>
-                <div class="kpi-row size-medium" id="kpiCards"></div>
-            </div>
 
-            <!-- الأداء العام للمحفظة -->
-            <div class="overall-card" id="overallCard"></div>
+            <!-- شريط التبويبات الفرعية -->
+            <nav class="sub-tabs-nav sub-tabs-nav-dashboard no-print">
+                <button class="sub-tab-btn active" data-subtab="dash-overview"><i class="fas fa-chart-pie"></i> ملخص عام</button>
+                <button class="sub-tab-btn" data-subtab="dash-budget"><i class="fas fa-coins"></i> الموازنة والتكلفة</button>
+                <button class="sub-tab-btn" data-subtab="dash-resources"><i class="fas fa-users-cog"></i> استغلال الموارد</button>
+                <button class="sub-tab-btn" data-subtab="dash-risks"><i class="fas fa-exclamation-triangle"></i> المخاطر والمشاكل</button>
+                <button class="sub-tab-btn" data-subtab="dash-projects"><i class="fas fa-folder-open"></i> المشاريع والأهداف</button>
+            </nav>
 
-            <div class="card" id="phase1DashboardCard">
-                <div class="card-header"><span><i class="fas fa-layer-group"></i> ملخص المرحلة الأولى: الخطة الخمسية + BSC + مؤشرات RAG</span></div>
-                <div id="phase1Dashboard"></div>
-            </div>
-
-            <!-- ====== قسم الموازنة والتكلفة ====== -->
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-coins"></i> الموازنة والتكلفة</span>
-                    <span style="font-size:0.8rem;color:#64748b;">
-                        موازنة الخطة الخمسية المعتمدة: <span id="totalBudgetDisplay">0</span>
-                    </span>
+            <!-- ===== تبويب: ملخص عام ===== -->
+            <div class="sub-tab-content sub-tab-content-dashboard active" id="dash-overview">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="fas fa-grip-vertical"></i> مربعات المؤشرات - اسحب لتغيير الترتيب</span>
+                    </div>
+                    <div class="kpi-row size-medium" id="kpiCards"></div>
                 </div>
-                <div class="budget-summary" id="budgetSummaryCards"></div>
-                <div class="dashboard-grid two-col">
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> الميزانية المخططة والتكلفة المخصصة والمنفق (بالمليون)</h3>
-                        <div class="chart-container"><canvas id="budgetVsSpentChart"></canvas></div>
-                    </div>
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-area" style="color:#10b981;"></i> التكلفة الشهرية</h3>
-                        <div class="chart-container"><canvas id="monthlyCostChart"></canvas></div>
-                    </div>
-                </div>
-                <div class="stats-row" id="costStatsRow"></div>
-            </div>
-
-            <!-- ====== قسم استغلال الموارد ====== -->
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-users-cog"></i> استغلال الموارد</span>
-                    <span style="font-size:0.8rem;color:#64748b;">نسبة الاستغلال الإجمالية: <span id="resourceUtilizationTotal">0%</span></span>
-                </div>
-                <div class="dashboard-grid two-col">
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-pie" style="color:#8b5cf6;"></i> توزيع الموارد حسب المشروع</h3>
-                        <div class="chart-container"><canvas id="resourceDistributionChart"></canvas></div>
-                    </div>
-                    <div class="chart-box">
-                        <h3><i class="fas fa-tachometer-alt" style="color:#f59e0b;"></i> استغلال الموارد</h3>
-                        <div class="chart-container tall" id="resourceUtilizationContainer"></div>
-                    </div>
+                <div class="overall-card" id="overallCard"></div>
+                <div class="card" id="phase1DashboardCard">
+                    <div class="card-header"><span><i class="fas fa-layer-group"></i> ملخص المرحلة الأولى: الخطة الخمسية + BSC + مؤشرات RAG</span></div>
+                    <div id="phase1Dashboard"></div>
                 </div>
             </div>
 
-            <!-- ====== قسم المخاطر والمشاكل (مفصل) ====== -->
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-exclamation-triangle"></i> المخاطر والمشاكل</span>
-                    <span style="font-size:0.8rem;color:#64748b;">إجمالي المخاطر النشطة: <span id="totalRisksOpen">0</span></span>
-                </div>
-                <div class="stats-row" id="riskStatsRow"></div>
-                <div class="risk-filter-btns" id="riskFilterBtns">
-                    <button class="btn btn-sm btn-outline active-filter" data-filter="all">الكل</button>
-                    <button class="btn btn-sm btn-outline" data-filter="حرج">حرج</button>
-                    <button class="btn btn-sm btn-outline" data-filter="مرتفع">مرتفع</button>
-                    <button class="btn btn-sm btn-outline" data-filter="متوسط">متوسط</button>
-                    <button class="btn btn-sm btn-outline" data-filter="منخفض">منخفض</button>
-                </div>
-                <div class="risks-tables-grid">
-                    <div>
-                        <h4 style="color:#ef4444;margin-bottom:8px;"><i class="fas fa-bug"></i> المخاطر</h4>
-                        <div class="table-wrapper"><table id="risksOnlyTable"><thead><tr><th>المشروع</th><th>المستوى</th><th>الوصف</th><th>الإجراء</th><th>المسؤول</th><th>الحالة</th></tr></thead><tbody id="risksOnlyBody"></tbody></table></div>
+            <!-- ===== تبويب: الموازنة والتكلفة ===== -->
+            <div class="sub-tab-content sub-tab-content-dashboard" id="dash-budget">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="fas fa-coins"></i> الموازنة والتكلفة</span>
+                        <span style="font-size:0.8rem;color:#64748b;">
+                            موازنة الخطة الخمسية المعتمدة: <span id="totalBudgetDisplay">0</span>
+                        </span>
                     </div>
-                    <div>
-                        <h4 style="color:#f59e0b;margin-bottom:8px;"><i class="fas fa-exclamation-circle"></i> المشاكل</h4>
-                        <div class="table-wrapper"><table id="problemsOnlyTable"><thead><tr><th>المشروع</th><th>المستوى</th><th>الوصف</th><th>الإجراء</th><th>المسؤول</th><th>الحالة</th></tr></thead><tbody id="problemsOnlyBody"></tbody></table></div>
+                    <div class="budget-summary" id="budgetSummaryCards"></div>
+                    <div class="dashboard-grid two-col">
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-bar" style="color:#3b82f6;"></i> الميزانية المخططة والتكلفة المخصصة والمنفق (بالمليون)</h3>
+                            <div class="chart-container"><canvas id="budgetVsSpentChart"></canvas></div>
+                        </div>
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-area" style="color:#10b981;"></i> التكلفة الشهرية</h3>
+                            <div class="chart-container"><canvas id="monthlyCostChart"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="stats-row" id="costStatsRow"></div>
+                </div>
+            </div>
+
+            <!-- ===== تبويب: استغلال الموارد ===== -->
+            <div class="sub-tab-content sub-tab-content-dashboard" id="dash-resources">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="fas fa-users-cog"></i> استغلال الموارد</span>
+                        <span style="font-size:0.8rem;color:#64748b;">نسبة الاستغلال الإجمالية: <span id="resourceUtilizationTotal">0%</span></span>
+                    </div>
+                    <div class="dashboard-grid two-col">
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-pie" style="color:#8b5cf6;"></i> توزيع الموارد حسب المشروع</h3>
+                            <div class="chart-container"><canvas id="resourceDistributionChart"></canvas></div>
+                        </div>
+                        <div class="chart-box">
+                            <h3><i class="fas fa-tachometer-alt" style="color:#f59e0b;"></i> استغلال الموارد</h3>
+                            <div class="chart-container tall" id="resourceUtilizationContainer"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ====== قسم المشاريع والأهداف الاستراتيجية ====== -->
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-folder-open"></i> المشاريع والأهداف الاستراتيجية</span>
-                </div>
-                <div class="dashboard-grid two-col">
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-pie" style="color:#3b82f6;"></i> توزيع المشاريع حسب القطاع</h3>
-                        <div class="chart-container"><canvas id="sectorDistributionChart"></canvas></div>
+            <!-- ===== تبويب: المخاطر والمشاكل ===== -->
+            <div class="sub-tab-content sub-tab-content-dashboard" id="dash-risks">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="fas fa-exclamation-triangle"></i> المخاطر والمشاكل</span>
+                        <span style="font-size:0.8rem;color:#64748b;">إجمالي المخاطر النشطة: <span id="totalRisksOpen">0</span></span>
                     </div>
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-pie" style="color:#8b5cf6;"></i> توزيع المشاريع حسب الحالة</h3>
-                        <div class="chart-container"><canvas id="projectStatusChart"></canvas></div>
+                    <div class="stats-row" id="riskStatsRow"></div>
+                    <div class="risk-filter-btns" id="riskFilterBtns">
+                        <button class="btn btn-sm btn-outline active-filter" data-filter="all">الكل</button>
+                        <button class="btn btn-sm btn-outline" data-filter="حرج">حرج</button>
+                        <button class="btn btn-sm btn-outline" data-filter="مرتفع">مرتفع</button>
+                        <button class="btn btn-sm btn-outline" data-filter="متوسط">متوسط</button>
+                        <button class="btn btn-sm btn-outline" data-filter="منخفض">منخفض</button>
                     </div>
-                    <div class="chart-box">
-                        <h3><i class="fas fa-chart-bar" style="color:#10b981;"></i> الإنجاز حسب المشروع</h3>
-                        <div class="chart-container tall"><canvas id="projectProgressChart"></canvas></div>
-                    </div>
-                    <div class="chart-box">
-                        <h3><i class="fas fa-bullseye" style="color:#ef4444;"></i> الأهداف الاستراتيجية</h3>
-                        <div class="chart-container tall"><canvas id="strategicObjectivesChart"></canvas></div>
-                        <div id="strategicObjectivesIndicator" style="margin-top:12px"></div>
+                    <div class="risks-tables-grid">
+                        <div>
+                            <h4 style="color:#ef4444;margin-bottom:8px;"><i class="fas fa-bug"></i> المخاطر</h4>
+                            <div class="table-wrapper"><table id="risksOnlyTable"><thead><tr><th>المشروع</th><th>المستوى</th><th>الوصف</th><th>الإجراء</th><th>المسؤول</th><th>الحالة</th></tr></thead><tbody id="risksOnlyBody"></tbody></table></div>
+                        </div>
+                        <div>
+                            <h4 style="color:#f59e0b;margin-bottom:8px;"><i class="fas fa-exclamation-circle"></i> المشاكل</h4>
+                            <div class="table-wrapper"><table id="problemsOnlyTable"><thead><tr><th>المشروع</th><th>المستوى</th><th>الوصف</th><th>الإجراء</th><th>المسؤول</th><th>الحالة</th></tr></thead><tbody id="problemsOnlyBody"></tbody></table></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- جدول حالة المشاريع -->
-            <div class="card">
-                <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-table"></i> حالة المشاريع الحالية</span></div>
-                <div class="table-wrapper"><table id="dashProjectsTable"><thead><tr><th>المشروع</th><th>النوع</th><th>الحالة</th><th>الإنجاز</th><th>الميزانية المخططة</th><th>التكلفة المخصصة</th><th>المنفق حتى الآن</th><th>نسبة الصرف</th><th>المخاطر</th></tr></thead><tbody></tbody></table></div>
+            <!-- ===== تبويب: المشاريع والأهداف ===== -->
+            <div class="sub-tab-content sub-tab-content-dashboard" id="dash-projects">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="fas fa-folder-open"></i> المشاريع والأهداف الاستراتيجية</span>
+                    </div>
+                    <div class="dashboard-grid two-col">
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-pie" style="color:#3b82f6;"></i> توزيع المشاريع حسب القطاع</h3>
+                            <div class="chart-container"><canvas id="sectorDistributionChart"></canvas></div>
+                        </div>
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-pie" style="color:#8b5cf6;"></i> توزيع المشاريع حسب الحالة</h3>
+                            <div class="chart-container"><canvas id="projectStatusChart"></canvas></div>
+                        </div>
+                        <div class="chart-box">
+                            <h3><i class="fas fa-chart-bar" style="color:#10b981;"></i> الإنجاز حسب المشروع</h3>
+                            <div class="chart-container tall"><canvas id="projectProgressChart"></canvas></div>
+                        </div>
+                        <div class="chart-box">
+                            <h3><i class="fas fa-bullseye" style="color:#ef4444;"></i> الأهداف الاستراتيجية</h3>
+                            <div class="chart-container tall"><canvas id="strategicObjectivesChart"></canvas></div>
+                            <div id="strategicObjectivesIndicator" style="margin-top:12px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-table"></i> حالة المشاريع الحالية</span></div>
+                    <div class="table-wrapper"><table id="dashProjectsTable"><thead><tr><th>المشروع</th><th>النوع</th><th>الحالة</th><th>الإنجاز</th><th>الميزانية المخططة</th><th>التكلفة المخصصة</th><th>المنفق حتى الآن</th><th>نسبة الصرف</th><th>المخاطر</th></tr></thead><tbody></tbody></table></div>
+                </div>
             </div>
+
         </div>
 
         <!-- ====== باقي التبويبات (محفوظة كما هي) ====== -->
@@ -1038,8 +1185,8 @@
                 <h2><i class="fas fa-calendar-alt"></i> الخطة الخمسية 2026–2030</h2>
                 <div style="font-size:.86rem;color:#cbd5e1;margin-top:6px">تقسيم سنوي للأهداف والمبادرات والموازنات وربط الخطة بالأهداف الاستراتيجية والمشاريع.</div>
             </div>
-            <div class="card">
-                <div class="card-header"><span><i class="fas fa-plus-circle"></i> إضافة / تعديل سنة في الخطة</span></div>
+            <div class="card fy-edit-card" id="fyEditorCard">
+                <div class="card-header"><span><i class="fas fa-plus-circle"></i> إضافة / تعديل سنة في الخطة <span class="fy-editor-status" id="fyEditorStatus"><i class="fas fa-circle-info"></i> إدخال سنة جديدة</span></span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>السنة *</label><select id="fyYear"><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div>
                     <div class="form-group"><label>التركيز الاستراتيجي</label><input type="text" id="fyFocus" placeholder="مثال: تأسيس الممكنات الرقمية"></div>
@@ -1065,11 +1212,11 @@
                 </div>
                 <div id="strategicKpiAchievementTable" class="strategy-kpi-table"></div>
             </div>
-            <div class="card"><div class="card-header"><span><i class="fas fa-table"></i> جدول الخطة السنوية</span></div><div class="table-wrapper"><table><thead><tr><th>السنة</th><th>التركيز</th><th>الأهداف</th><th>المستهدف</th><th>الإنجاز</th><th>RAG</th><th>الموازنة</th><th>إجراءات</th></tr></thead><tbody id="fiveYearBody"></tbody></table></div></div>
+            <div class="card fy-table-card" id="fiveYearTableCard"><div class="card-header"><span><i class="fas fa-table"></i> جدول الخطة السنوية</span><span style="font-size:.76rem;color:#64748b">اختر <i class="fas fa-edit"></i> لعرض بيانات السنة في النموذج الثابت أعلاه</span></div><div class="table-wrapper"><table><thead><tr><th>السنة</th><th>التركيز</th><th>الأهداف</th><th>المستهدف</th><th>الإنجاز</th><th>RAG</th><th>الموازنة</th><th>إجراءات</th></tr></thead><tbody id="fiveYearBody"></tbody></table></div></div>
         </div>
 
         <div class="tab-content" id="tab-strategy">
-            <div class="card">
+            <div class="card strategy-edit-card" id="objectivesEditorCard">
                 <div class="card-header"><span><i class="fas fa-bullseye"></i> إضافة / تعديل هدف استراتيجي</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>الهدف *</label><input type="text" id="objTitle"></div>
@@ -1088,7 +1235,7 @@
                     <button class="btn btn-outline" id="clearObjBtn"><i class="fas fa-plus"></i> جديد</button>
                 </div>
             </div>
-            <div class="card">
+            <div class="card strategy-edit-card" id="kpiEditorCard">
                 <div class="card-header"><span><i class="fas fa-tachometer-alt"></i> مؤشرات الأداء KPIs</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>الهدف *</label><select id="kpiObjective"></select></div>
@@ -1116,7 +1263,7 @@
         </div>
 
         <div class="tab-content" id="tab-projects">
-            <div class="card">
+            <div class="card project-edit-card" id="projectsEditorCard">
                 <div class="card-header"><span><i class="fas fa-edit"></i> إضافة / تعديل مشروع</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>الاسم *</label><input type="text" id="projName"></div>
@@ -1242,7 +1389,7 @@
                 <div class="card-header"><span><i class="fas fa-chart-line"></i> ملخص المخاطر التنفيذي</span></div>
                 <div id="phase2RiskSummary"></div>
             </div>
-            <div class="card">
+            <div class="card risk-edit-card" id="risksEditorCard">
                 <div class="card-header"><span><i class="fas fa-bug"></i> إضافة / تعديل خطر</span></div>
                 <div class="form-grid">
                     <div class="form-group"><label>المشروع *</label><select id="riskProject"></select></div>
@@ -1268,8 +1415,8 @@
         </div>
 
         <div class="tab-content" id="tab-budget">
-            <div class="card">
-                <div class="card-header"><span><i class="fas fa-calculator"></i> إضافة / تعديل بند</span></div>
+            <div class="card budget-edit-card is-collapsed" id="budgetEditorCard">
+                <div class="card-header budget-editor-head"><span><i class="fas fa-calculator"></i> <span id="budgetEditorTitle">إضافة بند جديد</span></span><button type="button" class="budget-editor-close" id="closeBudgetEditorBtn" title="إغلاق النموذج"><i class="fas fa-xmark"></i></button></div>
                 <div class="form-grid">
                     <div class="form-group"><label>المشروع *</label><select id="budgetProject"></select></div>
                     <div class="form-group"><label>الميزانية المخططة للمشروع (Budget)</label><input type="number" id="budgetProjectPlannedBudget" step="0.01" placeholder="إجمالي الاعتماد قبل بدء المشروع"></div>
@@ -1288,8 +1435,21 @@
             </div>
             <div class="card">
                 <div class="card-header card-header-title-only"><span class="card-title"><i class="fas fa-list"></i> تقرير الموازنة</span></div>
+                <div class="budget-filter-toolbar">
+                    <div class="form-group">
+                        <label for="budgetProjectFilter"><i class="fas fa-filter"></i> نطاق عرض التقرير</label>
+                        <select id="budgetProjectFilter"><option value="all">كل المشاريع</option></select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="applyBudgetFilter"><i class="fas fa-search"></i> عرض البيانات</button>
+                    <button type="button" class="btn btn-outline" id="resetBudgetFilter"><i class="fas fa-rotate-left"></i> كل المشاريع</button>
+                    <span class="budget-action-divider" aria-hidden="true"></span>
+                    <button type="button" class="btn btn-success" id="newBudgetItemBtn"><i class="fas fa-plus"></i> إضافة بند جديد</button>
+                    <button type="button" class="btn btn-warning" id="editSelectedBudgetBtn" disabled><i class="fas fa-pen"></i> تعديل البند المحدد</button>
+                    <span class="filter-context" id="budgetFilterContext">يتم عرض البيانات المالية لجميع المشاريع</span>
+                    <span class="budget-selection-hint" id="budgetSelectionHint">حدد أحد بنود التكلفة من الجدول لتفعيل زر التعديل.</span>
+                </div>
                 <div id="budgetSummary" style="margin-bottom:16px;padding:12px;background:#f0f9ff;border-radius:10px;"></div>
-                <div class="table-wrapper"><table id="budgetTable"><thead><tr><th>المشروع</th><th>البند</th><th>ميزانية المشروع Budget</th><th>تكلفة البند Cost</th><th>المنفق</th><th>المتبقي من Budget</th><th>نسبة الصرف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="budgetBody"></tbody></table></div>
+                <div class="table-wrapper"><table id="budgetTable"><thead><tr><th>المشروع</th><th>البند</th><th>ميزانية المشروع Budget</th><th>تكلفة البند Cost</th><th>المنفق</th><th>المتبقي من Budget</th><th>نسبة الصرف</th><th>التاريخ</th><th>الملاحظات</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="budgetBody"></tbody></table></div>
             </div>
         </div>
 
@@ -1318,30 +1478,65 @@
             </div>
         </div>
 
+        <!-- ====== صفحة التقارير (المعدلة مع تبويبات فرعية) ====== -->
         <div class="tab-content" id="tab-reports">
             <div class="phase3-print-note">تقرير تنفيذي صادر من نظام إدارة المشاريع المتكامل.</div>
-            <div class="card">
-                <div class="card-header">
-                    <span><i class="fas fa-chart-bar"></i> التقارير التنفيذية الشاملة</span>
-                    <div class="form-group" style="flex-direction:row;gap:10px;align-items:center;flex-wrap:wrap;">
-                        <label style="font-weight:600;color:#334155;font-size:0.85rem;">المشروع:</label>
-                        <select id="reportProjectFilter" style="width:220px;padding:6px 12px;"><option value="all">جميع المشاريع</option></select>
-                        <button class="btn btn-sm btn-primary" id="applyReportFilter"><i class="fas fa-sync"></i> تحديث</button>
-                        <button class="btn btn-sm btn-success" onclick="window.print()"><i class="fas fa-file-pdf"></i> طباعة / PDF</button>
+
+            <nav class="sub-tabs-nav sub-tabs-nav-reports no-print">
+                <button class="sub-tab-btn active" data-subtab="reports-summary"><i class="fas fa-file-lines"></i> الملخص التنفيذي</button>
+                <button class="sub-tab-btn" data-subtab="reports-charts"><i class="fas fa-chart-bar"></i> المخططات البيانية</button>
+                <button class="sub-tab-btn" data-subtab="reports-tables"><i class="fas fa-table"></i> الجداول التفصيلية</button>
+            </nav>
+
+            <!-- تبويب: الملخص التنفيذي -->
+            <div class="sub-tab-content sub-tab-content-reports active" id="reports-summary">
+                <section class="executive-report-shell">
+                    <header class="executive-report-head">
+                        <div>
+                            <span class="executive-eyebrow"><i class="fas fa-landmark"></i> موجز الإدارة العليا</span>
+                            <h2>الملخص التنفيذي للمحفظة والمشاريع</h2>
+                            <p>قراءة موحدة للأداء والإنجاز والموقف المالي والمخاطر لدعم اتخاذ القرار.</p>
+                        </div>
+                        <div class="executive-report-meta">
+                            <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
+                            <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
+                            <div><span>الإصدار</span><strong>T21.15</strong></div>
+                        </div>
+                    </header>
+                    <div class="executive-filter no-print">
+                        <div class="form-group">
+                            <label for="reportProjectFilter">نطاق العرض</label>
+                            <select id="reportProjectFilter"><option value="all">جميع المشاريع</option></select>
+                        </div>
+                        <button class="btn btn-primary" id="applyReportFilter"><i class="fas fa-rotate"></i> تحديث التقرير</button>
+                        <button class="btn btn-success" onclick="window.print()"><i class="fas fa-print"></i> طباعة A4 / PDF</button>
                     </div>
+                    <div class="phase3-cards executive-kpis" id="phase3ExecutiveCards"></div>
+                    <div id="executiveDecisionPulse" class="executive-pulse"></div>
+                    <div id="phase3ExecutiveSummary" class="phase3-exec-summary"></div>
+                    <div class="phase3-report-grid executive-three-col">
+                        <div class="phase3-list executive-list success"><h4><i class="fas fa-award"></i> أبرز الإنجازات</h4><div id="phase3Achievements"></div></div>
+                        <div class="phase3-list executive-list attention"><h4><i class="fas fa-compass"></i> أولويات المتابعة</h4><div id="phase3Priorities"></div></div>
+                        <div class="phase3-list executive-list decision"><h4><i class="fas fa-lightbulb"></i> توصيات وقرارات مقترحة</h4><div id="phase3Recommendations"></div></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- تبويب: المخططات البيانية -->
+            <div class="sub-tab-content sub-tab-content-reports" id="reports-charts">
+                <div class="card">
+                    <div class="card-header"><span><i class="fas fa-chart-line"></i> مؤشرات الأداء والاتجاهات</span></div>
+                    <div class="report-stats-row" id="reportStatsRow"></div>
+                    <div class="charts-row" id="reportsChartsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:18px;"></div>
                 </div>
-                <div id="phase3ExecutiveSummary" class="phase3-exec-summary"></div>
             </div>
-            <div class="phase3-cards" id="phase3ExecutiveCards"></div>
-            <div class="phase3-report-grid">
-                <div class="phase3-list"><h4><i class="fas fa-star"></i> أهم الإنجازات</h4><div id="phase3Achievements"></div></div>
-                <div class="phase3-list"><h4><i class="fas fa-triangle-exclamation"></i> أولويات الإدارة العليا</h4><div id="phase3Priorities"></div></div>
-            </div>
-            <div class="card">
-                <div class="card-header"><span><i class="fas fa-chart-line"></i> مؤشرات الأداء والاتجاهات</span></div>
-                <div class="report-stats-row" id="reportStatsRow"></div>
-                <div class="charts-row" id="reportsChartsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:18px;"></div>
-                <div id="reportsGanttContainer" style="margin-top:20px;padding:16px;background:#fff;border-radius:14px;border:1px solid #e2e8f0"></div>
+
+            <!-- تبويب: الجداول التفصيلية -->
+            <div class="sub-tab-content sub-tab-content-reports" id="reports-tables">
+                <div class="card">
+                    <div class="card-header"><span><i class="fas fa-table-list"></i> جداول المشاريع التفصيلية</span></div>
+                    <div id="reportsGanttContainer" style="padding:16px;background:#fff;border-radius:14px;border:1px solid #e2e8f0"></div>
+                </div>
             </div>
         </div>
 
@@ -1372,6 +1567,7 @@
             const T20_SYNC_INTERVAL_MS = 120000; // رفع تلقائي كل دقيقتين عند وجود تغييرات
             const T20_SYNC_META_KEY = 'motc_t20_sync_meta';
             let t20PullInProgress = false;
+            let t20AutoSyncEnabled = false; // المزامنة التلقائية متوقفة عند بدء التشغيل
 
             let appData = { projects: [], resources: [], tasks: [], risks: [], budgets: [], objectives: [],
                 kpis: [], services: [], teamMembers: [], sectors: [], directorates: [], fiveYearPlans: [] };
@@ -1385,6 +1581,7 @@
             let kpiDragState = { sourceCard: null, sourceIndex: null };
             let ganttDragState = { sourceRow: null, sourceIndex: null };
             let currentRiskFilter = 'all';
+            let selectedBudgetItemId = '';
 
             // ---- تحميل وتهيئة البيانات ----
             function t21DateOnly(value){
@@ -1629,10 +1826,13 @@
                 const meta=t20ReadSyncMeta();
                 meta.dirty=true; meta.lastLocalSaveAt=new Date().toISOString();
                 t20WriteSyncMeta(meta);
-                if(t20SyncEnabled()) t20SetSyncStatus('pending','تم الحفظ محلياً بانتظار المزامنة','سيتم رفع البيانات تلقائياً كل فترة، ويمكن الضغط على زر مزامنة الآن.');
+                if(t20SyncEnabled() && t20AutoSyncEnabled) t20SetSyncStatus('pending','تم الحفظ محلياً بانتظار المزامنة','سيتم رفع البيانات تلقائياً كل فترة، ويمكن الضغط على زر مزامنة الآن.');
+                else if(t20SyncEnabled()) t20SetSyncStatus('pending','تم الحفظ محلياً','المزامنة التلقائية متوقفة — اضغط "مزامنة الآن" أو استأنف المزامنة التلقائية.');
                 else t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.');
-                clearTimeout(window.__t20SyncTimer);
-                window.__t20SyncTimer=setTimeout(()=>t20SyncNow(false),1500);
+                if(t20AutoSyncEnabled){
+                    clearTimeout(window.__t20SyncTimer);
+                    window.__t20SyncTimer=setTimeout(()=>t20SyncNow(false),1500);
+                }
             }
             async function t20CentralRequest(payload){
                 if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
@@ -1782,11 +1982,42 @@
             window.t20PullFromCentral=t20PullFromCentral;
             function t20InitSync(){
                 const meta=t20ReadSyncMeta();
+                // المزامنة التلقائية متوقفة عند بدء التشغيل — لا يتم جلب أو رفع شيء تلقائياً
                 if(!t20SyncEnabled()) t20SetSyncStatus('off','التخزين المركزي غير مفعل','أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL لتفعيل المزامنة.');
-                else if(meta.dirty) t20SetSyncStatus('pending','توجد تغييرات محفوظة محلياً','سيتم رفعها تلقائياً أو عبر زر مزامنة الآن.');
-                else t20SetSyncStatus('ok','المزامنة المركزية مفعلة','يتم الحفظ محلياً فوراً والرفع مركزياً بشكل دوري.');
-                setInterval(()=>{ const m=t20ReadSyncMeta(); if(t20SyncEnabled() && m.dirty && !t20PullInProgress) t20SyncNow(false); }, T20_SYNC_INTERVAL_MS);
+                else if(meta.dirty) t20SetSyncStatus('pending','توجد تغييرات محفوظة محلياً','اضغط "مزامنة الآن" أو فعّل المزامنة التلقائية للرفع.');
+                else t20SetSyncStatus('ok','المزامنة المركزية جاهزة','المزامنة التلقائية متوقفة — يمكن تفعيلها من قائمة المزيد.');
+                // بدء حلقة المزامنة التلقائية (تعمل فقط إذا كان t20AutoSyncEnabled = true)
+                setInterval(()=>{ if(t20SyncEnabled() && t20AutoSyncEnabled){ const m=t20ReadSyncMeta(); if(m.dirty && !t20PullInProgress) t20SyncNow(false); } }, T20_SYNC_INTERVAL_MS);
+                t20UpdateAutoSyncBtn();
             }
+            function t20ToggleAutoSync(){
+                t20AutoSyncEnabled = !t20AutoSyncEnabled;
+                t20UpdateAutoSyncBtn();
+                if(t20AutoSyncEnabled){
+                    const meta=t20ReadSyncMeta();
+                    if(t20SyncEnabled() && meta.dirty) t20SyncNow(false); // رفع فوري للتغييرات المعلقة
+                    t20SetSyncStatus('pending','المزامنة التلقائية مفعلة','سيتم الرفع تلقائياً عند وجود تغييرات.');
+                } else {
+                    clearTimeout(window.__t20SyncTimer);
+                    if(t20SyncEnabled()){
+                        const meta=t20ReadSyncMeta();
+                        if(meta.dirty) t20SetSyncStatus('pending','المزامنة التلقائية متوقفة','توجد تغييرات غير مرفوعة — اضغط "مزامنة الآن" للرفع اليدوي.');
+                        else t20SetSyncStatus('ok','المزامنة التلقائية متوقفة','يمكن تفعيلها من قائمة المزيد.');
+                    }
+                }
+            }
+            function t20UpdateAutoSyncBtn(){
+                const btn=document.getElementById('t20AutoSyncToggleBtn');
+                if(!btn) return;
+                if(t20AutoSyncEnabled){
+                    btn.innerHTML='<i class="fas fa-pause-circle"></i> إيقاف المزامنة التلقائية';
+                    btn.className='btn btn-warning';
+                } else {
+                    btn.innerHTML='<i class="fas fa-play-circle"></i> تفعيل المزامنة التلقائية';
+                    btn.className='btn btn-outline';
+                }
+            }
+            window.t20ToggleAutoSync=t20ToggleAutoSync;
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
             function escapeHtml(v){return String(v??'').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
@@ -1989,11 +2220,11 @@
                     sel.innerHTML = id === 'projObjective' ? '<option value="">-- غير مرتبط --</option>' : '<option value="">-- اختر --</option>';
                     appData.objectives.forEach(o=>{ sel.innerHTML+=`<option value="${o.id}" ${o.id===cv?'selected':''}>${o.title}</option>`; });
                 });
-                ['resourceProject','riskProject','budgetProject','reportProjectFilter','ganttProjectFilter','serviceProject'].forEach(id => {
+                ['resourceProject','riskProject','budgetProject','budgetProjectFilter','reportProjectFilter','ganttProjectFilter','serviceProject'].forEach(id => {
                     const sel=document.getElementById(id);
                     if(!sel) return;
                     const cv=sel.value;
-                    if(id==='reportProjectFilter') sel.innerHTML='<option value="all">جميع المشاريع</option>';
+                    if(id==='reportProjectFilter' || id==='budgetProjectFilter') sel.innerHTML='<option value="all">كل المشاريع</option>';
                     else if(id==='serviceProject') sel.innerHTML='<option value="">-- غير مرتبط --</option>';
                     else sel.innerHTML='<option value="">-- اختر --</option>';
                     if(id==='ganttProjectFilter') sel.innerHTML += `<option value="__all__" ${cv==='__all__'?'selected':''}>كل المشاريع</option>`;
@@ -2460,6 +2691,21 @@
             window.deleteRisk=function(id){ appData.risks=appData.risks.filter(r=>r.id!==id); saveData(); renderRisks(); renderRisksDetailed(); };
 
             // ---- دوال الموازنة والخدمات ----
+            function setBudgetSelection(id){
+                selectedBudgetItemId=(id && appData.budgets.some(b=>b.id===id))?id:'';
+                document.querySelectorAll('#budgetBody .budget-cost-item-row').forEach(row=>row.classList.toggle('is-selected',row.dataset.budgetId===selectedBudgetItemId));
+                const editBtn=document.getElementById('editSelectedBudgetBtn'); if(editBtn) editBtn.disabled=!selectedBudgetItemId;
+                const hint=document.getElementById('budgetSelectionHint');
+                const item=appData.budgets.find(b=>b.id===selectedBudgetItemId);
+                if(hint) hint.textContent=item?`البند المحدد: ${item.item||'بند تكلفة'} — يمكنك الآن فتحه للتعديل.`:'حدد أحد بنود التكلفة من الجدول لتفعيل زر التعديل.';
+            }
+            window.selectBudgetRow=function(id){ setBudgetSelection(id); };
+            function setBudgetEditorOpen(open,title){
+                const card=document.getElementById('budgetEditorCard');
+                card?.classList.toggle('is-collapsed',!open);
+                const titleEl=document.getElementById('budgetEditorTitle'); if(titleEl) titleEl.textContent=title||'إضافة بند جديد';
+                if(open) setTimeout(()=>card?.scrollIntoView({behavior:'smooth',block:'start'}),40);
+            }
             function syncBudgetProjectFields(){
                 const pid=document.getElementById('budgetProject')?.value||'';
                 const p=appData.projects.find(pr=>pr.id===pid);
@@ -2474,7 +2720,12 @@
                 tbody.innerHTML='';
                 let totalProjectBudget=0,totalCostPlanned=0,totalSpent=0;
                 syncBudgetProjectFields();
-                appData.projects.forEach(p=>{
+                const filterValue=document.getElementById('budgetProjectFilter')?.value||'all';
+                const visibleProjects=filterValue==='all'?appData.projects:appData.projects.filter(p=>p.id===filterValue);
+                const filterProject=filterValue==='all'?null:appData.projects.find(p=>p.id===filterValue);
+                const context=document.getElementById('budgetFilterContext');
+                if(context) context.textContent=filterProject?`يتم عرض جميع البيانات المالية المرتبطة بمشروع: ${filterProject.name}`:'يتم عرض البيانات المالية لجميع المشاريع';
+                visibleProjects.forEach(p=>{
                     const projectItems=appData.budgets.filter(b=>b.projectId===p.id);
                     const budget=projectPlannedBudget(p);
                     const cost=projectItems.reduce((s,b)=>s+Number(b.planned||0),0);
@@ -2482,20 +2733,23 @@
                     const remaining=budget-spent;
                     const rate=budget?Math.round((spent/budget)*100):0;
                     totalProjectBudget+=budget; totalCostPlanned+=cost; totalSpent+=spent;
-                    tbody.innerHTML+=`<tr class="budget-project-separator"><td colspan="9"><i class="fas fa-folder-open"></i> ${p.name}</td></tr>`;
-                    tbody.innerHTML+=`<tr class="budget-project-summary-row"><td><strong>${p.name}</strong><div class="budget-row-note">ملخص مشروع</div></td><td><span class="budget-summary-label">ملخص مشروع</span></td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(cost)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(remaining)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-${projectBudgetStatusClass(p)}">${projectBudgetStatus(p)}</span></td><td><button class="btn btn-sm btn-warning" title="تعديل ميزانية المشروع من نفس صفحة الموازنة" onclick="editProjectBudgetSummary('${p.id}')"><i class="fas fa-edit"></i></button></td></tr>`;
+                    tbody.innerHTML+=`<tr class="budget-project-separator"><td colspan="11"><i class="fas fa-folder-open"></i> ${p.name}</td></tr>`;
+                    tbody.innerHTML+=`<tr class="budget-project-summary-row"><td><strong>${p.name}</strong><div class="budget-row-note">ملخص مشروع</div></td><td><span class="budget-summary-label">ملخص مشروع</span></td><td><span class="budget-cell-label">ميزانية المشروع Budget</span>${formatCurrency(budget)}</td><td><span class="budget-cell-label">تكلفة البنود Cost</span>${formatCurrency(cost)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(spent)}</td><td><span class="budget-cell-label">المتبقي من Budget</span>${formatCurrency(remaining)}</td><td><span class="budget-cell-label">نسبة الصرف</span>${rate}%</td><td>—</td><td>—</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-${projectBudgetStatusClass(p)}">${projectBudgetStatus(p)}</span></td><td><button class="btn btn-sm btn-warning" title="تعديل ميزانية المشروع من نفس صفحة الموازنة" onclick="editProjectBudgetSummary('${p.id}')"><i class="fas fa-edit"></i></button></td></tr>`;
                     if(!projectItems.length){
-                        tbody.innerHTML+=`<tr class="budget-empty-items-row"><td colspan="9">لا توجد بنود تكلفة مسجلة لهذا المشروع حتى الآن.</td></tr>`;
+                        tbody.innerHTML+=`<tr class="budget-empty-items-row"><td colspan="11">لا توجد بنود تكلفة مسجلة لهذا المشروع حتى الآن.</td></tr>`;
                     }
                     projectItems.forEach(b=>{
-                        tbody.innerHTML+=`<tr class="budget-cost-item-row"><td></td><td>${b.item||'-'}</td><td></td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(b.planned)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(b.spent)}</td><td></td><td></td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-info">Cost Item</span></td><td><button class="btn btn-sm btn-warning" onclick="editBudget('${b.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" onclick="deleteBudget('${b.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
+                        tbody.innerHTML+=`<tr class="budget-cost-item-row ${selectedBudgetItemId===b.id?'is-selected':''}" data-budget-id="${b.id}" onclick="selectBudgetRow('${b.id}')"><td></td><td>${b.item||'-'}</td><td></td><td><span class="budget-cell-label">تكلفة البند Cost</span>${formatCurrency(b.planned)}</td><td><span class="budget-cell-label">المنفق</span>${formatCurrency(b.spent)}</td><td></td><td></td><td>${b.date||'—'}</td><td>${b.notes||'—'}</td><td><span class="budget-cell-label">الحالة</span><span class="badge badge-info">Cost Item</span></td><td><button class="btn btn-sm btn-warning" title="تعديل البند" onclick="event.stopPropagation();selectBudgetRow('${b.id}');editBudget('${b.id}')"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-danger" title="حذف البند" onclick="event.stopPropagation();deleteBudget('${b.id}')"><i class="fas fa-trash"></i></button></td></tr>`;
                     });
                 });
                 const totalRemaining=totalProjectBudget-totalSpent;
                 const totalRate=totalProjectBudget?Math.round((totalSpent/totalProjectBudget)*100):0;
-                document.getElementById('budgetSummary').innerHTML=`<strong>إجمالي الميزانية المخططة للمشاريع Budget:</strong> ${formatCurrency(totalProjectBudget)} | <strong>إجمالي تكاليف البنود Cost:</strong> ${formatCurrency(totalCostPlanned)} | <strong>إجمالي المنفق:</strong> ${formatCurrency(totalSpent)} | <strong>المتبقي من الميزانية:</strong> ${formatCurrency(totalRemaining)} | <strong>نسبة الصرف:</strong> ${totalRate}%`;
+                if(!visibleProjects.length) tbody.innerHTML='<tr><td colspan="11" style="text-align:center;padding:24px;color:#64748b;font-weight:800">لا توجد بيانات للمشروع المحدد.</td></tr>';
+                const scopeLabel=filterProject?`المشروع: ${filterProject.name}`:'كل المشاريع';
+                document.getElementById('budgetSummary').innerHTML=`<strong>نطاق التقرير:</strong> ${scopeLabel} | <strong>عدد المشاريع:</strong> ${visibleProjects.length} | <strong>إجمالي الميزانية المخططة Budget:</strong> ${formatCurrency(totalProjectBudget)} | <strong>إجمالي تكاليف البنود Cost:</strong> ${formatCurrency(totalCostPlanned)} | <strong>إجمالي المنفق:</strong> ${formatCurrency(totalSpent)} | <strong>المتبقي من الميزانية:</strong> ${formatCurrency(totalRemaining)} | <strong>نسبة الصرف:</strong> ${totalRate}%`;
+                setBudgetSelection(selectedBudgetItemId);
             }
-            window.editBudget=function(id){ const b=appData.budgets.find(bg=>bg.id===id); if(!b) return; document.getElementById('editingBudgetId').value=b.id; document.getElementById('budgetProject').value=b.projectId; syncBudgetProjectFields(); document.getElementById('budgetItem').value=b.item; document.getElementById('plannedAmount').value=b.planned; document.getElementById('actualSpent').value=b.spent; document.getElementById('budgetDate').value=b.date||''; document.getElementById('budgetNotes').value=b.notes||''; };
+            window.editBudget=function(id){ const b=appData.budgets.find(bg=>bg.id===id); if(!b) return; setBudgetSelection(id); document.getElementById('editingBudgetId').value=b.id; document.getElementById('budgetProject').value=b.projectId; syncBudgetProjectFields(); document.getElementById('budgetItem').value=b.item; document.getElementById('plannedAmount').value=b.planned; document.getElementById('actualSpent').value=b.spent; document.getElementById('budgetDate').value=b.date||''; document.getElementById('budgetNotes').value=b.notes||''; setBudgetEditorOpen(true,`تعديل البند: ${b.item||'بند تكلفة'}`); };
             window.editProjectBudgetSummary=function(id){
                 const p=appData.projects.find(pr=>pr.id===id);
                 if(!p) return;
@@ -2506,10 +2760,12 @@
                 ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(fid=>{ const el=document.getElementById(fid); if(el) el.value=''; });
                 const dateEl=document.getElementById('budgetDate'); if(dateEl) dateEl.value='';
                 const editEl=document.getElementById('editingBudgetId'); if(editEl) editEl.value='';
+                setBudgetSelection('');
+                setBudgetEditorOpen(true,`تعديل ميزانية المشروع: ${p.name}`);
                 toast('يمكنك الآن تعديل ميزانية المشروع ثم الضغط على حفظ');
                 document.getElementById('budgetProjectPlannedBudget')?.focus();
             };
-            window.deleteBudget=function(id){ appData.budgets=appData.budgets.filter(b=>b.id!==id); saveData(); refreshAllViews(); };
+            window.deleteBudget=function(id){ appData.budgets=appData.budgets.filter(b=>b.id!==id); if(selectedBudgetItemId===id)setBudgetSelection(''); saveData(); refreshAllViews(); };
 
             function renderServices() {
                 const tbody=document.getElementById('servicesBody');
@@ -2883,6 +3139,15 @@
                 const planConsumption = totalPlanBudget ? Math.round(totalProjectCost/totalPlanBudget*100) : 0;
                 const health = total ? Math.round(projects.reduce((s,p)=>s+phase3ProjectHealth(p),0)/total) : 0;
                 const rag=phase3HealthColor(health);
+                const scopeProject=filter==='all'?null:appData.projects.find(p=>p.id===filter);
+                const scopeLabel=scopeProject?.name||'جميع المشاريع';
+                const scopeEl=document.getElementById('executiveScopeLabel'); if(scopeEl) scopeEl.textContent=scopeLabel;
+                const dateEl=document.getElementById('executiveReportDate'); if(dateEl) dateEl.textContent=new Date().toLocaleDateString('ar-OM',{year:'numeric',month:'long',day:'numeric'});
+                const linkedObjectiveIds=[...new Set(projects.map(p=>p.objectiveId).filter(Boolean))];
+                const scopedKpis=filter==='all'?appData.kpis:appData.kpis.filter(k=>linkedObjectiveIds.includes(k.objectiveId));
+                const closedRisks=risks.filter(r=>r.status==='مغلق').length;
+                const riskControlRate=risks.length?Math.round((closedRisks/risks.length)*100):100;
+                const budgetEfficiency=Math.max(0,Math.min(100,100-budgetRate));
                 const exec=document.getElementById('phase3ExecutiveSummary');
                 const delayed = projects.filter(p => Number(p.progress||0) < 50 && p.status !== 'مكتمل').length;
                 const onTrack = projects.filter(p => Number(p.progress||0) >= 75).length;
@@ -2961,9 +3226,27 @@
                 <p style="line-height:1.9;font-size:.9rem"><strong>نظرة عامة:</strong> ${filter==='all'?`تضم المحفظة ${total} مشروعاً، منها ${active} قيد التنفيذ و${completed} مكتمل.`:`تقرير المشروع المحدد.`} متوسط الإنجاز العام ${avgProgress}%. مؤشر الصحة التنفيذية ${health}% (${rag==='green'?'خضراء':rag==='amber'?'صفراء':'حمراء'}). إجمالي المنفق ${phase3Money(totalSpent)} من تكلفة مخصصة ${phase3Money(totalProjectCost)} (${budgetRate}% صرف). ${risksCritical>0?`<span style="color:#ef4444;font-weight:700">تنبيه: ${risksCritical} مخاطر حرجة تتطلب معالجة فورية.</span>`:'لا توجد مخاطر حرجة حالياً.'}</p>
                 ${execDetailHtml}
                 <div class="phase3-actions"><button onclick="window.print()"><i class="fas fa-print"></i> طباعة التقرير</button><button onclick="document.querySelector('[data-tab=tab-risks]').click()"><i class="fas fa-shield-halved"></i> عرض المخاطر</button><button onclick="document.querySelector('[data-tab=tab-gantt]').click()"><i class="fas fa-diagram-project"></i> عرض الخطة</button></div>`;
-                const cards=document.getElementById('phase3ExecutiveCards'); if(cards) cards.innerHTML=`<div class="phase3-card ${rag}"><div class="n">${health}%</div><div class="l">صحة المحفظة</div></div><div class="phase3-card green"><div class="n">${avgProgress}%</div><div class="l">متوسط الإنجاز</div></div><div class="phase3-card amber"><div class="n">${budgetRate}%</div><div class="l">نسبة الصرف</div></div><div class="phase3-card red"><div class="n">${risksCritical}</div><div class="l">مخاطر حرجة</div></div><div class="phase3-card purple"><div class="n">${appData.kpis.length}</div><div class="l">مؤشرات أداء مرتبطة</div></div>`;
+                const cards=document.getElementById('phase3ExecutiveCards'); if(cards) cards.innerHTML=`<div class="phase3-card ${rag}"><div class="n">${health}%</div><div class="l">الصحة التنفيذية</div><div class="s">مؤشر مركب لأداء النطاق</div></div><div class="phase3-card green"><div class="n">${avgProgress}%</div><div class="l">متوسط الإنجاز</div><div class="s">${onTrack} مشروع ضمن المسار</div></div><div class="phase3-card purple"><div class="n">${total}</div><div class="l">إجمالي المشاريع</div><div class="s">${active} نشط و${completed} مكتمل</div></div><div class="phase3-card amber"><div class="n">${budgetRate}%</div><div class="l">نسبة الصرف</div><div class="s">${phase3Money(totalSpent)} منفقة</div></div><div class="phase3-card red"><div class="n">${risksCritical}</div><div class="l">مخاطر حرجة</div><div class="s">من أصل ${risksOpen} مخاطر مفتوحة</div></div><div class="phase3-card purple"><div class="n">${scopedKpis.length}</div><div class="l">مؤشرات أداء مرتبطة</div><div class="s">${linkedObjectiveIds.length} أهداف استراتيجية</div></div>`;
+                const pulse=document.getElementById('executiveDecisionPulse'); if(pulse){
+                    const pulseItems=[
+                        {label:'تقدم التنفيذ',value:avgProgress,color:'#2563eb',note:'متوسط إنجاز المشاريع ضمن النطاق'},
+                        {label:'الصحة العامة',value:health,color:health>=80?'#10b981':health>=60?'#f59e0b':'#ef4444',note:'الصحة الزمنية والمالية والتشغيلية'},
+                        {label:'المساحة المالية المتبقية',value:budgetEfficiency,color:budgetRate<=85?'#10b981':'#f59e0b',note:`المتبقي ${phase3Money(Math.max(0,totalProjectCost-totalSpent))}`},
+                        {label:'معالجة المخاطر',value:riskControlRate,color:riskControlRate>=70?'#10b981':'#f59e0b',note:`${closedRisks} مخاطر مغلقة من ${risks.length}`}
+                    ];
+                    pulse.innerHTML=pulseItems.map(x=>`<div class="executive-pulse-item"><div class="executive-pulse-head"><span>${x.label}</span><strong>${x.value}%</strong></div><div class="executive-pulse-track"><div class="executive-pulse-fill" style="width:${Math.max(0,Math.min(100,x.value))}%;background:${x.color}"></div></div><div class="executive-pulse-note">${x.note}</div></div>`).join('');
+                }
                 const achievements=document.getElementById('phase3Achievements'); if(achievements){ const rows=projects.filter(p=>p.status==='مكتمل'||Number(p.progress||0)>=75).sort((a,b)=>(b.progress||0)-(a.progress||0)).slice(0,8); achievements.innerHTML=rows.length?rows.map(p=>`<div class="phase3-list-item"><span>${p.name}</span><strong>${p.progress||0}%</strong></div>`).join(''):'<div class="phase3-list-item"><span>لا توجد إنجازات مكتملة بعد.</span></div>'; }
                 const priorities=document.getElementById('phase3Priorities'); if(priorities){ const highRisk=risks.filter(r=>r.status!=='مغلق').sort((a,b)=>phase3RiskScore(b)-phase3RiskScore(a)).slice(0,8); priorities.innerHTML=highRisk.length?highRisk.map(r=>`<div class="phase3-list-item"><span>${r.desc}</span><strong>${projectName(r.projectId)}</strong></div>`).join(''):'<div class="phase3-list-item"><span>لا توجد مخاطر مفتوحة ذات أولوية.</span></div>'; }
+                const recommendations=document.getElementById('phase3Recommendations'); if(recommendations){
+                    const items=[];
+                    if(delayed) items.push(`توجيه دعم تنفيذي مركز لرفع تقدم ${delayed} مشروع ومتابعة خطة التعافي دورياً.`);
+                    if(risksCritical) items.push(`اعتماد مسار معالجة سريع للمخاطر الحرجة وعددها ${risksCritical} مع تحديد مسؤول وموعد إغلاق.`);
+                    if(budgetRate>85) items.push(`مراجعة توقعات التدفق المالي لضمان استدامة التنفيذ مع بلوغ الصرف ${budgetRate}%.`);
+                    if(onTrack) items.push(`تعزيز الممارسات الناجحة في ${onTrack} مشروع ضمن المسار وتعميمها على بقية المحفظة.`);
+                    if(!items.length) items.push('استمرار المتابعة الدورية للمؤشرات والمحافظة على الأداء الإيجابي المحقق.');
+                    recommendations.innerHTML=items.slice(0,5).map((x,i)=>`<div class="phase3-list-item"><span><i class="fas fa-circle-check"></i> ${x}</span><strong>قرار ${i+1}</strong></div>`).join('');
+                }
                 document.getElementById('reportStatsRow').innerHTML = `<div class="report-stat-card" style="border-bottom-color:#3b82f6;"><div class="stat-number">${total}</div><div class="stat-label">إجمالي المشاريع</div></div><div class="report-stat-card" style="border-bottom-color:#f59e0b;"><div class="stat-number">${active}</div><div class="stat-label">مشاريع نشطة</div></div><div class="report-stat-card" style="border-bottom-color:#10b981;"><div class="stat-number">${completed}</div><div class="stat-label">مشاريع مكتملة</div></div><div class="report-stat-card" style="border-bottom-color:#8b5cf6;"><div class="stat-number">${avgProgress}%</div><div class="stat-label">متوسط الإنجاز</div></div><div class="report-stat-card" style="border-bottom-color:#ef4444;"><div class="stat-number">${risksOpen}</div><div class="stat-label">مخاطر مفتوحة</div></div><div class="report-stat-card" style="border-bottom-color:#ec4899;"><div class="stat-number">${risksCritical}</div><div class="stat-label">مخاطر حرجة</div></div>`;
                 const container = document.getElementById('reportsChartsContainer'); container.innerHTML = '';
                 const charts = [
@@ -3242,7 +3525,8 @@
                         <div class="roadmap-status-line"><span class="metric-title" style="font-size:.74rem;color:#64748b;font-weight:900">مؤشر الحالة</span><span class="rag ${ragClass(y.actual,y.target)}">${statusName(sk)}</span></div>
                     </div>`;
                 }).join('');
-                body.innerHTML=rows.map(y=>`<tr><td><strong>${y.year}</strong></td><td>${y.focus||''}</td><td>${y.goals||''}</td><td>${Number(y.target||0)}%</td><td>${Number(y.actual||0)}%</td><td><span class="rag ${ragClass(y.actual,y.target)}">${ragText(y.actual,y.target)}</span></td><td>${formatCurrency(y.budget)}</td><td><button class="btn btn-sm btn-outline" onclick="editFiveYear('${y.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteFiveYear('${y.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+                const editingId=document.getElementById('editingFyId')?.value||'';
+                body.innerHTML=rows.map(y=>`<tr data-fy-id="${y.id}" class="${editingId===y.id?'fy-row-editing':''}"><td><strong>${y.year}</strong></td><td>${y.focus||''}</td><td>${y.goals||''}</td><td>${Number(y.target||0)}%</td><td>${Number(y.actual||0)}%</td><td><span class="rag ${ragClass(y.actual,y.target)}">${ragText(y.actual,y.target)}</span></td><td>${formatCurrency(y.budget)}</td><td><button class="btn btn-sm btn-outline" title="تعديل بيانات سنة ${y.year}" onclick="editFiveYear('${y.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" title="حذف سنة ${y.year}" onclick="deleteFiveYear('${y.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
                 renderStrategicKpiAchievementByYear(rows);
                 renderStrategicObjectiveTimeline();
             }
@@ -3342,7 +3626,15 @@
                     if(lineCtx) new Chart(lineCtx,{type:'line',data:{labels,datasets:[{label:'اتجاه تحقيق الأهداف الاستراتيجية',data:values,borderColor:'rgba(59,130,246,.95)',backgroundColor:'rgba(59,130,246,.15)',fill:true,tension:.35,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
                 },80);
             }
-            window.editFiveYear=function(id){ const y=appData.fiveYearPlans.find(x=>x.id===id); if(!y)return; document.getElementById('editingFyId').value=y.id; document.getElementById('fyYear').value=y.year; document.getElementById('fyFocus').value=y.focus||''; document.getElementById('fyGoals').value=y.goals||''; document.getElementById('fyTarget').value=y.target||0; document.getElementById('fyActual').value=y.actual||0; document.getElementById('fyBudget').value=y.budget||0; };
+            function setFiveYearEditorState(year){
+                const card=document.getElementById('fyEditorCard'), status=document.getElementById('fyEditorStatus');
+                const editing=year!==undefined && year!==null;
+                card?.classList.toggle('is-editing',editing);
+                status?.classList.toggle('is-editing',editing);
+                if(status) status.innerHTML=editing?`<i class="fas fa-pen"></i> جارٍ تعديل بيانات سنة ${year}`:'<i class="fas fa-circle-info"></i> إدخال سنة جديدة';
+                document.querySelectorAll('#fiveYearBody tr').forEach(tr=>tr.classList.toggle('fy-row-editing',editing && tr.dataset.fyId===document.getElementById('editingFyId')?.value));
+            }
+            window.editFiveYear=function(id){ const y=appData.fiveYearPlans.find(x=>x.id===id); if(!y)return; document.getElementById('editingFyId').value=y.id; document.getElementById('fyYear').value=y.year; document.getElementById('fyFocus').value=y.focus||''; document.getElementById('fyGoals').value=y.goals||''; document.getElementById('fyTarget').value=y.target||0; document.getElementById('fyActual').value=y.actual||0; document.getElementById('fyBudget').value=y.budget||0; setFiveYearEditorState(y.year); };
             window.deleteFiveYear=function(id){ if(confirm('حذف سنة الخطة؟')){ appData.fiveYearPlans=appData.fiveYearPlans.filter(x=>x.id!==id); saveData(); refreshAllViews(); }};
             function renderBscMap(){
                 const el=document.getElementById('bscMap'); if(!el) return;
@@ -3722,6 +4014,16 @@
             document.getElementById('clearRiskBtn')?.addEventListener('click', function() { ['riskDesc','riskAction','riskOwner'].forEach(id=>document.getElementById(id).value=''); const rp=document.getElementById('riskProbability'); if(rp) rp.value=3; const ri=document.getElementById('riskImpact'); if(ri) ri.value=3; document.getElementById('editingRiskId').value=''; });
 
             document.getElementById('budgetProject')?.addEventListener('change', function(){ syncBudgetProjectFields(); renderBudget(); });
+            document.getElementById('budgetProjectFilter')?.addEventListener('change', renderBudget);
+            document.getElementById('applyBudgetFilter')?.addEventListener('click', renderBudget);
+            document.getElementById('resetBudgetFilter')?.addEventListener('click', function(){ const filter=document.getElementById('budgetProjectFilter'); if(filter) filter.value='all'; renderBudget(); });
+            document.getElementById('newBudgetItemBtn')?.addEventListener('click', function(){
+                document.getElementById('clearBudgetBtn')?.click();
+                setBudgetSelection('');
+                setBudgetEditorOpen(true,'إضافة بند جديد');
+            });
+            document.getElementById('editSelectedBudgetBtn')?.addEventListener('click', function(){ if(selectedBudgetItemId) editBudget(selectedBudgetItemId); });
+            document.getElementById('closeBudgetEditorBtn')?.addEventListener('click', function(){ setBudgetEditorOpen(false); });
             document.getElementById('saveBudgetBtn')?.addEventListener('click', function() {
                 const pid = document.getElementById('budgetProject').value;
                 if(!pid) return alert('اختر المشروع');
@@ -3751,9 +4053,11 @@
                 document.getElementById('budgetNotes').value='';
                 document.getElementById('budgetDate').value='';
                 syncBudgetProjectFields();
+                setBudgetSelection('');
+                setBudgetEditorOpen(false);
                 showInlineSaveConfirm('budgetSaveConfirm','تم حفظ بيانات الموازنة بنجاح وتحديث التقرير مباشرة'); toast('تم حفظ بيانات الموازنة وتحديث الجدول بنجاح');
             });
-            document.getElementById('clearBudgetBtn')?.addEventListener('click', function() { ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingBudgetId').value=''; syncBudgetProjectFields(); });
+            document.getElementById('clearBudgetBtn')?.addEventListener('click', function() { ['budgetItem','plannedAmount','actualSpent','budgetNotes'].forEach(id=>document.getElementById(id).value=''); document.getElementById('budgetDate').value=''; document.getElementById('editingBudgetId').value=''; setBudgetSelection(''); const title=document.getElementById('budgetEditorTitle'); if(title) title.textContent='إضافة بند جديد'; syncBudgetProjectFields(); });
             document.getElementById('saveServiceBtn')?.addEventListener('click', function() {
                 const name = document.getElementById('serviceName').value.trim();
                 if(!name) return alert('الاسم مطلوب');
@@ -3788,10 +4092,11 @@
                 const i=appData.fiveYearPlans.findIndex(x=>x.id===finalId || Number(x.year)===year);
                 if(i>=0) appData.fiveYearPlans.splice(i,1,data); else appData.fiveYearPlans.push(data);
                 document.getElementById('editingFyId').value='';
+                setFiveYearEditorState();
                 saveData(); renderFiveYear(); renderPhaseOneDashboard(); renderDashboard(); renderReports();
                 toast(eid||existingByYear?'تم تحديث سنة الخطة':'تم حفظ سنة الخطة');
             });
-            document.getElementById('clearFyBtn')?.addEventListener('click', function(){ ['fyFocus','fyGoals','fyTarget','fyActual'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingFyId').value=''; try{t20FillFyBudgetForYear();}catch(e){} });
+            document.getElementById('clearFyBtn')?.addEventListener('click', function(){ ['fyFocus','fyGoals','fyTarget','fyActual'].forEach(id=>document.getElementById(id).value=''); document.getElementById('editingFyId').value=''; setFiveYearEditorState(); try{t20FillFyBudgetForYear();}catch(e){} });
             function t20FillFyBudgetForYear(){ var acc=t20AnnualPlannedBudgets(); var y=parseInt(document.getElementById('fyYear')?.value)||0; var el=document.getElementById('fyBudget'); if(el) el.value=Number(acc[y]||0); }
             document.getElementById('fyYear')?.addEventListener('change', function(){ try{t20FillFyBudgetForYear();}catch(e){} });
 
@@ -3823,6 +4128,166 @@
             document.getElementById('exportGoogleSheetBtn')?.addEventListener('click', ()=>t20SyncNow(true));
             document.getElementById('applyReportFilter')?.addEventListener('click', renderReports);
             document.addEventListener('click', function(e){ const panel=document.getElementById('phase3SearchPanel'); const wrap=document.querySelector('.phase3-search-wrap'); if(panel && !panel.contains(e.target) && !(wrap && wrap.contains(e.target))) panel.classList.remove('show'); });
+
+            // ===== نظام التبويبات الفرعية T21.8 =====
+            const T21_SUBTAB_KEY = 't21.8.activeSubTabs';
+
+            function resizeVisibleCharts(panel) {
+                if (!panel || !window.Chart || typeof Chart.getChart !== 'function') return;
+                requestAnimationFrame(() => panel.querySelectorAll('canvas').forEach(canvas => {
+                    const chart = Chart.getChart(canvas);
+                    if (chart) { chart.resize(); chart.update('none'); }
+                }));
+            }
+
+            function initSubTabs(containerSelector, navSelector, contentSelector) {
+                const container = document.querySelector(containerSelector);
+                if (!container) return;
+                const nav = container.querySelector(navSelector);
+                if (!nav || nav.dataset.subtabsReady === 'true') return;
+                const btns = Array.from(nav.querySelectorAll('.sub-tab-btn'));
+                const contents = Array.from(container.querySelectorAll(contentSelector));
+                if (!btns.length || !contents.length) return;
+
+                nav.dataset.subtabsReady = 'true';
+                nav.setAttribute('role', 'tablist');
+                nav.setAttribute('aria-label', 'أقسام الصفحة');
+
+                const storageId = container.id || containerSelector;
+                let saved = '';
+                try { saved = JSON.parse(localStorage.getItem(T21_SUBTAB_KEY) || '{}')[storageId] || ''; } catch (_) {}
+
+                function activate(tabId, focusButton) {
+                    const target = contents.find(content => content.id === tabId) || contents[0];
+                    if (!target) return;
+                    btns.forEach(btn => {
+                        const selected = btn.dataset.subtab === target.id;
+                        btn.classList.toggle('active', selected);
+                        btn.setAttribute('aria-selected', String(selected));
+                        btn.tabIndex = selected ? 0 : -1;
+                        if (selected && focusButton) btn.focus();
+                    });
+                    contents.forEach(content => {
+                        const selected = content === target;
+                        content.classList.toggle('active', selected);
+                        content.hidden = !selected;
+                    });
+                    try {
+                        const state = JSON.parse(localStorage.getItem(T21_SUBTAB_KEY) || '{}');
+                        state[storageId] = target.id;
+                        localStorage.setItem(T21_SUBTAB_KEY, JSON.stringify(state));
+                    } catch (_) {}
+                    resizeVisibleCharts(target);
+                    container.dispatchEvent(new CustomEvent('t21:subtabchange', { detail: { tabId: target.id } }));
+                }
+
+                btns.forEach((btn, index) => {
+                    const target = contents.find(content => content.id === btn.dataset.subtab);
+                    btn.type = 'button';
+                    btn.setAttribute('role', 'tab');
+                    btn.id = btn.id || `${storageId}-subtab-${index + 1}`;
+                    if (target) {
+                        btn.setAttribute('aria-controls', target.id);
+                        target.setAttribute('role', 'tabpanel');
+                        target.setAttribute('aria-labelledby', btn.id);
+                    }
+                    btn.addEventListener('click', e => {
+                        e.preventDefault();
+                        activate(btn.dataset.subtab, false);
+                    });
+                    btn.addEventListener('keydown', e => {
+                        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+                        e.preventDefault();
+                        let next = index;
+                        if (e.key === 'Home') next = 0;
+                        else if (e.key === 'End') next = btns.length - 1;
+                        else next = (index + (e.key === 'ArrowLeft' ? 1 : -1) + btns.length) % btns.length;
+                        activate(btns[next].dataset.subtab, true);
+                    });
+                });
+
+                const initial = contents.some(content => content.id === saved)
+                    ? saved
+                    : (btns.find(btn => btn.classList.contains('active'))?.dataset.subtab || contents[0].id);
+                activate(initial, false);
+            }
+
+            function pageChildFor(page, selector) {
+                let node = page.querySelector(selector);
+                while (node && node.parentElement !== page) node = node.parentElement;
+                return node;
+            }
+
+            function buildPageSubTabs(pageId, definitions) {
+                const page = document.getElementById(pageId);
+                if (!page || page.dataset.generatedSubtabs === 'true') return;
+                const nav = document.createElement('nav');
+                nav.className = 'sub-tabs-nav no-print';
+                const panels = [];
+
+                definitions.forEach((definition, index) => {
+                    const panel = document.createElement('section');
+                    panel.id = `${pageId}-section-${definition.id}`;
+                    panel.className = `t21-sub-tab-panel${index === 0 ? ' active' : ''}`;
+                    const moved = new Set();
+                    definition.selectors.forEach(selector => {
+                        const child = pageChildFor(page, selector);
+                        if (child && child !== nav && !moved.has(child)) {
+                            moved.add(child);
+                            panel.appendChild(child);
+                        }
+                    });
+                    if (!panel.children.length) return;
+                    const button = document.createElement('button');
+                    button.className = `sub-tab-btn${panels.length === 0 ? ' active' : ''}`;
+                    button.dataset.subtab = panel.id;
+                    button.innerHTML = `<i class="fas ${definition.icon}"></i> ${definition.label}`;
+                    nav.appendChild(button);
+                    panels.push(panel);
+                });
+
+                if (panels.length < 2) return;
+                page.insertBefore(nav, page.firstChild);
+                panels.forEach(panel => page.appendChild(panel));
+                page.dataset.generatedSubtabs = 'true';
+                initSubTabs(`#${pageId}`, '.sub-tabs-nav', '.t21-sub-tab-panel');
+            }
+
+            // التبويبات المصممة يدوياً في لوحة المؤشرات والتقارير.
+            initSubTabs('#tab-dashboard', '.sub-tabs-nav-dashboard', '.sub-tab-content-dashboard');
+            initSubTabs('#tab-reports', '.sub-tabs-nav-reports', '.sub-tab-content-reports');
+
+            // تحويل بقية الصفحات المزدحمة إلى أقسام قصيرة وواضحة.
+            buildPageSubTabs('tab-fiveyear', [
+                { id:'table', label:'الجدول السنوي', icon:'fa-table', selectors:['#saveFyBtn', '#fiveYearBody'] },
+                { id:'roadmap', label:'خارطة الطريق', icon:'fa-road', selectors:['#fiveYearRoadmap'] },
+                { id:'timeline', label:'امتداد الأهداف', icon:'fa-stream', selectors:['#strategicObjectiveTimelineCard'] },
+                { id:'achievement', label:'تحقيق المؤشرات', icon:'fa-chart-line', selectors:['#strategicKpiAchievementCard'] }
+            ]);
+            buildPageSubTabs('tab-strategy', [
+                { id:'objectives', label:'إدارة وسجل الأهداف', icon:'fa-bullseye', selectors:['#saveObjBtn', '#objectivesTable'] },
+                { id:'kpis', label:'إدارة وسجل المؤشرات', icon:'fa-gauge-high', selectors:['#saveKpiBtn', '#advancedKpiBox'] },
+                { id:'bsc', label:'خريطة BSC', icon:'fa-sitemap', selectors:['#bscMap'] }
+            ]);
+            buildPageSubTabs('tab-resources', [
+                { id:'edit', label:'إدارة الفريق', icon:'fa-people-group', selectors:['#saveResourceBtn'] },
+                { id:'register', label:'سجل فرق العمل', icon:'fa-address-book', selectors:['#resourcesTable'] }
+            ]);
+            buildPageSubTabs('tab-gantt', [
+                { id:'tasks', label:'المهام', icon:'fa-list-check', selectors:['#ganttEditableTable'] },
+                { id:'stages', label:'المراحل والمعالم', icon:'fa-route', selectors:['#phase2ProjectStages'] },
+                { id:'priority', label:'مصفوفة الأولوية', icon:'fa-layer-group', selectors:['#phase2PriorityMatrix'] },
+                { id:'chart', label:'المخطط الزمني', icon:'fa-chart-gantt', selectors:['#ganttChartContainer'] }
+            ]);
+            buildPageSubTabs('tab-risks', [
+                { id:'analysis', label:'التحليل والملخص', icon:'fa-chart-area', selectors:['#phase2RiskHeatMap', '#phase2RiskSummary'] },
+                { id:'manage', label:'إضافة وتعديل وسجل المخاطر', icon:'fa-list', selectors:['#saveRiskBtn', '#risksTable'] }
+            ]);
+            buildPageSubTabs('tab-services', [
+                { id:'edit', label:'إضافة وتعديل', icon:'fa-pen-to-square', selectors:['#saveServiceBtn'] },
+                { id:'register', label:'الخدمات والمبادرات', icon:'fa-list', selectors:['#servicesTable'] }
+            ]);
+
         })();
     </script>
 
@@ -3933,7 +4398,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
 
 
 <style id="t19-2-budget-report-toast-style">
-#tab-budget #budgetTable{border-collapse:separate!important;border-spacing:0 6px!important;background:#f8fafc;min-width:980px}
+#tab-budget #budgetTable{border-collapse:separate!important;border-spacing:0 6px!important;background:#f8fafc;min-width:1250px}
 #tab-budget #budgetTable thead th{background:#0f172a!important;color:#fff!important;border-bottom:none!important}
 #tab-budget #budgetBody tr.budget-project-separator td{background:linear-gradient(135deg,#1e3a8a,#2563eb)!important;color:#fff!important;font-weight:900!important;font-size:.92rem!important;padding:12px 14px!important;border-radius:12px 12px 0 0!important;border-bottom:0!important}
 #tab-budget #budgetBody tr.budget-project-separator i{margin-left:8px;color:#bfdbfe}
@@ -4674,10 +5139,9 @@ body.dark-mode .t2014-gantt-table tr:nth-child(even) td{background:#111827}
   function init(){ try{ build((window.appData&&window.appData.projects)||[]); }catch(e){} }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
   else init();
-  // Gantt chart loads automatically on init, no need to re-render on tab click
 })();
 </script>
-<!-- ================= T21.6 : i18n (AR/EN) + Enterprise Theming ================= -->
+<!-- ================= T21.8 : i18n (AR/EN) + Enterprise Theming ================= -->
 <style id="t21-theme-style">
 /* ---------- Theme tokens ---------- */
 :root{
@@ -5011,6 +5475,11 @@ var DICT={
 "إجمالي المخاطر النشطة":"Total Active Risks","المشاريع والأهداف الاستراتيجية":"Projects & Strategic Objectives",
 "توزيع المشاريع حسب القطاع":"Projects by Sector","توزيع المشاريع حسب الحالة":"Projects by Status",
 "الإنجاز حسب المشروع":"Progress by Project","جدول حالة المشاريع":"Project Status Table","حالة المشاريع الحالية":"Current Project Status",
+"ملخص عام":"Overview","إدارة السنة":"Manage Year","خارطة الطريق":"Roadmap","امتداد الأهداف":"Objective Timeline",
+"تحقيق المؤشرات":"KPI Achievement","إدارة الأهداف":"Manage Objectives","إدارة المؤشرات":"Manage KPIs",
+"سجل المؤشرات":"KPI Register","سجل الأهداف":"Objective Register","خريطة BSC":"BSC Map",
+"إضافة وتعديل":"Add / Edit","إدارة الفريق":"Manage Team","المهام":"Tasks","المراحل والمعالم":"Stages & Milestones",
+"مصفوفة الأولوية":"Priority Matrix","المخطط الزمني":"Timeline","التحليل والملخص":"Analysis & Summary","إدارة البنود":"Manage Items",
 "إجمالي المشاريع":"Total Projects","مشاريع نشطة":"Active Projects","متوسط الإنجاز":"Average Progress",
 "مخاطر مفتوحة":"Open Risks","مخاطر حرجة":"Critical Risks","المنفق حتى الآن":"Spent to Date",
 "موازنة الخطة الخمسية المعتمدة":"Approved Five-Year Plan Budget","الأهداف الاستراتيجية":"Strategic Objectives",
@@ -5270,8 +5739,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.6 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.6 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21.15 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.15 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
