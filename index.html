@@ -32,7 +32,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.15 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.19 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -983,7 +983,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.15 | Ver.15</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.19 | Ver.19</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1500,7 +1500,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21.15</strong></div>
+                            <div><span>الإصدار</span><strong>T21.19</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -1563,11 +1563,16 @@
             // مثال: const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/XXXXX/exec';
             //const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbyvDv9LH7FOfluI6OjaSXqay1IYlJNjaJSzBjnQefAR8O4rpQT-cZ-KVpGH2dFGPWxmwA/exec';
 			const T20_CENTRAL_SYNC_URL = 'https://script.google.com/macros/s/AKfycbzWnKDmoHTXJEIzoA2rAhv_EcOl7Ipt9tPd2pmr8lyp04I36uWxi3ECJYH-4ll2zTgq/exec';
+			window.T20_CENTRAL_SYNC_URL = T20_CENTRAL_SYNC_URL;
 			
             const T20_SYNC_INTERVAL_MS = 120000; // رفع تلقائي كل دقيقتين عند وجود تغييرات
             const T20_SYNC_META_KEY = 'motc_t20_sync_meta';
+            const T21_SYNC_BASE_KEY = 'motc_t21_collab_base_v1';
             let t20PullInProgress = false;
             let t20AutoSyncEnabled = false; // المزامنة التلقائية متوقفة عند بدء التشغيل
+            let t21InitializingData = true;
+            const T21_DELTA_ENTITIES = ['projects','objectives','kpis','tasks','risks','budgets','services','teamMembers','resources','fiveYearPlans','sectors','directorates'];
+            let t21SyncBase = {};
 
             let appData = { projects: [], resources: [], tasks: [], risks: [], budgets: [], objectives: [],
                 kpis: [], services: [], teamMembers: [], sectors: [], directorates: [], fiveYearPlans: [] };
@@ -1601,6 +1606,7 @@
                 return data;
             }
             function loadData() {
+                t21LoadSyncBase();
                 const s = localStorage.getItem(STORAGE_KEY);
                 if (s) {
                     try { appData = JSON.parse(s); } catch(e) { initDefaultData(); }
@@ -1619,6 +1625,7 @@
                 const savedZoom = localStorage.getItem('gantt_zoom_level');
                 if (savedZoom !== null) ganttZoomLevel = parseInt(savedZoom);
                 saveData();
+                t21InitializingData=false;
             }
 
             function initDefaultData() {
@@ -1805,6 +1812,65 @@
                 t20MarkDirty();
             }
 
+            function t21Clone(value){ return JSON.parse(JSON.stringify(value==null?null:value)); }
+            function t21LoadSyncBase(){ try{t21SyncBase=JSON.parse(localStorage.getItem(T21_SYNC_BASE_KEY)||'{}')||{};}catch(e){t21SyncBase={};} }
+            function t21SaveSyncBase(){ localStorage.setItem(T21_SYNC_BASE_KEY,JSON.stringify(t21SyncBase||{})); }
+            function t21Comparable(record){
+                const out={}; Object.keys(record||{}).forEach(k=>{ if(['revision','fieldVersions','updatedBy','updatedAt','createdAt','deleted'].indexOf(k)<0) out[k]=record[k]; }); return out;
+            }
+            function t21Same(a,b){ return JSON.stringify(a)===JSON.stringify(b); }
+            function t21RefId(entity,name){let h=0,s=String(name||'');for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return entity+'_'+Math.abs(h);}
+            function t21Records(entity,list){if(entity==='sectors'||entity==='directorates')return (list||[]).map(name=>({id:t21RefId(entity,name),name:String(name)}));return Array.isArray(list)?list:[];}
+            function t21BuildOperations(){
+                const operations=[];
+                T21_DELTA_ENTITIES.forEach(entity=>{
+                    const current=t21Records(entity,appData[entity]);
+                    const base=t21Records(entity,t21SyncBase[entity]);
+                    const curMap={}; current.forEach(r=>{if(r&&r.id)curMap[String(r.id)]=r;});
+                    const baseMap={}; base.forEach(r=>{if(r&&r.id)baseMap[String(r.id)]=r;});
+                    Object.keys(curMap).forEach(id=>{
+                        const cur=curMap[id], old=baseMap[id];
+                        if(!old){ operations.push({entity:entity,id:id,operation:'create',baseRevision:0,changes:t21Comparable(cur)}); return; }
+                        const now=t21Comparable(cur), before=t21Comparable(old), changes={};
+                        Object.keys(now).forEach(field=>{if(!t21Same(now[field],before[field]))changes[field]=now[field];});
+                        Object.keys(before).forEach(field=>{if(!(field in now))changes[field]='';});
+                        if(Object.keys(changes).length) operations.push({entity:entity,id:id,operation:'update',baseRevision:Number(old.revision||0),changes:changes});
+                    });
+                    Object.keys(baseMap).forEach(id=>{ if(!curMap[id]) operations.push({entity:entity,id:id,operation:'delete',baseRevision:Number(baseMap[id].revision||0),changes:{}}); });
+                });
+                return operations;
+            }
+            function t21Upsert(entity,record,target){
+                if(!record||!record.id)return;
+                if(entity==='sectors'||entity==='directorates'){
+                    if(!Array.isArray(target[entity]))target[entity]=[];
+                    const idx=target[entity].findIndex(name=>t21RefId(entity,name)===String(record.id));
+                    const deleted=record.deleted===true||String(record.deleted).toLowerCase()==='true';
+                    if(deleted){if(idx>=0)target[entity].splice(idx,1);}else if(idx>=0)target[entity][idx]=String(record.name||'');else target[entity].push(String(record.name||''));
+                    return;
+                }
+                if(!Array.isArray(target[entity]))target[entity]=[];
+                const idx=target[entity].findIndex(x=>String(x.id)===String(record.id));
+                const deleted=record.deleted===true||String(record.deleted).toLowerCase()==='true';
+                if(deleted){if(idx>=0)target[entity].splice(idx,1);return;}
+                if(typeof record.fieldVersions==='string'){try{record.fieldVersions=JSON.parse(record.fieldVersions||'{}');}catch(e){record.fieldVersions={};}}
+                if(idx>=0)target[entity][idx]=t21Clone(record); else target[entity].push(t21Clone(record));
+            }
+            function t21ApplyDeltaResult(result){
+                let conflicts=0;
+                (result.changes||[]).forEach(change=>{ if(T21_DELTA_ENTITIES.indexOf(change.entity)>=0)t21Upsert(change.entity,change.record,appData); });
+                (result.results||[]).forEach(item=>{
+                    if(item.status==='applied'&&item.record)t21Upsert(item.entity,item.record,appData);
+                    if(item.status==='conflict'){conflicts++; if(item.central)t21Upsert(item.entity,item.central,appData);}
+                });
+                t21SyncBase=t21Clone(appData); t21SaveSyncBase();
+                localStorage.setItem(STORAGE_KEY,JSON.stringify(appData));
+                const meta=t20ReadSyncMeta(); meta.lastSequence=Number(result.latestSequence||meta.lastSequence||0); meta.dirty=false; meta.lastSyncAt=new Date().toISOString(); t20WriteSyncMeta(meta);
+                refreshAllViews();
+                if(conflicts) toast('تم دمج التغييرات وتسجيل '+conflicts+' تعارض للمراجعة في سجل التدقيق');
+                return conflicts;
+            }
+
             function t20SyncEnabled(){ return !!(T20_CENTRAL_SYNC_URL && T20_CENTRAL_SYNC_URL.indexOf('http') === 0); }
             function t20ReadSyncMeta(){ try{return JSON.parse(localStorage.getItem(T20_SYNC_META_KEY)||'{}');}catch(e){return {};} }
             function t20WriteSyncMeta(meta){ localStorage.setItem(T20_SYNC_META_KEY, JSON.stringify(meta||{})); }
@@ -1823,6 +1889,7 @@
                 }
             }
             function t20MarkDirty(){
+                if(t21InitializingData) return;
                 const meta=t20ReadSyncMeta();
                 meta.dirty=true; meta.lastLocalSaveAt=new Date().toISOString();
                 t20WriteSyncMeta(meta);
@@ -1834,12 +1901,44 @@
                     window.__t20SyncTimer=setTimeout(()=>t20SyncNow(false),1500);
                 }
             }
+            function t21SetDBByFrame(payload){
+                return new Promise((resolve,reject)=>{
+                    const bridgeToken='write_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+                    const frame=document.createElement('iframe');
+                    frame.name='t21_write_'+Date.now();
+                    frame.style.cssText='position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;border:0;opacity:0';
+                    const form=document.createElement('form');
+                    form.method='POST'; form.action=T20_CENTRAL_SYNC_URL; form.target=frame.name; form.style.display='none';
+                    const values={action:'bridgeSetDB',bridgeToken:bridgeToken,token:payload.token||'',baseVersion:String(payload.baseVersion||0),dbJson:JSON.stringify(payload.db||{})};
+                    Object.keys(values).forEach(name=>{ const input=document.createElement(name==='dbJson'?'textarea':'input'); input.name=name; input.value=values[name]; form.appendChild(input); });
+                    const cleanup=()=>{ clearTimeout(timer); window.removeEventListener('message',onMessage); form.remove(); frame.remove(); };
+                    const onMessage=event=>{ const m=event.data; if(!m||m.type!=='T21_CENTRAL_WRITE_RESPONSE'||m.token!==bridgeToken)return; cleanup(); if(!m.result||m.result.ok===false){ const e=new Error((m.result&&m.result.error)||'تعذر الحفظ المركزي'); e.code=m.result&&m.result.code; reject(e); } else resolve(m.result); };
+                    const timer=setTimeout(()=>{cleanup();reject(new Error('انتهت مهلة الحفظ المركزي'));},30000);
+                    window.addEventListener('message',onMessage); document.body.appendChild(frame); document.body.appendChild(form); form.submit();
+                });
+            }
+            function t21DeltaSyncByFrame(operations,sinceSequence){
+                return new Promise((resolve,reject)=>{
+                    const bridgeToken='delta_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+                    const frame=document.createElement('iframe'); frame.name='t21_delta_'+Date.now(); frame.style.cssText='position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;border:0;opacity:0';
+                    const form=document.createElement('form'); form.method='POST'; form.action=T20_CENTRAL_SYNC_URL; form.target=frame.name; form.style.display='none';
+                    const authToken=(window.T20Security&&window.T20Security.token&&window.T20Security.token())||'';
+                    const values={action:'bridgeDeltaSync',bridgeToken:bridgeToken,token:authToken,sinceSequence:String(sinceSequence||0),operationsJson:JSON.stringify(operations||[])};
+                    Object.keys(values).forEach(name=>{const input=document.createElement(name==='operationsJson'?'textarea':'input');input.name=name;input.value=values[name];form.appendChild(input);});
+                    const cleanup=()=>{clearTimeout(timer);window.removeEventListener('message',onMessage);form.remove();frame.remove();};
+                    const onMessage=event=>{const m=event.data;if(!m||m.type!=='T21_CENTRAL_WRITE_RESPONSE'||m.token!==bridgeToken)return;cleanup();if(!m.result||m.result.ok===false)reject(new Error((m.result&&m.result.error)||'تعذر تشغيل المزامنة التعاونية'));else resolve(m.result);};
+                    const timer=setTimeout(()=>{cleanup();reject(new Error('انتهت مهلة المزامنة التعاونية'));},40000);
+                    window.addEventListener('message',onMessage);document.body.appendChild(frame);document.body.appendChild(form);form.submit();
+                });
+            }
             async function t20CentralRequest(payload){
                 if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
                 const __actor=(window.T20Security&&window.T20Security.identity&&window.T20Security.identity())||null;
-                const __payload=Object.assign({},payload,{actor:__actor});
+                const __token=(window.T20Security&&window.T20Security.token&&window.T20Security.token())||'';
+                const __payload=Object.assign({},payload,{actor:__actor,token:__token});
                 const __signal=window.__t20SyncAbortController ? window.__t20SyncAbortController.signal : undefined;
                 if(__payload.action==='setDB' && __actor && __actor.canWrite===false) throw new Error('صلاحيات القراءة فقط: لا يمكن رفع التعديلات');
+                if(__payload.action==='setDB') return t21SetDBByFrame(__payload);
                 try{
                     const res=await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(__payload),redirect:'follow',signal:__signal});
                     const txt=await res.text();
@@ -1847,11 +1946,9 @@
                     if(!res.ok || data.ok===false) throw new Error(data.error||('HTTP '+res.status));
                     return data;
                 }catch(err){
-                    // Apps Script قد يحجب قراءة الاستجابة من صفحات file:// بسبب CORS.
-                    // إعادة الإرسال no-cors صالحة للكتابة فقط؛ القراءة تستخدم JSONP أدناه.
-                    if(__payload.action!=='setDB' || !(err instanceof TypeError || /Failed to fetch/i.test(err.message||''))) throw err;
-                    await fetch(T20_CENTRAL_SYNC_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(__payload),redirect:'follow',signal:__signal});
-                    return {ok:true,opaque:true,updatedAt:new Date().toISOString()};
+                    // لا نستخدم no-cors للكتابة؛ لأنه لا يعيد نتيجة التحقق من تعارض الإصدارات.
+                    // عند تعذر قراءة الاستجابة يبقى الحفظ محلياً ولا تُعتبر العملية مزامنة ناجحة.
+                    throw err;
                 }
             }
 
@@ -1861,7 +1958,7 @@
                 try{
                     const response=await fetch(T20_CENTRAL_SYNC_URL+'?_='+Date.now(),{
                         method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-                        body:JSON.stringify({action:'getDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY}),
+                        body:JSON.stringify({action:'getDB',system:'MTCIT_PPM_T21',storageKey:STORAGE_KEY,token:(window.T20Security&&window.T20Security.token&&window.T20Security.token())||''}),
                         redirect:'follow',signal:controller.signal
                     });
                     const text=await response.text();
@@ -1884,7 +1981,8 @@
                     };
                     script.async=true;
                     script.onerror=()=>{ cleanup(); reject(new Error('تعذر تنفيذ JSONP')); };
-                    script.src=T20_CENTRAL_SYNC_URL+'?action=getDB&callback='+encodeURIComponent(callback)+'&_='+Date.now();
+                    const authToken=(window.T20Security&&window.T20Security.token&&window.T20Security.token())||'';
+                    script.src=T20_CENTRAL_SYNC_URL+'?action=getDB&token='+encodeURIComponent(authToken)+'&callback='+encodeURIComponent(callback)+'&_='+Date.now();
                     document.head.appendChild(script);
                 });
             }
@@ -1913,7 +2011,8 @@
                             : 'تعذر تحميل صفحة Apps Script داخل جسر القراءة. تحقق من رابط /exec وإتاحة الوصول للجميع.'));
                     },30000);
                     window.addEventListener('message',onMessage);
-                    frame.src=T20_CENTRAL_SYNC_URL+'?action=bridgeGetDB&token='+encodeURIComponent(token)+'&_='+Date.now();
+                    const authToken=(window.T20Security&&window.T20Security.token&&window.T20Security.token())||'';
+                    frame.src=T20_CENTRAL_SYNC_URL+'?action=bridgeGetDB&bridgeToken='+encodeURIComponent(token)+'&token='+encodeURIComponent(authToken)+'&_='+Date.now();
                     document.body.appendChild(frame);
                 });
             }
@@ -1921,8 +2020,8 @@
             async function t20CentralGetDB(){
                 if(!t20SyncEnabled()) throw new Error('لم يتم ضبط رابط التخزين المركزي');
                 const errors=[];
-                try{ return await t20GetDBByFetch(); }catch(err){ errors.push('fetch: '+(err.message||err)); }
                 try{ return await t20GetDBByJsonp(); }catch(err){ errors.push('JSONP: '+(err.message||err)); }
+                try{ return await t20GetDBByFetch(); }catch(err){ errors.push('fetch: '+(err.message||err)); }
                 try{ return await t20GetDBByFrame(); }catch(err){ errors.push('iframe: '+(err.message||err)); }
                 throw new Error('فشلت طرق القراءة المتاحة من GitHub Pages — '+errors.join(' | '));
             }
@@ -1932,14 +2031,13 @@
                 const syncController=new AbortController();
                 window.__t20SyncAbortController=syncController;
                 try{
-                    t20SetSyncStatus('pending','جاري المزامنة مع Google Sheet','يتم رفع نسخة JSON مركزية دون تعطيل العمل المحلي.');
-                    const payload={action:'setDB',system:'MTCIT_PPM_T20',storageKey:STORAGE_KEY,db:appData,clientUpdatedAt:new Date().toISOString(),source:location.href};
-                    const result=await t20CentralRequest(payload);
+                    t20SetSyncStatus('pending','جاري دمج التغييرات','يتم إرسال الحقول المتغيرة فقط واستقبال تعديلات المستخدمين الآخرين.');
                     const meta=t20ReadSyncMeta();
-                    meta.dirty=false; meta.lastSyncAt=new Date().toISOString(); meta.remoteVersion=result.version||result.updatedAt||meta.lastSyncAt;
-                    t20WriteSyncMeta(meta);
-                    t20SetSyncStatus('ok','تمت المزامنة بنجاح','تم حفظ البيانات مركزياً في Google Sheet مع استمرار النسخة المحلية.');
-                    if(showMessage) toast('تمت المزامنة مع Google Sheet بنجاح');
+                    const operations=t21BuildOperations();
+                    const result=await t21DeltaSyncByFrame(operations,Number(meta.lastSequence||0));
+                    const conflicts=t21ApplyDeltaResult(result);
+                    t20SetSyncStatus(conflicts?'pending':'ok',conflicts?'تمت المزامنة مع وجود تعارضات للمراجعة':'تمت المزامنة التعاونية بنجاح',conflicts?'راجع قسم سجل التدقيق والتعارضات في صلاحيات المستخدمين.':'تم دمج التغييرات المحلية والمركزية تلقائياً.');
+                    if(showMessage&&!conflicts) toast('تم دمج التغييرات مع Google Sheet بنجاح');
                 }catch(err){
                     if(err && err.name==='AbortError') return;
                     console.error('T20 sync failed',err);
@@ -1949,9 +2047,9 @@
                     if(window.__t20SyncAbortController===syncController) window.__t20SyncAbortController=null;
                 }
             }
-            async function t20PullFromCentral(){
+            async function t20PullFromCentral(silent){
                 if(!t20SyncEnabled()){ alert('أضف رابط Google Apps Script في السطر T20_CENTRAL_SYNC_URL أولاً.'); return; }
-                if(!confirm('سيتم تحميل آخر نسخة مركزية واستبدال البيانات الحالية محلياً. هل تريد المتابعة؟')) return;
+                if(!silent && !confirm('سيتم تحميل آخر نسخة مركزية واستبدال البيانات الحالية محلياً. هل تريد المتابعة؟')) return;
                 t20PullInProgress=true;
                 clearTimeout(window.__t20SyncTimer);
                 if(window.__t20SyncAbortController) window.__t20SyncAbortController.abort();
@@ -1965,11 +2063,14 @@
                     const remote=res.db||res.data;
                     if(!remote) throw new Error('لا توجد بيانات مركزية صالحة');
                     appData=t21NormalizeAppDates(remote);
+                    delete appData._meta;
+                    T21_DELTA_ENTITIES.forEach(entity=>{ appData[entity]=(appData[entity]||[]).filter(r=>!(r.deleted===true||String(r.deleted).toLowerCase()==='true')); });
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.pullInProgress=false; meta.pullFailed=false; meta.lastSyncAt=new Date().toISOString(); t20WriteSyncMeta(meta);
+                    t21SyncBase=t21Clone(appData); t21SaveSyncBase();
+                    const meta=t20ReadSyncMeta(); meta.dirty=false; meta.pullInProgress=false; meta.pullFailed=false; meta.lastSyncAt=new Date().toISOString(); meta.remoteVersion=Number((remote._meta&&remote._meta.version)||0); meta.lastSequence=Number((remote._meta&&remote._meta.changeSequence)||0); t20WriteSyncMeta(meta);
                     refreshAllViews();
                     t20SetSyncStatus('ok','تم تحميل النسخة المركزية','تم تحديث البيانات المحلية من Google Sheet.');
-                    toast('تم تحميل البيانات المركزية بنجاح');
+                    if(!silent) toast('تم تحميل البيانات المركزية بنجاح');
                 }catch(err){
                     const meta=t20ReadSyncMeta(); meta.dirty=false; meta.pullInProgress=false; meta.pullFailed=true; t20WriteSyncMeta(meta);
                     t20SetSyncStatus('error','تعذر تحميل النسخة المركزية','تحقق من رابط Google Apps Script وصلاحيات النشر.');
@@ -2018,6 +2119,20 @@
                 }
             }
             window.t20ToggleAutoSync=t20ToggleAutoSync;
+            window.t21StartCollaborationSync=async function(){
+                if(!t20SyncEnabled())return;
+                const meta=t20ReadSyncMeta();
+                const hasBase=T21_DELTA_ENTITIES.some(entity=>Array.isArray(t21SyncBase[entity]));
+                try{
+                    if(!hasBase){
+                        localStorage.setItem('motc_t21_pre_migration_backup_'+Date.now(),JSON.stringify(appData));
+                        await t20PullFromCentral(true);
+                    }
+                    else await t20SyncNow(false);
+                    t20AutoSyncEnabled=true; t20UpdateAutoSyncBtn();
+                    t20SetSyncStatus('ok','المزامنة التعاونية مفعلة','يتم دمج التغييرات تلقائياً دون استبدال قاعدة البيانات كاملة.');
+                }catch(e){ console.warn('collaboration sync start failed',e); }
+            };
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
             function formatCurrency(a) { return new Intl.NumberFormat('ar-OM', { maximumFractionDigits: 0 }).format(a||0) + ' ر.ع'; }
             function escapeHtml(v){return String(v??'').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
@@ -4502,6 +4617,9 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
 .t207-login label{display:block;font-size:.8rem;font-weight:800;color:#334155;margin:12px 0 5px}
 .t207-login input{width:100%;padding:11px 12px;border:1.5px solid #cbd5e1;border-radius:11px;font-size:.9rem;box-sizing:border-box;font-family:inherit}
 .t207-login input:focus{outline:0;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.t219-progress{display:none;margin-top:16px;padding:13px;border-radius:12px;background:#eff6ff;color:#1e3a8a;font-size:.82rem;font-weight:800;align-items:center;gap:10px}
+.t219-progress.show{display:flex}.t219-spinner{width:20px;height:20px;border:3px solid #bfdbfe;border-top-color:#2563eb;border-radius:50%;animation:t219spin .8s linear infinite;flex:0 0 auto}@keyframes t219spin{to{transform:rotate(360deg)}}
+.t219-password-box{width:min(470px,92vw)}.t219-password-hint{font-size:.75rem;color:#64748b;line-height:1.7;margin-top:8px}.t219-actions{display:flex;gap:8px;margin-top:18px}.t219-actions button{flex:1}
 .t207-btn{width:100%;margin-top:18px;background:#1e3a5f;color:#fff;border:0;border-radius:12px;padding:12px;font-weight:800;font-size:.92rem;cursor:pointer;font-family:inherit}
 .t207-btn:hover{background:#3b82f6}
 .t207-err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:10px;padding:9px 12px;font-size:.82rem;font-weight:700;margin-top:12px;display:none}
@@ -4657,7 +4775,47 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
     return s;
   }
+  function setCentralSession(auth){
+    var s = Object.assign({}, auth.session || {});
+    // حماية إضافية: مدير النظام يرى جميع الصفحات حتى عند وجود صفوف ناقصة في RolePermissions.
+    if(s.role==='admin'){
+      s.pages=s.pages||{};
+      TABS.forEach(function(t){s.pages[t[0]]='write';});
+      s.canWrite=true;
+    }
+    s.central = true;
+    s.token = auth.token || '';
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
+    return s;
+  }
   function clearSession(){ sessionStorage.removeItem(SESSION_KEY); }
+
+  function centralAuthenticate(username, password){
+    return new Promise(function(resolve,reject){
+      var url = window.T20_CENTRAL_SYNC_URL || '';
+      if(!url) return reject(new Error('رابط الخدمة المركزية غير مضبوط'));
+      var bridgeToken='auth_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+      var frame=document.createElement('iframe');
+      frame.name='t21_auth_'+Date.now();
+      frame.style.cssText='position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;border:0;opacity:0';
+      var form=document.createElement('form');
+      form.method='POST'; form.action=url; form.target=frame.name; form.style.display='none';
+      [['action','bridgeAuth'],['bridgeToken',bridgeToken],['username',username],['password',password]].forEach(function(pair){
+        var input=document.createElement('input'); input.type='hidden'; input.name=pair[0]; input.value=pair[1]; form.appendChild(input);
+      });
+      var cleanup=function(){ clearTimeout(timer); window.removeEventListener('message',onMessage); form.remove(); frame.remove(); };
+      var onMessage=function(event){
+        var m=event.data;
+        if(!m || m.type!=='T21_CENTRAL_AUTH_RESPONSE' || m.token!==bridgeToken) return;
+        cleanup();
+        if(!m.result || m.result.ok===false) reject(new Error((m.result&&m.result.error)||'تعذر التحقق من بيانات الدخول'));
+        else resolve(m.result.auth);
+      };
+      var timer=setTimeout(function(){ cleanup(); reject(new Error('انتهت مهلة الاتصال بخدمة تسجيل الدخول المركزية')); },20000);
+      window.addEventListener('message',onMessage);
+      document.body.appendChild(frame); document.body.appendChild(form); form.submit();
+    });
+  }
 
   /* ---------- public identity (attached to sync payloads) ---------- */
   window.T20Security = {
@@ -4667,6 +4825,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
       return { username:s.username, name:s.name, email:s.email, role:s.role,
                directorate:s.directorate, scope:s.scope, canWrite:s.canWrite, at:s.at };
     },
+    token: function(){ var s=session(); return s ? (s.token||'') : ''; },
     can: function(tab){ var s=session(); return s ? (s.pages[tab]||'none') : 'none'; },
     session: session
   };
@@ -4684,17 +4843,32 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
         '<label>كلمة المرور</label><input type="password" id="t207P" autocomplete="current-password">' +
         '<button class="t207-btn" id="t207Go">دخول</button>' +
         '<div class="t207-err" id="t207E"></div>' +
-        '<div class="t207-scope">ادخل اسم المستخدم وكلمة المرور ' +
-        '</div>' +
+        '<div class="t219-progress" id="t219LoginProgress"><span class="t219-spinner"></span><span id="t219LoginStage">جارٍ التحقق من بيانات الدخول…</span></div>' +
+        '<div class="t207-scope">يتم التحقق من الحساب والصلاحيات مركزيًا عبر Google Apps Script. وتُرفض عمليات القراءة أو الكتابة إذا كانت الجلسة غير صالحة أو لا تملك صلاحية التعديل.</div>' +
       '</div>';
     document.body.appendChild(ov);
 
-    function fail(m){ var e=document.getElementById('t207E'); e.textContent=m; e.classList.add('show'); }
+    function stage(m){ var p=document.getElementById('t219LoginProgress'),t=document.getElementById('t219LoginStage'); if(p)p.classList.add('show'); if(t)t.textContent=m; }
+    function fail(m){ var e=document.getElementById('t207E'); e.textContent=m; e.classList.add('show'); var p=document.getElementById('t219LoginProgress');if(p)p.classList.remove('show'); }
 
     function attempt(){
       var u = (document.getElementById('t207U').value||'').trim().toLowerCase();
       var p = document.getElementById('t207P').value||'';
       if(!u || !p) return fail('أدخل اسم المستخدم وكلمة المرور');
+      var centralUrl=window.T20_CENTRAL_SYNC_URL||'';
+      if(centralUrl){
+        document.getElementById('t207Go').disabled=true;
+        stage('جارٍ التحقق من بيانات الدخول والصلاحيات…');
+        centralAuthenticate(u,p).then(function(auth){
+          setCentralSession(auth);
+          stage('تم تسجيل الدخول — جارٍ تحميل البيانات المركزية…');
+          return boot();
+        }).then(function(){
+          stage('اكتمل تحميل البيانات بنجاح');
+          setTimeout(function(){ov.remove();var s=session();if(s&&s.mustChange)showPasswordDialog(true);},250);
+        }).catch(function(err){ document.getElementById('t207Go').disabled=false; fail(err.message||'تعذر تسجيل الدخول المركزي'); });
+        return;
+      }
       ensureStore().then(function(store){
         var user = store.users.filter(function(x){ return (x.username||'').toLowerCase()===u; })[0];
         if(!user) return fail('بيانات دخول غير صحيحة');
@@ -4723,8 +4897,9 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
     chip.style.marginRight = 'auto';
     chip.innerHTML = '<i class="fas fa-user-shield"></i><div><div class="nm">' + esc(s.name) +
                      '</div><div class="rl">' + esc(s.roleLabel) + (s.directorate ? ' — ' + esc(s.directorate) : '') +
-                     '</div></div><button id="t207Out">خروج</button>';
+                     '</div></div><button id="t219PasswordBtn" title="تغيير كلمة المرور"><i class="fas fa-key"></i> كلمة المرور</button><button id="t207Out">خروج</button>';
     host.appendChild(chip);
+    document.getElementById('t219PasswordBtn').addEventListener('click',function(){showPasswordDialog(false);});
     document.getElementById('t207Out').addEventListener('click', function(){
       clearSession(); location.reload();
     });
@@ -4820,12 +4995,119 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
     });
   }
 
+  function loadCentralSecurityActivity(){
+    return new Promise(function(resolve,reject){
+      var callback='__t21Audit_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+      var script=document.createElement('script');
+      var timer=setTimeout(function(){cleanup();reject(new Error('انتهت مهلة تحميل سجل التدقيق'));},20000);
+      function cleanup(){clearTimeout(timer);script.remove();try{delete window[callback];}catch(e){window[callback]=undefined;}}
+      window[callback]=function(result){cleanup();if(!result||result.ok===false)reject(new Error((result&&result.error)||'تعذر تحميل السجل'));else resolve(result.activity||{});};
+      script.onerror=function(){cleanup();reject(new Error('تعذر الاتصال بخدمة سجل التدقيق'));};
+      script.src=(window.T20_CENTRAL_SYNC_URL||'')+'?action=getSecurityActivity&token='+encodeURIComponent((session()||{}).token||'')+'&callback='+encodeURIComponent(callback)+'&_='+Date.now();
+      document.head.appendChild(script);
+    });
+  }
+  function centralSecurityAction(action,data){
+    return new Promise(function(resolve,reject){
+      var bridgeToken='security_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+      var frame=document.createElement('iframe'); frame.name='t219_security_'+Date.now(); frame.style.cssText='position:fixed;width:1px;height:1px;left:-10000px;top:-10000px;border:0;opacity:0';
+      var form=document.createElement('form'); form.method='POST'; form.action=window.T20_CENTRAL_SYNC_URL||''; form.target=frame.name; form.style.display='none';
+      var values={action:'bridgeSecurityAction',bridgeToken:bridgeToken,token:(session()||{}).token||'',securityAction:action,dataJson:JSON.stringify(data||{})};
+      Object.keys(values).forEach(function(name){var input=document.createElement(name==='dataJson'?'textarea':'input');input.name=name;input.value=values[name];form.appendChild(input);});
+      function cleanup(){clearTimeout(timer);window.removeEventListener('message',onMessage);form.remove();frame.remove();}
+      function onMessage(event){var m=event.data;if(!m||m.type!=='T21_CENTRAL_WRITE_RESPONSE'||m.token!==bridgeToken)return;cleanup();if(!m.result||m.result.ok===false)reject(new Error((m.result&&m.result.error)||'تعذر حفظ التغيير'));else resolve(m.result);}
+      var timer=setTimeout(function(){cleanup();reject(new Error('انتهت مهلة الاتصال بخدمة الأمان'));},30000);
+      window.addEventListener('message',onMessage);document.body.appendChild(frame);document.body.appendChild(form);form.submit();
+    });
+  }
+  function showPasswordDialog(forced){
+    if(document.getElementById('t219PasswordOverlay'))return;
+    var ov=document.createElement('div');ov.className='t207-overlay';ov.id='t219PasswordOverlay';
+    ov.innerHTML='<div class="t207-login t219-password-box"><h2><i class="fas fa-key"></i> تغيير كلمة المرور</h2>'+
+      '<div class="s">'+(forced?'يلزم إنشاء كلمة مرور خاصة بك قبل متابعة استخدام النظام.':'أدخل كلمة المرور الحالية ثم اختر كلمة مرور جديدة.')+'</div>'+
+      '<label>كلمة المرور الحالية</label><input type="password" id="t219CurrentPassword" autocomplete="current-password">'+
+      '<label>كلمة المرور الجديدة</label><input type="password" id="t219NewPassword" autocomplete="new-password">'+
+      '<label>تأكيد كلمة المرور الجديدة</label><input type="password" id="t219ConfirmPassword" autocomplete="new-password">'+
+      '<div class="t219-password-hint">استخدم 8 أحرف على الأقل. لا يتم حفظ كلمة المرور داخل المتصفح أو Google Sheet كنص واضح؛ تُرسل عبر HTTPS ويُحفظ ناتج التشفير فقط.</div>'+
+      '<div class="t219-actions"><button class="t207-btn" id="t219SavePassword">حفظ كلمة المرور</button>'+(forced?'':'<button class="t207-btn" style="background:#64748b" id="t219CancelPassword">إلغاء</button>')+'</div>'+
+      '<div class="t207-err" id="t219PasswordError"></div><div class="t219-progress" id="t219PasswordProgress"><span class="t219-spinner"></span><span>جارٍ التحقق والحفظ الآمن…</span></div></div>';
+    document.body.appendChild(ov);
+    if(!forced)document.getElementById('t219CancelPassword').addEventListener('click',function(){ov.remove();});
+    document.getElementById('t219SavePassword').addEventListener('click',function(){
+      var current=document.getElementById('t219CurrentPassword').value,newPassword=document.getElementById('t219NewPassword').value,confirmPassword=document.getElementById('t219ConfirmPassword').value;
+      var err=document.getElementById('t219PasswordError');err.classList.remove('show');
+      if(newPassword.length<8){err.textContent='يجب ألا تقل كلمة المرور عن 8 أحرف';err.classList.add('show');return;}
+      if(newPassword!==confirmPassword){err.textContent='تأكيد كلمة المرور غير مطابق';err.classList.add('show');return;}
+      var btn=this;btn.disabled=true;document.getElementById('t219PasswordProgress').classList.add('show');
+      centralSecurityAction('changeOwnPassword',{currentPassword:current,newPassword:newPassword}).then(function(result){
+        var s=session();if(s){s.mustChange=false;sessionStorage.setItem(SESSION_KEY,JSON.stringify(s));}
+        document.getElementById('t219CurrentPassword').value='';document.getElementById('t219NewPassword').value='';document.getElementById('t219ConfirmPassword').value='';ov.remove();
+        if(window.toast)toast(result.message||'تم تغيير كلمة المرور بنجاح');else alert(result.message||'تم تغيير كلمة المرور بنجاح');
+      }).catch(function(e){btn.disabled=false;document.getElementById('t219PasswordProgress').classList.remove('show');err.textContent=e.message;err.classList.add('show');});
+    });
+    setTimeout(function(){document.getElementById('t219CurrentPassword').focus();},50);
+  }
+  function showTemporaryPasswordDialog(username,button){
+    if(document.getElementById('t219TempPasswordOverlay'))return;
+    var ov=document.createElement('div');ov.className='t207-overlay';ov.id='t219TempPasswordOverlay';
+    ov.innerHTML='<div class="t207-login t219-password-box"><h2><i class="fas fa-user-lock"></i> تعيين كلمة مرور مؤقتة</h2><div class="s">للمستخدم: <b>'+esc(username)+'</b></div><label>كلمة المرور المؤقتة</label><input type="password" id="t219TempPassword" autocomplete="new-password"><label>تأكيد كلمة المرور</label><input type="password" id="t219TempPassword2" autocomplete="new-password"><div class="t219-password-hint">سيُطلب من المستخدم تغييرها إلى كلمة خاصة به عند تسجيل الدخول.</div><div class="t219-actions"><button class="t207-btn" id="t219SaveTemp">حفظ</button><button class="t207-btn" style="background:#64748b" id="t219CancelTemp">إلغاء</button></div><div class="t207-err" id="t219TempError"></div><div class="t219-progress" id="t219TempProgress"><span class="t219-spinner"></span><span>جارٍ الحفظ الآمن…</span></div></div>';
+    document.body.appendChild(ov);document.getElementById('t219CancelTemp').onclick=function(){ov.remove();};
+    document.getElementById('t219SaveTemp').onclick=function(){var p=document.getElementById('t219TempPassword').value,p2=document.getElementById('t219TempPassword2').value,e=document.getElementById('t219TempError');if(p.length<8||p!==p2){e.textContent=p.length<8?'يجب ألا تقل كلمة المرور عن 8 أحرف':'تأكيد كلمة المرور غير مطابق';e.classList.add('show');return;}this.disabled=true;document.getElementById('t219TempProgress').classList.add('show');centralSecurityAction('resetUserPassword',{username:username,password:p}).then(function(){ov.remove();renderCentralActivity();}).catch(function(err){e.textContent=err.message;e.classList.add('show');document.getElementById('t219TempProgress').classList.remove('show');document.getElementById('t219SaveTemp').disabled=false;});};
+    setTimeout(function(){document.getElementById('t219TempPassword').focus();},50);
+  }
+  function auditText(value){if(value===null||value===undefined||value==='')return '-';try{if(typeof value==='string'&&(value[0]==='{'||value[0]==='['))return JSON.stringify(JSON.parse(value));}catch(e){}return String(value);}
+  function renderCentralActivity(){
+    var status=document.getElementById('t21AuditStatus'); if(status)status.textContent='جارٍ تحميل السجلات...';
+    loadCentralSecurityActivity().then(function(data){
+      if(status)status.textContent='آخر تحديث: '+new Date().toLocaleString('ar-OM');
+      var users=document.getElementById('t21CentralUsers'); if(users)users.innerHTML=(data.users||[]).map(function(u){var active=String(u.active).toLowerCase()!=='false';return '<tr data-user="'+esc(u.username)+'"><td><b>'+esc(u.username)+'</b></td><td><input class="su-name" value="'+esc(u.name)+'"></td><td><input class="su-email" type="email" value="'+esc(u.email)+'"></td><td><select class="su-role"><option value="admin"'+(u.role==='admin'?' selected':'')+'>مدير النظام</option><option value="manager"'+(u.role==='manager'?' selected':'')+'>مدير مشروع</option><option value="viewer"'+(u.role==='viewer'?' selected':'')+'>عارض</option></select></td><td><input class="su-dir" value="'+esc(u.directorate)+'"></td><td><span style="color:'+(active?'#059669':'#dc2626')+';font-weight:800">'+(active?'مفعّل':'معطّل')+'</span></td><td style="white-space:nowrap"><button class="b p su-save">حفظ</button> <button class="b d su-password">كلمة مؤقتة</button> <button class="b '+(active?'r':'g')+' su-active" data-active="'+active+'">'+(active?'تعطيل':'تفعيل')+'</button> <button class="b r su-delete">حذف</button></td></tr>';}).join('')||'<tr><td colspan="7">لا يوجد مستخدمون</td></tr>';
+      var perms=document.getElementById('t21CentralPerms'); if(perms)perms.innerHTML=(data.permissions||[]).map(function(r){var fixed=r.role==='admin';return '<tr data-role="'+esc(r.role)+'" data-page="'+esc(r.pageId)+'"><td>'+esc(r.role)+'</td><td>'+esc(r.pageName)+'</td><td>'+esc(r.pageId)+'</td><td>'+(fixed?'<b>تعديل كامل</b>':'<select class="sp-access"><option value="write"'+(r.access==='write'?' selected':'')+'>تعديل</option><option value="read"'+(r.access==='read'?' selected':'')+'>قراءة</option><option value="none"'+(r.access==='none'?' selected':'')+'>بدون وصول</option></select> <button class="b p sp-save">حفظ</button>')+'</td></tr>';}).join('')||'<tr><td colspan="4">لا توجد صلاحيات</td></tr>';
+      var audit=document.getElementById('t21AuditRows'); if(audit)audit.innerHTML=(data.audit||[]).map(function(r){return '<tr><td>'+esc(r.timestamp)+'</td><td>'+esc(r.username)+'</td><td>'+esc(r.action)+'</td><td>'+esc(r.status)+'</td><td>'+esc(r.details)+'</td></tr>';}).join('')||'<tr><td colspan="5">لا توجد سجلات بعد</td></tr>';
+      var changes=document.getElementById('t21ChangeRows'); if(changes)changes.innerHTML=(data.changes||[]).map(function(r){return '<tr><td>'+esc(r.sequence)+'</td><td>'+esc(r.entity)+'</td><td>'+esc(r.recordId)+'</td><td>'+esc(r.operation)+'</td><td>'+esc(r.changedFields)+'</td><td>'+esc(r.updatedBy)+'</td><td>'+esc(r.timestamp)+'</td></tr>';}).join('')||'<tr><td colspan="7">لا توجد تعديلات بعد</td></tr>';
+      var conflicts=document.getElementById('t21ConflictRows'); if(conflicts)conflicts.innerHTML=(data.conflicts||[]).map(function(r){return '<tr><td>'+esc(r.entity)+'</td><td>'+esc(r.recordId)+'</td><td>'+esc(r.field)+'</td><td>'+esc(auditText(r.centralValue))+'</td><td>'+esc(auditText(r.localValue))+'</td><td>'+esc(r.username)+'</td><td>'+esc(r.timestamp)+'</td><td>'+esc(r.status)+'</td></tr>';}).join('')||'<tr><td colspan="8">لا توجد تعارضات</td></tr>';
+      bindCentralAdminActions();
+    }).catch(function(e){if(status)status.textContent='تعذر التحميل: '+e.message;});
+  }
+  function runAdminChange(action,data,button){
+    var status=document.getElementById('t21AuditStatus');if(status)status.textContent='جارٍ حفظ التغيير…';if(button)button.disabled=true;
+    centralSecurityAction(action,data).then(function(){if(status)status.textContent='تم الحفظ بنجاح';renderCentralActivity();}).catch(function(e){if(status)status.textContent='تعذر الحفظ: '+e.message;alert(e.message);if(button)button.disabled=false;});
+  }
+  function bindCentralAdminActions(){
+    document.querySelectorAll('#t21CentralUsers tr[data-user]').forEach(function(row){
+      var username=row.dataset.user;
+      var save=row.querySelector('.su-save');if(save)save.addEventListener('click',function(){runAdminChange('updateUser',{username:username,name:row.querySelector('.su-name').value,email:row.querySelector('.su-email').value,role:row.querySelector('.su-role').value,directorate:row.querySelector('.su-dir').value},save);});
+      var active=row.querySelector('.su-active');if(active)active.addEventListener('click',function(){var next=active.dataset.active!=='true';if(!confirm(next?'تفعيل هذا المستخدم؟':'سيتم تعطيل الدخول لهذا المستخدم مع الاحتفاظ بسجل أعماله. متابعة؟'))return;runAdminChange('setUserActive',{username:username,active:next},active);});
+      var reset=row.querySelector('.su-password');if(reset)reset.addEventListener('click',function(){showTemporaryPasswordDialog(username,reset);});
+      var del=row.querySelector('.su-delete');if(del)del.addEventListener('click',function(){if(!confirm('سيُحذف حساب '+username+' نهائياً، مع بقاء اسمه في سجل التدقيق. هل تريد المتابعة؟'))return;runAdminChange('deleteUser',{username:username},del);});
+    });
+    document.querySelectorAll('#t21CentralPerms tr[data-role]').forEach(function(row){var btn=row.querySelector('.sp-save');if(btn)btn.addEventListener('click',function(){runAdminChange('updatePermission',{role:row.dataset.role,pageId:row.dataset.page,access:row.querySelector('.sp-access').value},btn);});});
+  }
+
   function renderAdmin(){
     var pane = document.getElementById('tab-security'); if(!pane) return;
     var s = session();
     if(!s || (s.pages['tab-security'] !== 'write')){
       pane.innerHTML = '<div class="t207-card"><h3><i class="fas fa-ban"></i> غير مصرح</h3>' +
                        '<p style="font-size:.85rem;color:#64748b">لا تملك صلاحية إدارة المستخدمين.</p></div>';
+      return;
+    }
+    if(s.central){
+      pane.innerHTML = '<div class="t207-card"><h3><i class="fas fa-cloud-shield"></i> إدارة مركزية للمستخدمين والصلاحيات</h3>'+
+        '<p style="font-size:.86rem;line-height:1.9">يمكن إدارة الحسابات والصلاحيات من هذه الشاشة. كلمات المرور تُعالج على الخادم ولا تُخزن أو تُعرض كنص واضح.</p>'+
+        '<button class="b p" id="t21RefreshAudit">تحديث جميع البيانات</button> <span id="t21AuditStatus" style="font-size:.74rem;color:#64748b"></span></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-user-plus"></i> إضافة مستخدم جديد</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px"><input id="t219NewUsername" placeholder="اسم المستخدم بالإنجليزية"><input id="t219NewName" placeholder="الاسم الكامل"><input id="t219NewEmail" type="email" placeholder="البريد الإلكتروني"><input id="t219NewDirectorate" placeholder="المديرية"><select id="t219NewRole"><option value="viewer">عارض</option><option value="manager">مدير مشروع</option><option value="admin">مدير النظام</option></select><input id="t219NewPassword" type="password" autocomplete="new-password" placeholder="كلمة مرور مؤقتة (8 أحرف)"></div><button class="b g" id="t219CreateUser" style="margin-top:12px"><i class="fas fa-plus"></i> إنشاء المستخدم</button></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-users"></i> المستخدمون المركزيون</h3><div style="overflow:auto;max-height:360px"><table><thead><tr><th>المستخدم</th><th>الاسم</th><th>البريد</th><th>الدور</th><th>المديرية</th><th>الحالة</th><th>الإجراءات</th></tr></thead><tbody id="t21CentralUsers"></tbody></table></div></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-table-cells"></i> صلاحيات الأدوار حسب الصفحة</h3><div style="overflow:auto;max-height:330px"><table><thead><tr><th>الدور</th><th>الصفحة</th><th>المعرف</th><th>الصلاحية</th></tr></thead><tbody id="t21CentralPerms"></tbody></table></div></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-clock-rotate-left"></i> سجل التدقيق والدخول</h3><div style="overflow:auto;max-height:330px;margin-top:10px"><table><thead><tr><th>التوقيت</th><th>المستخدم</th><th>العملية</th><th>الحالة</th><th>التفاصيل</th></tr></thead><tbody id="t21AuditRows"></tbody></table></div></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-code-branch"></i> سجل التعديلات والإصدارات</h3><div style="overflow:auto;max-height:360px"><table><thead><tr><th>التسلسل</th><th>الكيان</th><th>السجل</th><th>العملية</th><th>الحقول</th><th>المستخدم</th><th>التوقيت</th></tr></thead><tbody id="t21ChangeRows"></tbody></table></div></div>'+
+        '<div class="t207-card"><h3><i class="fas fa-code-compare"></i> تعارضات تحتاج مراجعة</h3><div style="overflow:auto;max-height:360px"><table><thead><tr><th>الكيان</th><th>السجل</th><th>الحقل</th><th>القيمة المركزية</th><th>القيمة المحلية</th><th>المستخدم</th><th>التوقيت</th><th>الحالة</th></tr></thead><tbody id="t21ConflictRows"></tbody></table></div></div>';
+      document.getElementById('t21RefreshAudit').addEventListener('click',renderCentralActivity);
+      document.getElementById('t219CreateUser').addEventListener('click',function(){
+        var btn=this,data={username:document.getElementById('t219NewUsername').value,name:document.getElementById('t219NewName').value,email:document.getElementById('t219NewEmail').value,directorate:document.getElementById('t219NewDirectorate').value,role:document.getElementById('t219NewRole').value,password:document.getElementById('t219NewPassword').value};
+        if(!data.username||!data.name||data.password.length<8){alert('أدخل اسم المستخدم والاسم الكامل وكلمة مرور مؤقتة من 8 أحرف على الأقل');return;}
+        runAdminChange('createUser',data,btn);document.getElementById('t219NewPassword').value='';
+      });
+      renderCentralActivity();
       return;
     }
     var store = loadStore() || defaultStore();
@@ -5000,6 +5282,13 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
 
   /* ---------- boot ---------- */
   function boot(){
+    var currentSession=session();
+    if(currentSession&&currentSession.role==='admin'){
+      currentSession.pages=currentSession.pages||{};
+      TABS.forEach(function(t){currentSession.pages[t[0]]='write';});
+      currentSession.canWrite=true;
+      sessionStorage.setItem(SESSION_KEY,JSON.stringify(currentSession));
+    }
     ensureSecurityTab();
     renderChip();
     applyPerms();
@@ -5007,17 +5296,15 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
     new MutationObserver(scheduleApply).observe(host, { childList:true, subtree:true });
     document.addEventListener('click', function(e){ if(e.target.closest('.tab-btn')) scheduleApply(); });
     var s = session();
-    if(s && s.mustChange){
-      setTimeout(function(){
-        alert('تنبيه أمني: الحساب ما زال يستخدم كلمة المرور الافتراضية. يرجى تغييرها من صفحة صلاحيات المستخدمين.');
-      }, 800);
-    }
+    var ready=Promise.resolve();
+    if(s && s.central && window.t21StartCollaborationSync){ ready=Promise.resolve(window.t21StartCollaborationSync()); }
+    if(s && s.mustChange && !document.getElementById('t207Overlay')){ ready.then(function(){showPasswordDialog(true);}); }
+    return ready;
   }
 
   function start(){
-    ensureStore().then(function(){
-      if(session()) boot(); else showLogin();
-    });
+    if(window.T20_CENTRAL_SYNC_URL){ if(session()) boot(); else showLogin(); return; }
+    ensureStore().then(function(){ if(session()) boot(); else showLogin(); });
   }
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
@@ -5739,8 +6026,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.15 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.15 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21.19 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.19 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
