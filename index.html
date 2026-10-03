@@ -32,7 +32,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.23 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.27 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -957,8 +957,10 @@
         @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:1fr;position:relative;top:auto}.t20-sync-chip{min-width:0}.t20-smart-actions{justify-content:flex-start;flex-wrap:wrap}.tabs-nav{position:relative;top:auto}.tab-btn{font-size:.7rem!important;padding:6px 9px!important}}
         @media(max-width:700px){.header h1{font-size:1rem!important}.t20-smart-search .phase3-search-wrap{flex-wrap:wrap}.t20-smart-search .phase3-search{flex:1 0 100%}.t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{flex:1}.t20-sync-chip{width:100%;justify-content:flex-start}.t20-more-content{left:auto;right:0;width:220px}}
 
-        /* ===== T21.23 Unified compact command bar ===== */
-        .t20-smart-toolbar{grid-template-columns:minmax(360px,1fr) auto auto!important;border-right-width:1px!important;top:58px!important;padding:7px 9px!important}
+        /* ===== T21.27 Unified compact command bar ===== */
+        .t20-smart-toolbar{grid-template-columns:auto auto 1fr!important;border-right-width:1px!important;top:58px!important;padding:7px 9px!important;z-index:1200!important;overflow:visible!important}
+        .t20-smart-search{width:clamp(300px,32vw,480px);transition:width .24s ease}.t20-smart-search:focus-within{width:clamp(420px,52vw,720px)}
+        .t20-smart-actions{justify-self:end;position:relative;z-index:1250}
         .t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{width:38px!important;min-width:38px!important;padding:0!important;flex:0 0 38px!important}
         .t20-smart-search .phase3-search-reset-btn{color:#64748b!important}
         .t20-sync-chip{min-width:128px!important;justify-content:center;padding:7px 10px!important}.t20-sync-chip>div{min-width:0}.t20-sync-chip .t20-sync-meta{display:none!important}.t20-sync-chip .t20-sync-title{max-width:145px;overflow:hidden;text-overflow:ellipsis}
@@ -966,10 +968,34 @@
         .t23-popover{position:absolute;z-index:250;top:calc(100% + 7px);left:105px;width:min(390px,calc(100vw - 30px));background:#fff;border:1px solid #dbe4ef;border-radius:16px;box-shadow:0 22px 55px rgba(15,23,42,.2);padding:14px;direction:rtl}
         .t23-popover[hidden]{display:none!important}.t23-sync-head{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid #e2e8f0}.t23-sync-head strong{font-size:.9rem}.t23-sync-body{display:grid;gap:8px;padding:11px 0}.t23-sync-row{display:flex;justify-content:space-between;gap:14px;font-size:.76rem}.t23-sync-row span{color:#64748b}.t23-sync-row b{color:#0f172a;text-align:left;overflow-wrap:anywhere}.t23-sync-message{font-size:.77rem;line-height:1.7;padding:9px 10px;border-radius:10px;background:#f8fafc;color:#475569}.t23-sync-message.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}.t23-sync-actions{display:flex;gap:7px}.t23-sync-actions .btn{flex:1;margin:0!important;height:34px!important;font-size:.72rem!important}
         .t23-view-menu{position:relative}.t23-view-menu>summary{list-style:none}.t23-view-menu>summary::-webkit-details-marker{display:none}.t23-view-content{position:absolute;left:0;top:45px;width:260px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 18px 45px rgba(15,23,42,.16);padding:10px;z-index:200;display:grid;gap:8px}.t23-size-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.t23-size-grid button{height:34px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;font-family:inherit;font-size:.7rem;font-weight:800;cursor:pointer}.t23-size-grid button:hover{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}.t23-view-content .btn{width:100%;height:35px!important;margin:0!important;font-size:.72rem!important}
-        #t23InterfaceSettings .t21-ctl{display:grid!important;grid-template-columns:1fr 42px;width:100%;gap:7px}#t23InterfaceSettings .t21-lang-btn{height:36px;width:100%;justify-content:center;border-radius:10px}#t23InterfaceSettings .t21-theme-menu{width:100%}#t23InterfaceSettings .t21-theme-pop{position:fixed;inset:auto 22px 80px auto;max-height:60vh;overflow:auto}
+        #t23InterfaceSettings .t21-ctl{display:grid!important;grid-template-columns:1fr 42px;width:100%;gap:7px}#t23InterfaceSettings .t21-lang-btn{height:36px;width:100%;justify-content:center;border-radius:10px}#t23InterfaceSettings .t21-theme-menu{width:100%;position:relative}#t23InterfaceSettings .t21-theme-pop{position:absolute!important;top:calc(100% + 7px)!important;bottom:auto!important;inset-inline-end:0!important;inset-inline-start:auto!important;min-width:250px;max-height:330px;overflow-y:auto;z-index:4200!important}
+        .t20-more-menu{z-index:3000!important}.t20-more-content{z-index:3100!important;overflow:visible!important}.t20-more-menu[open]{z-index:3000!important}
         html[data-theme] .t23-popover,html[data-theme] .t23-view-content{background:var(--t21-surface)!important;border-color:var(--t21-border)!important;color:var(--t21-text)!important}html[data-theme] .t23-sync-row b{color:var(--t21-text)!important}html[data-theme] .t23-sync-message{background:var(--t21-surface3)!important;color:var(--t21-muted)!important}
-        @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:minmax(260px,1fr) auto auto!important;position:sticky!important;top:8px!important}.t20-smart-actions{flex-wrap:nowrap!important}.t20-sync-chip{width:auto!important}.t20-smart-icon-btn span:not(.badge){display:none}.t20-more-summary{font-size:0}.t20-more-summary i{font-size:.84rem}.t23-popover{left:8px}}
-        @media(max-width:700px){.t20-smart-toolbar{grid-template-columns:1fr auto!important}.t20-smart-search{grid-column:1/-1}.t20-smart-search .phase3-search-wrap{flex-wrap:nowrap!important}.t20-smart-search .phase3-search{flex:1 1 auto!important}.t20-sync-chip{grid-column:1}.t20-smart-actions{grid-column:2}.t23-view-content{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}.t23-popover{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}.header{min-height:58px!important}}
+        @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:auto auto 1fr!important;position:sticky!important;top:8px!important}.t20-smart-search{width:clamp(280px,38vw,430px)}.t20-smart-search:focus-within{width:clamp(360px,50vw,560px)}.t20-smart-actions{flex-wrap:nowrap!important}.t20-sync-chip{width:auto!important}.t20-smart-icon-btn span:not(.badge){display:none}.t20-more-summary{font-size:0}.t20-more-summary i{font-size:.84rem}.t23-popover{left:8px}}
+        @media(max-width:700px){.t20-smart-toolbar{grid-template-columns:1fr auto!important}.t20-smart-search,.t20-smart-search:focus-within{grid-column:1/-1;width:100%}.t20-smart-search .phase3-search-wrap{flex-wrap:nowrap!important}.t20-smart-search .phase3-search{flex:1 1 auto!important}.t20-sync-chip{grid-column:1}.t20-smart-actions{grid-column:2}.t23-view-content{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto;z-index:5000}.t23-popover{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}.t20-more-content{position:fixed!important;left:12px!important;right:12px!important;top:auto!important;bottom:12px!important;width:auto!important;max-height:70vh;overflow-y:auto!important;z-index:5000!important}#t23InterfaceSettings .t21-theme-pop{position:fixed!important;left:18px!important;right:18px!important;top:auto!important;bottom:18px!important;max-height:70vh}.header{min-height:58px!important}}
+
+        /* ===== T21.27 page identity headers with contextual search ===== */
+        .t20-smart-toolbar{display:flex!important;justify-content:flex-end!important;gap:8px!important;min-height:50px}.t20-smart-toolbar>.t20-sync-chip{order:1}.t20-smart-toolbar>.t20-smart-actions{order:2;justify-self:auto}.t20-smart-toolbar>.t23-sync-popover{order:3}
+        .t26-page-hero{display:grid;grid-template-columns:minmax(300px,1fr) minmax(320px,560px);grid-template-areas:"info search" "results results";align-items:center;gap:14px 24px;background:linear-gradient(115deg,#0f1b31 0%,#18365e 100%);color:#fff;border-radius:22px;padding:20px 24px;margin:0 0 12px;box-shadow:0 16px 36px rgba(15,23,42,.16);position:relative;z-index:25;overflow:visible}
+        .t26-page-info{grid-area:info;display:flex;align-items:center;gap:14px;min-width:0}.t26-page-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:1.25rem;flex:0 0 auto}.t26-page-copy{min-width:0}.t26-page-title{margin:0;font-size:1.34rem;line-height:1.35;font-weight:900;color:#fff}.t26-page-desc{font-size:.79rem;color:#dbeafe;line-height:1.7;margin-top:4px}
+        .t26-page-search{grid-area:search;display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:0}.t26-page-search .t20-smart-search,.t26-page-search .t20-smart-search:focus-within{width:100%;max-width:none}.t26-page-search .phase3-search{background:#fff!important;color:#0f172a!important;border-color:rgba(255,255,255,.55)!important}.t26-search-scope{height:38px;min-width:108px;border:1px solid rgba(255,255,255,.38);border-radius:11px;background:rgba(255,255,255,.12);color:#fff;padding:0 9px;font-family:inherit;font-size:.72rem;font-weight:800;outline:0}.t26-search-scope option{color:#0f172a;background:#fff}
+        .t26-page-hero>.phase3-search-panel{grid-area:results;margin:0!important;max-height:350px;text-align:right;color:#0f172a;z-index:35}.t26-page-hero+.sub-tabs-nav{margin-top:0!important}.t26-page-hero+.ux-screen-control-panel+.sub-tabs-nav{margin-top:0!important}
+        #tab-fiveyear>.phase1-banner{display:none!important}
+        html[dir="ltr"] .t26-page-hero{grid-template-areas:"info search" "results results"}.t26-page-hero[data-page="tab-security"]{background:linear-gradient(115deg,#172554,#1e3a8a)}
+        @media(max-width:900px){.t26-page-hero{grid-template-columns:1fr;grid-template-areas:"info" "search" "results";padding:18px}.t26-page-search{justify-content:stretch}.t26-page-title{font-size:1.15rem}}
+        @media(max-width:620px){.t26-page-search{display:grid;grid-template-columns:1fr}.t26-search-scope{width:100%}.t26-page-info{align-items:flex-start}.t26-page-icon{width:40px;height:40px}.t26-page-hero{border-radius:16px;padding:15px;gap:11px}.t20-smart-toolbar{min-height:46px}}
+        @media print{.t26-page-search{display:none!important}.t26-page-hero{display:block!important;background:#17345c!important;color:#fff!important;box-shadow:none!important;padding:14mm 10mm!important}.t26-page-icon{display:none!important}.t26-page-desc{color:#e2e8f0!important}}
+
+        /* ===== T21.27 all commands inside the page header ===== */
+        .t20-smart-toolbar{display:none!important}
+        .t26-page-hero{grid-template-columns:minmax(300px,.8fr) minmax(720px,1.35fr);grid-template-areas:"info search" "results results";z-index:1200}
+        .t26-page-search{display:flex;align-items:center;justify-content:flex-end;gap:7px;min-width:0;direction:rtl}
+        .t26-search-host{order:3;width:280px;flex:0 1 280px;min-width:210px;transition:width .26s ease,flex-basis .26s ease}.t26-search-host:focus-within{width:500px;flex-basis:500px}.t26-search-host .t20-smart-search,.t26-search-host .t20-smart-search:focus-within{width:100%!important;max-width:none!important}.t26-search-scope{order:2}
+        .t27-system-host{order:1;display:flex;align-items:center;gap:7px;flex:0 0 auto;position:relative;z-index:1250}.t27-system-host .t20-sync-chip{min-width:128px!important;background:rgba(255,255,255,.96)!important}.t27-system-host .t20-smart-actions{display:flex;align-items:center;gap:6px;position:relative}.t27-system-host .t23-popover{top:calc(100% + 9px);left:0;right:auto}.t27-system-host .t20-more-content,.t27-system-host .t23-view-content{top:45px}
+        .t26-page-hero>.phase3-search-panel{z-index:1300}.t26-page-hero:has(.t20-more-menu[open]),.t26-page-hero:has(.t23-view-menu[open]){z-index:4000}
+        @media(max-width:1320px){.t26-page-hero{grid-template-columns:1fr;grid-template-areas:"info" "search" "results"}.t26-page-search{justify-content:flex-start}.t26-search-host{flex:1 1 320px;width:auto}.t26-search-host:focus-within{flex-basis:520px;width:auto}}
+        @media(max-width:820px){.t26-page-search{flex-wrap:wrap}.t26-search-host,.t26-search-host:focus-within{order:1;flex:1 0 calc(100% - 120px);width:auto}.t26-search-scope{order:2}.t27-system-host{order:3;width:100%;justify-content:flex-start}.t27-system-host .t20-smart-actions{margin-inline-start:auto}.t27-system-host .t23-popover{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto}}
+        @media(max-width:560px){.t26-page-search{display:grid;grid-template-columns:1fr}.t26-search-host,.t26-search-host:focus-within,.t26-search-scope,.t27-system-host{width:100%;min-width:0}.t27-system-host{justify-content:space-between}.t27-system-host .t20-sync-chip{min-width:112px!important}.t27-system-host .t20-smart-actions{margin-inline-start:0}.t26-page-hero{padding:14px}}
 
 
         /* ===== T20 Ver.4 Portfolio Gantt View ===== */
@@ -997,7 +1023,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v23</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v27</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1523,7 +1549,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21 • v23</strong></div>
+                            <div><span>الإصدار</span><strong>T21 • v27</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -3224,15 +3250,18 @@
                 (data.services||[]).forEach(s=>add(s.type||'خدمة',s.name,`${s.status||''} - ${s.beneficiaries||''} - ${typeof projectName==='function'?projectName(s.projectId):s.projectId||''}`,'tab-services',raw,[s.id,s.name,s.status,s.beneficiaries].join(' ')));
                 (data.budgets||[]).forEach(b=>add('موازنة',b.item,`${typeof projectName==='function'?projectName(b.projectId):b.projectId||''} - مخطط ${b.planned||0} - مخصص ${b.allocated||b.planned||0} - منفق ${b.spent||0}`,'tab-budget',raw,[b.id,b.item,b.projectId,b.planned,b.spent].join(' ')));
                 (data.fiveYearPlans||[]).forEach(y=>add('الخطة الخمسية',y.year,`${y.theme||y.focus||''} - موازنة ${y.budget||0} - مستهدف ${y.target||''}`,'tab-fiveyear',raw,[y.id,y.year,y.theme,y.focus,y.goals].join(' ')));
+                const searchScope=document.querySelector('.tab-content.active .t26-search-scope')?.value||'all';
+                const activePage=document.querySelector('.tab-content.active')?.id||'';
+                const visibleRows=searchScope==='page'?rows.filter(r=>r.tab===activePage):rows;
                 const highlight=(s)=>{
                     const txt=esc(s);
                     if(!raw) return txt;
                     try{ return txt.replace(new RegExp(esc(raw).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`); }catch(e){ return txt; }
                 };
-                panel.innerHTML=rows.length?rows.slice(0,80).map((r,i)=>`<div class="phase3-result" onclick="phase3OpenSearchResult('${r.tab}', '${esc(r.filterText).replace(/'/g,'&#39;')}')"><strong>${highlight(r.type)}: ${highlight(r.title)}</strong><span>${highlight(r.desc)}</span></div>`).join(''):`<div class="phase3-result"><strong>لا توجد نتائج مطابقة</strong><span>جرّب كلمة أخرى أو ابحث باسم مشروع / قطاع / هدف / مدير مشروع / مؤشر / خطر.</span></div>`;
+                panel.innerHTML=visibleRows.length?visibleRows.slice(0,80).map((r,i)=>`<div class="phase3-result" onclick="phase3OpenSearchResult('${r.tab}', '${esc(r.filterText).replace(/'/g,'&#39;')}')"><strong>${highlight(r.type)}: ${highlight(r.title)}</strong><span>${highlight(r.desc)}</span></div>`).join(''):`<div class="phase3-result"><strong>لا توجد نتائج مطابقة</strong><span>جرّب كلمة أخرى أو غيّر نطاق البحث إلى كل النظام.</span></div>`;
                 panel.classList.add('show');
-                if(openDirect && rows.length===1){
-                    phase3OpenSearchResult(rows[0].tab, rows[0].filterText || raw);
+                if(openDirect && visibleRows.length===1){
+                    phase3OpenSearchResult(visibleRows[0].tab, visibleRows[0].filterText || raw);
                 }
             }
             window.phase3OpenSearchResult=function(tab, filterText){
@@ -4448,14 +4477,17 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
   const SIZE_KEY='t16_all_widgets_sizes_v2_stable';
   const TAB_SIZE_KEY='t16_all_widgets_tab_sizes_v2_stable';
   const levels=['small','medium','large','xlarge'];
-  const targetSelector='.tab-content.active > .card, .tab-content.active > .overall-card, .tab-content.active .dashboard-grid > .chart-box, .tab-content.active .stats-row > .stat-card, .tab-content.active .budget-summary > .budget-item, .tab-content.active .report-stats-row > .report-stat-card, .tab-content.active .kpi-row > .kpi-card, .tab-content.active .phase2-kpis > .phase2-kpi';
+  const targetSelector='.tab-content.active .card, .tab-content.active .overall-card, .tab-content.active .chart-box, .tab-content.active .stat-card, .tab-content.active .budget-item, .tab-content.active .report-stat-card, .tab-content.active .kpi-card, .tab-content.active .phase2-kpi';
   let dragged=null, enhancing=false;
   function read(k,def){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(def))}catch(e){return def}}
   function write(k,v){localStorage.setItem(k,JSON.stringify(v));}
   function activeTab(){return document.querySelector('.tab-content.active')?.id||'tab-dashboard'}
   function toast(msg){ if(typeof window.phase3Toast==='function') return window.phase3Toast(msg); if(typeof window.toast==='function') return window.toast(msg); const t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;bottom:20px;left:20px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:12px;z-index:99999;font-weight:800';document.body.appendChild(t);setTimeout(()=>t.remove(),1800);}
   function safeText(el){return (el.querySelector(':scope > .card-header, :scope > h3, :scope > h4, .kpi-label, .stat-label, .label')?.textContent||el.id||'widget').replace(/\s+/g,' ').trim().slice(0,45)}
-  function widgets(){return Array.from(document.querySelectorAll(targetSelector)).filter(el=>!el.closest('.ux-screen-control-panel') && !el.classList.contains('ux-screen-control-panel') && !el.classList.contains('ux-widget-controls'));}
+  function widgets(){
+    const all=Array.from(document.querySelectorAll(targetSelector)).filter(el=>!el.closest('.ux-screen-control-panel')&&!el.classList.contains('ux-screen-control-panel')&&!el.classList.contains('ux-widget-controls')&&!el.closest('[hidden]'));
+    return all.filter(el=>!all.some(parent=>parent!==el&&parent.contains(el)));
+  }
   function widgetId(el,idx){
     if(!el.dataset.uxWidgetId){
       const tab=el.closest('.tab-content')?.id||activeTab();
@@ -6065,8 +6097,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21 • v23 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21 • v23 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21 • v27 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21 • v27 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
@@ -6182,17 +6214,62 @@ else boot();
   window.t23ToggleSyncPopover=function(e){if(e)e.stopPropagation();var panel=document.getElementById('t20SyncPanel'),pop=document.getElementById('t23SyncPopover');if(!pop)return;var opening=pop.hidden;pop.hidden=!opening;if(panel)panel.setAttribute('aria-expanded',opening?'true':'false');if(opening)renderSync23();};
   function moveInterfaceSettings23(){var ctl=document.querySelector('.t21-ctl'),host=document.getElementById('t23InterfaceSettings');if(ctl&&host&&!host.contains(ctl))host.appendChild(ctl);}
   function activePanel23(){return document.querySelector('.tab-content.active .ux-screen-control-panel');}
-  function updateContext23(){var menu=document.getElementById('t23ViewMenu'),active=document.querySelector('.tab-content.active');if(menu){menu.style.display=active&&active.id==='tab-dashboard'?'':'none';if(menu.style.display==='none')menu.removeAttribute('open');}}
+  function updateContext23(){var menu=document.getElementById('t23ViewMenu');if(menu)menu.style.display='';}
   function init23(){
     moveInterfaceSettings23();setTimeout(moveInterfaceSettings23,500);
-    document.querySelectorAll('[data-t23-size]').forEach(function(b){b.addEventListener('click',function(){var p=activePanel23(),target=p&&p.querySelector('[data-ux-all-size="'+b.dataset.t23Size+'"]');if(target)target.click();});});
-    var rs=document.querySelector('[data-t23-reset-size]');if(rs)rs.addEventListener('click',function(){var p=activePanel23(),b=p&&p.querySelector('[data-ux-reset-sizes]');if(b)b.click();});
-    var ro=document.querySelector('[data-t23-reset-order]');if(ro)ro.addEventListener('click',function(){var p=activePanel23(),b=p&&p.querySelector('[data-ux-reset-order]');if(b)b.click();});
+    function withActivePanel23(callback){if(window.uxEnhanceAllWidgets)window.uxEnhanceAllWidgets();setTimeout(function(){var p=activePanel23();if(p)callback(p);},40);}
+    document.querySelectorAll('[data-t23-size]').forEach(function(b){b.addEventListener('click',function(){withActivePanel23(function(p){var target=p.querySelector('[data-ux-all-size="'+b.dataset.t23Size+'"]');if(target)target.click();});});});
+    var rs=document.querySelector('[data-t23-reset-size]');if(rs)rs.addEventListener('click',function(){withActivePanel23(function(p){var b=p.querySelector('[data-ux-reset-sizes]');if(b)b.click();});});
+    var ro=document.querySelector('[data-t23-reset-order]');if(ro)ro.addEventListener('click',function(){withActivePanel23(function(p){var b=p.querySelector('[data-ux-reset-order]');if(b)b.click();});});
     document.addEventListener('click',function(e){var pop=document.getElementById('t23SyncPopover'),panel=document.getElementById('t20SyncPanel');if(pop&&!pop.hidden&&!pop.contains(e.target)&&(!panel||!panel.contains(e.target))){pop.hidden=true;if(panel)panel.setAttribute('aria-expanded','false');}if(e.target.closest('.tab-btn'))setTimeout(updateContext23,80);});
     var panel=document.getElementById('t20SyncPanel');if(panel)new MutationObserver(function(){if(!document.getElementById('t23SyncPopover').hidden)renderSync23();}).observe(panel,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']});
     updateContext23();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init23);else init23();
+})();
+</script>
+
+<script id="t21-26-page-identity-headers">
+(function(){
+  var META={
+    'tab-dashboard':{icon:'fa-chart-pie',ar:'لوحة المؤشرات',arDesc:'نظرة تنفيذية شاملة على أداء المحفظة والمشاريع والمؤشرات.',en:'Executive Dashboard',enDesc:'An executive overview of portfolio, project and KPI performance.'},
+    'tab-fiveyear':{icon:'fa-calendar-alt',ar:'الخطة الخمسية 2026–2030',arDesc:'تقسيم سنوي للأهداف والمبادرات والموازنات وربطها بالأهداف الاستراتيجية والمشاريع.',en:'Five-Year Plan 2026–2030',enDesc:'Annual planning for objectives, initiatives and budgets linked to strategic goals and projects.'},
+    'tab-strategy':{icon:'fa-bullseye',ar:'الأهداف الاستراتيجية BSC',arDesc:'إدارة الأهداف والمؤشرات وخريطة بطاقة الأداء المتوازن.',en:'Strategic Objectives BSC',enDesc:'Manage objectives, KPIs and the balanced scorecard map.'},
+    'tab-projects':{icon:'fa-folder-open',ar:'المشاريع',arDesc:'إدارة محفظة المشاريع ومتابعة التخطيط والتنفيذ والأداء.',en:'Projects',enDesc:'Manage the project portfolio and monitor planning, delivery and performance.'},
+    'tab-resources':{icon:'fa-users',ar:'الموارد',arDesc:'إدارة فرق العمل والموارد وتوزيع الأدوار والمسؤوليات.',en:'Resources',enDesc:'Manage teams, resources, roles and responsibilities.'},
+    'tab-gantt':{icon:'fa-chart-gantt',ar:'خطة المشروع',arDesc:'متابعة المهام والمراحل والمعالم والجداول الزمنية للمشاريع.',en:'Project Plan',enDesc:'Track project tasks, stages, milestones and schedules.'},
+    'tab-risks':{icon:'fa-triangle-exclamation',ar:'المخاطر',arDesc:'تسجيل وتحليل ومتابعة المخاطر وخطط الاستجابة والمعالجة.',en:'Risks',enDesc:'Record, analyse and monitor risks and response plans.'},
+    'tab-budget':{icon:'fa-coins',ar:'الموازنة',arDesc:'متابعة البنود والمخصصات والمصروفات على مستوى المحفظة والمشاريع.',en:'Budget',enDesc:'Monitor budget items, allocations and expenditure across the portfolio and projects.'},
+    'tab-services':{icon:'fa-concierge-bell',ar:'الخدمات والمبادرات',arDesc:'إدارة الخدمات الرقمية والمبادرات المؤسسية وقياس تقدمها.',en:'Services and Initiatives',enDesc:'Manage digital services and institutional initiatives and track progress.'},
+    'tab-reports':{icon:'fa-chart-column',ar:'التقارير',arDesc:'تقارير تنفيذية وتحليلية منظمة لدعم متخذي القرار.',en:'Reports',enDesc:'Structured executive and analytical reporting for decision-makers.'},
+    'tab-export':{icon:'fa-file-export',ar:'التصدير والاستيراد',arDesc:'إدارة تصدير البيانات واستيراد النسخ الاحتياطية بصورة آمنة.',en:'Export and Import',enDesc:'Securely export data and import backup copies.'},
+    'tab-security':{icon:'fa-user-shield',ar:'صلاحيات المستخدمين',arDesc:'إدارة الحسابات والصلاحيات وسجلات الدخول والتدقيق والتعارضات.',en:'User Permissions',enDesc:'Manage accounts, permissions, access logs, audit records and conflicts.'}
+  };
+  function isEnglish26(){return document.documentElement.getAttribute('lang')==='en';}
+  function createHero26(page){
+    if(!page||!META[page.id])return null;
+    var old=page.querySelector(':scope > .t26-page-hero');if(old)return old;
+    var m=META[page.id],hero=document.createElement('section');hero.className='t26-page-hero';hero.dataset.page=page.id;hero.setAttribute('data-t21-skip','');
+    hero.innerHTML='<div class="t26-page-info"><div class="t26-page-icon"><i class="fas '+m.icon+'"></i></div><div class="t26-page-copy"><h2 class="t26-page-title"></h2><div class="t26-page-desc"></div></div></div><div class="t26-page-search no-print"><select class="t26-search-scope" aria-label="نطاق البحث"><option value="all">كل النظام</option><option value="page">هذه الصفحة</option></select><div class="t26-search-host"></div><div class="t27-system-host"></div></div>';
+    page.insertBefore(hero,page.firstChild);updateHeroText26(hero);return hero;
+  }
+  function updateHeroText26(hero){var m=META[hero.dataset.page];if(!m)return;var en=isEnglish26();hero.querySelector('.t26-page-title').textContent=en?m.en:m.ar;hero.querySelector('.t26-page-desc').textContent=en?m.enDesc:m.arDesc;var scope=hero.querySelector('.t26-search-scope');if(scope){scope.options[0].textContent=en?'Entire system':'كل النظام';scope.options[1].textContent=en?'This page':'هذه الصفحة';scope.setAttribute('aria-label',en?'Search scope':'نطاق البحث');}}
+  function ensureAll26(){document.querySelectorAll('.tab-content[id]').forEach(createHero26);}
+  function moveSearch26(){
+    ensureAll26();var page=document.querySelector('.tab-content.active'),hero=page&&createHero26(page);if(!hero)return;
+    var host=hero.querySelector('.t26-search-host'),systemHost=hero.querySelector('.t27-system-host'),search=document.querySelector('.t20-smart-search'),panel=document.getElementById('phase3SearchPanel'),sync=document.getElementById('t20SyncPanel'),syncPop=document.getElementById('t23SyncPopover'),actions=document.querySelector('.t20-smart-actions');
+    if(search&&host&&!host.contains(search))host.appendChild(search);
+    if(sync&&systemHost&&!systemHost.contains(sync))systemHost.appendChild(sync);
+    if(syncPop&&systemHost&&!systemHost.contains(syncPop))systemHost.appendChild(syncPop);
+    if(actions&&systemHost&&!systemHost.contains(actions))systemHost.appendChild(actions);
+    if(panel&&!hero.contains(panel))hero.appendChild(panel);
+    var input=document.getElementById('globalSearchInput'),m=META[page.id],en=isEnglish26();if(input&&m)input.placeholder=en?('Search '+m.en.toLowerCase()+' or the entire system...'):('ابحث في '+m.ar+' أو في كل النظام...');
+    updateHeroText26(hero);
+  }
+  function bindScope26(){document.addEventListener('change',function(e){if(e.target&&e.target.classList.contains('t26-search-scope')){var input=document.getElementById('globalSearchInput');if(input&&input.value.trim())window.phase3GlobalSearch(input.value,true,false);}});}
+  function parkSearch26(){var toolbar=document.querySelector('.t20-smart-toolbar'),search=document.querySelector('.t20-smart-search'),panel=document.getElementById('phase3SearchPanel'),sync=document.getElementById('t20SyncPanel'),syncPop=document.getElementById('t23SyncPopover'),actions=document.querySelector('.t20-smart-actions');if(toolbar&&search&&!toolbar.contains(search))toolbar.appendChild(search);if(toolbar&&sync&&!toolbar.contains(sync))toolbar.appendChild(sync);if(toolbar&&syncPop&&!toolbar.contains(syncPop))toolbar.appendChild(syncPop);if(toolbar&&actions&&!toolbar.contains(actions))toolbar.appendChild(actions);if(toolbar&&panel&&!toolbar.contains(panel))toolbar.appendChild(panel);}
+  function init26(){ensureAll26();moveSearch26();bindScope26();document.addEventListener('click',function(e){if(e.target.closest('.tab-btn'))parkSearch26();},true);document.addEventListener('click',function(e){if(e.target.closest('.tab-btn'))setTimeout(moveSearch26,100);if(e.target.closest('#t21LangBtn'))setTimeout(function(){document.querySelectorAll('.t26-page-hero').forEach(updateHeroText26);moveSearch26();},120);});var root=document.querySelector('.main-container')||document.body;var timer;new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(function(){ensureAll26();var active=document.querySelector('.tab-content.active');if(active&&!active.querySelector(':scope > .t26-page-hero'))moveSearch26();},80);}).observe(root,{childList:true,subtree:true});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init26);else init26();
 })();
 </script>
 
