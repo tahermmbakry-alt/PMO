@@ -37,7 +37,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.31 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.32 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -1036,7 +1036,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v31</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v32</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1562,7 +1562,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21 • v31</strong></div>
+                            <div><span>الإصدار</span><strong>T21 • v32</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -6117,8 +6117,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21 • v31 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21 • v31 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21 • v32 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21 • v32 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
@@ -6301,5 +6301,22 @@ else boot();
 })();
 </script>
 
+<script id="t32-dismiss-command-menus">
+(function(){
+  function closeMenu(menu){
+    menu.open=false;
+    menu.querySelectorAll('.t21-theme-pop.show').forEach(function(pop){pop.classList.remove('show');});
+    menu.querySelectorAll('#t21ThemeBtn').forEach(function(button){button.setAttribute('aria-expanded','false');});
+  }
+  document.addEventListener('click',function(event){
+    document.querySelectorAll('details.t23-view-menu[open],details.t20-more-menu[open]').forEach(function(menu){
+      if(!menu.contains(event.target))closeMenu(menu);
+    });
+  },true);
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape')document.querySelectorAll('details.t23-view-menu[open],details.t20-more-menu[open]').forEach(closeMenu);
+  });
+})();
+</script>
 </body>
 </html>
