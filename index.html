@@ -37,7 +37,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.30 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.31 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -1025,6 +1025,10 @@
 .t20-modal-actions{display:flex;gap:8px;justify-content:flex-start;padding:0 16px 16px}.t20-modal-actions .btn{min-width:92px}.t20-modal-close{background:transparent;border:0;color:#fff;font-size:1.1rem;cursor:pointer}
 [data-layout-size]{transition:outline .2s ease}.layout-size-indicator{display:none!important}
 </style>
+<style id="t31-notifications-layer">
+/* Keep the notification drawer above page headers and their command menus. */
+#phase3NotificationsDrawer{z-index:8000!important}
+</style>
 </head>
 <body>
     <div id="t29AuthGate" role="status" aria-live="polite"><div class="t29-gate-box"><span class="t29-gate-spinner"></span><span>جارٍ تهيئة شاشة الدخول الآمنة…</span></div></div>
@@ -1032,7 +1036,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v30</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v31</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1558,7 +1562,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21 • v30</strong></div>
+                            <div><span>الإصدار</span><strong>T21 • v31</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -6113,8 +6117,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21 • v30 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21 • v30 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21 • v31 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21 • v31 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
