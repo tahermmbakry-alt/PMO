@@ -32,7 +32,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.21 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.22 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -983,7 +983,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.21 | Ver.21</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.22 | Ver.22</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1500,7 +1500,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21.21</strong></div>
+                            <div><span>الإصدار</span><strong>T21.22</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -5064,13 +5064,28 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
       var perms=document.getElementById('t21CentralPerms'); if(perms)perms.innerHTML=(data.permissions||[]).map(function(r){var fixed=r.role==='admin';return '<tr data-role="'+esc(r.role)+'" data-page="'+esc(r.pageId)+'"><td>'+esc(r.role)+'</td><td>'+esc(r.pageName)+'</td><td>'+esc(r.pageId)+'</td><td>'+(fixed?'<b>تعديل كامل</b>':'<select class="sp-access"><option value="write"'+(r.access==='write'?' selected':'')+'>تعديل</option><option value="read"'+(r.access==='read'?' selected':'')+'>قراءة</option><option value="none"'+(r.access==='none'?' selected':'')+'>بدون وصول</option></select> <button class="b p sp-save">حفظ</button>')+'</td></tr>';}).join('')||'<tr><td colspan="4">لا توجد صلاحيات</td></tr>';
       var audit=document.getElementById('t21AuditRows'); if(audit)audit.innerHTML=(data.audit||[]).map(function(r){return '<tr><td>'+esc(r.timestamp)+'</td><td>'+esc(r.username)+'</td><td>'+esc(r.action)+'</td><td>'+esc(r.status)+'</td><td>'+esc(r.details)+'</td></tr>';}).join('')||'<tr><td colspan="5">لا توجد سجلات بعد</td></tr>';
       var changes=document.getElementById('t21ChangeRows'); if(changes)changes.innerHTML=(data.changes||[]).map(function(r){return '<tr><td>'+esc(r.sequence)+'</td><td>'+esc(r.entity)+'</td><td>'+esc(r.recordId)+'</td><td>'+esc(r.operation)+'</td><td>'+esc(r.changedFields)+'</td><td>'+esc(r.updatedBy)+'</td><td>'+esc(r.timestamp)+'</td></tr>';}).join('')||'<tr><td colspan="7">لا توجد تعديلات بعد</td></tr>';
-      var conflicts=document.getElementById('t21ConflictRows'); if(conflicts)conflicts.innerHTML=(data.conflicts||[]).map(function(r){return '<tr><td>'+esc(r.entity)+'</td><td>'+esc(r.recordId)+'</td><td>'+esc(r.field)+'</td><td>'+esc(auditText(r.centralValue))+'</td><td>'+esc(auditText(r.localValue))+'</td><td>'+esc(r.username)+'</td><td>'+esc(r.timestamp)+'</td><td>'+esc(r.status)+'</td></tr>';}).join('')||'<tr><td colspan="8">لا توجد تعارضات</td></tr>';
+      window.__t21ConflictData=data.conflicts||[];renderConflictRows();
       bindCentralAdminActions();
     }).catch(function(e){if(status)status.textContent='تعذر التحميل: '+e.message;});
   }
   function runAdminChange(action,data,button){
     var status=document.getElementById('t21AuditStatus');if(status)status.textContent='جارٍ حفظ التغيير…';if(button)button.disabled=true;
     centralSecurityAction(action,data).then(function(){if(status)status.textContent='تم الحفظ بنجاح';renderCentralActivity();}).catch(function(e){if(status)status.textContent='تعذر الحفظ: '+e.message;alert(e.message);if(button)button.disabled=false;});
+  }
+  function conflictStatusLabel(status){var labels={open:'مفتوح',auto_resolved:'أُغلق تلقائياً لتطابق القيم',resolved_central:'تم اعتماد القيمة المركزية',resolved_local:'تم اعتماد القيمة المحلية',resolved_closed:'مغلق'};return labels[status]||status;}
+  function renderConflictRows(){
+    var host=document.getElementById('t21ConflictRows');if(!host)return;
+    var filter=(document.getElementById('t21ConflictFilter')||{}).value||'open';
+    var rows=(window.__t21ConflictData||[]).filter(function(r){return filter==='all'||(filter==='resolved'?String(r.status)!=='open':String(r.status)==='open');});
+    host.innerHTML=rows.map(function(r){var open=String(r.status)==='open';return '<tr data-conflict="'+esc(r.id)+'"><td>'+esc(r.entity)+'</td><td>'+esc(r.recordId)+'</td><td>'+esc(r.field)+'</td><td>'+esc(auditText(r.centralValue))+'</td><td>'+esc(auditText(r.localValue))+'</td><td>'+esc(r.username)+'</td><td>'+esc(r.timestamp)+'</td><td>'+esc(conflictStatusLabel(r.status))+'</td><td style="white-space:nowrap">'+(open?'<button class="b p cf-central">اعتماد المركزية</button> <button class="b g cf-local">اعتماد المحلية</button> <button class="b d cf-close">إغلاق</button>':'—')+'</td></tr>';}).join('')||'<tr><td colspan="9">لا توجد تعارضات ضمن هذا النطاق</td></tr>';
+    bindConflictActions();
+  }
+  function bindConflictActions(){
+    document.querySelectorAll('#t21ConflictRows tr[data-conflict]').forEach(function(row){var id=row.dataset.conflict;
+      var central=row.querySelector('.cf-central');if(central)central.onclick=function(){if(confirm('اعتماد القيمة المركزية وإغلاق التعارض؟'))runAdminChange('resolveConflict',{id:id,choice:'central'},central);};
+      var local=row.querySelector('.cf-local');if(local)local.onclick=function(){if(confirm('سيتم استبدال القيمة المركزية بالقيمة المحلية. هل تريد المتابعة؟'))runAdminChange('resolveConflict',{id:id,choice:'local'},local);};
+      var close=row.querySelector('.cf-close');if(close)close.onclick=function(){if(confirm('إغلاق التعارض دون تغيير البيانات؟'))runAdminChange('resolveConflict',{id:id,choice:'close'},close);};
+    });
   }
   function bindCentralAdminActions(){
     document.querySelectorAll('#t21CentralUsers tr[data-user]').forEach(function(row){
@@ -5100,8 +5115,9 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
         '<div class="t207-card"><h3><i class="fas fa-table-cells"></i> صلاحيات الأدوار حسب الصفحة</h3><div style="overflow:auto;max-height:330px"><table><thead><tr><th>الدور</th><th>الصفحة</th><th>المعرف</th><th>الصلاحية</th></tr></thead><tbody id="t21CentralPerms"></tbody></table></div></div>'+
         '<div class="t207-card"><h3><i class="fas fa-clock-rotate-left"></i> سجل التدقيق والدخول</h3><div style="overflow:auto;max-height:330px;margin-top:10px"><table><thead><tr><th>التوقيت</th><th>المستخدم</th><th>العملية</th><th>الحالة</th><th>التفاصيل</th></tr></thead><tbody id="t21AuditRows"></tbody></table></div></div>'+
         '<div class="t207-card"><h3><i class="fas fa-code-branch"></i> سجل التعديلات والإصدارات</h3><div style="overflow:auto;max-height:360px"><table><thead><tr><th>التسلسل</th><th>الكيان</th><th>السجل</th><th>العملية</th><th>الحقول</th><th>المستخدم</th><th>التوقيت</th></tr></thead><tbody id="t21ChangeRows"></tbody></table></div></div>'+
-        '<div class="t207-card"><h3><i class="fas fa-code-compare"></i> تعارضات تحتاج مراجعة</h3><div style="overflow:auto;max-height:360px"><table><thead><tr><th>الكيان</th><th>السجل</th><th>الحقل</th><th>القيمة المركزية</th><th>القيمة المحلية</th><th>المستخدم</th><th>التوقيت</th><th>الحالة</th></tr></thead><tbody id="t21ConflictRows"></tbody></table></div></div>';
+        '<div class="t207-card"><h3><i class="fas fa-code-compare"></i> إدارة التعارضات</h3><div style="display:flex;gap:8px;align-items:center;margin-bottom:12px"><label for="t21ConflictFilter" style="font-size:.8rem;font-weight:800">عرض:</label><select id="t21ConflictFilter"><option value="open">المفتوحة فقط</option><option value="resolved">المحلولة</option><option value="all">الكل</option></select><span style="font-size:.75rem;color:#64748b">تُغلق الحالات ذات القيم المتطابقة تلقائياً.</span></div><div style="overflow:auto;max-height:420px"><table><thead><tr><th>الكيان</th><th>السجل</th><th>الحقل</th><th>القيمة المركزية</th><th>القيمة المحلية</th><th>المستخدم</th><th>التوقيت</th><th>الحالة</th><th>الإجراء</th></tr></thead><tbody id="t21ConflictRows"></tbody></table></div></div>';
       document.getElementById('t21RefreshAudit').addEventListener('click',renderCentralActivity);
+      document.getElementById('t21ConflictFilter').addEventListener('change',renderConflictRows);
       document.getElementById('t219CreateUser').addEventListener('click',function(){
         var btn=this,data={username:document.getElementById('t219NewUsername').value,name:document.getElementById('t219NewName').value,email:document.getElementById('t219NewEmail').value,directorate:document.getElementById('t219NewDirectorate').value,role:document.getElementById('t219NewRole').value,password:document.getElementById('t219NewPassword').value};
         if(!data.username||!data.name||data.password.length<8){alert('أدخل اسم المستخدم والاسم الكامل وكلمة مرور مؤقتة من 8 أحرف على الأقل');return;}
@@ -6026,8 +6042,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.21 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.21 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21.22 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21.22 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
