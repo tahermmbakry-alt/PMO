@@ -32,7 +32,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.22 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.23 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -941,7 +941,7 @@
         .header h1{font-size:1.22rem!important;line-height:1.35!important;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
         .header .subtitle{font-size:.76rem!important;margin-top:2px!important}
         .program-version-badge{padding:4px 10px!important;font-size:.72rem!important;margin-right:6px!important;background:rgba(59,130,246,.18)!important;color:#dbeafe!important;border-color:rgba(147,197,253,.35)!important}
-        .program-version-badge::before{content:"الإصدار";font-size:.62rem;color:#bfdbfe;font-weight:800;margin-left:3px}
+        .program-version-badge::before{display:none}
         .tabs-nav{min-height:44px!important;padding:6px!important;gap:3px!important;margin-bottom:10px!important;border-radius:15px!important;align-items:center;box-shadow:0 6px 18px rgba(15,23,42,.05)!important;position:sticky;top:8px;z-index:70;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(10px)}
         .tab-btn{height:32px!important;padding:6px 12px!important;font-size:.76rem!important;border-radius:10px!important;gap:5px!important;line-height:1!important}
         .tab-btn i{font-size:.82rem!important;color:inherit!important}
@@ -956,6 +956,20 @@
         body.dark-mode .tabs-nav,body.dark-mode .t20-smart-toolbar,body.dark-mode .t20-more-content{background:rgba(17,24,39,.96)!important;border-color:#263244!important;color:#e5e7eb!important}body.dark-mode .t20-sync-chip,body.dark-mode .t20-smart-icon-btn,body.dark-mode .t20-more-summary{background:#0f172a!important;border-color:#334155!important;color:#e5e7eb!important}body.dark-mode .t20-smart-search .phase3-search{background:#0f172a!important;color:#e5e7eb!important;border-color:#334155!important}
         @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:1fr;position:relative;top:auto}.t20-sync-chip{min-width:0}.t20-smart-actions{justify-content:flex-start;flex-wrap:wrap}.tabs-nav{position:relative;top:auto}.tab-btn{font-size:.7rem!important;padding:6px 9px!important}}
         @media(max-width:700px){.header h1{font-size:1rem!important}.t20-smart-search .phase3-search-wrap{flex-wrap:wrap}.t20-smart-search .phase3-search{flex:1 0 100%}.t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{flex:1}.t20-sync-chip{width:100%;justify-content:flex-start}.t20-more-content{left:auto;right:0;width:220px}}
+
+        /* ===== T21.23 Unified compact command bar ===== */
+        .t20-smart-toolbar{grid-template-columns:minmax(360px,1fr) auto auto!important;border-right-width:1px!important;top:58px!important;padding:7px 9px!important}
+        .t20-smart-search .phase3-search-btn,.t20-smart-search .phase3-search-reset-btn{width:38px!important;min-width:38px!important;padding:0!important;flex:0 0 38px!important}
+        .t20-smart-search .phase3-search-reset-btn{color:#64748b!important}
+        .t20-sync-chip{min-width:128px!important;justify-content:center;padding:7px 10px!important}.t20-sync-chip>div{min-width:0}.t20-sync-chip .t20-sync-meta{display:none!important}.t20-sync-chip .t20-sync-title{max-width:145px;overflow:hidden;text-overflow:ellipsis}
+        .ux-screen-control-panel{display:none!important}
+        .t23-popover{position:absolute;z-index:250;top:calc(100% + 7px);left:105px;width:min(390px,calc(100vw - 30px));background:#fff;border:1px solid #dbe4ef;border-radius:16px;box-shadow:0 22px 55px rgba(15,23,42,.2);padding:14px;direction:rtl}
+        .t23-popover[hidden]{display:none!important}.t23-sync-head{display:flex;align-items:center;gap:9px;padding-bottom:10px;border-bottom:1px solid #e2e8f0}.t23-sync-head strong{font-size:.9rem}.t23-sync-body{display:grid;gap:8px;padding:11px 0}.t23-sync-row{display:flex;justify-content:space-between;gap:14px;font-size:.76rem}.t23-sync-row span{color:#64748b}.t23-sync-row b{color:#0f172a;text-align:left;overflow-wrap:anywhere}.t23-sync-message{font-size:.77rem;line-height:1.7;padding:9px 10px;border-radius:10px;background:#f8fafc;color:#475569}.t23-sync-message.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}.t23-sync-actions{display:flex;gap:7px}.t23-sync-actions .btn{flex:1;margin:0!important;height:34px!important;font-size:.72rem!important}
+        .t23-view-menu{position:relative}.t23-view-menu>summary{list-style:none}.t23-view-menu>summary::-webkit-details-marker{display:none}.t23-view-content{position:absolute;left:0;top:45px;width:260px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 18px 45px rgba(15,23,42,.16);padding:10px;z-index:200;display:grid;gap:8px}.t23-size-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.t23-size-grid button{height:34px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;font-family:inherit;font-size:.7rem;font-weight:800;cursor:pointer}.t23-size-grid button:hover{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}.t23-view-content .btn{width:100%;height:35px!important;margin:0!important;font-size:.72rem!important}
+        #t23InterfaceSettings .t21-ctl{display:grid!important;grid-template-columns:1fr 42px;width:100%;gap:7px}#t23InterfaceSettings .t21-lang-btn{height:36px;width:100%;justify-content:center;border-radius:10px}#t23InterfaceSettings .t21-theme-menu{width:100%}#t23InterfaceSettings .t21-theme-pop{position:fixed;inset:auto 22px 80px auto;max-height:60vh;overflow:auto}
+        html[data-theme] .t23-popover,html[data-theme] .t23-view-content{background:var(--t21-surface)!important;border-color:var(--t21-border)!important;color:var(--t21-text)!important}html[data-theme] .t23-sync-row b{color:var(--t21-text)!important}html[data-theme] .t23-sync-message{background:var(--t21-surface3)!important;color:var(--t21-muted)!important}
+        @media(max-width:1100px){.t20-smart-toolbar{grid-template-columns:minmax(260px,1fr) auto auto!important;position:sticky!important;top:8px!important}.t20-smart-actions{flex-wrap:nowrap!important}.t20-sync-chip{width:auto!important}.t20-smart-icon-btn span:not(.badge){display:none}.t20-more-summary{font-size:0}.t20-more-summary i{font-size:.84rem}.t23-popover{left:8px}}
+        @media(max-width:700px){.t20-smart-toolbar{grid-template-columns:1fr auto!important}.t20-smart-search{grid-column:1/-1}.t20-smart-search .phase3-search-wrap{flex-wrap:nowrap!important}.t20-smart-search .phase3-search{flex:1 1 auto!important}.t20-sync-chip{grid-column:1}.t20-smart-actions{grid-column:2}.t23-view-content{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}.t23-popover{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}.header{min-height:58px!important}}
 
 
         /* ===== T20 Ver.4 Portfolio Gantt View ===== */
@@ -983,7 +997,7 @@
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21.22 | Ver.22</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v23</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1009,11 +1023,11 @@
                 <div class="phase3-search-wrap">
                     <i class="fas fa-search"></i>
                     <input id="globalSearchInput" class="phase3-search" type="text" placeholder="بحث شامل في المشاريع، الأهداف، KPIs، المخاطر، الخدمات، الموازنة..." oninput="phase3GlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){phase3SearchButton(event)}">
-                    <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)"><i class="fas fa-magnifying-glass"></i> بحث</button>
-                    <button type="button" class="phase3-search-reset-btn" onclick="resetGlobalSearch()"><i class="fas fa-rotate-left"></i> إعادة تعيين</button>
+                    <button type="button" class="phase3-search-btn" onclick="phase3SearchButton(event)" title="بحث" aria-label="بحث"><i class="fas fa-magnifying-glass"></i></button>
+                    <button type="button" class="phase3-search-reset-btn" onclick="resetGlobalSearch()" title="مسح البحث" aria-label="مسح البحث"><i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div id="t20SyncPanel" class="t20-sync-chip t20-sync-off" title="حالة المزامنة المركزية">
+            <div id="t20SyncPanel" class="t20-sync-chip t20-sync-off" title="تفاصيل المزامنة المركزية" role="button" tabindex="0" aria-expanded="false" onclick="t23ToggleSyncPopover(event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();t23ToggleSyncPopover(event)}">
                 <span class="t20-sync-dot"></span>
                 <div>
                     <div id="t20SyncTitle" class="t20-sync-title">التخزين المركزي غير مفعل</div>
@@ -1021,20 +1035,29 @@
                     <span id="t20SyncMeta" class="t20-sync-meta">نسخة محلية محفوظة</span>
                 </div>
             </div>
+            <div id="t23SyncPopover" class="t23-popover t23-sync-popover" hidden></div>
             <div class="t20-smart-actions">
+                <details class="t23-view-menu" id="t23ViewMenu">
+                    <summary class="t20-smart-icon-btn" title="أدوات العرض"><i class="fas fa-sliders-h"></i><span>العرض</span></summary>
+                    <div class="t23-view-content">
+                        <div class="t20-more-label">حجم مؤشرات الشاشة</div>
+                        <div class="t23-size-grid"><button data-t23-size="small">صغير</button><button data-t23-size="medium">متوسط</button><button data-t23-size="large">كبير</button><button data-t23-size="xlarge">ضخم</button></div>
+                        <button type="button" class="btn btn-outline" data-t23-reset-size><i class="fas fa-compress"></i> استعادة الحجم الافتراضي</button>
+                        <button type="button" class="btn btn-dark" data-t23-reset-order><i class="fas fa-rotate-left"></i> استعادة الترتيب الافتراضي</button>
+                    </div>
+                </details>
                 <button class="t20-smart-icon-btn warn" onclick="toggleNotifications()" title="مركز التنبيهات"><i class="fas fa-bell"></i><span id="phase3AlertCount" class="badge badge-danger">0</span></button>
                 <button class="t20-smart-icon-btn dark" onclick="toggleDarkMode()" title="سمة داكنة"><i class="fas fa-moon"></i></button>
                 <details class="t20-more-menu">
                     <summary class="t20-more-summary" title="المزيد"><i class="fas fa-ellipsis-h"></i> المزيد</summary>
                     <div class="t20-more-content">
-                        <div class="t20-more-label">إجراءات البيانات والمزامنة</div>
+                        <div class="t20-more-label">المزامنة والبيانات</div>
                         <button type="button" class="btn btn-success" onclick="t20SyncNow()"><i class="fas fa-cloud-upload-alt"></i> مزامنة الآن</button>
                         <button type="button" class="btn btn-outline" onclick="t20PullFromCentral()"><i class="fas fa-cloud-download-alt"></i> تحميل المركزي</button>
                         <button type="button" id="t20AutoSyncToggleBtn" class="btn btn-outline" onclick="t20ToggleAutoSync()"><i class="fas fa-play-circle"></i> تفعيل المزامنة التلقائية</button>
                         <button type="button" class="btn btn-outline" onclick="document.querySelector('[data-tab=&quot;tab-export&quot;]')?.click()"><i class="fas fa-file-export"></i> التصدير والاستيراد</button>
-                        <div class="t20-more-label">إعدادات العرض</div>
-                        <button type="button" class="btn btn-outline" onclick="document.querySelector('.tab-content.active [data-ux-reset-sizes]')?.click()"><i class="fas fa-compress"></i> الحجم الافتراضي</button>
-                        <button type="button" class="btn btn-dark" onclick="document.querySelector('.tab-content.active [data-ux-reset-order]')?.click()"><i class="fas fa-rotate-left"></i> الترتيب الافتراضي</button>
+                        <div class="t20-more-label">إعدادات الواجهة</div>
+                        <div id="t23InterfaceSettings"></div>
                     </div>
                 </details>
             </div>
@@ -1500,7 +1523,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21.22</strong></div>
+                            <div><span>الإصدار</span><strong>T21 • v23</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -4843,7 +4866,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
         '<button class="t207-btn" id="t207Go">دخول</button>' +
         '<div class="t207-err" id="t207E"></div>' +
         '<div class="t219-progress" id="t219LoginProgress"><span class="t219-spinner"></span><span id="t219LoginStage">جارٍ التحقق من بيانات الدخول…</span></div>' +
-        '<div class="t207-scope">يتم التحقق من الحساب والصلاحيات مركزيًا عبر Google Apps Script. وتُرفض عمليات القراءة أو الكتابة إذا كانت الجلسة غير صالحة أو لا تملك صلاحية التعديل.</div>' +
+        '<div class="t207-scope">يتم التحقق من هويتك وصلاحياتك عبر خدمة النظام المركزية لضمان الوصول الآمن إلى البيانات. تُتاح القراءة والتعديل وفق الصلاحيات المعتمدة لحسابك.<br><b>اتصال آمن • صلاحيات مركزية • حماية للبيانات</b></div>' +
       '</div>';
     document.body.appendChild(ov);
 
@@ -6042,8 +6065,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21.22 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21.22 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21 • v23 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21 • v23 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
@@ -6139,6 +6162,37 @@ function boot(){
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
 else boot();
+})();
+</script>
+
+<script id="t21-23-compact-command-bar">
+(function(){
+  function esc23(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function syncMeta23(){try{return JSON.parse(localStorage.getItem('motc_t20_sync_meta')||'{}');}catch(e){return {};}}
+  function fmt23(v){if(!v)return 'غير متوفر';try{return new Date(v).toLocaleString('ar-OM');}catch(e){return String(v);}}
+  function syncState23(panel){if(panel.classList.contains('t20-sync-error'))return ['خطأ في المزامنة','error'];if(panel.classList.contains('t20-sync-pending'))return ['قيد التنفيذ','pending'];if(panel.classList.contains('t20-sync-ok'))return ['تعمل بصورة سليمة','ok'];return ['غير مفعلة','off'];}
+  function renderSync23(){
+    var panel=document.getElementById('t20SyncPanel'),pop=document.getElementById('t23SyncPopover');if(!panel||!pop)return;
+    var title=document.getElementById('t20SyncTitle'),sub=document.getElementById('t20SyncSub'),metaText=document.getElementById('t20SyncMeta'),meta=syncMeta23(),state=syncState23(panel),isError=state[1]==='error'||meta.pullFailed;
+    pop.innerHTML='<div class="t23-sync-head"><span class="t20-sync-dot"></span><div><strong>حالة المزامنة المركزية</strong><div style="font-size:.72rem;color:#64748b;margin-top:2px">'+esc23(state[0])+'</div></div></div>'+
+      '<div class="t23-sync-body"><div class="t23-sync-row"><span>الحالة الحالية</span><b>'+esc23(title?title.textContent:state[0])+'</b></div><div class="t23-sync-row"><span>آخر مزامنة ناجحة</span><b>'+esc23(meta.lastSyncAt?fmt23(meta.lastSyncAt):(metaText?metaText.textContent:'غير متوفر'))+'</b></div><div class="t23-sync-row"><span>آخر حفظ محلي</span><b>'+esc23(fmt23(meta.lastLocalSaveAt))+'</b></div><div class="t23-sync-row"><span>رقم النسخة المركزية</span><b>'+esc23(meta.remoteVersion==null?'غير متوفر':meta.remoteVersion)+'</b></div><div class="t23-sync-row"><span>آخر تسلسل تغييرات</span><b>'+esc23(meta.lastSequence==null?'غير متوفر':meta.lastSequence)+'</b></div><div class="t23-sync-row"><span>تغييرات بانتظار الرفع</span><b>'+(meta.dirty?'نعم':'لا')+'</b></div></div>'+
+      '<div class="t23-sync-message'+(isError?' error':'')+'">'+esc23(isError?'توجد مشكلة في المزامنة: '+(sub?sub.textContent:'تحقق من الاتصال وإعدادات Apps Script.'):(sub?sub.textContent:'المزامنة جاهزة.'))+'</div>'+
+      '<div class="t23-sync-actions" style="margin-top:10px"><button class="btn btn-success" onclick="t20SyncNow()"><i class="fas fa-rotate"></i> مزامنة الآن</button><button class="btn btn-outline" onclick="t20PullFromCentral()"><i class="fas fa-cloud-arrow-down"></i> تحميل المركزي</button></div>';
+  }
+  window.t23ToggleSyncPopover=function(e){if(e)e.stopPropagation();var panel=document.getElementById('t20SyncPanel'),pop=document.getElementById('t23SyncPopover');if(!pop)return;var opening=pop.hidden;pop.hidden=!opening;if(panel)panel.setAttribute('aria-expanded',opening?'true':'false');if(opening)renderSync23();};
+  function moveInterfaceSettings23(){var ctl=document.querySelector('.t21-ctl'),host=document.getElementById('t23InterfaceSettings');if(ctl&&host&&!host.contains(ctl))host.appendChild(ctl);}
+  function activePanel23(){return document.querySelector('.tab-content.active .ux-screen-control-panel');}
+  function updateContext23(){var menu=document.getElementById('t23ViewMenu'),active=document.querySelector('.tab-content.active');if(menu){menu.style.display=active&&active.id==='tab-dashboard'?'':'none';if(menu.style.display==='none')menu.removeAttribute('open');}}
+  function init23(){
+    moveInterfaceSettings23();setTimeout(moveInterfaceSettings23,500);
+    document.querySelectorAll('[data-t23-size]').forEach(function(b){b.addEventListener('click',function(){var p=activePanel23(),target=p&&p.querySelector('[data-ux-all-size="'+b.dataset.t23Size+'"]');if(target)target.click();});});
+    var rs=document.querySelector('[data-t23-reset-size]');if(rs)rs.addEventListener('click',function(){var p=activePanel23(),b=p&&p.querySelector('[data-ux-reset-sizes]');if(b)b.click();});
+    var ro=document.querySelector('[data-t23-reset-order]');if(ro)ro.addEventListener('click',function(){var p=activePanel23(),b=p&&p.querySelector('[data-ux-reset-order]');if(b)b.click();});
+    document.addEventListener('click',function(e){var pop=document.getElementById('t23SyncPopover'),panel=document.getElementById('t20SyncPanel');if(pop&&!pop.hidden&&!pop.contains(e.target)&&(!panel||!panel.contains(e.target))){pop.hidden=true;if(panel)panel.setAttribute('aria-expanded','false');}if(e.target.closest('.tab-btn'))setTimeout(updateContext23,80);});
+    var panel=document.getElementById('t20SyncPanel');if(panel)new MutationObserver(function(){if(!document.getElementById('t23SyncPopover').hidden)renderSync23();}).observe(panel,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class']});
+    updateContext23();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init23);else init23();
 })();
 </script>
 
