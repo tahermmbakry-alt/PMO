@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="t29-auth-pending">
 <head>
         <style>
+            html.t29-auth-pending,html.t29-auth-pending body{min-height:100%;background:linear-gradient(135deg,#0f172a,#1e3a5f)!important}
+            html.t29-auth-pending .main-container{visibility:hidden!important;opacity:0!important}
+            #t29AuthGate{position:fixed;inset:0;z-index:2147482999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#1e3a5f);direction:rtl;font-family:'Segoe UI',Tahoma,sans-serif;color:#fff}
+            #t29AuthGate .t29-gate-box{display:flex;align-items:center;gap:13px;padding:17px 22px;border:1px solid rgba(255,255,255,.17);border-radius:16px;background:rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:.84rem;font-weight:800}
+            #t29AuthGate .t29-gate-spinner{width:22px;height:22px;border:3px solid rgba(255,255,255,.28);border-top-color:#60a5fa;border-radius:50%;animation:t29GateSpin .8s linear infinite}@keyframes t29GateSpin{to{transform:rotate(360deg)}}
             .fy-edit-card { position: sticky !important; top: 8px !important; z-index: 100 !important; background: white !important; border:2px solid #dbeafe !important; box-shadow:0 14px 36px rgba(15,23,42,.16) !important; }
             body.dark-mode .fy-edit-card { background: #111827 !important; }
             .fy-edit-card.is-editing { border-color:#3b82f6 !important; }
@@ -32,7 +37,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T21.27 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
+    <title>T21.30 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل | @ حقوق النقل والاستخدام محفوظه</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
@@ -986,16 +991,19 @@
         @media(max-width:620px){.t26-page-search{display:grid;grid-template-columns:1fr}.t26-search-scope{width:100%}.t26-page-info{align-items:flex-start}.t26-page-icon{width:40px;height:40px}.t26-page-hero{border-radius:16px;padding:15px;gap:11px}.t20-smart-toolbar{min-height:46px}}
         @media print{.t26-page-search{display:none!important}.t26-page-hero{display:block!important;background:#17345c!important;color:#fff!important;box-shadow:none!important;padding:14mm 10mm!important}.t26-page-icon{display:none!important}.t26-page-desc{color:#e2e8f0!important}}
 
-        /* ===== T21.27 all commands inside the page header ===== */
+        /* ===== T21.28 all commands inside the page header ===== */
         .t20-smart-toolbar{display:none!important}
         .t26-page-hero{grid-template-columns:minmax(300px,.8fr) minmax(720px,1.35fr);grid-template-areas:"info search" "results results";z-index:1200}
         .t26-page-search{display:flex;align-items:center;justify-content:flex-end;gap:7px;min-width:0;direction:rtl}
-        .t26-search-host{order:3;width:280px;flex:0 1 280px;min-width:210px;transition:width .26s ease,flex-basis .26s ease}.t26-search-host:focus-within{width:500px;flex-basis:500px}.t26-search-host .t20-smart-search,.t26-search-host .t20-smart-search:focus-within{width:100%!important;max-width:none!important}.t26-search-scope{order:2}
+        .t28-search-composite{order:3;position:relative;display:flex;align-items:center;width:390px;flex:0 1 390px;min-width:300px;height:40px;background:#fff;border:1.5px solid rgba(255,255,255,.7);border-radius:13px;box-shadow:0 5px 16px rgba(15,23,42,.12);transition:width .26s ease,flex-basis .26s ease,box-shadow .2s ease,border-color .2s ease}.t28-search-composite:focus-within{width:580px;flex-basis:580px;border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.2),0 8px 22px rgba(15,23,42,.16)}
+        .t28-search-composite::before{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translate(-50%,5px);background:#0f172a;color:#fff;padding:7px 11px;border-radius:8px;font-size:.68rem;font-weight:800;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transition:.18s;z-index:5000;box-shadow:0 8px 20px rgba(15,23,42,.25)}.t28-search-composite::after{content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);border:6px solid transparent;border-top-color:#0f172a;opacity:0;visibility:hidden;transition:.18s;z-index:5000}.t28-search-composite:hover::before,.t28-search-composite:hover::after,.t28-search-composite:focus-within::before,.t28-search-composite:focus-within::after{opacity:1;visibility:visible;transform:translate(-50%,0)}.t28-search-composite:hover::after,.t28-search-composite:focus-within::after{transform:translateX(-50%)}
+        .t26-search-host{order:2;flex:1 1 auto;min-width:0;height:100%}.t26-search-host .t20-smart-search,.t26-search-host .t20-smart-search:focus-within{width:100%!important;max-width:none!important;height:100%}.t26-search-host .phase3-search-wrap{height:100%;gap:0!important}.t26-search-host .phase3-search{height:100%!important;border:0!important;border-radius:0 12px 12px 0!important;box-shadow:none!important;background:transparent!important}.t26-search-host .phase3-search-btn,.t26-search-host .phase3-search-reset-btn{height:36px!important;min-height:36px!important}
+        .t26-search-scope{order:1;height:28px!important;min-width:102px!important;max-width:125px;border:0!important;border-right:1px solid #dbe4ef!important;border-radius:0!important;background:#f1f5f9!important;color:#0f172a!important;padding:0 9px!important;margin:0 4px 0 0;font-size:.7rem!important;box-shadow:none!important;outline:0}.t26-search-scope:focus{background:#e0efff!important;color:#1d4ed8!important}
         .t27-system-host{order:1;display:flex;align-items:center;gap:7px;flex:0 0 auto;position:relative;z-index:1250}.t27-system-host .t20-sync-chip{min-width:128px!important;background:rgba(255,255,255,.96)!important}.t27-system-host .t20-smart-actions{display:flex;align-items:center;gap:6px;position:relative}.t27-system-host .t23-popover{top:calc(100% + 9px);left:0;right:auto}.t27-system-host .t20-more-content,.t27-system-host .t23-view-content{top:45px}
         .t26-page-hero>.phase3-search-panel{z-index:1300}.t26-page-hero:has(.t20-more-menu[open]),.t26-page-hero:has(.t23-view-menu[open]){z-index:4000}
-        @media(max-width:1320px){.t26-page-hero{grid-template-columns:1fr;grid-template-areas:"info" "search" "results"}.t26-page-search{justify-content:flex-start}.t26-search-host{flex:1 1 320px;width:auto}.t26-search-host:focus-within{flex-basis:520px;width:auto}}
-        @media(max-width:820px){.t26-page-search{flex-wrap:wrap}.t26-search-host,.t26-search-host:focus-within{order:1;flex:1 0 calc(100% - 120px);width:auto}.t26-search-scope{order:2}.t27-system-host{order:3;width:100%;justify-content:flex-start}.t27-system-host .t20-smart-actions{margin-inline-start:auto}.t27-system-host .t23-popover{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto}}
-        @media(max-width:560px){.t26-page-search{display:grid;grid-template-columns:1fr}.t26-search-host,.t26-search-host:focus-within,.t26-search-scope,.t27-system-host{width:100%;min-width:0}.t27-system-host{justify-content:space-between}.t27-system-host .t20-sync-chip{min-width:112px!important}.t27-system-host .t20-smart-actions{margin-inline-start:0}.t26-page-hero{padding:14px}}
+        @media(max-width:1320px){.t26-page-hero{grid-template-columns:1fr;grid-template-areas:"info" "search" "results"}.t26-page-search{justify-content:flex-start}.t28-search-composite{flex:1 1 390px;width:auto}.t28-search-composite:focus-within{flex-basis:580px;width:auto}}
+        @media(max-width:820px){.t26-page-search{flex-wrap:wrap}.t28-search-composite,.t28-search-composite:focus-within{order:1;flex:1 0 100%;width:auto}.t27-system-host{order:3;width:100%;justify-content:flex-start}.t27-system-host .t20-smart-actions{margin-inline-start:auto}.t27-system-host .t23-popover{position:fixed;left:12px;right:12px;bottom:12px;top:auto;width:auto}}
+        @media(max-width:560px){.t26-page-search{display:grid;grid-template-columns:1fr}.t28-search-composite,.t28-search-composite:focus-within,.t27-system-host{width:100%;min-width:0}.t26-search-scope{min-width:92px!important}.t27-system-host{justify-content:space-between}.t27-system-host .t20-sync-chip{min-width:112px!important}.t27-system-host .t20-smart-actions{margin-inline-start:0}.t26-page-hero{padding:14px}}
 
 
         /* ===== T20 Ver.4 Portfolio Gantt View ===== */
@@ -1019,11 +1027,12 @@
 </style>
 </head>
 <body>
+    <div id="t29AuthGate" role="status" aria-live="polite"><div class="t29-gate-box"><span class="t29-gate-spinner"></span><span>جارٍ تهيئة شاشة الدخول الآمنة…</span></div></div>
     <div class="main-container">
         <div class="header">
             <i class="fas fa-satellite-dish"></i>
             <div>
-                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v27</span></h1>
+                <h1>نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل <span class="program-version-badge">T21 • v30</span></h1>
                 <div class="subtitle">@ حقوق النقل والاستخدام محفوظه | Projects & Portfolio Management</div>
             </div>
         </div>
@@ -1549,7 +1558,7 @@
                         <div class="executive-report-meta">
                             <div><span>نطاق التقرير</span><strong id="executiveScopeLabel">جميع المشاريع</strong></div>
                             <div><span>تاريخ التحديث</span><strong id="executiveReportDate">—</strong></div>
-                            <div><span>الإصدار</span><strong>T21 • v27</strong></div>
+                            <div><span>الإصدار</span><strong>T21 • v30</strong></div>
                         </div>
                     </header>
                     <div class="executive-filter no-print">
@@ -1975,8 +1984,8 @@
                     const values={action:'bridgeDeltaSync',bridgeToken:bridgeToken,token:authToken,sinceSequence:String(sinceSequence||0),operationsJson:JSON.stringify(operations||[])};
                     Object.keys(values).forEach(name=>{const input=document.createElement(name==='operationsJson'?'textarea':'input');input.name=name;input.value=values[name];form.appendChild(input);});
                     const cleanup=()=>{clearTimeout(timer);window.removeEventListener('message',onMessage);form.remove();frame.remove();};
-                    const onMessage=event=>{const m=event.data;if(!m||m.type!=='T21_CENTRAL_WRITE_RESPONSE'||m.token!==bridgeToken)return;cleanup();if(!m.result||m.result.ok===false)reject(new Error((m.result&&m.result.error)||'تعذر تشغيل المزامنة التعاونية'));else resolve(m.result);};
-                    const timer=setTimeout(()=>{cleanup();reject(new Error('انتهت مهلة المزامنة التعاونية'));},40000);
+                    const onMessage=event=>{const m=event.data;if(!m||m.type!=='T21_CENTRAL_WRITE_RESPONSE'||m.token!==bridgeToken)return;cleanup();if(!m.result||m.result.ok===false)reject(new Error((m.result&&m.result.error)||'تعذر تشغيل المزامنة المركزية'));else resolve(m.result);};
+                    const timer=setTimeout(()=>{cleanup();reject(new Error('انتهت مهلة المزامنة المركزية'));},40000);
                     window.addEventListener('message',onMessage);document.body.appendChild(frame);document.body.appendChild(form);form.submit();
                 });
             }
@@ -2081,7 +2090,7 @@
                     const operations=t21BuildOperations();
                     const result=await t21DeltaSyncByFrame(operations,Number(meta.lastSequence||0));
                     const conflicts=t21ApplyDeltaResult(result);
-                    t20SetSyncStatus(conflicts?'pending':'ok',conflicts?'تمت المزامنة مع وجود تعارضات للمراجعة':'تمت المزامنة التعاونية بنجاح',conflicts?'راجع قسم سجل التدقيق والتعارضات في صلاحيات المستخدمين.':'تم دمج التغييرات المحلية والمركزية تلقائياً.');
+                    t20SetSyncStatus(conflicts?'pending':'ok',conflicts?'تمت المزامنة مع وجود تعارضات للمراجعة':'تمت المزامنة المركزية بنجاح',conflicts?'راجع قسم سجل التدقيق والتعارضات في صلاحيات المستخدمين.':'تم دمج التغييرات المحلية والمركزية تلقائياً.');
                     if(showMessage&&!conflicts) toast('تم دمج التغييرات مع Google Sheet بنجاح');
                 }catch(err){
                     if(err && err.name==='AbortError') return;
@@ -2178,7 +2187,7 @@
                     }
                     else await t20SyncNow(false);
                     t20AutoSyncEnabled=true; t20UpdateAutoSyncBtn();
-                    t20SetSyncStatus('ok','المزامنة التعاونية مفعلة','يتم دمج التغييرات تلقائياً دون استبدال قاعدة البيانات كاملة.');
+                    t20SetSyncStatus('ok','المزامنة المركزية مفعلة','يتم دمج التغييرات تلقائياً دون استبدال قاعدة البيانات كاملة.');
                 }catch(e){ console.warn('collaboration sync start failed',e); throw e; }
             };
             function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
@@ -4885,6 +4894,8 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
   };
 
   /* ---------- login overlay ---------- */
+  function removeInitialGate(){ var gate=document.getElementById('t29AuthGate'); if(gate) gate.remove(); }
+  function revealApplication(){ document.documentElement.classList.remove('t29-auth-pending'); removeInitialGate(); }
   function showLogin(){
     if(document.getElementById('t207Overlay')) return;
     var ov = document.createElement('div');
@@ -4901,6 +4912,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
         '<div class="t207-scope">يتم التحقق من هويتك وصلاحياتك عبر خدمة النظام المركزية لضمان الوصول الآمن إلى البيانات. تُتاح القراءة والتعديل وفق الصلاحيات المعتمدة لحسابك.<br><b>اتصال آمن • صلاحيات مركزية • حماية للبيانات</b></div>' +
       '</div>';
     document.body.appendChild(ov);
+    removeInitialGate();
 
     function stage(m){ var p=document.getElementById('t219LoginProgress'),t=document.getElementById('t219LoginStage'); if(p)p.classList.add('show'); if(t)t.textContent=m; }
     function fail(m){ var e=document.getElementById('t207E'); e.textContent=m; e.classList.add('show'); var p=document.getElementById('t219LoginProgress');if(p)p.classList.remove('show'); }
@@ -4919,6 +4931,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
           return boot();
         }).then(function(){
           stage('اكتمل تحميل البيانات بنجاح');
+          revealApplication();
           setTimeout(function(){ov.remove();var s=session();if(s&&s.mustChange)showPasswordDialog(true);},250);
         }).catch(function(err){ document.getElementById('t207Go').disabled=false; var s=session(); fail(s&&s.central?'تم تسجيل الدخول، لكن تعذر تحميل البيانات المركزية. تأكد من نشر Apps Script v3.3 ثم أعد المحاولة.':'تعذر تسجيل الدخول المركزي: '+(err.message||'')); });
         return;
@@ -4930,8 +4943,7 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
         return hashPassword(p, user.pwSalt).then(function(h){
           if(h.hash !== user.pwHash) return fail('بيانات دخول غير صحيحة');
           setSession(user, store);
-          ov.remove();
-          boot();
+          return boot().then(function(){ revealApplication(); ov.remove(); });
         });
       }).catch(function(err){ fail(err.message||'تعذر تسجيل الدخول'); });
     }
@@ -5374,8 +5386,12 @@ body.dark-mode .ux-screen-control-panel{background:#0f172a;border-color:#334155}
   }
 
   function start(){
-    if(window.T20_CENTRAL_SYNC_URL){ if(session()) boot(); else showLogin(); return; }
-    ensureStore().then(function(){ if(session()) boot(); else showLogin(); });
+    function resume(){
+      if(!session()){ showLogin(); return; }
+      boot().then(revealApplication).catch(function(err){ console.warn('secure boot failed',err); clearSession(); showLogin(); });
+    }
+    if(window.T20_CENTRAL_SYNC_URL){ resume(); return; }
+    ensureStore().then(resume).catch(function(err){ console.warn('security store initialization failed',err); showLogin(); });
   }
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
@@ -6097,8 +6113,8 @@ function setLang(lang){
   var lbl=document.getElementById('t21LangLabel');
   if(lbl) lbl.textContent = lang==='en' ? 'العربية' : 'English';
   document.title = lang==='en'
-    ? "T21 • v27 — Integrated Portfolio & Strategic Plan Management System"
-    : "T21 • v27 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
+    ? "T21 • v30 — Integrated Portfolio & Strategic Plan Management System"
+    : "T21 • v30 - نظام إدارة المحافظ ومشاريع الخطط الاستراتيجية المتكامل";
   if(window.Chart) retintCharts();
   busy=false;
 }
@@ -6202,12 +6218,20 @@ else boot();
   function esc23(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function syncMeta23(){try{return JSON.parse(localStorage.getItem('motc_t20_sync_meta')||'{}');}catch(e){return {};}}
   function fmt23(v){if(!v)return 'غير متوفر';try{return new Date(v).toLocaleString('ar-OM');}catch(e){return String(v);}}
+  function localSaveState23(meta){
+    var stamp=meta.lastLocalSaveAt,parsed=stamp?new Date(stamp):null,valid=parsed&&!isNaN(parsed.getTime());
+    if(meta.dirty)return {label:'آخر تعديل محلي بانتظار الرفع',value:valid?fmt23(stamp):'توجد تعديلات محلية بانتظار الرفع'};
+    if(!valid)return {label:'حالة الحفظ المحلي',value:'لم تُسجل تعديلات محلية'};
+    var age=Date.now()-parsed.getTime(),recent=age>=0&&age<=24*60*60*1000;
+    if(recent)return {label:'آخر تعديل محلي تمت مزامنته',value:fmt23(stamp)};
+    return {label:'حالة الحفظ المحلي',value:'لا توجد تعديلات محلية حديثة'};
+  }
   function syncState23(panel){if(panel.classList.contains('t20-sync-error'))return ['خطأ في المزامنة','error'];if(panel.classList.contains('t20-sync-pending'))return ['قيد التنفيذ','pending'];if(panel.classList.contains('t20-sync-ok'))return ['تعمل بصورة سليمة','ok'];return ['غير مفعلة','off'];}
   function renderSync23(){
     var panel=document.getElementById('t20SyncPanel'),pop=document.getElementById('t23SyncPopover');if(!panel||!pop)return;
-    var title=document.getElementById('t20SyncTitle'),sub=document.getElementById('t20SyncSub'),metaText=document.getElementById('t20SyncMeta'),meta=syncMeta23(),state=syncState23(panel),isError=state[1]==='error'||meta.pullFailed;
+    var title=document.getElementById('t20SyncTitle'),sub=document.getElementById('t20SyncSub'),metaText=document.getElementById('t20SyncMeta'),meta=syncMeta23(),state=syncState23(panel),isError=state[1]==='error'||meta.pullFailed,localState=localSaveState23(meta);
     pop.innerHTML='<div class="t23-sync-head"><span class="t20-sync-dot"></span><div><strong>حالة المزامنة المركزية</strong><div style="font-size:.72rem;color:#64748b;margin-top:2px">'+esc23(state[0])+'</div></div></div>'+
-      '<div class="t23-sync-body"><div class="t23-sync-row"><span>الحالة الحالية</span><b>'+esc23(title?title.textContent:state[0])+'</b></div><div class="t23-sync-row"><span>آخر مزامنة ناجحة</span><b>'+esc23(meta.lastSyncAt?fmt23(meta.lastSyncAt):(metaText?metaText.textContent:'غير متوفر'))+'</b></div><div class="t23-sync-row"><span>آخر حفظ محلي</span><b>'+esc23(fmt23(meta.lastLocalSaveAt))+'</b></div><div class="t23-sync-row"><span>رقم النسخة المركزية</span><b>'+esc23(meta.remoteVersion==null?'غير متوفر':meta.remoteVersion)+'</b></div><div class="t23-sync-row"><span>آخر تسلسل تغييرات</span><b>'+esc23(meta.lastSequence==null?'غير متوفر':meta.lastSequence)+'</b></div><div class="t23-sync-row"><span>تغييرات بانتظار الرفع</span><b>'+(meta.dirty?'نعم':'لا')+'</b></div></div>'+
+      '<div class="t23-sync-body"><div class="t23-sync-row"><span>الحالة الحالية</span><b>'+esc23(title?title.textContent:state[0])+'</b></div><div class="t23-sync-row"><span>آخر مزامنة ناجحة</span><b>'+esc23(meta.lastSyncAt?fmt23(meta.lastSyncAt):(metaText?metaText.textContent:'غير متوفر'))+'</b></div><div class="t23-sync-row"><span>'+esc23(localState.label)+'</span><b>'+esc23(localState.value)+'</b></div><div class="t23-sync-row"><span>رقم النسخة المركزية</span><b>'+esc23(meta.remoteVersion==null?'غير متوفر':meta.remoteVersion)+'</b></div><div class="t23-sync-row"><span>آخر تسلسل تغييرات</span><b>'+esc23(meta.lastSequence==null?'غير متوفر':meta.lastSequence)+'</b></div><div class="t23-sync-row"><span>تغييرات بانتظار الرفع</span><b>'+(meta.dirty?'نعم':'لا')+'</b></div></div>'+
       '<div class="t23-sync-message'+(isError?' error':'')+'">'+esc23(isError?'توجد مشكلة في المزامنة: '+(sub?sub.textContent:'تحقق من الاتصال وإعدادات Apps Script.'):(sub?sub.textContent:'المزامنة جاهزة.'))+'</div>'+
       '<div class="t23-sync-actions" style="margin-top:10px"><button class="btn btn-success" onclick="t20SyncNow()"><i class="fas fa-rotate"></i> مزامنة الآن</button><button class="btn btn-outline" onclick="t20PullFromCentral()"><i class="fas fa-cloud-arrow-down"></i> تحميل المركزي</button></div>';
   }
@@ -6250,10 +6274,10 @@ else boot();
     if(!page||!META[page.id])return null;
     var old=page.querySelector(':scope > .t26-page-hero');if(old)return old;
     var m=META[page.id],hero=document.createElement('section');hero.className='t26-page-hero';hero.dataset.page=page.id;hero.setAttribute('data-t21-skip','');
-    hero.innerHTML='<div class="t26-page-info"><div class="t26-page-icon"><i class="fas '+m.icon+'"></i></div><div class="t26-page-copy"><h2 class="t26-page-title"></h2><div class="t26-page-desc"></div></div></div><div class="t26-page-search no-print"><select class="t26-search-scope" aria-label="نطاق البحث"><option value="all">كل النظام</option><option value="page">هذه الصفحة</option></select><div class="t26-search-host"></div><div class="t27-system-host"></div></div>';
+    hero.innerHTML='<div class="t26-page-info"><div class="t26-page-icon"><i class="fas '+m.icon+'"></i></div><div class="t26-page-copy"><h2 class="t26-page-title"></h2><div class="t26-page-desc"></div></div></div><div class="t26-page-search no-print"><div class="t28-search-composite" data-tooltip="البحث في جميع بيانات النظام أو الصفحة الحالية"><select class="t26-search-scope" aria-label="نطاق البحث"><option value="all">كل النظام</option><option value="page">هذه الصفحة</option></select><div class="t26-search-host"></div></div><div class="t27-system-host"></div></div>';
     page.insertBefore(hero,page.firstChild);updateHeroText26(hero);return hero;
   }
-  function updateHeroText26(hero){var m=META[hero.dataset.page];if(!m)return;var en=isEnglish26();hero.querySelector('.t26-page-title').textContent=en?m.en:m.ar;hero.querySelector('.t26-page-desc').textContent=en?m.enDesc:m.arDesc;var scope=hero.querySelector('.t26-search-scope');if(scope){scope.options[0].textContent=en?'Entire system':'كل النظام';scope.options[1].textContent=en?'This page':'هذه الصفحة';scope.setAttribute('aria-label',en?'Search scope':'نطاق البحث');}}
+  function updateHeroText26(hero){var m=META[hero.dataset.page];if(!m)return;var en=isEnglish26();hero.querySelector('.t26-page-title').textContent=en?m.en:m.ar;hero.querySelector('.t26-page-desc').textContent=en?m.enDesc:m.arDesc;var scope=hero.querySelector('.t26-search-scope'),composite=hero.querySelector('.t28-search-composite');if(scope){scope.options[0].textContent=en?'Entire system':'كل النظام';scope.options[1].textContent=en?'This page':'هذه الصفحة';scope.setAttribute('aria-label',en?'Search scope':'نطاق البحث');}if(composite)composite.setAttribute('data-tooltip',en?'Search all system data or the current page':'البحث في جميع بيانات النظام أو الصفحة الحالية');}
   function ensureAll26(){document.querySelectorAll('.tab-content[id]').forEach(createHero26);}
   function moveSearch26(){
     ensureAll26();var page=document.querySelector('.tab-content.active'),hero=page&&createHero26(page);if(!hero)return;
